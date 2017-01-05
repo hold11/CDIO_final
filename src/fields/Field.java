@@ -9,7 +9,7 @@ package fields;/*
     /`           ´\                                      |
  */
 
-public class Field
+public abstract class Field
 {
 
 }

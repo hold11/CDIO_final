@@ -9,7 +9,7 @@ package fields;/*
     /`           ´\                                      |
  */
 
-public class Ownable extends Field
+public abstract class Ownable extends Field
 {
 
 }
