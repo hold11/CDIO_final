@@ -9,7 +9,33 @@ package models;/*
     /`           ´\                                      |
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player
 {
+    private int playerID;
+    private String playerName;
+    private BankAcct playerAcct;
+    private DiceCup diceCup;
+    private fields.Field currentField;
+    private fields.Field previousField;
+    private final int STARTING_BALANCE = 10000;
 
+    private static int nextPlayerID = 1; // This variable is for defining the player ID for the next player that gets constructed.
+    private static List<Player> players = new ArrayList<>();
+
+    public Player() {
+        this.playerID = nextPlayerID;
+        nextPlayerID++;
+
+        this.playerName = String.format("Player %s", this.playerID);
+        this.diceCup = new DiceCup();
+        this.playerAcct = Bank.createBankAcct();
+        players.add(this);
+    }
+
+    public BankAcct getPlayerAcct() { return this.playerAcct; }
+
+    public static List<Player> getPlayers() { return players; }
 }
