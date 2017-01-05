@@ -9,7 +9,7 @@
     /`           ´\                                      |
  */
 
-public class Die  extends DiceCup
+public class CentralizedGameInformationDistributionRepository
 {
 
 }
