@@ -2,6 +2,8 @@
 <project name="CDIO_final" default="tests" basedir=".">
   <property name="main.build.dir" value="build/main" />
   <property name="main.src.dir" value="src" />
+  <property name="test.build.dir" value="build/tests" />
+  <property name="test.src.dir" value="tests" />
 
   <path id="classpath.base" />
 
