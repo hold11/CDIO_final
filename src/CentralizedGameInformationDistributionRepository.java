@@ -11,5 +11,6 @@
 
 public class CentralizedGameInformationDistributionRepository
 {
-
+    // THIS CLASS IS OBSOLETE
+    // TODO: Remove this class after meeting 2017-01-06.
 }

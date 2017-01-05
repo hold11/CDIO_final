@@ -1,4 +1,4 @@
-/*
+package fields;/*
            ,                                             |
           /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
          /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
@@ -9,7 +9,7 @@
     /`           ´\                                      |
  */
 
-public class ChanceCard
+public class Tax extends Field
 {
 
 }
