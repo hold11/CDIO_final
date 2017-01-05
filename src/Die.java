@@ -9,13 +9,7 @@
     /`           ´\                                      |
  */
 
-public class Main {
+public class Die  extends DiceCup
+{
 
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
-
-    public static boolean testBool() {
-        return true;
-    }
 }
