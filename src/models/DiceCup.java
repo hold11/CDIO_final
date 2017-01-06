@@ -12,6 +12,8 @@ package models;/*
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.*;
+import java.lang.*;
 
 /**
  * This class is a die cup (a cup holding multiple dice. It basically handles all the dice in the game.
@@ -118,4 +120,3 @@ public class DiceCup {
         return results;
     }
 }
-
