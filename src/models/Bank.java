@@ -21,4 +21,8 @@ public class Bank
         bankAccts.add(bankAcct);
         return bankAcct;
     }
+
+    public static ArrayList<BankAcct> getBankAccts() {
+
+    }
 }
