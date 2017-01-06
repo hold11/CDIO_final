@@ -9,7 +9,26 @@ package chanceCards;/*
     /`           ´\                                      |
  */
 
+import models.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class ChanceCard
 {
+    private int chanceCardID;
+    protected String chanceText;
+    protected int count = 1;
 
+    public ChanceCard(int chanceCardID) {
+        this.chanceCardID = chanceCardID;
+        this.chanceText = lang.Lang.msg("Card" + this.chanceCardID);
+    }
+
+    public ChanceCard(String chanceText, int count) {
+        this.chanceText = chanceText;
+        this.count = count;
+    }
+
+    public abstract void receiveCard(Player player);
 }
