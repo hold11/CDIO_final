@@ -51,7 +51,7 @@ public final class Jail extends Field{
 		if("default".equalsIgnoreCase(picture)){
 			int p = (picCounter++ % 2);
 			String name = p>0 ? "GoToJail.jpg" : "Jail.jpg";
-			this.icon = this.factory.createIcon("/resources/pics/"+name);
+			this.icon = this.factory.createIcon("/GUI/resources/pics/"+name);
 		}else{
 			try{
 			this.icon = new ImageIcon(picture);

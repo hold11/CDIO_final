@@ -94,7 +94,7 @@ public final class FieldFactory {
         File file;
         try {
             if (path == null) {
-                InputStream is = getClass().getResourceAsStream("/fields.txt");
+                InputStream is = getClass().getResourceAsStream("/GUI/resources/fields.txt");
                 in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
             } else {
                 file = new File(path);

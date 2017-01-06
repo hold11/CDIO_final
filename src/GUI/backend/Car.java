@@ -316,15 +316,15 @@ public final class Car {
         private static final Map<Pattern, String> patternImages =
             new HashMap<Pattern, String>();
         static {
-            patternImages.put(Pattern.DIAGONAL_DUAL_COLOR, "/resources/patterns/Diag_dual.png");
-            patternImages.put(Pattern.DOTTED, "/resources/patterns/Dotted.png");
-            patternImages.put(Pattern.CHECKERED, "/resources/patterns/Checkered.png");
-            patternImages.put(Pattern.ZEBRA, "/resources/patterns/Zebra.png");
+            patternImages.put(Pattern.DIAGONAL_DUAL_COLOR, "/GUI/resources/patterns/Diag_dual.png");
+            patternImages.put(Pattern.DOTTED, "/GUI/resources/patterns/Dotted.png");
+            patternImages.put(Pattern.CHECKERED, "/GUI/resources/patterns/Checkered.png");
+            patternImages.put(Pattern.ZEBRA, "/GUI/resources/patterns/Zebra.png");
         }
     }
     
     // Constants
     private static final int WIDTH = 40;
     private static final int HEIGHT = 21;
-    private static final String PATH = "/resources/pics/cars.png";
+    private static final String PATH = "/GUI/resources/pics/cars.png";
 }

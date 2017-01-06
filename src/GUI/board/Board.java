@@ -84,7 +84,7 @@ public final class Board extends javax.swing.JFrame {
 	 */
 	private void makeDice() {
 		try {
-			BufferedImage image = ImageIO.read(getClass().getResource("/resources/pics/Dice.png"));
+			BufferedImage image = ImageIO.read(getClass().getResource("/GUI/resources/pics/Dice.png"));
 			for(int value = 0; value < 6; value++) {
 				int x = 0;
 				int y = 55 * value;

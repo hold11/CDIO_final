@@ -81,14 +81,14 @@ public final class Street extends Ownable {
         if (houseCount != 0) {
             icon =
                 new ImageIcon(getClass().getResource(
-                    "/resources/buildings/" + houseCount + "House.png"));
+                    "/GUI/resources/buildings/" + houseCount + "House.png"));
         }
         this.houseLabel.setIcon(icon);
     }
     public void setHotel(boolean hasHotel) {
         Icon icon =
             hasHotel ? new ImageIcon(getClass().getResource(
-                "/resources/buildings/Hotel.png")) : null;
+                "/GUI/resources/buildings/Hotel.png")) : null;
         this.houseLabel.setIcon(icon);
     }
     @Override

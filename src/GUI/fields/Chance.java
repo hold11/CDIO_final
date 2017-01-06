@@ -51,7 +51,7 @@ public final class Chance extends Field {
     public void displayOnCenter() {
         super.displayOnCenter();
         Center.label[1].setIcon(this.factory
-            .createIcon("/resources/pics/Prøv lykken small.png"));
+            .createIcon("/GUI/resources/pics/Prøv lykken small.png"));
         Center.label[2].setText("__________________________");
         Center.label[3].setText(this.description);
         super.displayCarOnCenter();

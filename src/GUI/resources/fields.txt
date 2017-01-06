@@ -1,7 +1,7 @@
 	type::Start;;
 	backgroundColor::255,,0,,0;;
 	foregroundColor::0,,0,,0;;
-	title::;;
+	title::Start;;
 	subText::Modtag: 200;; 
 	description::Modtag kr. 200,-\nnår de passerer start;;
 ||		

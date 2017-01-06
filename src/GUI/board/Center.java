@@ -89,7 +89,7 @@ public final class Center{
 	public void displayDefault(){
 		centerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.BLACK, 3));
 		clearLabels();
-		label[0].setIcon(new ImageIcon(getClass().getResource("/resources/pics/Prøv lykken.png")));
+		label[0].setIcon(new ImageIcon(getClass().getResource("/GUI/resources/pics/Prøv lykken.png")));
 		label[0].setText(" ");
 		label[0].setFont(new Font(label[1].getFont().getName(), Font.BOLD, 20));
 		label[0].setVerticalTextPosition(SwingConstants.TOP);

@@ -57,7 +57,7 @@ public final class Brewery extends Ownable {
         
         if ("default".equalsIgnoreCase(picture)) {
             int p = (picCounter++ % 2) + 1;
-            this.icon = this.factory.createIcon("/resources/pics/Brewery" + p + ".jpg");
+            this.icon = this.factory.createIcon("/GUI/resources/pics/Brewery" + p + ".jpg");
         } else {
             try {
                 this.icon = new ImageIcon(picture);

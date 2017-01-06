@@ -57,7 +57,7 @@ public final class Shipping extends Ownable {
 		
 		if("default".equalsIgnoreCase(picture)) {
 			int p = (picCounter++ % 4) + 1;
-			this.icon = this.factory.createIcon("/resources/pics/Ferry" + p + ".jpg");
+			this.icon = this.factory.createIcon("/GUI/resources/pics/Ferry" + p + ".jpg");
 		} else {
 			try {
 				this.icon = new ImageIcon(picture);

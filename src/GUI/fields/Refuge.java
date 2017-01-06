@@ -51,7 +51,7 @@ public final class Refuge extends Field {
         super(bgColor, fgColor, title, subText, description);
         
         if ("default".equalsIgnoreCase(picture)) {
-            this.icon = this.factory.createIcon("/resources/pics/Cones.jpg");
+            this.icon = this.factory.createIcon("/GUI/resources/pics/Cones.jpg");
         } else {
             try {
                 this.icon = new ImageIcon(picture);
