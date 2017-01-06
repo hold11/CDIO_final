@@ -39,4 +39,12 @@ public class BankAcct
     }
 
     public int getBalance() { return this.balance; }
+
+    public int getGrossWorth() {
+
+    }
+
+    public int getNetWorth() {
+
+    }
 }
