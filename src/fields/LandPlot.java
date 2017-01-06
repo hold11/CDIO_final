@@ -13,13 +13,19 @@ import models.Player;
 
 public class LandPlot extends Ownable
 {
+    // [0] : 0 houses, [1] : 1 house,  [2] : 2 houses
+    // [3] : 3 houses, [4] : 4 houses, [5] : 1 hotel
+    private int rents[] = new int[6];
+
     public LandPlot(String fieldName, int price) {
         super(fieldName, price);
     }
 
     @Override
     public void landOnField(Player player) {
-
+        if (this.isOwned() && this.owner != player) {                    // if the plot is owned by another player
+            player.getPlayerAcct().transfer(this.getRent(), this.owner); // transfer rent to the rightful owner
+        }
     }
 
     @Override

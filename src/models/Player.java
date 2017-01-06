@@ -35,7 +35,7 @@ public class Player {
 
         this.playerName = String.format("Player %s", this.playerID);
         this.diceCup = new DiceCup();
-        this.playerAcct = Bank.createBankAcct();
+        this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
         players.add(this);
     }
 

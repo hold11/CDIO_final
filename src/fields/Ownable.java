@@ -27,4 +27,25 @@ public abstract class Ownable extends Field
         super(fieldName);
         this.price = price;
     }
+
+    public boolean isOwned() {
+        for (Ownable o : ownedOwnables)
+            return (this == o); // if the plot is owned, return true, otherwise return false.
+        return false;
+    }
+
+    public void purchaseField(Player player) {
+//        if (isOwned())
+//            return;
+//        if (player.getPlayerAcct().getBalance() < this.getRent())
+//            return; // Player cannot affort the plot
+        if (!isOwned() && player.getPlayerAcct().getBalance() >= this.price) {
+            this.owner = player;
+            ownedOwnables.add(this);
+            player.getPlayerAcct().withdraw(this.price);
+            System.out.println(this.owner + " just bought " + this.fieldName);
+        }
+    }
+
+    public Player getOwner() { return this.owner; }
 }
