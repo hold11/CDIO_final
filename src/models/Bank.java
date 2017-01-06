@@ -21,4 +21,14 @@ public class Bank
         bankAccts.add(bankAcct);
         return bankAcct;
     }
+
+    public static BankAcct createBankAcct(int startingBalance) {
+        BankAcct bankAcct = new BankAcct(startingBalance);
+        bankAccts.add(bankAcct);
+        return bankAcct;
+    }
+
+    public static List<BankAcct> getBankAccts() {
+        return bankAccts;
+    }
 }

@@ -9,12 +9,16 @@ package models;/*
     /`           ´\                                      |
  */
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.*;
 import java.lang.*;
 
 /**
  * This class is a die cup (a cup holding multiple dice. It basically handles all the dice in the game.
  * @version 1.1.1
+ * imported from CDIO_del3 develop branch on 2017-01-06.
  */
 public class DiceCup {
     private Collection<Die> dice = new ArrayList<Die>();
