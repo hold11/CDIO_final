@@ -33,22 +33,22 @@ public class BalanceCard extends ChanceCard
      * @param changeBalance
      * @param type
      */
-    public BalanceCard(int chanceCardID, int changeBalance, int type) {
+    public BalanceCard(int chanceCardID, int type, int changeBalance) {
         super(chanceCardID);
-        this.changeBalance = changeBalance;
         this.type = type;                       // TODO: Can we do this in a prettier way?
+        this.changeBalance = changeBalance;
     }
 
     @Override
-    public void receiveCard(Player player) {
-        if (this.changeBalance < 0 && this.type == 0) {                               // Pay money to the bank
+    public void receiveCard(Player player)
+    {
+        if (this.changeBalance < 0 && this.type == 0)                 // Pay money to the bank
             player.getPlayerAcct().withdraw(this.changeBalance);
-        } else if (this.changeBalance > 0 && this.type == 0) {                        // Receive money from the bank
+        else if (this.changeBalance > 0 && this.type == 0)            // Receive money from the bank
             player.getPlayerAcct().deposit(this.changeBalance);
-        } else if (this.type == 1) {                       // Receive money from all players except you
+        else if (this.type == 1)                                      // Receive money from all players except you
             for (Player p : Player.getPlayers())
-                if (p != player)                                    // If the player in the list is not the current player, transfer the money (really not necesary to check this)
+                if (p != player)                                      // If the player in the list is not the current player, transfer the money (really not necesary to check this)
                     p.getPlayerAcct().transfer(this.changeBalance, p);
-        }
     }
 }
