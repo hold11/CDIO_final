@@ -22,7 +22,7 @@ public class Bank
         return bankAcct;
     }
 
-    public static ArrayList<BankAcct> getBankAccts() {
-
+    public static List<BankAcct> getBankAccts() {
+        return bankAccts;
     }
 }
