@@ -19,8 +19,8 @@ public class Player {
     private String playerName;
     private BankAcct playerAcct;
     private DiceCup diceCup;
-    private fields.Field currentField;
-    private fields.Field previousField;
+    private int currentField;
+    private int previousField;
     private static final int STARTING_BALANCE = 10000;
 
     private static int nextPlayerID = 1; // This variable is for defining the player ID for the next player that gets constructed.
@@ -95,6 +95,12 @@ public class Player {
     }
 
     // Reused from del3
+    public static List<Player> getPlayers()
+    {
+        return players;
+    }
+
+    // Reused from del3
     public String toString() {
         return this.playerName;
     }
@@ -105,22 +111,22 @@ public class Player {
     }
 
     // Reused from del3
-    public Field getPreviousField() {
+    public int getPreviousField() {
         return this.previousField;
     }
 
     // Reused from del3
-    public Field getCurrentField() {
+    public int getCurrentField() {
         return this.currentField;
     }
 
     // Reused from del3
     public void moveCurrentField(int diceCount) {
-        models.GameBoard board = new models.GameBoard();
+        /*models.GameBoard board = new models.GameBoard();
         if (this.currentField + diceCount > board.getFields().length)
             this.setCurrentField(diceCount - board.getFields().length + this.currentField);
         else
-            this.setCurrentField(this.currentField + diceCount);
+            this.setCurrentField(this.currentField + diceCount);*/
     }
 
     // Reused from del3
@@ -132,11 +138,11 @@ public class Player {
         this.currentField = fieldID;
     }
 
-    public int getOwnedHouseCount {
+    public int getOwnedHouseCount() {
         return 0;
     }
 
-    public int getOwnedHotelCount {
+    public int getOwnedHotelCount() {
         return 0;
     }
 }
