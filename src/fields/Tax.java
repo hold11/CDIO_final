@@ -9,7 +9,16 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import models.Player;
+
 public class Tax extends Field
 {
+    public Tax(String fieldName) {
+        super(fieldName);
+    }
 
+    @Override
+    public void landOnField(Player player) {
+
+    }
 }
