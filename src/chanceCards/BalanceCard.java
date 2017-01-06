@@ -24,29 +24,31 @@ import models.Player;
 public class BalanceCard extends ChanceCard
 {
     int changeBalance;
-    int receiveFromPlayers;
+    int type;
 
-    public BalanceCard(int chanceCardID, int changeBalance) {
+    /**
+     * Type = 0: Pay/receive money to/from the bank.
+     * Type = 1: Receive from all players
+     * @param chanceCardID
+     * @param changeBalance
+     * @param type
+     */
+    public BalanceCard(int chanceCardID, int changeBalance, int type) {
         super(chanceCardID);
         this.changeBalance = changeBalance;
-    }
-
-    public BalanceCard(int chanceCardID, int changeBalance, int receiveFromPlayers) {
-        super(chanceCardID);
-        this.changeBalance = 0; // TODO: Can we do this in a prettier way? chanceBalance isn't used here
-        this.receiveFromPlayers = receiveFromPlayers;
+        this.type = type;                       // TODO: Can we do this in a prettier way?
     }
 
     @Override
     public void receiveCard(Player player) {
-        if (this.changeBalance < 0) {                               // Pay money to the bank
+        if (this.changeBalance < 0 && this.type == 0) {                               // Pay money to the bank
             player.getPlayerAcct().withdraw(this.changeBalance);
-        } else if (this.changeBalance > 0) {                        // Receive money from the bank
+        } else if (this.changeBalance > 0 && this.type == 0) {                        // Receive money from the bank
             player.getPlayerAcct().deposit(this.changeBalance);
-        } else if (this.changeBalance == 0) {                       // Receive money from all players except you
+        } else if (this.type == 1) {                       // Receive money from all players except you
             for (Player p : Player.getPlayers())
                 if (p != player)                                    // If the player in the list is not the current player, transfer the money (really not necesary to check this)
-                    p.getPlayerAcct().transfer(this.receiveFromPlayers, p);
+                    p.getPlayerAcct().transfer(this.changeBalance, p);
         }
     }
 }
