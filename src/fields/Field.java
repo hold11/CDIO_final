@@ -9,7 +9,17 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import models.Player;
+
 public abstract class Field
 {
+    protected String fieldName;
+    public abstract void landOnField(Player player);
 
+    public Field(String fieldName) {
+        this.fieldName = fieldName;
+    }
+
+    @Override
+    public String toString() { return this.fieldName; }
 }

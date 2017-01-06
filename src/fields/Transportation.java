@@ -9,7 +9,26 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import models.DiceCup;
+import models.Player;
+
 public class Transportation extends Ownable
 {
+    public Transportation(String fieldName, int price) {
+        super(fieldName, price);
+    }
 
+    @Override
+    public void landOnField(Player player) {
+
+    }
+
+    @Override
+    public int getRent() {
+        throw new IllegalArgumentException("Use getRent(DiceCup) instead of getRent().");
+    }
+
+    public int getRent(DiceCup diceCup) {
+        return 0;
+    }
 }

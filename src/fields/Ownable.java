@@ -9,7 +9,22 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import models.DiceCup;
+import models.Player;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Ownable extends Field
 {
+    protected int price;
+    protected Player owner;
+    protected static List<Ownable> ownedOwnables = new ArrayList<>();
+    public abstract int getRent();
 
+    public Ownable(String fieldName, int price) {
+        super(fieldName);
+        this.price = price;
+    }
 }
