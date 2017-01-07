@@ -43,10 +43,26 @@ public class ReadFields {
             // Look through each node in the XML document for field
             for (int temp = 0; temp < nodeFieldList.getLength(); temp++) {
                 Node nodeField = nodeFieldList.item(temp);
+                Element elmField = (Element) nodeField;
 
                 // If the node is an element node:
                 if (nodeField.getNodeType() == Node.ELEMENT_NODE) {
-                    fields.add(createLandPlot((Element) nodeField)); // add the field to the fields list
+                    if (getAttrValueStr(elmField, "type").equals("landPlot"))
+                        fields.add(createLandPlot(elmField)); // add the field to the fields list
+                    else if (getAttrValueStr(elmField, "type").equals("business"))
+                        fields.add(createBusiness(elmField));
+                    else if (getAttrValueStr(elmField, "type").equals("chanceField"))
+                        fields.add(createChanceField(elmField));
+                    else if (getAttrValueStr(elmField, "type").equals("jail"))
+                        fields.add(createJail(elmField));
+                    else if (getAttrValueStr(elmField, "type").equals("rest"))
+                        fields.add(createRest(elmField));
+                    else if (getAttrValueStr(elmField, "type").equals("tax"))
+                        fields.add(createTax(elmField));
+                    else if (getAttrValueStr(elmField, "type").equals("transportation"))
+                        fields.add(createTransportation(elmField));
+                    else
+                        System.out.println("[ReadFields] : Field type does not exist.");
                 }
             }
         } catch (Exception e) {
@@ -58,7 +74,7 @@ public class ReadFields {
     private static LandPlot createLandPlot(Element element) {
         // Fetch all the data for the field:
         int fieldId = getTagValue(element, "id");
-        int groupId = getAttrValue(element, "groupId");
+        int groupId = getAttrValueInt(element, "groupId");
         int price = getTagValue(element, "price");
         int housePrice = getTagValue(element, "housePrice");
 
@@ -78,17 +94,64 @@ public class ReadFields {
         for (int i = 0; i < 6; i++)
             rents[i] = Integer.parseInt(rentStrs[i]);
 
-        // Create a LandPlot based on the given data:
-        LandPlot field = new LandPlot(fieldId, groupId, price, housePrice, rents);
+        // Return a LandPlot based on the given data:
+        return  new LandPlot(fieldId, groupId, price, housePrice, rents);
+    }
 
-        return field;
+    private static Business createBusiness(Element element) {
+        int fieldId = getTagValue(element, "id");
+        int price = getTagValue(element, "price");
+        return new Business(fieldId, price);
+    }
+
+    private static ChanceField createChanceField(Element element) {
+        int fieldId = getTagValue(element, "id");
+        return new ChanceField(fieldId);
+    }
+
+    private static Jail createJail(Element element) {
+        int fieldId = getTagValue(element, "id");
+        return new Jail(fieldId);
+    }
+
+    private static Rest createRest(Element element) {
+        int fieldId = getTagValue(element, "id");
+        int passingReward = 0;
+
+        try {
+            passingReward = getTagValue(element, "reward");
+        } catch (Exception e) { /* Reward doesn't exist = field not equal start field. */}
+
+        return new Rest(fieldId, passingReward);
+    }
+
+    private static Tax createTax(Element element) {
+        int fieldId = getTagValue(element, "fieldId");
+        int amount = getTagValue(element, "amount");
+        int percentage = 0;
+
+        try {
+            percentage = getTagValue(element, "percentage");
+        } catch (Exception e) { /* Percentage doesn't exist on this field */ }
+
+        return new Tax(fieldId, percentage, amount);
+    }
+
+    private static Transportation createTransportation(Element element) {
+        int fieldId = getTagValue(element, "id");
+        int price = getTagValue(element, "price");
+        return new Transportation(fieldId, price);
     }
 
     private static int getTagValue(Element element, String tagName) {
         return Integer.parseInt(element.getElementsByTagName(tagName).item(0).getTextContent());
     }
 
-    private static int getAttrValue(Element element, String attrName) {
+    private static int getAttrValueInt(Element element, String attrName) {
         return Integer.parseInt(element.getAttribute(attrName));
+    }
+
+    private static String getAttrValueStr(Element element, String attrName) {
+        return element.getAttribute(attrName);
     }
 }

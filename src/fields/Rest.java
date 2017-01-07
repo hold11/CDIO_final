@@ -13,16 +13,16 @@ import models.Player;
 
 public class Rest extends Field
 {
-    private int passingReward;
+    private int reward;
 
     public Rest(int fieldID) {
         super(fieldID);
-        this.passingReward = 0;
+        this.reward = 0;
     }
 
     public Rest(int fieldID, int passingReward) {
         super(fieldID);
-        this.passingReward = passingReward;
+        this.reward = passingReward;
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Rest extends Field
     }
 
     public void passedField(Player player) {
-        player.getPlayerAcct().deposit(this.passingReward);
+        player.getPlayerAcct().deposit(this.reward);
     }
 }
