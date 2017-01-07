@@ -44,4 +44,18 @@ public class LandPlot extends Ownable
         else
             return 0;
     }
+
+    public void buyHouse() {
+        if (this.isOwned() && this.houseCount <= 5) {
+            this.getOwner().getPlayerAcct().withdraw(this.housePrice);
+            this.houseCount++;
+        }
+    }
+
+    public void sellHouse() {
+        if (this.isOwned() && this.houseCount > 0) {
+            this.getOwner().getPlayerAcct().deposit(this.housePrice / 2);
+            this.houseCount--;
+        }
+    }
 }
