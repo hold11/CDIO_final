@@ -45,22 +45,29 @@ public class ReadFields {
     }
 
     private static LandPlot createLandPlot(Element element) {
+        // Fetch all the data for the field:
         int fieldId = getTagValue(element, "id");
         int groupId = getAttrValue(element, "groupId");
         int price = getTagValue(element, "price");
         int housePrice = getTagValue(element, "housePrice");
 
-        // Seperate each rent by ", "
+        // Get the rent element:
         String rentsString = element.getElementsByTagName("rent").item(0).getTextContent();
-        if (rentsString.startsWith("[") && rentsString.endsWith("]"))
-            rentsString = rentsString.replaceAll("\\[", "").replaceAll("]", ""); // Remove the [ and ]
 
+        // Remove [ and ] from the string:
+        if (rentsString.startsWith("[") && rentsString.endsWith("]")) {
+            rentsString = rentsString.replaceAll("\\[", "").replaceAll("]", "");
+        }
+
+        // Seperate each rent by ", ":
         String[] rentStrs = rentsString.split(", ");
         int[] rents = new int[rentStrs.length];
 
+        // Put all the int values in the rents variable:
         for (int i = 0; i < 6; i++)
             rents[i] = Integer.parseInt(rentStrs[i]);
 
+        // Create a LandPlot based on the given data:
         LandPlot field = new LandPlot(fieldId, groupId, price, housePrice, rents);
 
         return field;
