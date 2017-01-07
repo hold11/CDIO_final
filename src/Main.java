@@ -14,6 +14,7 @@ import fields.*;
 import lang.Lang;
 import models.Player;
 import GUI.GUIController;
+import models.ReadFields;
 
 public class Main {
 
@@ -21,13 +22,19 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
+//        ReadFields.readAndDisplay();
+        Field fields[] = ReadFields.readFields();
+        for (Field f : fields)
+            System.out.println(f);
+
+        System.out.println("Test");
         // A few testing fields (all LandPlots)
-        Field fields[] = new Field[5];
-        fields[0] = new LandPlot(1, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
-        fields[1] = new LandPlot(2, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
-        fields[2] = new LandPlot(3, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
-        fields[3] = new LandPlot(4, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
-        fields[4] = new LandPlot(5, 2000, 1000, new int[] {150, 800, 2000, 6000, 9000, 12000});
+//        Field fields[] = new Field[5];
+//        fields[0] = new LandPlot(1, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
+//        fields[1] = new LandPlot(2, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
+//        fields[2] = new LandPlot(3, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
+//        fields[3] = new LandPlot(4, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
+//        fields[4] = new LandPlot(5, 2000, 1000, new int[] {150, 800, 2000, 6000, 9000, 12000});
 
 //        setup();
     }
