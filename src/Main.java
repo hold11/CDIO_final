@@ -17,21 +17,17 @@ import GUI.GUIController;
 public class Main {
 
     public static void main(String[] args) {
-
         Lang.setLanguage(args);
 
-        //setup();
+//        LandPlot plot = new LandPlot("testPlot", 32000);
+//        System.out.println(plot.getOwner() + " owns " + plot);
+//        Player p1 = new Player();
+//        System.out.println(p1.getPlayerAcct().getBalance());
+//        plot.purchaseField(p1);
+//        System.out.println(p1.getPlayerAcct().getBalance());
 
-        LandPlot plot = new LandPlot("testPlot", 32000);
-        System.out.println(plot.getOwner() + " owns " + plot);
-        Player p1 = new Player();
-        System.out.println(p1.getPlayerAcct().getBalance());
-        plot.purchaseField(p1);
-        System.out.println(p1.getPlayerAcct().getBalance());
-    }
 
-    public static boolean testBool() {
-        return true;
+//        setup();
     }
 
     private static void setup() {

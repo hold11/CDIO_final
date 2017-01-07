@@ -13,8 +13,8 @@ import models.Player;
 
 public class Tax extends Field
 {
-    public Tax(String fieldName) {
-        super(fieldName);
+    public Tax(int fieldID) {
+        super(fieldID);
     }
 
     @Override

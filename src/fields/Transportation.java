@@ -14,8 +14,8 @@ import models.Player;
 
 public class Transportation extends Ownable
 {
-    public Transportation(String fieldName, int price) {
-        super(fieldName, price);
+    public Transportation(int fieldID, int price) {
+        super(fieldID, price);
     }
 
     @Override

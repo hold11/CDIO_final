@@ -13,8 +13,8 @@ import models.Player;
 
 public class Business extends Ownable
 {
-    public Business(String fieldName, int price) {
-        super(fieldName, price);
+    public Business(int fieldID, int price) {
+        super(fieldID, price);
     }
 
     @Override

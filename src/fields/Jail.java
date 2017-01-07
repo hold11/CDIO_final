@@ -13,8 +13,8 @@ import models.Player;
 
 public class Jail extends Field
 {
-    public Jail(String fieldName) {
-        super(fieldName);
+    public Jail(int fieldID) {
+        super(fieldID);
     }
 
     @Override
