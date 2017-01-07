@@ -15,7 +15,7 @@ public final class Chance extends Field {
         public Builder() {
             this.title = "<b><font size=\"7\">?";
             this.subText = "Prøv lykken";
-            this.description = "Ta' et chancekort.";
+            this.description = "Tag et chancekort.";
             this.bgColor = new Color(204, 204, 204);
         }
         

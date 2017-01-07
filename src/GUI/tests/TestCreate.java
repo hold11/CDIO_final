@@ -23,10 +23,10 @@ public class TestCreate {
         list.add(new Empty.Builder().setFgColor(Color.YELLOW).build());
         list.add(new Brewery.Builder().build());
         
-        Field[] fields = new Field[list.size()];
-        for(int i = 0; i < fields.length; i++) fields[i] = list.get(i);
+        //Field[] fields = new Field[list.size()];
+        //for(int i = 0; i < fields.length; i++) fields[i] = list.get(i);
       
-        GUI.create(fields);
+        GUI.create(list);
         Car car = new Car.Builder()
             .typeRacecar()
             .primaryColor(Color.BLUE)

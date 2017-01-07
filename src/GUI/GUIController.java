@@ -11,277 +11,277 @@ package GUI;
     /`           ´\                                      |
  */
 
-/*
+
 import GUI.GUI;
 import GUI.backend.Car;
 import GUI.fields.*;
-import strings.Lang;
+import lang.Lang;
+import models.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class GUIController {
-    private Car[] movers = new Car[6];
+    private Car[] cars = new Car[6];
 
     public GUIController() {
     }
 
-    public void initMovers() {
-
-        movers[0] = new Car.Builder()
-                .troldeTanja()
-                .primaryColor(new Color(22, 154,255))
-                .secondaryColor(new Color(255, 21, 208))
-                .overlayDualColor()
-                .build();
-
-        movers[1] = new Car.Builder()
-                .troldeTanja()
-                .primaryColor(Color.GREEN)
-                .secondaryColor(Color.WHITE)
-                .overlayDualColor()
-                .build();
-
-        movers[2] = new Car.Builder()
-                .troldeTanja()
-                .primaryColor(Color.WHITE)
-                .secondaryColor(Color.RED)
-                .overlayDualColor()
-                .build();
-
-        movers[3] = new Car.Builder()
-                .troldeTanja()
-                .primaryColor(Color.YELLOW)
-                .secondaryColor(Color.GREEN)
-                .overlayDualColor()
-                .build();
-
-        movers[4] = new Car.Builder()
-                .troldeTanja()
-                .primaryColor(Color.BLUE)
-                .secondaryColor(Color.ORANGE)
-                .overlayDualColor()
-                .build();
-
-        movers[5] = new Car.Builder()
-                .troldeTanja()
-                .primaryColor(Color.WHITE)
-                .secondaryColor(new Color(22, 154,255))
-                .overlayDualColor()
-                .build();
-    }
+    //TODO: Figure out if this is still needed
+//    public void initMovers() {
+//
+//        movers[0] = new Car.Builder()
+//                .troldeTanja()
+//                .primaryColor(new Color(22, 154,255))
+//                .secondaryColor(new Color(255, 21, 208))
+//                .overlayDualColor()
+//                .build();
+//
+//        movers[1] = new Car.Builder()
+//                .troldeTanja()
+//                .primaryColor(Color.GREEN)
+//                .secondaryColor(Color.WHITE)
+//                .overlayDualColor()
+//                .build();
+//
+//        movers[2] = new Car.Builder()
+//                .troldeTanja()
+//                .primaryColor(Color.WHITE)
+//                .secondaryColor(Color.RED)
+//                .overlayDualColor()
+//                .build();
+//
+//        movers[3] = new Car.Builder()
+//                .troldeTanja()
+//                .primaryColor(Color.YELLOW)
+//                .secondaryColor(Color.GREEN)
+//                .overlayDualColor()
+//                .build();
+//
+//        movers[4] = new Car.Builder()
+//                .troldeTanja()
+//                .primaryColor(Color.BLUE)
+//                .secondaryColor(Color.ORANGE)
+//                .overlayDualColor()
+//                .build();
+//
+//        movers[5] = new Car.Builder()
+//                .troldeTanja()
+//                .primaryColor(Color.WHITE)
+//                .secondaryColor(new Color(22, 154,255))
+//                .overlayDualColor()
+//                .build();
+//    }
 
     public int selectPlayerCount() {
-        return Integer.parseInt(GUI.getUserSelection("Select players", "2", "3", "4", "5", "6"));
+        return Integer.parseInt(GUI.getUserSelection("Select players",  "3", "4", "5", "6"));
     }
 
-    public void getPlayerNames() {
-        Player player = new Player(GUI.getUserString(" please type your name"));
-    }
-
-    public void createBoardWithFields() {
-        ArrayList<Field> list = new ArrayList<>();
-
-        //Field #1
-        list.add(new Territory.Builder()
-                .setTitle("Tribe Encampment")
-                .setPicture("src/GUI/art/fields/territories/tribalEncampment.png")
-                .setRent("100")
-                .setPrice("1000")
-                .build());
-
-        //Field #2
-        list.add(new Territory.Builder()
-                .setTitle("Crater")
-                .setPicture("src/GUI/art/fields/territories/crater.png")
-                .setRent("300")
-                .setPrice("1500")
-                .build());
-
-        //Field #3
-        list.add(new Territory.Builder()
-                .setTitle("Mountain")
-                .setPicture("src/GUI/art/fields/territories/mountain.png")
-                .setRent("500")
-                .setPrice("2000")
-                .build());
-
-        //Field #4
-        list.add(new Territory.Builder()
-                .setTitle("Cold Desert")
-                .setPicture("src/GUI/art/fields/territories/coldDesert.png")
-                .setRent("700")
-                .setPrice("3000")
-                .build());
-
-        //Field #5
-        list.add(new Territory.Builder()
-                .setTitle("Black Cave")
-                .setPicture("src/GUI/art/fields/territories/blackCave.png")
-                .setRent("1000")
-                .setPrice("4000")
-                .build());
-
-        //Field #6
-        list.add(new Territory.Builder()
-                .setTitle("The Werewall")
-                .setPicture("src/GUI/art/fields/territories/werewall.png")
-                .setRent("1300")
-                .setPrice("4300")
-                .build());
-
-        //Field #7
-        list.add(new Territory.Builder()
-                .setTitle("Mountain Village")
-                .setPicture("src/GUI/art/fields/territories/mountainVillage.png")
-                .setRent("1600")
-                .setPrice("4750")
-                .build());
-
-        //Field #8
-        list.add(new Territory.Builder()
-                .setTitle("South Citadel")
-                .setPicture("src/GUI/art/fields/territories/southCitadel.png")
-                .setRent("2000")
-                .setPrice("5000")
-                .build());
-
-        //Field #9
-        list.add(new Territory.Builder()
-                .setTitle("Palace Gates")
-                .setPicture("src/GUI/art/fields/territories/palaceGates.png")
-                .setRent("2600")
-                .setPrice("5500")
-                .build());
-
-        //Field #10
-        list.add(new Territory.Builder()
-                .setTitle("Tower")
-                .setPicture("src/GUI/art/fields/territories/tower.png")
-                .setRent("3200")
-                .setPrice("6000")
-                .build());
-
-        //Field #11
-        list.add(new Territory.Builder()
-                .setTitle("Castle")
-                .setPicture("src/GUI/art/fields/territories/castle.png")
-                .setRent("4000")
-                .setPrice("8000")
-                .build());
-
-        //Field #12
-        list.add(new Refuge.Builder()
-                .setTitle("Walled City")
-                .setPicture("src/GUI/art/Fields/refuge/walledCity.png")
-                .setBonus("5000")
-                .build());
-
-        //Field #13
-        list.add(new Refuge.Builder()
-                .setTitle("Monastery")
-                .setPicture("src/GUI/art/Fields/refuge/monastery.png")
-                .setBonus("500")
-                .build());
-
-        //Field #14
-        list.add(new LaborCamp.Builder()
-                .setTitle("Huts in the Mountain")
-                .setPicture("src/GUI/art/Fields/laborCamp/hutsInTheMountain.png")
-                .setRent("dice x100")  //TODO: Should this maybe display the rent a player has to pay to the owner as well?
-                .setPrice("2500")
-                .build());
-
-        //Field #15
-        list.add(new LaborCamp.Builder()
-                .setTitle("The Pit")
-                .setPicture("src/GUI/art/Fields/laborCamp/thePit.png")
-                .setRent("dice x100")  //TODO: Should this maybe display the rent a player has to pay to the owner as well?
-                .setPrice("2500")
-                .build());
-
-        //Field #16
-        list.add(new Tax.Builder()
-                .setTitle("Goldmine")
-                .setPicture("src/GUI/art/Fields/tax/goldmine.png")
-                .setTax("2000")
-                .build());
-
-        //Field #17
-        list.add(new Tax.Builder()
-                .setTitle("Caravan")
-                .setPicture("src/GUI/art/Fields/tax/caravan.png")
-                .setTax("10% or 4000")   //TODO: Maybe have it show what 10% means for current player
-                .build());
-
-        //Field #18
-        list.add(new Fleet.Builder()
-                .setTitle("Second Sail")
-                .setPicture("src/GUI/art/Fields/fleet/secondSail.png")
-                .setRent("1000")  //TODO: Make it actually show the correct value according to the rules
-                .setPrice("4000")
-                .build());
-
-        //Field #19
-        list.add(new Fleet.Builder()
-                .setTitle("Sea Grover")
-                .setPicture("src/GUI/art/Fields/fleet/seaGrover.png")
-                .setRent("2000")  //TODO: Make it actually show the correct value according to the rules
-                .setPrice("4000")
-                .build());
-
-        //Field #20
-        list.add(new Fleet.Builder()
-                .setTitle("The Buccaneers")
-                .setPicture("src/GUI/art/Fields/fleet/theBuccaneers.png")
-                .setRent("3000")  //TODO: Make it actually show the correct value according to the rules
-                .setPrice("4000")
-                .build());
-
-        //Field #21
-        list.add(new Fleet.Builder()
-                .setTitle("Privateer Armada")
-                .setPicture("src/GUI/art/Fields/fleet/privateerArmada.png")
-                .setRent("4000")  //TODO: Make it actually show the correct value according to the rules
-                .setPrice("4000")
-                .build());
-
-        GUI.create(list);
-    }
+    //TODO: Figure out if this is needed at all
+//    public void createBoardWithFields() {
+//        ArrayList<Field> list = new ArrayList<>();
+//
+//        //Field #1
+//        list.add(new Territory.Builder()
+//                .setTitle("Tribe Encampment")
+//                .setPicture("src/GUI/art/fields/territories/tribalEncampment.png")
+//                .setRent("100")
+//                .setPrice("1000")
+//                .build());
+//
+//        //Field #2
+//        list.add(new Territory.Builder()
+//                .setTitle("Crater")
+//                .setPicture("src/GUI/art/fields/territories/crater.png")
+//                .setRent("300")
+//                .setPrice("1500")
+//                .build());
+//
+//        //Field #3
+//        list.add(new Territory.Builder()
+//                .setTitle("Mountain")
+//                .setPicture("src/GUI/art/fields/territories/mountain.png")
+//                .setRent("500")
+//                .setPrice("2000")
+//                .build());
+//
+//        //Field #4
+//        list.add(new Territory.Builder()
+//                .setTitle("Cold Desert")
+//                .setPicture("src/GUI/art/fields/territories/coldDesert.png")
+//                .setRent("700")
+//                .setPrice("3000")
+//                .build());
+//
+//        //Field #5
+//        list.add(new Territory.Builder()
+//                .setTitle("Black Cave")
+//                .setPicture("src/GUI/art/fields/territories/blackCave.png")
+//                .setRent("1000")
+//                .setPrice("4000")
+//                .build());
+//
+//        //Field #6
+//        list.add(new Territory.Builder()
+//                .setTitle("The Werewall")
+//                .setPicture("src/GUI/art/fields/territories/werewall.png")
+//                .setRent("1300")
+//                .setPrice("4300")
+//                .build());
+//
+//        //Field #7
+//        list.add(new Territory.Builder()
+//                .setTitle("Mountain Village")
+//                .setPicture("src/GUI/art/fields/territories/mountainVillage.png")
+//                .setRent("1600")
+//                .setPrice("4750")
+//                .build());
+//
+//        //Field #8
+//        list.add(new Territory.Builder()
+//                .setTitle("South Citadel")
+//                .setPicture("src/GUI/art/fields/territories/southCitadel.png")
+//                .setRent("2000")
+//                .setPrice("5000")
+//                .build());
+//
+//        //Field #9
+//        list.add(new Territory.Builder()
+//                .setTitle("Palace Gates")
+//                .setPicture("src/GUI/art/fields/territories/palaceGates.png")
+//                .setRent("2600")
+//                .setPrice("5500")
+//                .build());
+//
+//        //Field #10
+//        list.add(new Territory.Builder()
+//                .setTitle("Tower")
+//                .setPicture("src/GUI/art/fields/territories/tower.png")
+//                .setRent("3200")
+//                .setPrice("6000")
+//                .build());
+//
+//        //Field #11
+//        list.add(new Territory.Builder()
+//                .setTitle("Castle")
+//                .setPicture("src/GUI/art/fields/territories/castle.png")
+//                .setRent("4000")
+//                .setPrice("8000")
+//                .build());
+//
+//        //Field #12
+//        list.add(new Refuge.Builder()
+//                .setTitle("Walled City")
+//                .setPicture("src/GUI/art/Fields/refuge/walledCity.png")
+//                .setBonus("5000")
+//                .build());
+//
+//        //Field #13
+//        list.add(new Refuge.Builder()
+//                .setTitle("Monastery")
+//                .setPicture("src/GUI/art/Fields/refuge/monastery.png")
+//                .setBonus("500")
+//                .build());
+//
+//        //Field #14
+//        list.add(new LaborCamp.Builder()
+//                .setTitle("Huts in the Mountain")
+//                .setPicture("src/GUI/art/Fields/laborCamp/hutsInTheMountain.png")
+//                .setRent("dice x100")
+//                .setPrice("2500")
+//                .build());
+//
+//        //Field #15
+//        list.add(new LaborCamp.Builder()
+//                .setTitle("The Pit")
+//                .setPicture("src/GUI/art/Fields/laborCamp/thePit.png")
+//                .setRent("dice x100")
+//                .setPrice("2500")
+//                .build());
+//
+//        //Field #16
+//        list.add(new Tax.Builder()
+//                .setTitle("Goldmine")
+//                .setPicture("src/GUI/art/Fields/tax/goldmine.png")
+//                .setTax("2000")
+//                .build());
+//
+//        //Field #17
+//        list.add(new Tax.Builder()
+//                .setTitle("Caravan")
+//                .setPicture("src/GUI/art/Fields/tax/caravan.png")
+//                .setTax("10% or 4000")
+//                .build());
+//
+//        //Field #18
+//        list.add(new Fleet.Builder()
+//                .setTitle("Second Sail")
+//                .setPicture("src/GUI/art/Fields/fleet/secondSail.png")
+//                .setRent("1000")
+//                .setPrice("4000")
+//                .build());
+//
+//        //Field #19
+//        list.add(new Fleet.Builder()
+//                .setTitle("Sea Grover")
+//                .setPicture("src/GUI/art/Fields/fleet/seaGrover.png")
+//                .setRent("2000")
+//                .setPrice("4000")
+//                .build());
+//
+//        //Field #20
+//        list.add(new Fleet.Builder()
+//                .setTitle("The Buccaneers")
+//                .setPicture("src/GUI/art/Fields/fleet/theBuccaneers.png")
+//                .setRent("3000")
+//                .setPrice("4000")
+//                .build());
+//
+//        //Field #21
+//        list.add(new Fleet.Builder()
+//                .setTitle("Privateer Armada")
+//                .setPicture("src/GUI/art/Fields/fleet/privateerArmada.png")
+//                .setRent("4000")
+//                .setPrice("4000")
+//                .build());
+//
+//        GUI.create(list);
+//    }
 
     public void createPlayers() {
-        initMovers();
+        //initMovers();
 
-        for (int i = 0; i < Player.getPlayersList().size(); i++)
-            GUI.addPlayer(Player.getPlayersList().get(i), movers[i]);
+        for (int i = 0; i < Player.getPlayers().size(); i++)
+            GUI.addPlayer(Player.getPlayers().get(i).getPlayerName(), Player.getPlayers().get(i).getPlayerAcct().getBalance());
     }
 
-    public void moveMovers(Player player) {
+    public void moveCars(Player player) {
         if (player.getPreviousField() >= player.getCurrentField()) {
             for (int i = player.getPreviousField() ; i <= 21 ; i++) {
-                GUI.removeAllMovers(player);
-                GUI.setMover(i, player);
+                GUI.removeAllCars(player.getPlayerName());
+                GUI.setCar(i, player.getPlayerName());
                 sleep(500);
             }
             for (int i = 1 ; i <= player.getCurrentField(); i++) {
-                GUI.removeAllMovers(player);
-                GUI.setMover(i, player);
+                GUI.removeAllCars(player.getPlayerName());
+                GUI.setCar(i, player.getPlayerName());
                 sleep(500);
             }
         } else {
             for (int i = player.getPreviousField(); i <= player.getCurrentField(); i++) {
-                GUI.removeAllMovers(player);
-                GUI.setMover((i), player);
+                GUI.removeAllCars(player.getPlayerName());
+                GUI.setCar((i), player.getPlayerName());
                 sleep(500);
             }
         }
     }
 
-    public void removeBankruptPlayer(Player player) {
-        if (player.getPlayerAccount().getBalance() == 0) {
-            GUI.removeAllMovers(player);
-
+    //TODO: Get this thing working
+//    public void removeBankruptPlayer(Player player) {
+//        if (player.getPlayerAccount().getBalance() == 0) {
+//            GUI.removeAllMovers(player);
+//
 //            List<Integer> ownablesInt = new ArrayList<>();
 //            List<fields.Ownable> tmp = fields.Ownable.getPlayersOwnedFields(player);
 //            models.GameBoard board = new models.GameBoard();
@@ -294,24 +294,25 @@ public class GUIController {
 //            }
 //            for (int i : ownablesInt)
 //                GUI.removeOwner(i);
-        }
-    }
+//        }
+//    }
 
     public void updateBalance(Player player) {
-        GUI.setBalance(player, player.getPlayerAccount().getBalance());
+        GUI.setBalance(player.getPlayerName(), player.getPlayerAcct().getBalance());
     }
 
-    public void playerRoll(Player player) {
-        GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
-        player.getDiceCup().roll();
-        GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
-    }
+    //TODO: Move to Main!
+//    public void playerRoll(Player player) {
+//        GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
+//        player.getDiceCup().roll();
+//        GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
+//    }
 
     public boolean getPlayerPurchaseChoice(Player player) {
         showDescriptionCardBuy(player);
         String answer = GUI.getUserButtonPressed("Want to purchase this field?", "Yes!", "No!");
         if (answer.equals("Yes!")) {
-            GUI.setOwner(player.getCurrentField(), player);
+            GUI.setOwner(player.getCurrentField(), player.getPlayerName());
             return true;
         } else return false;
     }
@@ -411,4 +412,4 @@ public class GUIController {
         }
         while((t1 - t0) < (n));
     }
-}*/
+}
