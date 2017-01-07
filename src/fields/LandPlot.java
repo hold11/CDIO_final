@@ -18,9 +18,11 @@ public class LandPlot extends Ownable
     private int rents[] = new int[6];
     private int housePrice;
     private int houseCount;
+    private int groupID;
 
-    public LandPlot(int fieldID, int price, int housePrice, int[] rents) {
+    public LandPlot(int fieldID, int groupID, int price, int housePrice, int[] rents) {
         super(fieldID, price);
+        this.groupID = groupID;
         this.housePrice = housePrice;
         this.houseCount = 0;
         if (rents.length == 6)
