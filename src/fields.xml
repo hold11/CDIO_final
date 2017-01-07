@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<fields>
+    <field groupId="1" type="LandPlot">
+        <id>1</id>
+        <price>1200</price>
+        <housePrice>1000</housePrice>
+        <rent>[50, 250, 750, 2250, 4000, 6000]</rent>
+    </field>
+
+    <field groupId="1" type="LandPlot">
+        <id>2</id>
+        <price>1200</price>
+        <housePrice>1000</housePrice>
+        <rent>[50, 250, 750, 2250, 4000, 6000]</rent>
+    </field>
+</fields>
