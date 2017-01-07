@@ -13,12 +13,23 @@ import models.Player;
 
 public class Tax extends Field
 {
-    public Tax(int fieldID) {
+    private double percentage;
+    private int amount;
+
+    public Tax(int fieldID, int amount) {
         super(fieldID);
+        this.percentage = 0;
+        this.amount = amount;
+    }
+
+    public Tax(int fieldID, double percentage, int amount) {
+        super(fieldID);
+        this.percentage = percentage;
+        this.amount = amount;
     }
 
     @Override
     public void landOnField(Player player) {
-
+        // TODO: amount or percentage?
     }
 }
