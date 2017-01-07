@@ -20,7 +20,6 @@ public abstract class Field
 
     public Field(int fieldID) {
         this.fieldID = fieldID;
-        System.out.println("Field" + this.fieldID);
         this.fieldName = Lang.msg("Field" + this.fieldID);
     }
 
