@@ -9,6 +9,7 @@
     /`           ´\                                      |
  */
 
+import CLI.CLIController;
 import fields.*;
 import lang.Lang;
 import models.Player;
@@ -18,6 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         Lang.setLanguage(args);
+        CLIController cli = new CLIController(); // For testing purposes
 
         // A few testing fields (all LandPlots)
         Field fields[] = new Field[5];
