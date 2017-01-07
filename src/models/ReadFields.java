@@ -23,8 +23,19 @@ public class ReadFields {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fieldsXMLFile);
 
-            //optional, but recommended
-            //read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+            // this formats the node correctly
+            // i.e.:
+            //    <foo>Hel
+            //    lo
+            //     World</foo>
+            // gets represented (denormalized):
+            //    Element foo
+            //       Text node: Hel
+            //       Text node: lo
+            //       Text node:  World
+            // (normalized):
+            //    Element foo
+            //       Text node: Hello world
             doc.getDocumentElement().normalize();
 
             NodeList nodeFieldList = doc.getElementsByTagName("field");
