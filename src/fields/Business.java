@@ -25,7 +25,10 @@ public class Business extends Ownable
 
     @Override
     public int getRent(Player player) {
-        return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
+        if (this.isOwned() && this.owner != player)
+            return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
+        else
+            return 0;
     }
 
     /**

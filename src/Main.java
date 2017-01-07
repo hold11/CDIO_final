@@ -24,17 +24,18 @@ public class Main {
 
 //        ReadFields.readAndDisplay();
         Field fields[] = ReadFields.readFields();
-        for (Field f : fields)
-            System.out.println(f);
+//        for (Field f : fields)
+//            System.out.println(f);
 
-        System.out.println("Test");
-        // A few testing fields (all LandPlots)
-//        Field fields[] = new Field[5];
-//        fields[0] = new LandPlot(1, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
-//        fields[1] = new LandPlot(2, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
-//        fields[2] = new LandPlot(3, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
-//        fields[3] = new LandPlot(4, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
-//        fields[4] = new LandPlot(5, 2000, 1000, new int[] {150, 800, 2000, 6000, 9000, 12000});
+        Player p1 = new Player();
+        Player p2 = new Player();
+
+        Field[] fieldsTest =  {
+                new Transportation(1, 4000),
+                new Transportation(2, 4000),
+                new Transportation(3, 4000),
+                new Transportation(4, 4000)
+        };
 
 //        setup();
     }

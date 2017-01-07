@@ -41,7 +41,7 @@ public class LandPlot extends Ownable
     @Override
     public int getRent(Player player) {
         // TODO: If pawning gets implemented, start by checking if field is pawned
-        if (this.owner != null && this.owner != player)
+        if (this.isOwned() && this.owner != player)
             return rents[houseCount];
         else
             return 0;
