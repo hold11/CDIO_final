@@ -14,8 +14,8 @@ import models.Player;
 
 public abstract class Field
 {
-    protected String fieldName;
-    protected int fieldID;
+    private String fieldName;
+    private int fieldID;
     public abstract void landOnField(Player player);
 
     public Field(int fieldID) {

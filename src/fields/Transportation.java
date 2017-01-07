@@ -24,11 +24,7 @@ public class Transportation extends Ownable
     }
 
     @Override
-    public int getRent() {
-        throw new IllegalArgumentException("Use getRent(DiceCup) instead of getRent().");
-    }
-
-    public int getRent(DiceCup diceCup) {
+    public int getRent(Player player) {
         return 0;
     }
 }

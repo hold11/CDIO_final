@@ -32,12 +32,16 @@ public class LandPlot extends Ownable
     @Override
     public void landOnField(Player player) {
         if (this.isOwned() && this.owner != player) {                    // if the plot is owned by another player
-            player.getPlayerAcct().transfer(this.getRent(), this.owner); // transfer rent to the rightful owner
+            player.getPlayerAcct().transfer(this.getRent(player), this.owner); // transfer rent to the rightful owner
         }
     }
 
     @Override
-    public int getRent() {
-        return 0;
+    public int getRent(Player player) {
+        // TODO: If pawning gets implemented, start by checking if field is pawned
+        if (this.owner != null && this.owner != player)
+            return rents[houseCount];
+        else
+            return 0;
     }
 }
