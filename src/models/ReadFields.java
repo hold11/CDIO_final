@@ -41,26 +41,26 @@ public class ReadFields {
             NodeList nodeFieldList = doc.getElementsByTagName("field");
 
             // Look through each node in the XML document for field
-            for (int temp = 0; temp < nodeFieldList.getLength(); temp++) {
-                Node nodeField = nodeFieldList.item(temp);
+            for (int i = 0; i < nodeFieldList.getLength(); i++) {
+                Node nodeField = nodeFieldList.item(i);
                 Element elmField = (Element) nodeField;
 
                 // If the node is an element node:
                 if (nodeField.getNodeType() == Node.ELEMENT_NODE) {
                     if (getAttrValueStr(elmField, "type").equals("landPlot"))
-                        fields.add(createLandPlot(elmField)); // add the field to the fields list
+                        fields.add(createLandPlot(elmField, i + 1)); // add the field to the fields list
                     else if (getAttrValueStr(elmField, "type").equals("business"))
-                        fields.add(createBusiness(elmField));
+                        fields.add(createBusiness(elmField, i + 1));
                     else if (getAttrValueStr(elmField, "type").equals("chanceField"))
-                        fields.add(createChanceField(elmField));
+                        fields.add(createChanceField(elmField, i + 1));
                     else if (getAttrValueStr(elmField, "type").equals("jail"))
-                        fields.add(createJail(elmField));
+                        fields.add(createJail(elmField, i + 1));
                     else if (getAttrValueStr(elmField, "type").equals("rest"))
-                        fields.add(createRest(elmField));
+                        fields.add(createRest(elmField, i + 1));
                     else if (getAttrValueStr(elmField, "type").equals("tax"))
-                        fields.add(createTax(elmField));
+                        fields.add(createTax(elmField, i + 1));
                     else if (getAttrValueStr(elmField, "type").equals("transportation"))
-                        fields.add(createTransportation(elmField));
+                        fields.add(createTransportation(elmField, i + 1));
                     else
                         System.out.println("[ReadFields] : Field type does not exist.");
                 }
@@ -71,9 +71,10 @@ public class ReadFields {
         return fields.toArray(new Field[fields.size()]); // return fields list as an array of Field objects
     }
 
-    private static LandPlot createLandPlot(Element element) {
+    private static LandPlot createLandPlot(Element element, int index) {
         // Fetch all the data for the field:
-        int fieldId = getTagValue(element, "id");
+//        int fieldId = getTagValue(element, "id");
+        int fieldId = index;
         int groupId = getAttrValueInt(element, "groupId");
         int price = getTagValue(element, "price");
         int housePrice = getTagValue(element, "housePrice");
@@ -98,24 +99,28 @@ public class ReadFields {
         return  new LandPlot(fieldId, groupId, price, housePrice, rents);
     }
 
-    private static Business createBusiness(Element element) {
-        int fieldId = getTagValue(element, "id");
+    private static Business createBusiness(Element element, int index) {
+//        int fieldId = getTagValue(element, "id");
+        int fieldId = index;
         int price = getTagValue(element, "price");
         return new Business(fieldId, price);
     }
 
-    private static ChanceField createChanceField(Element element) {
-        int fieldId = getTagValue(element, "id");
+    private static ChanceField createChanceField(Element element, int index) {
+//        int fieldId = getTagValue(element, "id");
+        int fieldId = index;
         return new ChanceField(fieldId);
     }
 
-    private static Jail createJail(Element element) {
-        int fieldId = getTagValue(element, "id");
+    private static Jail createJail(Element element, int index) {
+//        int fieldId = getTagValue(element, "id");
+        int fieldId = index;
         return new Jail(fieldId);
     }
 
-    private static Rest createRest(Element element) {
-        int fieldId = getTagValue(element, "id");
+    private static Rest createRest(Element element, int index) {
+//        int fieldId = getTagValue(element, "id");
+        int fieldId = index;
         int passingReward = 0;
 
         try {
@@ -125,20 +130,22 @@ public class ReadFields {
         return new Rest(fieldId, passingReward);
     }
 
-    private static Tax createTax(Element element) {
-        int fieldId = getTagValue(element, "fieldId");
+    private static Tax createTax(Element element, int index) {
+//        int fieldId = getTagValue(element, "fieldId");
+        int fieldId = index;
         int amount = getTagValue(element, "amount");
-        int percentage = 0;
+        double percentage = 0;
 
         try {
-            percentage = getTagValue(element, "percentage");
+            percentage = Double.parseDouble(element.getElementsByTagName("percentage").item(0).getTextContent());
         } catch (Exception e) { /* Percentage doesn't exist on this field */ }
 
         return new Tax(fieldId, percentage, amount);
     }
 
-    private static Transportation createTransportation(Element element) {
-        int fieldId = getTagValue(element, "id");
+    private static Transportation createTransportation(Element element, int index) {
+//        int fieldId = getTagValue(element, "id");
+        int fieldId = index;
         int price = getTagValue(element, "price");
         return new Transportation(fieldId, price);
     }
