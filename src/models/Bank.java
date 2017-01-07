@@ -9,7 +9,26 @@ package models;/*
     /`           ´\                                      |
  */
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Bank
 {
+    private static List<BankAcct> bankAccts = new ArrayList<>();
 
+    public static BankAcct createBankAcct() {
+        BankAcct bankAcct = new BankAcct();
+        bankAccts.add(bankAcct);
+        return bankAcct;
+    }
+
+    public static BankAcct createBankAcct(int startingBalance) {
+        BankAcct bankAcct = new BankAcct(startingBalance);
+        bankAccts.add(bankAcct);
+        return bankAcct;
+    }
+
+    public static List<BankAcct> getBankAccts() {
+        return bankAccts;
+    }
 }

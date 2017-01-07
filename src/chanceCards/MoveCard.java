@@ -9,7 +9,17 @@ package chanceCards;/*
     /`           ´\                                      |
  */
 
+import models.Player;
+
 public class MoveCard extends ChanceCard
 {
+    public MoveCard(int chanceCardID) {
+        super(chanceCardID);
+        // More here
+    }
 
+    @Override
+    public void receiveCard(Player player) {
+
+    }
 }

@@ -9,7 +9,43 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import models.DiceCup;
+import models.Player;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Ownable extends Field
 {
+    protected int price;
+    protected Player owner;
+    protected static List<Ownable> ownedOwnables = new ArrayList<>();
+    public abstract int getRent();
 
+    public Ownable(String fieldName, int price) {
+        super(fieldName);
+        this.price = price;
+    }
+
+    public boolean isOwned() {
+        for (Ownable o : ownedOwnables)
+            return (this == o); // if the plot is owned, return true, otherwise return false.
+        return false;
+    }
+
+    public void purchaseField(Player player) {
+//        if (isOwned())
+//            return;
+//        if (player.getPlayerAcct().getBalance() < this.getRent())
+//            return; // Player cannot affort the plot
+        if (!isOwned() && player.getPlayerAcct().getBalance() >= this.price) {
+            this.owner = player;
+            ownedOwnables.add(this);
+            player.getPlayerAcct().withdraw(this.price);
+            System.out.println(this.owner + " just bought " + this.fieldName);
+        }
+    }
+
+    public Player getOwner() { return this.owner; }
 }

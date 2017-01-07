@@ -9,7 +9,16 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import models.Player;
+
 public class Jail extends Field
 {
+    public Jail(String fieldName) {
+        super(fieldName);
+    }
 
+    @Override
+    public void landOnField(Player player) {
+
+    }
 }

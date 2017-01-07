@@ -11,5 +11,40 @@ package models;/*
 
 public class BankAcct
 {
+    private int balance;
+    private int grossWorth;
+    private int netWorth;
 
+    public BankAcct() {
+        this.balance = 0;
+    }
+
+    public BankAcct(int balance) {
+        this.balance = balance;
+    }
+
+    public void deposit(int balance) {
+        this.balance += Math.abs(balance);
+        // Recalculate gross worth and net worth
+    }
+
+    public void withdraw(int balance) {
+        this.balance -= Math.abs(balance);
+        // Recalculate gross worth and net worth
+    }
+
+    public void transfer(int amount,Player transferToPlayer) {
+        this.withdraw(amount);
+        transferToPlayer.getPlayerAcct().deposit(amount);
+    }
+
+    public int getBalance() { return this.balance; }
+
+    public int getGrossWorth() {
+        return 0;
+    }
+
+    public int getNetWorth() {
+        return 0;
+    }
 }
