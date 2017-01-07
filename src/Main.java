@@ -30,10 +30,6 @@ public class Main {
 //        setup();
     }
 
-    private static boolean testBool() {
-        return true;
-    }
-
     private static void setup() {
         GUIController gui = new GUIController();
 

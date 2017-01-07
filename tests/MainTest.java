@@ -14,10 +14,4 @@ public class MainTest {
     public void tearDown() throws Exception {
 
     }
-
-    @Test
-    public void testBool() throws Exception {
-        assertTrue(Main.testBool());
-    }
-
 }
