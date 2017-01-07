@@ -22,20 +22,9 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
-//        ReadFields.readAndDisplay();
         Field fields[] = ReadFields.readFields();
-//        for (Field f : fields)
-//            System.out.println(f);
-
-        Player p1 = new Player();
-        Player p2 = new Player();
-
-        Field[] fieldsTest =  {
-                new Transportation(1, 4000),
-                new Transportation(2, 4000),
-                new Transportation(3, 4000),
-                new Transportation(4, 4000)
-        };
+        for (Field f : fields)
+            System.out.println(f.getFieldId() + ": " + f);
 
 //        setup();
     }

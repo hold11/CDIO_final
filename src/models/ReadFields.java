@@ -62,7 +62,7 @@ public class ReadFields {
                     else if (getAttrValueStr(elmField, "type").equals("transportation"))
                         fields.add(createTransportation(elmField, i + 1));
                     else
-                        System.out.println("[ReadFields] : Field type does not exist.");
+                        System.out.println("[ReadFields] : Field type does not exist. (number " + i + 1 + ")");
                 }
             }
         } catch (Exception e) {

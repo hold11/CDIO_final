@@ -1,16 +1,229 @@
 <?xml version="1.0"?>
 <fields>
-    <field groupId="1" type="LandPlot">
-        <id>1</id>
+    <!-- 1 : Start -->
+    <field type="rest">
+        <reward>4000</reward>
+    </field>
+
+    <!-- 2 : Rodovrevej -->
+    <field groupId="1" type="landPlot">
         <price>1200</price>
         <housePrice>1000</housePrice>
         <rent>[50, 250, 750, 2250, 4000, 6000]</rent>
     </field>
 
-    <field groupId="1" type="LandPlot">
-        <id>2</id>
+    <!-- 3 : Chance Field -->
+    <field type="chanceField"></field>
+
+    <!-- 4 : Hvidovrevej -->
+    <field groupId="1" type="landPlot">
         <price>1200</price>
         <housePrice>1000</housePrice>
         <rent>[50, 250, 750, 2250, 4000, 6000]</rent>
+    </field>
+
+    <!-- 5 : First Tax -->
+    <field type="tax">
+        <amount>4000</amount>
+        <percentage>0.1</percentage>
+    </field>
+
+    <!-- 6 : Scandlines 1 (???) -->
+    <field type="transportation">
+        <price>4000</price>
+    </field>
+
+    <!-- 7 : Roskildevej -->
+    <field groupId="2" type="landPlot">
+        <price>2000</price>
+        <housePrice>1000</housePrice>
+        <rent>[100, 600, 1800, 5400, 8000, 11000]</rent>
+    </field>
+
+    <!-- 8 : Chance Field -->
+    <field type="chanceField"></field>
+
+    <!-- 9 : Valby Langgade -->
+    <field groupId="2" type="landPlot">
+        <price>2000</price>
+        <housePrice>1000</housePrice>
+        <rent>[100, 600, 1800, 5400, 8000, 11000]</rent>
+    </field>
+
+    <!-- 10 : Allegade -->
+    <field groupId="2" type="landPlot">
+        <price>2400</price>
+        <housePrice>1000</housePrice>
+        <rent>[150, 800, 2000, 6000, 9000, 12000]</rent>
+    </field>
+
+    <!-- 11 : Paa besoeg i faengslet -->
+    <field type="rest"></field>
+
+    <!-- 12 : Frederiksberg Alle -->
+    <field groupId="3" type="landPlot">
+        <price>2800</price>
+        <housePrice>2000</housePrice>
+        <rent>[200, 1000, 3000, 9000, 12500, 15000]</rent>
+    </field>
+
+    <!-- 13 : Turborg Squash -->
+    <field type="business">
+        <price>3000</price>
+    </field>
+
+    <!-- 14 : Bulowsvej -->
+    <field groupId="4" type="landPlot">
+        <price>2800</price>
+        <housePrice>2000</housePrice>
+        <rent>[200, 1000, 3000, 9000, 12500, 15000]</rent>
+    </field>
+
+    <!-- 15 : Gl. Kongevej -->
+    <field groupId="4" type="landPlot">
+        <price>3200</price>
+        <housePrice>2000</housePrice>
+        <rent>[250, 1250, 3750, 10000, 14000, 18000]</rent>
+    </field>
+
+    <!-- 16 : Molslinjen -->
+    <field type="transportation">
+        <price>4000</price>
+    </field>
+
+    <!-- 17 : Bernstorffsvej -->
+    <field groupId="5" type="landPlot">
+        <price>3600</price>
+        <housePrice>2000</housePrice>
+        <rent>[300, 1400, 4000, 11000, 15000, 19000]</rent>
+    </field>
+
+    <!-- 18 : Chance Card -->
+    <field type="chanceCard"></field>
+
+    <!-- 19 : Hellerupvej -->
+    <field groupId="5" type="landPlot">
+        <price>3600</price>
+        <housePrice>2000</housePrice>
+        <rent>[300, 1400, 4000, 11000, 15000, 19000]</rent>
+    </field>
+
+    <!-- 20 : Stranvejen -->
+    <field groupId="5" type="landPlot">
+        <price>4000</price>
+        <housePrice>2000</housePrice>
+        <rent>[350, 1600, 4400, 12000, 16000, 20000]</rent>
+    </field>
+
+    <!-- 21 : Parkering -->
+    <field type="rest"></field>
+
+    <!-- 22 : Trianglen -->
+    <field groupId="6" type="landPlot">
+        <price>4400</price>
+        <housePrice>3000</housePrice>
+        <rent>[350, 1800, 5000, 14000, 17500, 21000]</rent>
+    </field>
+
+    <!-- 23 : Chance Card -->
+    <field type="chanceCard"></field>
+
+    <!-- 24 : Osterbrogade -->
+    <field groupId="6" type="landPlot">
+        <price>4400</price>
+        <housePrice>3000</housePrice>
+        <rent>[350, 1800, 5000, 14000, 17500, 21000]</rent>
+    </field>
+
+    <!-- 25 : Gronningen -->
+    <field groupId="6" type="landPlot">
+        <price>4800</price>
+        <housePrice>3000</housePrice>
+        <rent>400, 2000, 6000, 15000, 18500, 22000</rent>
+    </field>
+
+    <!-- 26 : Scandlines -->
+    <field type="transportation">
+        <price>4000</price>
+    </field>
+
+    <!-- 27 : Bredgade -->
+    <field groupId="7" type="landPlot">
+        <price>5200</price>
+        <housePrice>3000</housePrice>
+        <rent>[450, 2200, 6600, 16000, 19500, 23000]</rent>
+    </field>
+
+    <!-- 28 : Kgs. Nytorv -->
+    <field groupId="7" type="landPlot">
+        <price>5200</price>
+        <housePrice>3000</housePrice>
+        <rent>[450, 2200, 6600, 16000, 19500, 23000]</rent>
+    </field>
+
+    <!-- 29 : Coca Cola -->
+    <field type="business">
+        <price>3000</price>
+    </field>
+
+    <!-- 30 : Ostergade -->
+    <field groupId="7" type="landPlot">
+        <price>5600</price>
+        <housePrice>3000</housePrice>
+        <rent>[500, 2400, 7200, 17000, 20500, 24000]</rent>
+    </field>
+
+    <!-- 31 : Jail -->
+    <field type="jail"></field>
+
+    <!-- 32 : Amagertorv -->
+    <field groupId="8" type="landPlot">
+        <price>6000</price>
+        <housePrice>4000</housePrice>
+        <rent>[550, 2600, 7800, 18000, 22000, 25000]</rent>
+    </field>
+
+    <!-- 33 : Vimmelskaftet -->
+    <field groupId="8" type="landPlot">
+        <price>6000</price>
+        <housePrice>4000</housePrice>
+        <rent>[550, 2600, 7800, 18000, 22000, 25000]</rent>
+    </field>
+
+    <!-- 34 : Chance Field -->
+    <field type="chanceField"></field>
+
+    <!-- 35 : Nygade -->
+    <field groupId="8" type="landPlot">
+        <price>6400</price>
+        <housePrice>4000</housePrice>
+        <rent>[600, 3000, 9000, 20000, 24000, 28000]</rent>
+    </field>
+
+    <!-- 36 : Scandlines -->
+    <field type="transportation">
+        <price>4000</price>
+    </field>
+
+    <!-- 37 : Chance Card -->
+    <field type="chanceCard"></field>
+
+    <!-- 38 : Frederiksberggade -->
+    <field groupId="9" type="landPlot">
+        <price>7000</price>
+        <housePrice>4000</housePrice>
+        <rent>[700, 3500, 10000, 22000, 26000, 30000]</rent>
+    </field>
+
+    <!-- 39 : Tax 2 -->
+    <field type="tax">
+        <amount>2000</amount>
+    </field>
+
+    <!-- 40 : Raadhuspladsen -->
+    <field groupId="9" type="landPlot">
+        <price>8000</price>
+        <housePrice>4000</housePrice>
+        <rent>[1000, 4000, 12000, 28000, 34000, 40000]</rent>
     </field>
 </fields>
