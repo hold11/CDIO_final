@@ -15,13 +15,16 @@ import models.Player;
 public abstract class Field
 {
     private String fieldName;
-    private int fieldID;
+    private int fieldId;
     public abstract void landOnField(Player player);
 
     public Field(int fieldID) {
-        this.fieldID = fieldID;
-        System.out.println("Field" + this.fieldID);
-        this.fieldName = Lang.msg("Field" + this.fieldID);
+        this.fieldId = fieldID;
+        this.fieldName = Lang.msg("Field" + this.fieldId);
+    }
+
+    public int getFieldId() {
+        return fieldId;
     }
 
     @Override

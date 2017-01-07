@@ -19,6 +19,7 @@ public class Jail extends Field
 
     @Override
     public void landOnField(Player player) {
-
+        player.setInJail(true);
+        // TODO: Move player to the jail parking area.
     }
 }

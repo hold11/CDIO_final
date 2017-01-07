@@ -13,12 +13,24 @@ import models.Player;
 
 public class Rest extends Field
 {
+    private int reward;
+
     public Rest(int fieldID) {
         super(fieldID);
+        this.reward = 0;
+    }
+
+    public Rest(int fieldID, int passingReward) {
+        super(fieldID);
+        this.reward = passingReward;
     }
 
     @Override
     public void landOnField(Player player) {
+        // Nothing at all happens. Sad right?
+    }
 
+    public void passedField(Player player) {
+        player.getPlayerAcct().deposit(this.reward);
     }
 }

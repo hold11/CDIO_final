@@ -19,11 +19,31 @@ public class Business extends Ownable
 
     @Override
     public void landOnField(Player player) {
-
+        if (this.isOwned() && this.owner != player)
+            player.getPlayerAcct().transfer(this.getRent(player), this.owner);
     }
 
     @Override
     public int getRent(Player player) {
-        return 0;
+        if (this.isOwned() && this.owner != player)
+            return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
+        else
+            return 0;
+    }
+
+    /**
+     * This method calculates how many businesses is owned by a specific player
+     * @param player
+     * @return
+     */
+    private static int getTotalBusinessCount(Player player) {
+        int totalCount = 0;
+
+        for (Ownable o : ownedOwnables) {
+            if (o instanceof Business && o.getOwner() == player)
+                totalCount++;
+        }
+
+        return totalCount;
     }
 }

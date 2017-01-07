@@ -18,9 +18,11 @@ public class LandPlot extends Ownable
     private int rents[] = new int[6];
     private int housePrice;
     private int houseCount;
+    private int groupID;
 
-    public LandPlot(int fieldID, int price, int housePrice, int[] rents) {
+    public LandPlot(int fieldID, int groupID, int price, int housePrice, int[] rents) {
         super(fieldID, price);
+        this.groupID = groupID;
         this.housePrice = housePrice;
         this.houseCount = 0;
         if (rents.length == 6)
@@ -39,7 +41,7 @@ public class LandPlot extends Ownable
     @Override
     public int getRent(Player player) {
         // TODO: If pawning gets implemented, start by checking if field is pawned
-        if (this.owner != null && this.owner != player)
+        if (this.isOwned() && this.owner != player)
             return rents[houseCount];
         else
             return 0;
