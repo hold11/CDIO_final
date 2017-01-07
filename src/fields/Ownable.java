@@ -23,8 +23,8 @@ public abstract class Ownable extends Field
     protected static List<Ownable> ownedOwnables = new ArrayList<>();
     public abstract int getRent();
 
-    public Ownable(String fieldName, int price) {
-        super(fieldName);
+    public Ownable(int fieldID, int price) {
+        super(fieldID);
         this.price = price;
     }
 

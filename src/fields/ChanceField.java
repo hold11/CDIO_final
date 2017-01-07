@@ -13,8 +13,8 @@ import models.Player;
 
 public class ChanceField extends Field
 {
-    public ChanceField(String fieldName) {
-        super(fieldName);
+    public ChanceField(int fieldID) {
+        super(fieldID);
     }
 
     @Override

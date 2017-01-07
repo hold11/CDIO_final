@@ -13,8 +13,8 @@ import models.Player;
 
 public class Rest extends Field
 {
-    public Rest(String fieldName) {
-        super(fieldName);
+    public Rest(int fieldID) {
+        super(fieldID);
     }
 
     @Override
