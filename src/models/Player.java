@@ -21,6 +21,7 @@ public class Player {
     private DiceCup diceCup;
     private int currentField;
     private int previousField;
+    private boolean isInJail = false; // TODO: Could we have this in a List instead somewhere?
     private static final int STARTING_BALANCE = 30000;
 
     private static int nextPlayerID = 1; // This variable is for defining the player ID for the next player that gets constructed.
@@ -144,5 +145,13 @@ public class Player {
 
     public int getOwnedHotelCount() {
         return 0;
+    }
+
+    public boolean isInJail() {
+        return isInJail;
+    }
+
+    public void setInJail(boolean inJail) {
+        isInJail = inJail;
     }
 }
