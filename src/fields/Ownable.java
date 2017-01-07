@@ -19,7 +19,7 @@ public abstract class Ownable extends Field
     protected int price;
     protected Player owner;
     protected static List<Ownable> ownedOwnables = new ArrayList<>();
-    public abstract int getRent();
+    public abstract int getRent(Player player);
 
     public Ownable(int fieldID, int price) {
         super(fieldID);
