@@ -19,13 +19,13 @@ public class Main {
     public static void main(String[] args) {
         Lang.setLanguage(args);
 
-//        LandPlot plot = new LandPlot("testPlot", 32000);
-//        System.out.println(plot.getOwner() + " owns " + plot);
-//        Player p1 = new Player();
-//        System.out.println(p1.getPlayerAcct().getBalance());
-//        plot.purchaseField(p1);
-//        System.out.println(p1.getPlayerAcct().getBalance());
-
+        // A few testing fields (all LandPlots)
+        Field fields[] = new Field[5];
+        fields[0] = new LandPlot(1, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
+        fields[1] = new LandPlot(2, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000});
+        fields[2] = new LandPlot(3, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
+        fields[3] = new LandPlot(4, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000});
+        fields[4] = new LandPlot(5, 2000, 1000, new int[] {150, 800, 2000, 6000, 9000, 12000});
 
 //        setup();
     }
