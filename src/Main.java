@@ -10,11 +10,18 @@
  */
 
 import fields.*;
+import lang.Lang;
 import models.Player;
+import GUI.GUIController;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        Lang.setLanguage(args);
+
+        //setup();
+
         LandPlot plot = new LandPlot("testPlot", 32000);
         System.out.println(plot.getOwner() + " owns " + plot);
         Player p1 = new Player();
@@ -25,5 +32,25 @@ public class Main {
 
     public static boolean testBool() {
         return true;
+    }
+
+    private static void setup() {
+        GUIController gui = new GUIController();
+
+        int players = gui.selectPlayerCount();
+            for (int i = 1; i <= players; i++)
+                getPlayerName();
+        gui.createPlayers();
+
+    }
+
+    private static void getPlayerName() {
+        Player p = new Player(GUI.GUI.getUserString(" please type your name"));
+    }
+
+    private static void playerRoll(Player player) {
+        GUI.GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
+        player.getDiceCup().roll();
+        GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
     }
 }
