@@ -12,7 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import GUI.backend.Car;
-import GUI.backend.FieldFactory;
+import GUI.backend.FieldFactoryXML;
 import GUI.backend.Player;
 import GUI.fields.Field;
 import GUI.fields.Ownable;
@@ -275,7 +275,7 @@ public final class BoardController {
 	 * @param title : String (Mind the length!)
 	 */
 	public void setTitleText(int fieldNumber, String title) {
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		f.setTitle(title);
 	}
 	/**
@@ -284,7 +284,7 @@ public final class BoardController {
 	 * @param subText : String (Mind the length!)
 	 */
 	public void setSubText(int fieldNumber, String subText) {
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		f.setSubText(subText);
 	}
 	/**
@@ -294,7 +294,7 @@ public final class BoardController {
 	 * @param description : String (Mind the length!)
 	 */
 	public void setDescriptionText(int fieldNumber, String description) {
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		f.setDescription(description);
 	}
 	public void addPlayer(String name, int balance, Car car) {
@@ -452,7 +452,7 @@ public final class BoardController {
 	 */
 	public void setCar(int fieldNumber, String name) {
 		// removeCar(name);
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		if(this.board.getPlayer(name) != null) {
 			f.setCar(name, true);
 		}
@@ -464,7 +464,7 @@ public final class BoardController {
 	 * @param name The name of the player
 	 */
 	public void removeCar(int fieldNumber, String name) {
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		f.setCar(name, false);
 		Center.getInstance().displayDefault();
 	}
@@ -474,7 +474,7 @@ public final class BoardController {
 	 * @param name The name of the player
 	 */
 	public void removeAllCars(String name) {
-		for(Field f : FieldFactory.fields) {
+		for(Field f : FieldFactoryXML.fields) {
 			f.setCar(name, false);
 		}
 		Center.getInstance().displayDefault();
@@ -488,7 +488,7 @@ public final class BoardController {
 	 * @param name The name of the player
 	 */
 	public void setOwner(int fieldNumber, String name) {
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		Player p = this.board.getPlayer(name);
 		if((f instanceof Ownable) && p != null) {
 			((Ownable) f).setOwner(p);
@@ -500,7 +500,7 @@ public final class BoardController {
 	 * @param fieldNumber : int [1:40]
 	 */
 	public void removeOwner(int fieldNumber) {
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		if(f instanceof Ownable) {
 			((Ownable) f).setOwner(null);
 		}
@@ -514,7 +514,7 @@ public final class BoardController {
 	 */
 	public void setHouses(int fieldNumber, int houseCount) {
 		if(houseCount >= 0 && houseCount < 5) {
-			Field f = FieldFactory.fields.get(fieldNumber - 1);
+			Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 			if(f instanceof Street) {
 				Street s = ((Street) f);
 				s.setHouses(houseCount);
@@ -527,7 +527,7 @@ public final class BoardController {
 	 * @param hasHotel : boolean
 	 */
 	public void setHotel(int fieldNumber, boolean hasHotel) {
-		Field f = FieldFactory.fields.get(fieldNumber - 1);
+		Field f = FieldFactoryXML.fields.get(fieldNumber - 1);
 		if(f instanceof Street) {
 			Street s = ((Street) f);
 			s.setHotel(hasHotel);

@@ -99,7 +99,7 @@
     </field>
 
     <!-- 18 : Chance Field -->
-    <field type="chanceField"></field>
+    <field type="chancefield"></field>
 
     <!-- 19 : Hellerupvej -->
     <field groupId="4" type="landplot">
@@ -126,7 +126,7 @@
     </field>
 
     <!-- 23 : Chance Field -->
-    <field type="chanceField"></field>
+    <field type="chancefield"></field>
 
     <!-- 24 : Osterbrogade -->
     <field groupId="5" type="landplot">
@@ -206,7 +206,7 @@
     </field>
 
     <!-- 37 : Chance Field -->
-    <field type="chanceField"></field>
+    <field type="chancefield"></field>
 
     <!-- 38 : Frederiksberggade -->
     <field groupId="8" type="landplot">
