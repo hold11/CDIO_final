@@ -9,6 +9,7 @@ import GUI.GUI;
 public class TestRunExampleGame{
 
 	public static void main(String[] args){
+		lang.Lang.setLanguage(args);
 		realExampleGame();
 	}
 

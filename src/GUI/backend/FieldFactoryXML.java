@@ -26,10 +26,10 @@ public class FieldFactoryXML {
 //    private enum Type {
 //        BREWERY, CHANCE, JAIL, REFUGE, SHIPPING, START, STREET, TAX
 //    }
-    private enum Type {
-        //                      Refuge = parking, start = gone.
-        BUSINESS, CHANCEFIELD, JAIL, REST, TRANSPORTATION, LANDPLOT, TAX
-    }
+//    private enum Type {
+//        //                      Refuge = parking, start = gone.
+//        BUSINESS, CHANCEFIELD, JAIL, REST, TRANSPORTATION, LANDPLOT, TAX
+//    }
     public static ArrayList<Field> fields = null;
     private static fields.Field[] xmlFields = models.ReadFields.readFields();
 
@@ -49,11 +49,11 @@ public class FieldFactoryXML {
     }
 
     private boolean parse() {
-        String str = readFile();
-
-        if (str == null) {
-            return false;
-        }
+//        String str = readFile();
+//
+//        if (str == null) {
+//            return false;
+//        }
 
         // 75% > 40 so increase in capacity is required
         fields = new ArrayList<Field>(54);
@@ -122,38 +122,38 @@ public class FieldFactoryXML {
         return true;
     }
 
-    private String readFile() {
-        BufferedReader in = null;
-        String str = "";
-        File file;
-        try {
-            if (path == null) {
-                InputStream is = getClass().getResourceAsStream("/GUI/resources/fields.txt");
-                in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            } else {
-                file = new File(path);
-                in = new BufferedReader(new FileReader(file));
-            }
-
-            String line;
-            while ((line = in.readLine()) != null) {
-                str += line.trim() + "\n";
-            }
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-            return null;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        try {
-            in.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return str;
-    }
+//    private String readFile() {
+//        BufferedReader in = null;
+//        String str = "";
+//        File file;
+//        try {
+//            if (path == null) {
+//                InputStream is = getClass().getResourceAsStream("/GUI/resources/fields.txt");
+//                in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+//            } else {
+//                file = new File(path);
+//                in = new BufferedReader(new FileReader(file));
+//            }
+//
+//            String line;
+//            while ((line = in.readLine()) != null) {
+//                str += line.trim() + "\n";
+//            }
+//        } catch (FileNotFoundException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//        try {
+//            in.close();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//        return str;
+//    }
     private void createBrewery(fields.Business field) {
         String picture = "Default";
         String title = field.toString();
@@ -283,7 +283,7 @@ public class FieldFactoryXML {
             case 4: return toColor("153,,153,,153");
             case 5: return toColor("255,,0,,0");
             case 6: return toColor("255,,255,,255");
-            case 7: return toColor("255,,255,50");
+            case 7: return toColor("255,,255,,50");
             case 8: return toColor("150,,60,,150");
             default: return toColor("0,,0,,0");
         }
@@ -308,23 +308,23 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
-    private Type validType(String type) {
-        for (Type t : Type.values()) {
-            if (t.toString().equalsIgnoreCase(type)) {
-                return t;
-            }
-        }
-        return null;
-    }
-    private String valueOf(String label, String[] attributes) {
-        for (String a : attributes) {
-            if (a.split("::")[0].trim().equalsIgnoreCase(label)) {
-                return a.split("::")[1];
-            }
-        }
-        System.err.println("GUI - Missing attribute: " + label);
-        return null;
-    }
+//    private Type validType(String type) {
+//        for (Type t : Type.values()) {
+//            if (t.toString().equalsIgnoreCase(type)) {
+//                return t;
+//            }
+//        }
+//        return null;
+//    }
+//    private String valueOf(String label, String[] attributes) {
+//        for (String a : attributes) {
+//            if (a.split("::")[0].trim().equalsIgnoreCase(label)) {
+//                return a.split("::")[1];
+//            }
+//        }
+//        System.err.println("GUI - Missing attribute: " + label);
+//        return null;
+//    }
     private Color toColor(String str) {
         int r = Integer.parseInt(str.split(",,")[0]);
         int g = Integer.parseInt(str.split(",,")[1]);

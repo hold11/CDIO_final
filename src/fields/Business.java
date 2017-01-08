@@ -26,7 +26,9 @@ public class Business extends Ownable
 
     @Override
     public int getRent() {
-        throw new NotImplementedException(); // Use getRent(Player) instead in this method.
+        System.out.println("lol");
+        return 0;
+        //throw new NotImplementedException(); // Use getRent(Player) instead in this method.
     }
 
     public int getRent(Player player) {

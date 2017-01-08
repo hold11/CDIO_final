@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import GUI.backend.Car;
-import GUI.backend.FieldFactory;
+import GUI.backend.FieldFactoryXML;
 import GUI.backend.JLabelRotatable;
 import GUI.backend.Player;
 import GUI.backend.SwingComponentFactory;
@@ -55,7 +55,7 @@ public final class Board extends javax.swing.JFrame {
 		makeDiceLabels();
 		makePlayerAreas();
 		makeCenter();
-		FieldFactory.makeFields();
+		FieldFactoryXML.makeFields();
 		makeFieldPanels();
 		makeCarPanes();
 		makeInputPanel();
@@ -98,8 +98,8 @@ public final class Board extends javax.swing.JFrame {
 	 * Makes a graphical representation of all the fields
 	 */
 	private void makeFieldPanels() {
-		for(int i = 0; i < FieldFactory.fields.size(); i++) {
-			Field f = FieldFactory.fields.get(i);
+		for(int i = 0; i < FieldFactoryXML.fields.size(); i++) {
+			Field f = FieldFactoryXML.fields.get(i);
 			JLayeredPane panel = f.getPanel();
 			this.base.add(panel, this.factory.createGridBagConstraints(f.getX(), f.getY()));
 		}
@@ -151,7 +151,7 @@ public final class Board extends javax.swing.JFrame {
 	 * Makes the components on which cars can be placed
 	 */
 	private void makeCarPanes() {
-		for(Field f : FieldFactory.fields) {
+		for(Field f : FieldFactoryXML.fields) {
 			int x = f.getX();
 			int y = f.getY();
 			
