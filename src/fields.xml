@@ -28,7 +28,7 @@
         <percentage>0.1</percentage>
     </field>
 
-    <!-- 6 : Scandlines 1 (???) -->
+    <!-- 6 : Scandlines 1 -->
     <field type="transportation">
         <price>4000</price>
     </field>
@@ -98,8 +98,8 @@
         <rent>[300, 1400, 4000, 11000, 15000, 19000]</rent>
     </field>
 
-    <!-- 18 : Chance Card -->
-    <field type="chanceCard"></field>
+    <!-- 18 : Chance Field -->
+    <field type="chanceField"></field>
 
     <!-- 19 : Hellerupvej -->
     <field groupId="5" type="landPlot">
@@ -125,8 +125,8 @@
         <rent>[350, 1800, 5000, 14000, 17500, 21000]</rent>
     </field>
 
-    <!-- 23 : Chance Card -->
-    <field type="chanceCard"></field>
+    <!-- 23 : Chance Field -->
+    <field type="chanceField"></field>
 
     <!-- 24 : Osterbrogade -->
     <field groupId="6" type="landPlot">
@@ -142,7 +142,7 @@
         <rent>400, 2000, 6000, 15000, 18500, 22000</rent>
     </field>
 
-    <!-- 26 : Scandlines -->
+    <!-- 26 : Scandlines 2 -->
     <field type="transportation">
         <price>4000</price>
     </field>
@@ -200,13 +200,13 @@
         <rent>[600, 3000, 9000, 20000, 24000, 28000]</rent>
     </field>
 
-    <!-- 36 : Scandlines -->
+    <!-- 36 : Scandlines 3 -->
     <field type="transportation">
         <price>4000</price>
     </field>
 
-    <!-- 37 : Chance Card -->
-    <field type="chanceCard"></field>
+    <!-- 37 : Chance Field -->
+    <field type="chanceField"></field>
 
     <!-- 38 : Frederiksberggade -->
     <field groupId="9" type="landPlot">
