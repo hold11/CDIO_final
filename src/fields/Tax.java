@@ -32,4 +32,13 @@ public class Tax extends Field
     public void landOnField(Player player) {
         // TODO: amount or percentage?
     }
+
+    public double getPercentageInPercent() {
+        double percentagalizer = this.percentage * 100;
+        return (int) percentagalizer;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
 }

@@ -2,6 +2,7 @@ package GUI.backend;
 
 import java.awt.Color;
 import java.util.ArrayList;
+
 import GUI.fields.*;
 import GUI.fields.Field;
 import GUI.fields.Jail;
@@ -9,7 +10,18 @@ import GUI.fields.Tax;
 import fields.*;
 import lang.*;
 
+/**
+ * Created by AndersWOlsen on 08-01-2017.
+ */
 public class FieldFactoryXML {
+    public static String path = null;
+    //    private enum Type {
+//        BREWERY, CHANCE, JAIL, REFUGE, SHIPPING, START, STREET, TAX
+//    }
+//    private enum Type {
+//        //                      Refuge = parking, start = gone.
+//        BUSINESS, CHANCEFIELD, JAIL, REST, TRANSPORTATION, LANDPLOT, TAX
+//    }
     public static ArrayList<Field> fields = null;
     private static fields.Field[] xmlFields = models.ReadFields.readFields();
 
@@ -39,10 +51,10 @@ public class FieldFactoryXML {
             else if (field instanceof fields.ChanceField)
                 createChance();
             else if (field instanceof fields.Jail) // TODO: check if a rest field is the visit jail field
-                createJail(((fields.Jail) field), false);
+                createJail(((fields.Jail) field));
             else if (field instanceof fields.Rest) {
                 if (((Rest) field).isJail())
-                    createJail(((fields.Rest) field), true);
+                    createJail(((fields.Rest) field));
                 else if (!((Rest) field).isJail() && ((Rest) field).getReward() > 0) // if not jail and reward is greater than 0 = start field
                     createStart(((Rest) field));
                 else
@@ -61,7 +73,7 @@ public class FieldFactoryXML {
     private void createBrewery(fields.Business field) {
         String picture = "Default";
         String title = field.toString();
-        String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
+        String subText = Lang.msg("price") + ": " + Lang.msg("currency") + " " + field.getPrice();
         String description = Lang.msg("Field" + field.getFieldId() + "_desc");
         String leje = Lang.msg("currency") + " " + field.getRent();
         Field f = new Brewery.Builder()
@@ -73,13 +85,11 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
-
     private void createChance() {
         Field f = new Chance.Builder().build(); // TODO: Check out this method to make sure it gets the right text
         fields.add(f);
     }
-
-    private void createJail(fields.Field field, boolean visitJailField) {
+    private void createJail(fields.Field field) {
         String picture = "Default";
         String title = field.toString();
         String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
@@ -92,23 +102,6 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
-
-    private void createStart(fields.Rest field) {
-        String title = field.toString();
-        Color bgColor = toColor("255,,0,,0");
-        Color fgColor = toColor("0,,0,,0");
-        String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
-        String description = Lang.msg("Field" + field.getFieldId() + "_desc");
-        Field f = new Start.Builder()
-                .setBgColor(bgColor)
-                .setFgColor(fgColor)
-                .setTitle(title)
-                .setSubText(subText)
-                .setDescription(description)
-                .build();
-        fields.add(f);
-    }
-
     private void createRefuge(fields.Rest field) { // Parking
         String picture = "Default";
         String title = field.toString();
@@ -122,11 +115,10 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
-
     private void createShipping(fields.Transportation field) {
         String picture = "Default";
         String title = field.toString();
-        String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
+        String subText = Lang.msg("price") + ": " + Lang.msg("currency") + " " + field.getPrice();
         String description = Lang.msg("Field" + field.getFieldId() + "_desc");
         String leje = Lang.msg("currency") + " " + field.getRent();
         Field f = new Shipping.Builder()
@@ -138,12 +130,27 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
-
+    private void createStart(fields.Rest field) {
+        String title = field.toString();
+        Color bgColor = toColor("255,,0,,0");
+        Color fgColor = toColor("0,,0,,0");
+        String subText = Lang.msg("Field" + field.getFieldId() + "_sub") + ": " + field.getReward();
+        String description = Lang.msg("Field" + field.getFieldId() + "_desc") + " " + Lang.msg("currency") + " " +
+                field.getReward() + Lang.msg("Field" + field.getFieldId() + "_desc2");
+        Field f = new Start.Builder()
+                .setBgColor(bgColor)
+                .setFgColor(fgColor)
+                .setTitle(title)
+                .setSubText(subText)
+                .setDescription(description)
+                .build();
+        fields.add(f);
+    }
     private void createStreet(fields.LandPlot field) {
         String title = field.toString();
         Color bgColor = getBgColor(field);
         Color fgColor = getFgColor(field);
-        String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
+        String subText = Lang.msg("price") + ": " + Lang.msg("currency") + " " + field.getPrice();
         String description = Lang.msg("Field" + field.getFieldId() + "_desc");
         String leje = Lang.msg("currency") + " " + field.getRent();
         Field f = new Street.Builder()
@@ -156,19 +163,6 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
-
-    private void createTax(fields.Tax field) {
-        String title = field.toString();
-        String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
-        String description = Lang.msg("Field" + field.getFieldId() + "_desc");
-        Field f = new Tax.Builder()
-                .setTitle(title)
-                .setSubText(subText)
-                .setDescription(description)
-                .build();
-        fields.add(f);
-    }
-
     private Color getBgColor(fields.LandPlot field) {
         switch  (field.getGroupID()) {
             case 1: return toColor("75,,155,,255");
@@ -182,14 +176,27 @@ public class FieldFactoryXML {
             default: return toColor("0,,0,,0");
         }
     }
-
     private Color getFgColor(fields.LandPlot field) {
         if (field.getGroupID() == 8)
             return toColor("255,,255,,255");
         else
             return toColor("0,,0,,0");
     }
-
+    private void createTax(fields.Tax field) {
+        String title = field.toString();
+        String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
+        String description;
+        if (field.getPercentageInPercent() == 0)
+            description = Lang.msg("Field" + field.getFieldId() + "_desc") + ": " + Lang.msg("currency") + " " + field.getAmount();
+        else
+            description = Lang.msg("Field" + field.getFieldId() + "_desc") + " " + field.getPercentageInPercent() + "% " + Lang.msg("or") + " " +Lang.msg("currency") + " " + field.getAmount();
+        Field f = new Tax.Builder()
+                .setTitle(title)
+                .setSubText(subText)
+                .setDescription(description)
+                .build();
+        fields.add(f);
+    }
     private Color toColor(String str) {
         int r = Integer.parseInt(str.split(",,")[0]);
         int g = Integer.parseInt(str.split(",,")[1]);

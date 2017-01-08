@@ -22,10 +22,6 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
-        Field fields[] = ReadFields.readFields();
-        for (Field f : fields)
-            System.out.println(f.getFieldId() + ": " + f);
-
 //        setup();
     }
 
