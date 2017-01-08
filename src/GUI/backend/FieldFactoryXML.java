@@ -67,7 +67,7 @@ public class FieldFactoryXML {
                 createJail(((fields.Jail) field), false);
             else if (field instanceof fields.Rest) {
                 if (((Rest) field).isJail())
-                    createJail(((fields.Jail) field), true);
+                    createJail(((fields.Rest) field), true);
                 else if (!((Rest) field).isJail() && ((Rest) field).getReward() > 0) // if not jail and reward is greater than 0 = start field
                     createStart(((Rest) field));
                 else
@@ -178,7 +178,7 @@ public class FieldFactoryXML {
         Field f = new Chance.Builder().build(); // TODO: Check out this method to make sure it gets the right text
         fields.add(f);
     }
-    private void createJail(fields.Jail field, boolean visitJailField) {
+    private void createJail(fields.Field field, boolean visitJailField) {
         String picture = "Default";
         String title = field.toString();
         String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
