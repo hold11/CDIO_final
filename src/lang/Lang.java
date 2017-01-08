@@ -34,7 +34,7 @@ public class Lang {
         catch (Exception ex)
         {
             System.out.println("You either specified some wrong arguments or you specified a language that doesn't exist in this game.");
-            System.out.println("Usage: java -jar game.jar <language> <country>");
+            System.out.println("Usage: java -jar game.jar <language> <country> (ex. da DK)");
         }
 
     }
