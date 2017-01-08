@@ -16,6 +16,7 @@ public abstract class Field
 {
     private String fieldName;
     private int fieldId;
+    private static final Field[] fields = models.ReadFields.readFields();
     public abstract void landOnField(Player player);
 
     public Field(int fieldID) {
@@ -29,4 +30,8 @@ public abstract class Field
 
     @Override
     public String toString() { return this.fieldName; }
+
+    public static Field[] getFields() {
+        return fields;
+    }
 }

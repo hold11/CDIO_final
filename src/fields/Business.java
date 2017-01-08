@@ -10,7 +10,6 @@ package fields;/*
  */
 
 import models.Player;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Business extends Ownable
 {
@@ -46,7 +45,7 @@ public class Business extends Ownable
     private static int getTotalBusinessCount(Player player) {
         int totalCount = 0;
 
-        for (Ownable o : ownedOwnables) {
+        for (Ownable o : getOwnedOwnables()) {
             if (o instanceof Business && o.getOwner() == player)
                 totalCount++;
         }

@@ -18,7 +18,7 @@ public abstract class Ownable extends Field
 {
     protected int price;
     protected Player owner;
-    protected static List<Ownable> ownedOwnables = new ArrayList<>();
+//    protected static List<Ownable> getOwnedOwnables = new ArrayList<>();
     public abstract int getRent();
 
     public Ownable(int fieldID, int price) {
@@ -26,16 +26,27 @@ public abstract class Ownable extends Field
         this.price = price;
     }
 
+    public static Ownable[] getOwnedOwnables() {
+        List<Ownable> ownedOwnables = new ArrayList<>();
+        for (Field field : Field.getFields()) {
+            if (field instanceof Ownable)
+                if (((Ownable) field).getOwner() != null)
+                    ownedOwnables.add(((Ownable) field));
+        }
+        return ownedOwnables.toArray(new Ownable[ownedOwnables.size()]);
+    }
+
     public boolean isOwned() {
-        for (Ownable o : ownedOwnables)
-            return (this == o); // if the plot is owned, return true, otherwise return false.
-        return false;
+        if (this.owner == null)
+            return false;
+        else
+            return true;
     }
 
     public void purchaseField(Player player) {
         if (!isOwned() && player.getPlayerAcct().getBalance() >= this.price) {
             this.owner = player;
-            ownedOwnables.add(this);
+//            getOwnedOwnables.add(this);
             player.getPlayerAcct().withdraw(this.price);
             System.out.println(this.owner + " just bought " + this.toString());
         }

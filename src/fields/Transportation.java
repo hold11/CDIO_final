@@ -9,7 +9,6 @@ package fields;/*
     /`           ´\                                      |
  */
 
-import models.DiceCup;
 import models.Player;
 
 public class Transportation extends Ownable
@@ -40,7 +39,7 @@ public class Transportation extends Ownable
     private static int getTotalTransportationCount(Player player) {
         int totalCount = 0;
 
-        for (Ownable o : ownedOwnables) {
+        for (Ownable o : getOwnedOwnables()) {
             if (o instanceof Transportation && o.getOwner() == player)
                 totalCount++;
         }
