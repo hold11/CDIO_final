@@ -42,4 +42,8 @@ public abstract class Ownable extends Field
     }
 
     public Player getOwner() { return this.owner; }
+
+    public int getPrice() {
+        return price;
+    }
 }
