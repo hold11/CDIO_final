@@ -10,18 +10,7 @@ import GUI.fields.Tax;
 import fields.*;
 import lang.*;
 
-/**
- * Created by AndersWOlsen on 08-01-2017.
- */
 public class FieldFactoryXML {
-    public static String path = null;
-    //    private enum Type {
-//        BREWERY, CHANCE, JAIL, REFUGE, SHIPPING, START, STREET, TAX
-//    }
-//    private enum Type {
-//        //                      Refuge = parking, start = gone.
-//        BUSINESS, CHANCEFIELD, JAIL, REST, TRANSPORTATION, LANDPLOT, TAX
-//    }
     public static ArrayList<Field> fields = null;
     private static fields.Field[] xmlFields = models.ReadFields.readFields();
 
@@ -85,10 +74,12 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
+
     private void createChance() {
         Field f = new Chance.Builder().build(); // TODO: Check out this method to make sure it gets the right text
         fields.add(f);
     }
+
     private void createJail(fields.Field field) {
         String picture = "Default";
         String title = field.toString();
@@ -102,6 +93,7 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
+
     private void createRefuge(fields.Rest field) { // Parking
         String picture = "Default";
         String title = field.toString();
@@ -115,6 +107,7 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
+
     private void createShipping(fields.Transportation field) {
         String picture = "Default";
         String title = field.toString();
@@ -130,6 +123,7 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
+
     private void createStart(fields.Rest field) {
         String title = field.toString();
         Color bgColor = toColor("255,,0,,0");
@@ -146,6 +140,7 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
+
     private void createStreet(fields.LandPlot field) {
         String title = field.toString();
         Color bgColor = getBgColor(field);
@@ -163,25 +158,7 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
-    private Color getBgColor(fields.LandPlot field) {
-        switch  (field.getGroupID()) {
-            case 1: return toColor("75,,155,,255");
-            case 2: return toColor("255,,135,,120");
-            case 3: return toColor("102,,204,,0");
-            case 4: return toColor("153,,153,,153");
-            case 5: return toColor("255,,0,,0");
-            case 6: return toColor("255,,255,,255");
-            case 7: return toColor("255,,255,,50");
-            case 8: return toColor("150,,60,,150");
-            default: return toColor("0,,0,,0");
-        }
-    }
-    private Color getFgColor(fields.LandPlot field) {
-        if (field.getGroupID() == 8)
-            return toColor("255,,255,,255");
-        else
-            return toColor("0,,0,,0");
-    }
+
     private void createTax(fields.Tax field) {
         String title = field.toString();
         String subText = Lang.msg("Field" + field.getFieldId() + "_sub");
@@ -197,6 +174,28 @@ public class FieldFactoryXML {
                 .build();
         fields.add(f);
     }
+
+    private Color getBgColor(fields.LandPlot field) {
+        switch  (field.getGroupID()) {
+            case 1: return toColor("75,,155,,255");
+            case 2: return toColor("255,,135,,120");
+            case 3: return toColor("102,,204,,0");
+            case 4: return toColor("153,,153,,153");
+            case 5: return toColor("255,,0,,0");
+            case 6: return toColor("255,,255,,255");
+            case 7: return toColor("255,,255,,50");
+            case 8: return toColor("150,,60,,150");
+            default: return toColor("0,,0,,0");
+        }
+    }
+
+    private Color getFgColor(fields.LandPlot field) {
+        if (field.getGroupID() == 8)
+            return toColor("255,,255,,255");
+        else
+            return toColor("0,,0,,0");
+    }
+
     private Color toColor(String str) {
         int r = Integer.parseInt(str.split(",,")[0]);
         int g = Integer.parseInt(str.split(",,")[1]);
