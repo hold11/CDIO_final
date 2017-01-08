@@ -15,19 +15,19 @@ import GUI.fields.*;
  * Creates all the fields
  * @author Ronnie
  */
-public final class FieldFactory {
+public final class FieldFactoryOLD {
     public static String path = null;
     private enum Type {
         BREWERY, CHANCE, JAIL, REFUGE, SHIPPING, START, STREET, TAX
     }
     public static ArrayList<Field> fields = null;
     
-    private FieldFactory() {
+    private FieldFactoryOLD() {
         
     }
     
     public static void makeFields() {
-        FieldFactory fact = new FieldFactory();
+        FieldFactoryOLD fact = new FieldFactoryOLD();
         if (fields == null || fields.size() == 0) {
             try {
                 fact.parse();

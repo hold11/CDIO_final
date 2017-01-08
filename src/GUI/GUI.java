@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import GUI.board.Board;
 import GUI.board.BoardController;
 import GUI.backend.Car;
-import GUI.backend.FieldFactory;
+import GUI.backend.FieldFactoryOLD;
 import GUI.fields.Field;
 
 /**
@@ -52,7 +52,7 @@ public final class GUI {
     public static void create(ArrayList<Field> fields) {
         //ArrayList<Field> list = new ArrayList<Field>();
         //for(Field f : fields) list.add(f);
-        FieldFactory.fields = fields;
+        FieldFactoryOLD.fields = fields;
     }
     /**
      * Closes the GUI, so you can start a new one. 
@@ -60,7 +60,7 @@ public final class GUI {
     public final static void close() {
         getBC().closeGUI();
         bc = null;
-        FieldFactory.path = null;
+        FieldFactoryOLD.path = null;
     }
     /**
      * Displays a message to the user.<br>
