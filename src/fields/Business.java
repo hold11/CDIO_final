@@ -10,6 +10,7 @@ package fields;/*
  */
 
 import models.Player;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Business extends Ownable
 {
@@ -20,10 +21,14 @@ public class Business extends Ownable
     @Override
     public void landOnField(Player player) {
         if (this.isOwned() && this.owner != player)
-            player.getPlayerAcct().transfer(this.getRent(player), this.owner);
+            player.getPlayerAcct().transfer(this.getRent(), this.owner);
     }
 
     @Override
+    public int getRent() {
+        throw new NotImplementedException(); // Use getRent(Player) instead in this method.
+    }
+
     public int getRent(Player player) {
         if (this.isOwned() && this.owner != player)
             return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
