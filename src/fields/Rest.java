@@ -14,15 +14,17 @@ import models.Player;
 public class Rest extends Field
 {
     private int reward;
+    private boolean isJail; // This is so that the GUI are able to differentiate between the jail and visit jail (our backend differs from the GUI backend)
 
     public Rest(int fieldID) {
         super(fieldID);
         this.reward = 0;
     }
 
-    public Rest(int fieldID, int passingReward) {
+    public Rest(int fieldID, int passingReward, boolean isJail) {
         super(fieldID);
         this.reward = passingReward;
+        this.isJail = isJail;
     }
 
     @Override
@@ -32,5 +34,13 @@ public class Rest extends Field
 
     public void passedField(Player player) {
         player.getPlayerAcct().deposit(this.reward);
+    }
+
+    public boolean isJail() {
+        return isJail;
+    }
+
+    public int getReward() {
+        return reward;
     }
 }

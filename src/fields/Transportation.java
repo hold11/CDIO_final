@@ -21,15 +21,15 @@ public class Transportation extends Ownable
     @Override
     public void landOnField(Player player) {
         if (this.isOwned() && this.owner != player)
-            player.getPlayerAcct().transfer(getRent(player), this.owner);
+            player.getPlayerAcct().transfer(getRent(), this.owner);
     }
 
     @Override
-    public int getRent(Player player) {
-        if (this.isOwned() && this.owner != player)
+    public int getRent() {
+//        if (this.isOwned() && this.owner != player)
             return 250 * ((int) Math.pow(2, getTotalTransportationCount(this.owner)));
-        else
-            return 0;
+//        else
+//            return 0;
     }
 
     /**

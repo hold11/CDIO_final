@@ -47,11 +47,11 @@ public class ReadFields {
 
                 // If the node is an element node:
                 if (nodeField.getNodeType() == Node.ELEMENT_NODE) {
-                    if (getAttrValueStr(elmField, "type").equals("landPlot"))
+                    if (getAttrValueStr(elmField, "type").equals("landplot"))
                         fields.add(createLandPlot(elmField, i + 1)); // add the field to the fields list
                     else if (getAttrValueStr(elmField, "type").equals("business"))
                         fields.add(createBusiness(elmField, i + 1));
-                    else if (getAttrValueStr(elmField, "type").equals("chanceField"))
+                    else if (getAttrValueStr(elmField, "type").equals("chancefield"))
                         fields.add(createChanceField(elmField, i + 1));
                     else if (getAttrValueStr(elmField, "type").equals("jail"))
                         fields.add(createJail(elmField, i + 1));
@@ -122,12 +122,17 @@ public class ReadFields {
 //        int fieldId = getTagValue(element, "id");
         int fieldId = index;
         int passingReward = 0;
+        boolean isJail = false;
 
         try {
             passingReward = getTagValue(element, "reward");
         } catch (Exception e) { /* Reward doesn't exist = field not equal start field. */}
 
-        return new Rest(fieldId, passingReward);
+        try {
+            isJail = Boolean.parseBoolean(element.getElementsByTagName("jail").item(0).getTextContent());
+        } catch (Exception e) { /* Is not the visit jail field. */ }
+
+        return new Rest(fieldId, passingReward, isJail);
     }
 
     private static Tax createTax(Element element, int index) {
