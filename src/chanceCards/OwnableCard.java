@@ -21,20 +21,22 @@ public abstract class OwnableCard extends ChanceCard {
         this.owner = player;
     }
 
+    public Player getOwner() {
+        return owner;
+    }
+
     public void removeOwner() {
         this.owner = null;
     }
 
     public static OwnableCard[] getOwnedCards() {
-        List<OwnableCard> ownedCards = new ArrayList<>();
+        List<OwnableCard> ownableCards = new ArrayList<>();
         for (ChanceCard c : ChanceCard.getChanceCards()) {
-            if (c instanceof OwnableCard) {
-                if (((OwnableCard) c).owner != null) {
-                    ownedCards.add(((OwnableCard) c));
-                }
-            }
+            if (c instanceof OwnableCard)
+                if (((OwnableCard) c).owner != null)
+                    ownableCards.add(((OwnableCard) c));
         }
-        return ownedCards.toArray(new OwnableCard[ownedCards.size()]);
+        return ownableCards.toArray(new OwnableCard[ownableCards.size()]);
     }
 
     public static OwnableCard[] getPlayersCards(Player player) {
