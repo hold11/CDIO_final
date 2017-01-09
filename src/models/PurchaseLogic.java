@@ -1,6 +1,5 @@
 package models;
 
-import fields.Field;
 import fields.LandPlot;
 import fields.Ownable;
 
@@ -8,11 +7,6 @@ import fields.Ownable;
  * Created by tjc on 9/1/17.
  */
 public class PurchaseLogic {
-
-    // Buy house
-    public void buyHouse() {
-
-    }
 
     // Sell house
     public void sellHouse() {
@@ -34,8 +28,22 @@ public class PurchaseLogic {
     }
 
     public int getHouseCount() {
+        int houseCount = 0;
         for (Ownable o : Ownable.getOwnedOwnables()) {
-
+            if (o instanceof LandPlot)
+                if (((LandPlot) o).getHouseCount() < 5)     // Casting ownable o to LandPlot, because getHouseCount method is there.
+                    houseCount++;
         }
+        return houseCount;
+    }
+
+    public int getHotelCount() {
+        int hotelCount = 0;
+        for (Ownable o : Ownable.getOwnedOwnables()) {
+            if (o instanceof LandPlot)
+                if (((LandPlot) o).getHouseCount() == 5)    // Casting ownable o to LandPlot, because getHouseCount method is there.
+                    hotelCount++;
+        }
+        return hotelCount;
     }
 }
