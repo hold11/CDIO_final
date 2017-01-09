@@ -21,6 +21,11 @@ public class Jail extends Field
         super(fieldID);
     }
 
+    public enum buttons {
+        FREE_BAIL_CARD,
+        PAY_BAIL_OUT
+    }
+
     @Override
     public void landOnField(Player player) {
         player.setInJail(true);
