@@ -24,21 +24,21 @@ public class GameController
 
     }
 
-    public void playTurn() {
-
+    public boolean playNormalTurn() {
+        return (!getCurrentPlayer().isInJail());
     }
 
-    public Jail.buttons[] getJailButtons() {
+    public List<Jail.buttons>getJailButtons() {
         List<Jail.buttons> jailButtons = new ArrayList<>();
 
         if (getCurrentPlayer().getPlayerAcct().getBalance() >= 1000) {
             jailButtons.add(Jail.buttons.PAY_BAIL_OUT);
         }
         if (OwnableCard.playerHasCard(getCurrentPlayer(), FreeBailCard.class)) {
-            jailButtons.add(Jail.buttons.PAY_BAIL_OUT);
+            jailButtons.add(Jail.buttons.FREE_BAIL_CARD);
         }
 
-        return jailButtons.toArray(new Jail.buttons[jailButtons.size()]);
+        return jailButtons;
     }
 
     public void nextPlayer() {
@@ -58,7 +58,9 @@ public class GameController
     }
 
     public Player getWinner() {
-        return new Player();
-
+        if (Player.getPlayers().size() == 1)
+            return Player.getPlayers().get(0);
+        else
+            return null;
     }
 }
