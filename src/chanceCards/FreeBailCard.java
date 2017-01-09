@@ -11,7 +11,7 @@ package chanceCards;/*
 
 import models.Player;
 
-public class FreeBailCard extends ChanceCard
+public class FreeBailCard extends OwnableCard
 {
     public FreeBailCard(int chanceCardID) {
         super(chanceCardID);

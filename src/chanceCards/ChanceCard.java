@@ -19,6 +19,7 @@ public abstract class ChanceCard
     private int chanceCardID;
     protected String chanceText;
     protected int count = 1;
+    private static List<ChanceCard> chanceCards = new ArrayList<>();
 
     public ChanceCard(int chanceCardID) {
         this.chanceCardID = chanceCardID;
@@ -31,4 +32,8 @@ public abstract class ChanceCard
     }
 
     public abstract void receiveCard(Player player);
+
+    public static List<ChanceCard> getChanceCards() {
+        return chanceCards;
+    }
 }
