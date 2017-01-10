@@ -22,6 +22,15 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
+//        Player p1 = new Player();
+//        Player p2 = new Player();
+//
+//        p1.setInJail(false);
+//
+//        ((Ownable) Field.getFields()[1]).purchaseField(p1);
+//        (Fiel)
+
+
 //        setup();
     }
 

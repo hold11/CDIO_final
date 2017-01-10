@@ -9,7 +9,11 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import com.sun.org.apache.bcel.internal.generic.LAND;
 import models.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LandPlot extends Ownable
 {
@@ -34,8 +38,8 @@ public class LandPlot extends Ownable
     @Override
     public void landOnField(Player player) {
         // TODO: If pawning gets implemented, start by checking if field is pawned
-        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) {                    // if the plot is owned by another player and is owner NOT in jail
-            player.getPlayerAcct().transfer(this.getRent(), this.owner); // transfer rent to the rightful owner
+        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) {                     // if the plot is owned by another player and is owner NOT in jail
+            player.getPlayerAcct().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
         } else {
             purchaseField(player);
         }
@@ -60,5 +64,17 @@ public class LandPlot extends Ownable
 
     public int getGroupID() {
         return groupID;
+    }
+
+    public static LandPlot[] getGroupedPlots (int groupID) {
+        List<LandPlot> groupedPlots = new ArrayList<>();
+
+        for (Ownable o: Ownable.getOwnedOwnables()) {
+            if (o instanceof LandPlot)
+                if (((LandPlot) o).getGroupID() == groupID)
+                    groupedPlots.add(((LandPlot) o));
+        }
+        return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
+
     }
 }

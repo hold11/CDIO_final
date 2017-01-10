@@ -39,3 +39,6 @@ public class PurchaseLogic {
         return hotelCount;
     }
 }
+
+
+// TODO: check if player has all fields in group and make sure houses get purchased in a distributed fashion.
