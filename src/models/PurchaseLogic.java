@@ -3,15 +3,7 @@ package models;
 import fields.LandPlot;
 import fields.Ownable;
 
-/**
- * Created by tjc on 9/1/17.
- */
 public class PurchaseLogic {
-
-    // Sell house
-    public void sellHouse() {
-
-    }
 
     public void buyHouse(LandPlot landplot) {
         if (landplot.isOwned() && landplot.getHouseCount() <= 5) {
