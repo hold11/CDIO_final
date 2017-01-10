@@ -303,13 +303,6 @@ public class GUIController {
             GUI.setBalance(player.getPlayerName(), player.getPlayerAcct().getBalance());
     }
 
-    //TODO: Move to Main!
-//    public void playerRoll(Player player) {
-//        GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
-//        player.getDiceCup().roll();
-//        GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
-//    }
-
     public boolean getPlayerPurchaseChoice(Player player) {
 //        showDescriptionCardBuy(player);
         String answer = GUI.getUserButtonPressed("Want to purchase this field?", "Yes!", "No!");

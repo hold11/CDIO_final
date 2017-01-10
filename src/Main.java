@@ -15,6 +15,7 @@ import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
+import models.PurchaseLogic;
 import test_models.AutoDiceCup;
 
 public class Main {
@@ -152,5 +153,46 @@ public class Main {
         GUI.GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
         player.getDiceCup().roll();
         GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
+    }
+
+    public static void test(){
+        PurchaseLogic prl = new PurchaseLogic();
+
+        Player p1 = new Player();
+        Player p2 = new Player();
+
+        p1.setCurrentField(9);
+
+        for (LandPlot l : LandPlot.getPlotGroup(2))
+            System.out.println(l.toString());
+        GUI.GUIController.sleep(200);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+        ((LandPlot) Field.getFields()[6]).purchaseField(p1);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+        ((LandPlot) Field.getFields()[8]).purchaseField(p1);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+
+        ((LandPlot) Field.getFields()[9]).purchaseField(p1);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+
+        for (int i=0 ; i < 7 ; i++) {
+            prl.buyHouse(((LandPlot) Field.getFields()[9]));
+            System.out.println((Field.getFields()[9]).toString() + " contains " + ((LandPlot) Field.getFields()[9]).getHouseCount() + " Houses");
+            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
+            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
+        }
+
     }
 }
