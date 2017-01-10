@@ -75,12 +75,26 @@ public class Main {
 
     }
 
+    private static void setupAutoGame() {
+        GUIController gui = new GUIController();
+
+        int players = gui.selectPlayerCount();
+        for (int i = 1; i <= players; i++)
+            getPlayerName();
+        gui.createPlayers();
+
+    }
+
     private static void aPlayerHasWon(GameController game) {
         if (game.getWinner() != null)
             System.out.println(game.getWinner() + " has won the game!");
     }
 
     private static void getPlayerName() {
+        Player p = new Player(GUI.GUI.getUserString(" please type your name"));
+    }
+
+    private static void getAutomatedPlayerName() {
         Player p = new Player(GUI.GUI.getUserString(" please type your name"));
     }
 
