@@ -23,6 +23,7 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
+        System.out.println("Testing...");
 //        setup();
 
         gameLoop();
