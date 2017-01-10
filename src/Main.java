@@ -23,37 +23,40 @@ public class Main {
     private static GUIController gui;
 
     public static void main(String[] args) {
-        // TODO: Put the following in a separate method:
-        String[] locale = new String[2];
-        boolean autoGame = false;
-        if (args.length == 1 || args.length == 3) {
-            if (args[0].equals("auto")) {
-                autoGame = true;
-                System.out.println("[Autogame enabled]");
-            }
+        Lang.setLanguage(args);
 
-            if (args.length == 3) {
-                locale[0] = args[1];
-                locale[1] = args[2];
-            } else {
-                locale[0] = "da";
-                locale[1] = "DK";
-            }
-        } else {
-            locale[0] = "da";
-            locale[1] = "DK";
-        }
-
-        Lang.setLanguage(locale);
-        CLIController cli = new CLIController(); // For testing purposes
-        GameController game = new GameController();
-        if (autoGame)
-            setupAutoGame(game);
-        else
-            setup(game);
-        // TODO: commented out for testing purposes
-
-        gameLoop(game);
+        test();
+//        // TODO: Put the following in a separate method:
+//        String[] locale = new String[2];
+//        boolean autoGame = false;
+//        if (args.length == 1 || args.length == 3) {
+//            if (args[0].equals("auto")) {
+//                autoGame = true;
+//                System.out.println("[Autogame enabled]");
+//            }
+//
+//            if (args.length == 3) {
+//                locale[0] = args[1];
+//                locale[1] = args[2];
+//            } else {
+//                locale[0] = "da";
+//                locale[1] = "DK";
+//            }
+//        } else {
+//            locale[0] = "da";
+//            locale[1] = "DK";
+//        }
+//
+//        Lang.setLanguage(locale);
+//        CLIController cli = new CLIController(); // For testing purposes
+//        GameController game = new GameController();
+//        if (autoGame)
+//            setupAutoGame(game);
+//        else
+//            setup(game);
+//        // TODO: commented out for testing purposes
+//
+//        gameLoop(game);
     }
 
     private static void gameLoop(GameController game) {
@@ -163,35 +166,39 @@ public class Main {
 
         p1.setCurrentField(9);
 
-        for (LandPlot l : LandPlot.getPlotGroup(2))
-            System.out.println(l.toString());
-        GUI.GUIController.sleep(200);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+//        for (LandPlot l : LandPlot.getPlotGroup(2))
+//            System.out.println(l.toString());
+//        GUI.GUIController.sleep(200);
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
         ((LandPlot) Field.getFields()[6]).purchaseField(p1);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
         ((LandPlot) Field.getFields()[8]).purchaseField(p1);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+//
         ((LandPlot) Field.getFields()[9]).purchaseField(p1);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
 
-        for (int i=0 ; i < 7 ; i++) {
-            prl.buyHouse(((LandPlot) Field.getFields()[9]));
-            System.out.println((Field.getFields()[9]).toString() + " contains " + ((LandPlot) Field.getFields()[9]).getHouseCount() + " Houses");
-            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
-            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
+        for (int i = 0 ; i < 3 ; i++) {
+            prl.buyHouse(((LandPlot) Field.getFields()[6]));
+            System.out.println((Field.getFields()[6]).toString() + " contains " + ((LandPlot) Field.getFields()[6]).getHouseCount() + " Houses");
+            for(int j = 0 ; j < 3 ; j++) {
+                prl.buyHouse(((LandPlot) Field.getFields()[8]));
+                System.out.println((Field.getFields()[8]).toString() + " contains " + ((LandPlot) Field.getFields()[8]).getHouseCount() + " Houses");
+            }
+//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
+//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
         }
 
     }
