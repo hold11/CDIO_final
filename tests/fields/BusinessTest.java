@@ -67,11 +67,13 @@ public class BusinessTest {
     }
     @Test
     public void testLandOnFieldOtherOwner() throws Exception {
-        // The test is based on balance change as it is the only function of the landOnField method really handles. No balance change is expected seeing as it is the owner who lands on it.
-        b1.purchaseField(p1);
+        // The test is based on balance change as it is the only function of the landOnField method really handles.Balance change is expected as p1 lands on a field owned by someone else.
+        b1.purchaseField(p2);
         int startingBalance = p1.getPlayerAcct().getBalance();
+        p1.getDiceCup().roll();
         b1.landOnField(p1);
         assertEquals(startingBalance, p1.getPlayerAcct().getBalance() );
+        System.out.print(p1.getPlayerAcct().getBalance());
     }
 
 
