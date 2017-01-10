@@ -15,21 +15,46 @@ import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
-import models.ReadFields;
+import models.PurchaseLogic;
 
 public class Main {
 
     public static void main(String[] args) {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
+        PurchaseLogic prl = new PurchaseLogic();
 
         Player p1 = new Player();
         Player p2 = new Player();
 
-        ((LandPlot) Field.getFields()[1]).purchaseField(p1);
-        ((LandPlot) Field.getFields()[3]).purchaseField(p1);
-        ((LandPlot) Field.getFields()[3]).purchaseField(p1);
+        for (LandPlot l : LandPlot.getPlotGroup(2))
+            System.out.println(l.toString());
+        GUI.GUIController.sleep(200);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+        ((LandPlot) Field.getFields()[6]).purchaseField(p1);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+        ((LandPlot) Field.getFields()[8]).purchaseField(p1);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
 
+        ((LandPlot) Field.getFields()[9]).purchaseField(p1);
+        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+        else
+            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+
+        for (int i=0 ; i < 5 ; i++) {
+            prl.buyHouse(((LandPlot) Field.getFields()[9]));
+            System.out.println(((LandPlot) Field.getFields()[9]).getHouseCount());
+        }
 
 
 //        setup();

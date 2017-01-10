@@ -66,10 +66,10 @@ public class LandPlot extends Ownable
     public static LandPlot[] getPlotGroup (int groupID) {
         List<LandPlot> groupedPlots = new ArrayList<>();
 
-        for (Ownable o: Ownable.getOwnedOwnables()) {
-            if (o instanceof LandPlot)
-                if (((LandPlot) o).getGroupID() == groupID)
-                    groupedPlots.add(((LandPlot) o));
+        for (Field f: Field.getFields()) {
+            if (f instanceof LandPlot)
+                if (((LandPlot) f).getGroupID() == groupID)
+                    groupedPlots.add(((LandPlot) f));
         }
         return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
     }
@@ -77,9 +77,10 @@ public class LandPlot extends Ownable
     public static boolean hasAllPlotsInGroup(Player player, int groupID) {
         int groupPlotsCount = getPlotGroup(groupID).length;
 
-        for (LandPlot l : getPlotGroup(groupID))
+        for (LandPlot l : getPlotGroup(groupID)) {
             if (l.getOwner() == player)
                 groupPlotsCount--;
-    return (groupPlotsCount == 0);
+        }
+        return (groupPlotsCount == 0);
     }
 }

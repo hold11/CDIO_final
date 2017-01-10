@@ -4,7 +4,6 @@ import fields.Field;
 import fields.LandPlot;
 import fields.Ownable;
 
-import java.io.NotActiveException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,8 @@ public class PurchaseLogic {
         if (landplot.isOwned() && landplot.getHouseCount() <= 5) {
             landplot.getOwner().getPlayerAcct().withdraw(landplot.getHousePrice());
             landplot.setHouseCount(landplot.getHouseCount() + 1);
-            System.out.println("player bought a house");
+            System.out.println("player bought a house on " + landplot.toString());
+
         }
     }
 
@@ -26,24 +26,24 @@ public class PurchaseLogic {
         }
     }
 
-    public int getHouseCount() {
-        int houseCount = 0;
+    public int getTotalHouseCount() {
+        int totalHouseCount = 0;
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot)
                 if (((LandPlot) o).getHouseCount() < 5)     // Casting ownable o to LandPlot, because getHouseCount method is there.
-                    houseCount++;
+                    totalHouseCount += ((LandPlot) o).getHouseCount();
         }
-        return houseCount;
+        return totalHouseCount;
     }
 
-    public int getHotelCount() {
-        int hotelCount = 0;
+    public int getTotalHotelCount() {
+        int totalHotelCount = 0;
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot)
                 if (((LandPlot) o).getHouseCount() == 5)    // Casting ownable o to LandPlot, because getHouseCount method is there.
-                    hotelCount++;
+                    totalHotelCount++;
         }
-        return hotelCount;
+        return totalHotelCount;
     }
 
     public LandPlot[] getAvailablePlotsToBuildOn(Player player) throws Exception {
