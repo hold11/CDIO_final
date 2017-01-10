@@ -36,4 +36,8 @@ public abstract class ChanceCard
     public static List<ChanceCard> getChanceCards() {
         return chanceCards;
     }
+
+    public static void addChanceCard(ChanceCard cc) { // TODO: Need this???? Maybe private
+        chanceCards.add(cc);
+    }
 }

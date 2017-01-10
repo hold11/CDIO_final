@@ -154,4 +154,36 @@ public class Player {
     public void setInJail(boolean inJail) {
         isInJail = inJail;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (playerID != player.playerID) return false;
+        if (currentField != player.currentField) return false;
+        if (previousField != player.previousField) return false;
+        if (isInJail != player.isInJail) return false;
+        if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
+        if (playerAcct != null ? !playerAcct.equals(player.playerAcct) : player.playerAcct != null) return false;
+        return diceCup != null ? diceCup.equals(player.diceCup) : player.diceCup == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = playerID;
+        result = 31 * result + (playerName != null ? playerName.hashCode() : 0);
+        result = 31 * result + (playerAcct != null ? playerAcct.hashCode() : 0);
+        result = 31 * result + (diceCup != null ? diceCup.hashCode() : 0);
+        result = 31 * result + currentField;
+        result = 31 * result + previousField;
+        result = 31 * result + (isInJail ? 1 : 0);
+        return result;
+    }
+
+    public static void reset() {
+        players.clear();
+    }
 }
