@@ -96,7 +96,7 @@ public class Main {
         // Player passed a field
         game.playerPassedField();
         gui.updateBalance(game.getPlayers());
-//        System.out.println("   [Main 2]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Next Player
         game.nextPlayer();
@@ -126,14 +126,13 @@ public class Main {
     private static void setupAutoGame(GameController game) {
         gui = new GUIController();
 
-        int[] autoRolls = { 3, 7, 11, 7, 7, 6, 2, 3};
+        int[] autoRolls1 = { 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls2 = { 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
-        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls));
-        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls));
-        // for testing, Inger buys Roskildevej right away.
-        ((Ownable) Field.getFields()[6]).purchaseField(Player.getPlayers().get(1));
-
-        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls));
+        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
+        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
+        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
         gui.createPlayers(game.getPlayers());
 
     }

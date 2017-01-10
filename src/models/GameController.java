@@ -70,7 +70,6 @@ public class GameController
     public void playerPassedField() {
         int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
         int previousPlayerFieldId = getCurrentPlayer().getPreviousField();
-        Field currentPlayerField = Field.getFieldByID(currentPlayerFieldId);
 
         if (previousPlayerFieldId > currentPlayerFieldId)
             ((Rest) Field.getFields()[0]).passedField(getCurrentPlayer());

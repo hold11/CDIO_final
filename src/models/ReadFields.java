@@ -19,7 +19,6 @@ public class ReadFields {
 
         try {
             String currentPath = System.getProperty("user.dir");
-            System.out.println(currentPath);
 //            File fieldsXMLFile = new File("src/fields.xml");
             File fieldsXMLFile = new File(currentPath + "/fields.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
