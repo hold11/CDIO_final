@@ -27,6 +27,8 @@ public class Main {
         Player p1 = new Player();
         Player p2 = new Player();
 
+        p1.setCurrentField(9);
+
         for (LandPlot l : LandPlot.getPlotGroup(2))
             System.out.println(l.toString());
         GUI.GUIController.sleep(200);
@@ -51,9 +53,11 @@ public class Main {
         else
             System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
 
-        for (int i=0 ; i < 5 ; i++) {
+        for (int i=0 ; i < 7 ; i++) {
             prl.buyHouse(((LandPlot) Field.getFields()[9]));
-            System.out.println(((LandPlot) Field.getFields()[9]).getHouseCount());
+            System.out.println((Field.getFields()[9]).toString() + " contains " + ((LandPlot) Field.getFields()[9]).getHouseCount() + " Houses");
+            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
+            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
         }
 
 
