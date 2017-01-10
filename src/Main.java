@@ -46,9 +46,9 @@ public class Main {
         CLIController cli = new CLIController(); // For testing purposes
         GameController game = new GameController();
         // TODO: commented out for testing purposes
-//        if (!autoGame)
-//            setup(game);
-//        else
+        if (!autoGame)
+            setup(game);
+        else
             setupAutoGame(game);
 
         gameLoop(game);
