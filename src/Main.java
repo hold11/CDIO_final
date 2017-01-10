@@ -15,7 +15,6 @@ import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
-import test_models.AutoDiceCup;
 
 public class Main {
 
@@ -83,7 +82,7 @@ public class Main {
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
 
-        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
@@ -92,8 +91,10 @@ public class Main {
 
         // Player landed on a field
         game.playerLandsOnField();
+        // Player passed a field
+        game.playerPassedField();
         gui.updateBalance(game.getPlayers());
-        System.out.println("   [Main 2]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+//        System.out.println("   [Main 2]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Next Player
         game.nextPlayer();

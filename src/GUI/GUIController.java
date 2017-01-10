@@ -259,21 +259,21 @@ public class GUIController {
 
     public void moveCars(Player player) {
         if (player.getPreviousField() >= player.getCurrentField()) {
-            for (int i = player.getPreviousField() ; i <= 21 ; i++) {
+            for (int i = player.getPreviousField() ; i <= 40 ; i++) {
+                sleep(125);
                 GUI.removeAllCars(player.getPlayerName());
                 GUI.setCar(i, player.getPlayerName());
-                sleep(500);
             }
             for (int i = 1 ; i <= player.getCurrentField(); i++) {
+                sleep(125);
                 GUI.removeAllCars(player.getPlayerName());
                 GUI.setCar(i, player.getPlayerName());
-                sleep(500);
             }
         } else {
             for (int i = player.getPreviousField(); i <= player.getCurrentField(); i++) {
+                sleep(125);
                 GUI.removeAllCars(player.getPlayerName());
                 GUI.setCar((i), player.getPlayerName());
-                sleep(500);
             }
         }
     }
