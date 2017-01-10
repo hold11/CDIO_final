@@ -20,8 +20,6 @@ public class BusinessTest {
     @Before
     public void setUp() throws Exception {
         Lang.setLanguage(new String[] {"da", "DK"});
-        p1 = new Player();
-        p2 = new Player();
         b1 = new Business(1, 1000);
         b2 = new Business(2, 2000);
     }
@@ -29,6 +27,7 @@ public class BusinessTest {
     @After
     public void tearDown() throws Exception {
         Ownable.reset();
+        Player.reset();
     }
 
     @Test
@@ -72,8 +71,10 @@ public class BusinessTest {
         int startingBalance = p1.getPlayerAcct().getBalance();
         p1.getDiceCup().roll();
         b1.landOnField(p1);
-        assertEquals(startingBalance, p1.getPlayerAcct().getBalance() );
         System.out.print(p1.getPlayerAcct().getBalance());
+        System.out.print(p1.getDiceCup().getTotalEyes());
+        assertNotEquals(startingBalance, p1.getPlayerAcct().getBalance() );
+
     }
 
 
