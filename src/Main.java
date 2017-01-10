@@ -12,6 +12,7 @@
 import CLI.CLIController;
 import fields.*;
 import lang.Lang;
+import models.GameController;
 import models.Player;
 import GUI.GUIController;
 import models.ReadFields;
@@ -22,7 +23,46 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
+        System.out.println("Testing...");
 //        setup();
+
+        gameLoop();
+    }
+
+    private static void gameLoop() {
+        GameController game = new GameController();
+
+        // Call aPlayerhasWon() and stop the main method if a player has won the game.
+        if (game.getWinner() != null) {
+            aPlayerHasWon(game);
+            return;
+        }
+
+        // If a player hasn't won the game
+        if (game.playNormalTurn()) {
+            playNormalTurn(game);
+        } else {
+            playJailTurn(game);
+        }
+
+        // Then restart the game loop (until a player has won the game)
+        gameLoop();
+    }
+
+    private static void playNormalTurn(GameController game) {
+
+    }
+
+    private static void playJailTurn(GameController game) {
+        if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
+            // Show pay bail out button
+        }
+        if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
+            // Show use free bail card button
+        }
+
+        // Show roll button
+        // Show sell house button (if the player owns any houses that is)
     }
 
     private static void setup() {
@@ -33,6 +73,11 @@ public class Main {
                 getPlayerName();
         gui.createPlayers();
 
+    }
+
+    private static void aPlayerHasWon(GameController game) {
+        if (game.getWinner() != null)
+            System.out.println(game.getWinner() + " has won the game!");
     }
 
     private static void getPlayerName() {
