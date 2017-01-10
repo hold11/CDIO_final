@@ -77,20 +77,25 @@ public class Main {
     private static void playNormalTurn(GameController game) {
         // Start by rolling the dice
         playerRoll(game.getCurrentPlayer());
-//        Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
+        Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
 
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
 
-        // Player landed on a field
-        game.playerLandsOnField();
         System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
             if (gui.getPlayerPurchaseChoice(game.getCurrentPlayer()))
                 game.purchaseCurrentField();
+
+        // Player landed on a field
+        game.playerLandsOnField();
+        gui.updateBalance(game.getPlayers());
         System.out.println("   [Main 2]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+
+        // Next Player
+        game.nextPlayer();
     }
 
     private static void playJailTurn(GameController game) {

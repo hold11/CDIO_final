@@ -298,8 +298,9 @@ public class GUIController {
 //        }
 //    }
 
-    public void updateBalance(Player player) {
-        GUI.setBalance(player.getPlayerName(), player.getPlayerAcct().getBalance());
+    public void updateBalance(List<Player> players) {
+        for (Player player : players)
+            GUI.setBalance(player.getPlayerName(), player.getPlayerAcct().getBalance());
     }
 
     //TODO: Move to Main!
