@@ -84,7 +84,7 @@ public class Main {
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
 
-        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
@@ -93,8 +93,10 @@ public class Main {
 
         // Player landed on a field
         game.playerLandsOnField();
+        // Player passed a field
+        game.playerPassedField();
         gui.updateBalance(game.getPlayers());
-        System.out.println("   [Main 2]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Next Player
         game.nextPlayer();
@@ -124,14 +126,13 @@ public class Main {
     private static void setupAutoGame(GameController game) {
         gui = new GUIController();
 
-        int[] autoRolls = { 3, 7, 11, 7, 7, 6, 2, 3};
+        int[] autoRolls1 = { 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls2 = { 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
-        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls));
-        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls));
-        // for testing, Inger buys Roskildevej right away.
-        ((Ownable) Field.getFields()[6]).purchaseField(Player.getPlayers().get(1));
-
-        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls));
+        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
+        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
+        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
         gui.createPlayers(game.getPlayers());
 
     }
@@ -153,46 +154,5 @@ public class Main {
         GUI.GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
         player.getDiceCup().roll();
         GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
-    }
-
-    public static void test(){
-        PurchaseLogic prl = new PurchaseLogic();
-
-        Player p1 = new Player();
-        Player p2 = new Player();
-
-        p1.setCurrentField(9);
-
-        for (LandPlot l : LandPlot.getPlotGroup(2))
-            System.out.println(l.toString());
-        GUI.GUIController.sleep(200);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-        ((LandPlot) Field.getFields()[6]).purchaseField(p1);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-        ((LandPlot) Field.getFields()[8]).purchaseField(p1);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-
-        ((LandPlot) Field.getFields()[9]).purchaseField(p1);
-        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-        else
-            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-
-        for (int i=0 ; i < 7 ; i++) {
-            prl.buyHouse(((LandPlot) Field.getFields()[9]));
-            System.out.println((Field.getFields()[9]).toString() + " contains " + ((LandPlot) Field.getFields()[9]).getHouseCount() + " Houses");
-            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
-            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
-        }
-
     }
 }

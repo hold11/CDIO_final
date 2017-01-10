@@ -33,6 +33,8 @@ public class Rest extends Field
     }
 
     public void passedField(Player player) {
+        System.out.println("   [Rest Passed]: ");
+        System.out.println("      " + player + " has received " + this.reward + " for passing START.");
         player.getPlayerAcct().deposit(this.reward);
     }
 

@@ -11,10 +11,7 @@ package models;/*
 
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
-import fields.Business;
-import fields.Field;
-import fields.Jail;
-import fields.Ownable;
+import fields.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +65,14 @@ public class GameController
     public void playerLandsOnField() {
         Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
         currentPlayerField.landOnField(getCurrentPlayer());
+    }
+
+    public void playerPassedField() {
+        int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
+        int previousPlayerFieldId = getCurrentPlayer().getPreviousField();
+
+        if (previousPlayerFieldId > currentPlayerFieldId)
+            ((Rest) Field.getFields()[0]).passedField(getCurrentPlayer());
     }
 
     public Field playerLandedOn() {
