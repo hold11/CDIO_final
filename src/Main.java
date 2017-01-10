@@ -23,6 +23,15 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
+        Player p1 = new Player();
+        Player p2 = new Player();
+
+        ((LandPlot) Field.getFields()[1]).purchaseField(p1);
+        ((LandPlot) Field.getFields()[3]).purchaseField(p1);
+        ((LandPlot) Field.getFields()[3]).purchaseField(p1);
+
+
+
 //        setup();
 
 //        gameLoop();

@@ -38,11 +38,8 @@ public class LandPlot extends Ownable
     @Override
     public void landOnField(Player player) {
         // TODO: If pawning gets implemented, start by checking if field is pawned
-        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) {                     // if the plot is owned by another player and is owner NOT in jail
+        if (this.isOwned() && this.owner != player && !this.owner.isInJail())                       // if the plot is owned by another player and owner is NOT in jail
             player.getPlayerAcct().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
-        } else {
-            purchaseField(player);
-        }
     }
 
     @Override
@@ -66,7 +63,7 @@ public class LandPlot extends Ownable
         return groupID;
     }
 
-    public static LandPlot[] getGroupedPlots (int groupID) {
+    public static LandPlot[] getPlotGroup (int groupID) {
         List<LandPlot> groupedPlots = new ArrayList<>();
 
         for (Ownable o: Ownable.getOwnedOwnables()) {
@@ -75,6 +72,14 @@ public class LandPlot extends Ownable
                     groupedPlots.add(((LandPlot) o));
         }
         return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
+    }
 
+    public static boolean hasAllPlotsInGroup(Player player, int groupID) {
+        int groupPlotsCount = getPlotGroup(groupID).length;
+
+        for (LandPlot l : getPlotGroup(groupID))
+            if (l.getOwner() == player)
+                groupPlotsCount--;
+    return (groupPlotsCount == 0);
     }
 }

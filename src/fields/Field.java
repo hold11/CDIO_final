@@ -35,7 +35,7 @@ public abstract class Field
         return fields;
     }
 
-    public Field getFieldByID(int ID) {
+    public static Field getFieldByID(int ID) {
         for (Field f: fields)
             if (f.getFieldId() == ID)
                 return f;
