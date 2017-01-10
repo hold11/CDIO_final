@@ -26,8 +26,9 @@ public class Main {
         String[] locale = new String[2];
         boolean autoGame = false;
         if (args.length == 1 || args.length == 3) {
-            if (args[0] == "auto") {
+            if (args[0].equals("auto")) {
                 autoGame = true;
+                System.out.println("[Autogame enabled]");
             }
 
             if (args.length == 3) {
@@ -45,11 +46,11 @@ public class Main {
         Lang.setLanguage(locale);
         CLIController cli = new CLIController(); // For testing purposes
         GameController game = new GameController();
-        // TODO: commented out for testing purposes
-        if (!autoGame)
-            setup(game);
-        else
+        if (autoGame)
             setupAutoGame(game);
+        else
+            setup(game);
+        // TODO: commented out for testing purposes
 
         gameLoop(game);
     }

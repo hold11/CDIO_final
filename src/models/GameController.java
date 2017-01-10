@@ -11,6 +11,7 @@ package models;/*
 
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
+import fields.Business;
 import fields.Field;
 import fields.Jail;
 import fields.Ownable;
