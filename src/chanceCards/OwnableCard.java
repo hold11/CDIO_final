@@ -3,6 +3,7 @@ package chanceCards;
 import fields.Ownable;
 import models.Player;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,29 +21,38 @@ public abstract class OwnableCard extends ChanceCard {
         this.owner = player;
     }
 
+    public Player getOwner() {
+        return owner;
+    }
+
     public void removeOwner() {
         this.owner = null;
     }
 
     public static OwnableCard[] getOwnedCards() {
-        List<OwnableCard> ownedCards = new ArrayList<>();
+        List<OwnableCard> ownableCards = new ArrayList<>();
         for (ChanceCard c : ChanceCard.getChanceCards()) {
-            if (c instanceof OwnableCard) {
-                if (((OwnableCard) c).owner != null) {
-                    ownedCards.add(((OwnableCard) c));
-                }
-            }
+            if (c instanceof OwnableCard)
+                if (((OwnableCard) c).owner != null)
+                    ownableCards.add(((OwnableCard) c));
         }
-        return ownedCards.toArray(new OwnableCard[ownedCards.size()]);
+        return ownableCards.toArray(new OwnableCard[ownableCards.size()]);
     }
 
     public static OwnableCard[] getPlayersCards(Player player) {
         List<OwnableCard> ownedCards = new ArrayList<>();
         for (OwnableCard o : getOwnedCards()) {
-            if (o.owner == player) {
+            if (o.owner.equals(player)) {
                 ownedCards.add(o);
             }
         }
         return ownedCards.toArray(new OwnableCard[ownedCards.size()]);
+    }
+
+    public static boolean playerHasCard(Player player, Class C) {
+        for (OwnableCard o : getPlayersCards(player))
+            if (o.getClass() == C)
+                return true;
+        return false;
     }
 }
