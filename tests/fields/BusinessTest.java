@@ -33,11 +33,13 @@ public class BusinessTest {
 
     @Test
     public void testIsOwnable() throws Exception {
+        // Tests if business ownable field can be owned.
         b1.purchaseField(p1);
         assertTrue(b1.isOwned());
     }
     @Test
     public void testOnlyOneOwner() throws Exception {
+        // tests if it is possible for someone to purchased the field after it has already been purchased. It should not be possible.
         b1.purchaseField(p1);
         b1.purchaseField(p2);
         assertNotEquals(p2, b1.getOwner());
@@ -45,12 +47,33 @@ public class BusinessTest {
 
     @Test
     public void testNoOwner() throws Exception {
+        // Tests if the field starts without a owner / if it is possible for a field to not have an owner.
         assertEquals(null, b1.getOwner());
     }
     @Test
     public void testLandOnFieldNoOwner() throws Exception {
+        // The test is based on balance change as it is the only function of the landOnField method really handles. No balance change is expected seeing as it should have no owner in this test.
         int startingBalance = p1.getPlayerAcct().getBalance();
         b1.landOnField(p1);
-        assertEquals(startingBalance, p1.getPlayerAcct().getBalance());
+        assertEquals(startingBalance, p1.getPlayerAcct().getBalance() );
     }
+    @Test
+    public void testLandOnFieldSelfOwner() throws Exception {
+        // The test is based on balance change as it is the only function of the landOnField method really handles. No balance change is expected seeing as it is the owner who lands on it.
+        b1.purchaseField(p1);
+        int startingBalance = p1.getPlayerAcct().getBalance();
+        b1.landOnField(p1);
+        assertEquals(startingBalance, p1.getPlayerAcct().getBalance() );
+    }
+    @Test
+    public void testLandOnFieldOtherOwner() throws Exception {
+        // The test is based on balance change as it is the only function of the landOnField method really handles. No balance change is expected seeing as it is the owner who lands on it.
+        b1.purchaseField(p1);
+        int startingBalance = p1.getPlayerAcct().getBalance();
+        b1.landOnField(p1);
+        assertEquals(startingBalance, p1.getPlayerAcct().getBalance() );
+    }
+
+
+
 }
