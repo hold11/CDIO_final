@@ -21,7 +21,7 @@ public class Business extends Ownable
     @Override
     public void landOnField(Player player) {
         if (this.isOwned() && this.owner != player)
-            player.getPlayerAcct().transfer(this.getRent(), this.owner);
+            player.getPlayerAcct().transfer(this.getRent(player), this.owner);
     }
 
     @Override
@@ -30,10 +30,7 @@ public class Business extends Ownable
     }
 
     public int getRent(Player player) {
-        if (this.isOwned() && this.owner != player)
-            return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
-        else
-            return 0;
+        return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
     }
 
     /**
