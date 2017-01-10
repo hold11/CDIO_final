@@ -21,7 +21,7 @@ public class Business extends Ownable
     @Override
     public void landOnField(Player player) {
         if (this.isOwned() && this.owner != player)
-            player.getPlayerAcct().transfer(this.getRent(), this.owner);
+            player.getPlayerAcct().transfer(this.getRent(player), this.owner);
     }
 
     @Override
