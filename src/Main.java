@@ -84,9 +84,6 @@ public class Main {
             System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
         }
 
-
-        setup();
-
         gameLoop();
     }
 
