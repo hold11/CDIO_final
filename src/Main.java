@@ -19,6 +19,8 @@ import models.PurchaseLogic;
 
 public class Main {
 
+    private static GUIController gui;
+
     public static void main(String[] args) {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
@@ -61,9 +63,9 @@ public class Main {
         }
 
 
-//        setup();
+        setup();
 
-//        gameLoop();
+        gameLoop();
     }
 
     private static void gameLoop() {
@@ -86,9 +88,16 @@ public class Main {
         gameLoop();
     }
 
+    static int test = 0;
     private static void playNormalTurn(GameController game) {
         playerRoll(game.getCurrentPlayer());
         Field playerLandedOn = game.playerLandedOn();
+        gui.moveCars(game.getCurrentPlayer());
+        System.out.println("Can Purchase: " + game.canPurchaseField());
+
+        if (game.canPurchaseField())
+            if (gui.getPlayerPurchaseChoice(game.getCurrentPlayer()))
+                game.purchaseCurrentField();
     }
 
     private static void playJailTurn(GameController game) {
@@ -104,13 +113,12 @@ public class Main {
     }
 
     private static void setup() {
-        GUIController gui = new GUIController();
+        gui = new GUIController();
 
         int players = gui.selectPlayerCount();
             for (int i = 1; i <= players; i++)
                 getPlayerName();
         gui.createPlayers();
-
     }
 
     private static void aPlayerHasWon(GameController game) {

@@ -13,6 +13,7 @@ import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
 import fields.Field;
 import fields.Jail;
+import fields.Ownable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,27 @@ public class GameController
         }
 
         return jailButtons;
+    }
+
+    public boolean canPurchaseField() {
+        int playerBalance = getCurrentPlayer().getPlayerAcct().getBalance();
+        int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
+        Field currentPlayerField = Field.getFieldByID(currentPlayerFieldId);
+
+        if (currentPlayerField instanceof Ownable) {
+            boolean canAffordField = playerBalance >= ((Ownable) currentPlayerField).getPrice();
+            boolean fieldIsOwned = ((Ownable) currentPlayerField).isOwned();
+            return (canAffordField && !fieldIsOwned);
+        }
+
+        return false;
+    }
+
+    public void purchaseCurrentField() {
+        Field playersCurrentField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
+        if (playersCurrentField instanceof Ownable)
+            if (!((Ownable) playersCurrentField).isOwned())
+                ((Ownable) playersCurrentField).purchaseField(getCurrentPlayer()); // Current players buys the current field
     }
 
     public Field playerLandedOn() {
