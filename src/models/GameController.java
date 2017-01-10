@@ -92,4 +92,6 @@ public class GameController
         else
             return null;
     }
+
+    public List<Player> getPlayers() { return Player.getPlayers(); }
 }

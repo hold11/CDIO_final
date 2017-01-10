@@ -18,7 +18,7 @@ import GUI.fields.*;
 import lang.Lang;
 import models.Player;
 
-import java.awt.*;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
@@ -249,11 +249,12 @@ public class GUIController {
 //        GUI.create(list);
 //    }
 
-    public void createPlayers() {
+    public void createPlayers(List<Player> players) {
         //initMovers();
 
-        for (int i = 0; i < Player.getPlayers().size(); i++)
-            GUI.addPlayer(Player.getPlayers().get(i).getPlayerName(), Player.getPlayers().get(i).getPlayerAcct().getBalance());
+        for (int i = 0; i < players.size(); i++)
+            GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAcct().getBalance());
+//            GUI.addPlayer(Player.getPlayers().get(i).getPlayerName(), Player.getPlayers().get(i).getPlayerAcct().getBalance());
     }
 
     public void moveCars(Player player) {

@@ -15,6 +15,7 @@ import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
+import test_models.AutoDiceCup;
 
 public class Main {
 
@@ -23,14 +24,14 @@ public class Main {
     public static void main(String[] args) {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
-
-        setup();
-
-        gameLoop();
+        GameController game = new GameController();
+//        setup(game);
+//
+//        gameLoop(game);
     }
 
-    private static void gameLoop() {
-        GameController game = new GameController();
+    private static void gameLoop(GameController game) {
+
 
         // Call aPlayerhasWon() and stop the main method if a player has won the game.
         if (game.getWinner() != null) {
@@ -46,7 +47,7 @@ public class Main {
         }
 
         // Then restart the game loop (until a player has won the game)
-        gameLoop();
+        gameLoop(game);
     }
 
     static int test = 0;
@@ -73,22 +74,22 @@ public class Main {
         // Show sell house button (if the player owns any houses that is)
     }
 
-    private static void setup() {
+    private static void setup(GameController game) {
         gui = new GUIController();
 
         int players = gui.selectPlayerCount();
             for (int i = 1; i <= players; i++)
                 getPlayerName();
-        gui.createPlayers();
+        gui.createPlayers(game.getPlayers());
     }
 
-    private static void setupAutoGame() {
-        GUIController gui = new GUIController();
+    private static void setupAutoGame(GameController game) {
+        gui = new GUIController();
 
-        int players = gui.selectPlayerCount();
-        for (int i = 1; i <= players; i++)
-            getPlayerName();
-        gui.createPlayers();
+        getAutomatedPlayerName("Bent", new test_models.AutoDiceCup());
+        getAutomatedPlayerName("Knud", new test_models.AutoDiceCup());
+        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup());
+        gui.createPlayers(game.getPlayers());
 
     }
 
@@ -101,8 +102,8 @@ public class Main {
         Player p = new Player(GUI.GUI.getUserString(" please type your name"));
     }
 
-    private static void getAutomatedPlayerName() {
-        Player p = new Player(GUI.GUI.getUserString(" please type your name"));
+    private static void getAutomatedPlayerName(String name, test_models.AutoDiceCup diceCup) {
+        Player p = new Player(name, diceCup);
     }
 
     private static void playerRoll(Player player) {
