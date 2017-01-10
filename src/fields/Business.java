@@ -38,7 +38,7 @@ public class Business extends Ownable
      * @param player
      * @return
      */
-    private static int getTotalBusinessCount(Player player) {
+    public static int getTotalBusinessCount(Player player) {
         int totalCount = 0;
 
         for (Ownable o : getOwnedOwnables()) {
