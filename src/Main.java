@@ -23,7 +23,6 @@ public class Main {
         Lang.setLanguage(args);
         CLIController cli = new CLIController(); // For testing purposes
 
-        System.out.println("Testing...");
 //        setup();
 
         gameLoop();
@@ -50,7 +49,8 @@ public class Main {
     }
 
     private static void playNormalTurn(GameController game) {
-
+        playerRoll(game.getCurrentPlayer());
+        Field playerLandedOn = game.playerLandedOn();
     }
 
     private static void playJailTurn(GameController game) {

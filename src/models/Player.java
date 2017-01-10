@@ -123,11 +123,11 @@ public class Player {
 
     // Reused from del3
     public void moveCurrentField(int diceCount) {
-        /*models.GameBoard board = new models.GameBoard();
-        if (this.currentField + diceCount > board.getFields().length)
-            this.setCurrentField(diceCount - board.getFields().length + this.currentField);
+//        models.GameBoard board = new models.GameBoard();
+        if (this.currentField + diceCount > Field.getFields().length)
+            this.setCurrentField(diceCount - Field.getFields().length + this.currentField);
         else
-            this.setCurrentField(this.currentField + diceCount);*/
+            this.setCurrentField(this.currentField + diceCount);
     }
 
     // Reused from del3

@@ -11,6 +11,7 @@ package models;/*
 
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
+import fields.Field;
 import fields.Jail;
 
 import java.util.ArrayList;
@@ -39,6 +40,12 @@ public class GameController
         }
 
         return jailButtons;
+    }
+
+    public Field playerLandedOn() {
+        int totalRolled = getCurrentPlayer().getDiceCup().getTotalEyes();
+        getCurrentPlayer().moveCurrentField(totalRolled);
+        return null; // TODO: Wait for Field.getFieldById(int);
     }
 
     public void nextPlayer() {
