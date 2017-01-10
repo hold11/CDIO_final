@@ -24,15 +24,15 @@ public class Player {
     private boolean isInJail = false; // TODO: Could we have this in a List instead somewhere?
     private static final int STARTING_BALANCE = 30000;
 
-    private static int nextPlayerID = 1; // This variable is for defining the player ID for the next player that gets constructed.
+    private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
     private static List<Player> players = new ArrayList<>();
 
     /*
     Anders made this. Not reused from del3.
      */
     public Player() {
-        this.playerID = nextPlayerID;
-        nextPlayerID++;
+        this.playerID = nextPlayerId;
+        nextPlayerId++;
 
         this.playerName = String.format("Player %s", this.playerID);
         this.diceCup = new DiceCup();
@@ -42,12 +42,12 @@ public class Player {
 
     //Reused from del3
     public Player(DiceCup diceCup) {
-        this.playerName = String.format("Player %s", nextPlayerID);
-        this.playerID = nextPlayerID;
+        this.playerName = String.format("Player %s", nextPlayerId);
+        this.playerID = nextPlayerId;
         this.diceCup = diceCup;
 
         this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
-        nextPlayerID++;
+        nextPlayerId++;
         players.add(this);
 
         currentField = 0;
@@ -57,12 +57,12 @@ public class Player {
     //Reused from del3
     public Player(String playerName) {
         this.playerName = playerName;
-        this.playerID = nextPlayerID;
+        this.playerID = nextPlayerId;
         this.diceCup = new DiceCup();
 
         this.playerAcct = new BankAcct(STARTING_BALANCE);
 
-        nextPlayerID++;
+        nextPlayerId++;
 
         players.add(this);
     }
@@ -70,12 +70,12 @@ public class Player {
     // Reused from del3
     public Player(String playerName, DiceCup diceCup) {
         this.playerName = playerName;
-        this.playerID = nextPlayerID;
+        this.playerID = nextPlayerId;
         this.diceCup = diceCup;
 
         this.playerAcct = new BankAcct(STARTING_BALANCE);
 
-        nextPlayerID++;
+        nextPlayerId++;
 
         players.add(this);
     }
@@ -185,5 +185,6 @@ public class Player {
 
     public static void reset() {
         players.clear();
+        nextPlayerId = 1;
     }
 }
