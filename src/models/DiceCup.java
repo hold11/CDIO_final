@@ -22,7 +22,7 @@ import java.lang.*;
  */
 public class DiceCup {
     private Collection<Die> dice = new ArrayList<Die>();
-    private Collection<Integer> results = new ArrayList<Integer>();
+    protected Collection<Integer> results = new ArrayList<Integer>();
 
     private static int diceCount;
     private static int faceCount;
