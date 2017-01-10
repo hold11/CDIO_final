@@ -38,12 +38,18 @@ public class LandPlot extends Ownable
     @Override
     public void landOnField(Player player) {
         // TODO: If pawning gets implemented, start by checking if field is pawned
-        if (this.isOwned() && this.owner != player && !this.owner.isInJail())                       // if the plot is owned by another player and owner is NOT in jail
+        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) { // if the plot is owned by another player and owner is NOT in jail
+            System.out.println("   [LandPlot LOF]");
+            System.out.print("      " + player + " pays ");
+            System.out.println(getRent() + " to " + this.owner + " in rent.");
             player.getPlayerAcct().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
+        }
     }
 
     @Override
     public int getRent() {
+        if (hasAllPlotsInGroup(this.owner, this.groupID) && this.houseCount == 0)
+            return rents[houseCount] * 2;
         return rents[houseCount];
     }
 

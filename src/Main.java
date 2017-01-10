@@ -23,40 +23,37 @@ public class Main {
     private static GUIController gui;
 
     public static void main(String[] args) {
-        Lang.setLanguage(args);
+        // TODO: Put the following in a separate method:
+        String[] locale = new String[2];
+        boolean autoGame = false;
+        if (args.length == 1 || args.length == 3) {
+            if (args[0].equals("auto")) {
+                autoGame = true;
+                System.out.println("[Autogame enabled]");
+            }
 
-        test();
-//        // TODO: Put the following in a separate method:
-//        String[] locale = new String[2];
-//        boolean autoGame = false;
-//        if (args.length == 1 || args.length == 3) {
-//            if (args[0].equals("auto")) {
-//                autoGame = true;
-//                System.out.println("[Autogame enabled]");
-//            }
-//
-//            if (args.length == 3) {
-//                locale[0] = args[1];
-//                locale[1] = args[2];
-//            } else {
-//                locale[0] = "da";
-//                locale[1] = "DK";
-//            }
-//        } else {
-//            locale[0] = "da";
-//            locale[1] = "DK";
-//        }
-//
-//        Lang.setLanguage(locale);
-//        CLIController cli = new CLIController(); // For testing purposes
-//        GameController game = new GameController();
-//        if (autoGame)
-//            setupAutoGame(game);
-//        else
-//            setup(game);
-//        // TODO: commented out for testing purposes
-//
-//        gameLoop(game);
+            if (args.length == 3) {
+                locale[0] = args[1];
+                locale[1] = args[2];
+            } else {
+                locale[0] = "da";
+                locale[1] = "DK";
+            }
+        } else {
+            locale[0] = "da";
+            locale[1] = "DK";
+        }
+
+        Lang.setLanguage(locale);
+        CLIController cli = new CLIController(); // For testing purposes
+        GameController game = new GameController();
+        if (autoGame)
+            setupAutoGame(game);
+        else
+            setup(game);
+        // TODO: commented out for testing purposes
+
+        gameLoop(game);
     }
 
     private static void gameLoop(GameController game) {
@@ -87,7 +84,7 @@ public class Main {
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
 
-        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
@@ -96,8 +93,10 @@ public class Main {
 
         // Player landed on a field
         game.playerLandsOnField();
+        // Player passed a field
+        game.playerPassedField();
         gui.updateBalance(game.getPlayers());
-        System.out.println("   [Main 2]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
         // Next Player
         game.nextPlayer();
@@ -127,14 +126,13 @@ public class Main {
     private static void setupAutoGame(GameController game) {
         gui = new GUIController();
 
-        int[] autoRolls = { 3, 7, 11, 7, 7, 6, 2, 3};
+        int[] autoRolls1 = { 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls2 = { 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
-        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls));
-        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls));
-        // for testing, Inger buys Roskildevej right away.
-        ((Ownable) Field.getFields()[6]).purchaseField(Player.getPlayers().get(1));
-
-        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls));
+        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
+        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
+        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
         gui.createPlayers(game.getPlayers());
 
     }
