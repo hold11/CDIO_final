@@ -309,7 +309,7 @@ public class GUIController {
 //    }
 
     public boolean getPlayerPurchaseChoice(Player player) {
-        showDescriptionCardBuy(player);
+//        showDescriptionCardBuy(player);
         String answer = GUI.getUserButtonPressed("Want to purchase this field?", "Yes!", "No!");
         if (answer.equals("Yes!")) {
             GUI.setOwner(player.getCurrentField(), player.getPlayerName());
@@ -317,92 +317,92 @@ public class GUIController {
         } else return false;
     }
 
-   public void showDescriptionCardBuy(Player player) {
+//   public void showDescriptionCardBuy(Player player) {
+//
+//        switch(player.getCurrentField()) {
+//
+//            case 1: GUI.displayChanceCard(Lang.msg("desc_buy_TribeEncampment"));
+//                    break;
+//            case 2: GUI.displayChanceCard(Lang.msg("desc_buy_Crater"));
+//                    break;
+//            case 3: GUI.displayChanceCard(Lang.msg("desc_buy_Mountain"));
+//                    break;
+//            case 4: GUI.displayChanceCard(Lang.msg("desc_buy_ColdDesert"));
+//                    break;
+//            case 5: GUI.displayChanceCard(Lang.msg("desc_buy_BlackCave"));
+//                    break;
+//            case 6: GUI.displayChanceCard(Lang.msg("desc_buy_TheWerewall"));
+//                    break;
+//            case 7: GUI.displayChanceCard(Lang.msg("desc_buy_MountainVillage"));
+//                    break;
+//            case 8: GUI.displayChanceCard(Lang.msg("desc_buy_SouthCitadel"));
+//                    break;
+//            case 9: GUI.displayChanceCard(Lang.msg("desc_buy_PalaceGates"));
+//                    break;
+//            case 10: GUI.displayChanceCard(Lang.msg("desc_buy_Tower"));
+//                    break;
+//            case 11: GUI.displayChanceCard(Lang.msg("desc_buy_Castle"));
+//                    break;
+//            case 14: GUI.displayChanceCard(Lang.msg("desc_buy_HutsInTheMountains"));
+//                    break;
+//            case 15: GUI.displayChanceCard(Lang.msg("desc_buy_ThePit1") + " 100 " + Lang.msg("desc_buy_ThePit2"));
+//                    break;
+//            case 18: GUI.displayChanceCard(Lang.msg("desc_buy_SecondSail"));
+//                    break;
+//            case 19: GUI.displayChanceCard(Lang.msg("desc_buy_SeaGrover"));
+//                    break;
+//            case 20: GUI.displayChanceCard(Lang.msg("desc_buy_TheBuccaneers"));
+//                    break;
+//            case 21: GUI.displayChanceCard(Lang.msg("desc_buy_PrivateArmada"));
+//                break;
+//            default:
+//                break;
+//        }
+//   }
 
-        switch(player.getCurrentField()) {
-
-            case 1: GUI.displayChanceCard(Lang.msg("desc_buy_TribeEncampment"));
-                    break;
-            case 2: GUI.displayChanceCard(Lang.msg("desc_buy_Crater"));
-                    break;
-            case 3: GUI.displayChanceCard(Lang.msg("desc_buy_Mountain"));
-                    break;
-            case 4: GUI.displayChanceCard(Lang.msg("desc_buy_ColdDesert"));
-                    break;
-            case 5: GUI.displayChanceCard(Lang.msg("desc_buy_BlackCave"));
-                    break;
-            case 6: GUI.displayChanceCard(Lang.msg("desc_buy_TheWerewall"));
-                    break;
-            case 7: GUI.displayChanceCard(Lang.msg("desc_buy_MountainVillage"));
-                    break;
-            case 8: GUI.displayChanceCard(Lang.msg("desc_buy_SouthCitadel"));
-                    break;
-            case 9: GUI.displayChanceCard(Lang.msg("desc_buy_PalaceGates"));
-                    break;
-            case 10: GUI.displayChanceCard(Lang.msg("desc_buy_Tower"));
-                    break;
-            case 11: GUI.displayChanceCard(Lang.msg("desc_buy_Castle"));
-                    break;
-            case 14: GUI.displayChanceCard(Lang.msg("desc_buy_HutsInTheMountains"));
-                    break;
-            case 15: GUI.displayChanceCard(Lang.msg("desc_buy_ThePit1") + " 100 " + Lang.msg("desc_buy_ThePit2"));
-                    break;
-            case 18: GUI.displayChanceCard(Lang.msg("desc_buy_SecondSail"));
-                    break;
-            case 19: GUI.displayChanceCard(Lang.msg("desc_buy_SeaGrover"));
-                    break;
-            case 20: GUI.displayChanceCard(Lang.msg("desc_buy_TheBuccaneers"));
-                    break;
-            case 21: GUI.displayChanceCard(Lang.msg("desc_buy_PrivateArmada"));
-                break;
-            default:
-                break;
-        }
-   }
-
-   public void showDescriptionCardRent(Player player) {
-
-        switch(player.getCurrentField()) {
-
-            case 1: GUI.displayChanceCard(Lang.msg("desc_rent_TribeEncampment"));
-                break;
-            case 2: GUI.displayChanceCard(Lang.msg("desc_rent_Crater"));
-                break;
-            case 3: GUI.displayChanceCard(Lang.msg("desc_rent_Mountain"));
-                break;
-            case 4: GUI.displayChanceCard(Lang.msg("desc_rent_ColdDesert"));
-                break;
-            case 5: GUI.displayChanceCard(Lang.msg("desc_rent_BlackCave"));
-                break;
-            case 6: GUI.displayChanceCard(Lang.msg("desc_rent_TheWerewall"));
-                break;
-            case 7: GUI.displayChanceCard(Lang.msg("desc_rent_MountainVillage"));
-                break;
-            case 8: GUI.displayChanceCard(Lang.msg("desc_rent_SouthCitadel"));
-                break;
-            case 9: GUI.displayChanceCard(Lang.msg("desc_rent_PalaceGates"));
-                break;
-            case 10: GUI.displayChanceCard(Lang.msg("desc_rent_Tower"));
-                break;
-            case 11: GUI.displayChanceCard(Lang.msg("desc_rent_Castle"));
-                break;
-            case 14: GUI.displayChanceCard(Lang.msg("desc_rent_HutsInTheMountains"));
-                break;
-            case 15: GUI.displayChanceCard(Lang.msg("desc_rent_ThePit1" + " 100 " + "desc_rent_ThePit2"));
-                break;
-            case 18: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-                break;
-            case 19: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-                break;
-            case 20: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-                break;
-            case 21: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-                break;
-            default:
-                break;
-
-        }
-    }
+//   public void showDescriptionCardRent(Player player) {
+//
+//        switch(player.getCurrentField()) {
+//
+//            case 1: GUI.displayChanceCard(Lang.msg("desc_rent_TribeEncampment"));
+//                break;
+//            case 2: GUI.displayChanceCard(Lang.msg("desc_rent_Crater"));
+//                break;
+//            case 3: GUI.displayChanceCard(Lang.msg("desc_rent_Mountain"));
+//                break;
+//            case 4: GUI.displayChanceCard(Lang.msg("desc_rent_ColdDesert"));
+//                break;
+//            case 5: GUI.displayChanceCard(Lang.msg("desc_rent_BlackCave"));
+//                break;
+//            case 6: GUI.displayChanceCard(Lang.msg("desc_rent_TheWerewall"));
+//                break;
+//            case 7: GUI.displayChanceCard(Lang.msg("desc_rent_MountainVillage"));
+//                break;
+//            case 8: GUI.displayChanceCard(Lang.msg("desc_rent_SouthCitadel"));
+//                break;
+//            case 9: GUI.displayChanceCard(Lang.msg("desc_rent_PalaceGates"));
+//                break;
+//            case 10: GUI.displayChanceCard(Lang.msg("desc_rent_Tower"));
+//                break;
+//            case 11: GUI.displayChanceCard(Lang.msg("desc_rent_Castle"));
+//                break;
+//            case 14: GUI.displayChanceCard(Lang.msg("desc_rent_HutsInTheMountains"));
+//                break;
+//            case 15: GUI.displayChanceCard(Lang.msg("desc_rent_ThePit1" + " 100 " + "desc_rent_ThePit2"));
+//                break;
+//            case 18: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
+//                break;
+//            case 19: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
+//                break;
+//            case 20: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
+//                break;
+//            case 21: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
+//                break;
+//            default:
+//                break;
+//
+//        }
+//    }
 
     public static void sleep(int n) {
         long t0, t1;
