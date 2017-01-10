@@ -28,7 +28,7 @@ public class BusinessTest {
 
     @After
     public void tearDown() throws Exception {
-        Player.reset();
+        Ownable.reset();
     }
 
     @Test
@@ -38,14 +38,19 @@ public class BusinessTest {
     }
     @Test
     public void testOnlyOneOwner() throws Exception {
+        b1.purchaseField(p1);
         b1.purchaseField(p2);
-        assertEquals(p1, b1.getOwner());
+        assertNotEquals(p2, b1.getOwner());
     }
 
     @Test
-    public void testLandOnField() throws Exception {
-        p1.landPlot(1, 2, 1000, 2000, 3000);
-
+    public void testNoOwner() throws Exception {
+        assertEquals(null, b1.getOwner());
     }
-
+    @Test
+    public void testLandOnFieldNoOwner() throws Exception {
+        int startingBalance = p1.getPlayerAcct().getBalance();
+        b1.landOnField(p1);
+        assertEquals(startingBalance, p1.getPlayerAcct().getBalance());
+    }
 }
