@@ -17,8 +17,10 @@ public class AutoDiceCup extends models.DiceCup {
     public AutoDiceCup(int[] rolls) {
         this.rolls = new ArrayList<>();
 
-        for (int i : rolls)
+        for (int i : rolls) {
+            // TODO: Implement double rolls
             this.rolls.add(i);
+        }
     }
 
     public void addRoll(int roll) {
@@ -30,7 +32,9 @@ public class AutoDiceCup extends models.DiceCup {
         this.results.clear();
 
         if (this.rolls.size() > 0) {
-            this.results.add(rolls.get(0));
+            this.results.add(rolls.get(0) - 1);
+            this.results.add(1);
+            System.out.println("[AutoDiceCup]: rolled " + rolls.get(0));
             this.rolls.remove(0);
         }
     }

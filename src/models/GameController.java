@@ -58,10 +58,15 @@ public class GameController
     }
 
     public void purchaseCurrentField() {
-        Field playersCurrentField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
-        if (playersCurrentField instanceof Ownable)
-            if (!((Ownable) playersCurrentField).isOwned())
-                ((Ownable) playersCurrentField).purchaseField(getCurrentPlayer()); // Current players buys the current field
+        Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
+        if (currentPlayerField instanceof Ownable)
+            if (!((Ownable) currentPlayerField).isOwned())
+                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current players buys the current field
+    }
+
+    public void playerLandsOnField() {
+        Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
+        currentPlayerField.landOnField(getCurrentPlayer());
     }
 
     public Field playerLandedOn() {

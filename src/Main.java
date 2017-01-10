@@ -22,12 +22,36 @@ public class Main {
     private static GUIController gui;
 
     public static void main(String[] args) {
-        Lang.setLanguage(args);
+        // TODO: Put the following in a separate method:
+        String[] locale = new String[2];
+        boolean autoGame = false;
+        if (args.length == 1 || args.length == 3) {
+            if (args[0] == "auto") {
+                autoGame = true;
+            }
+
+            if (args.length == 3) {
+                locale[0] = args[1];
+                locale[1] = args[2];
+            } else {
+                locale[0] = "da";
+                locale[1] = "DK";
+            }
+        } else {
+            locale[0] = "da";
+            locale[1] = "DK";
+        }
+
+        Lang.setLanguage(locale);
         CLIController cli = new CLIController(); // For testing purposes
         GameController game = new GameController();
-//        setup(game);
-//
-//        gameLoop(game);
+        // TODO: commented out for testing purposes
+//        if (!autoGame)
+//            setup(game);
+//        else
+            setupAutoGame(game);
+
+        gameLoop(game);
     }
 
     private static void gameLoop(GameController game) {
@@ -50,16 +74,23 @@ public class Main {
         gameLoop(game);
     }
 
-    static int test = 0;
     private static void playNormalTurn(GameController game) {
+        // Start by rolling the dice
         playerRoll(game.getCurrentPlayer());
-        Field playerLandedOn = game.playerLandedOn();
-        gui.moveCars(game.getCurrentPlayer());
-        System.out.println("Can Purchase: " + game.canPurchaseField());
+//        Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
 
+        // Move the player's car
+        gui.moveCars(game.getCurrentPlayer());
+
+        // Player landed on a field
+        game.playerLandsOnField();
+        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+
+        // Purchase field if the player can and want to
         if (game.canPurchaseField())
             if (gui.getPlayerPurchaseChoice(game.getCurrentPlayer()))
                 game.purchaseCurrentField();
+        System.out.println("   [Main 2]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
     }
 
     private static void playJailTurn(GameController game) {
@@ -86,9 +117,14 @@ public class Main {
     private static void setupAutoGame(GameController game) {
         gui = new GUIController();
 
-        getAutomatedPlayerName("Bent", new test_models.AutoDiceCup());
-        getAutomatedPlayerName("Knud", new test_models.AutoDiceCup());
-        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup());
+        int[] autoRolls = { 3, 7, 11, 7, 7, 6, 2, 3};
+
+        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls));
+        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls));
+        // for testing, Inger buys Roskildevej right away.
+        ((Ownable) Field.getFields()[6]).purchaseField(Player.getPlayers().get(1));
+
+        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls));
         gui.createPlayers(game.getPlayers());
 
     }

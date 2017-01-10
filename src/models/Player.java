@@ -48,10 +48,9 @@ public class Player {
 
         this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
         nextPlayerId++;
+
         players.add(this);
 
-        currentField = 0;
-        previousField = 0;
     }
 
     //Reused from del3
@@ -76,6 +75,9 @@ public class Player {
         this.playerAcct = new BankAcct(STARTING_BALANCE);
 
         nextPlayerId++;
+
+        currentField = 1;
+        previousField = 1;
 
         players.add(this);
     }
