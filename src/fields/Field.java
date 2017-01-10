@@ -34,4 +34,11 @@ public abstract class Field
     public static Field[] getFields() {
         return fields;
     }
+
+    public Field getFieldByID(int ID) {
+        for (Field f: fields)
+            if (f.getFieldId() == ID)
+                return f;
+        return null;
+    }
 }
