@@ -9,7 +9,11 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import com.sun.org.apache.bcel.internal.generic.LAND;
 import models.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LandPlot extends Ownable
 {
@@ -33,35 +37,44 @@ public class LandPlot extends Ownable
 
     @Override
     public void landOnField(Player player) {
-        if (this.isOwned() && this.owner != player) {                    // if the plot is owned by another player
-            player.getPlayerAcct().transfer(this.getRent(), this.owner); // transfer rent to the rightful owner
+        // TODO: If pawning gets implemented, start by checking if field is pawned
+        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) {                     // if the plot is owned by another player and is owner NOT in jail
+            player.getPlayerAcct().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
+        } else {
+            purchaseField(player);
         }
     }
 
     @Override
     public int getRent() {
-        // TODO: If pawning gets implemented, start by checking if field is pawned
-//        if (this.isOwned() && this.owner != player)
-            return rents[houseCount];
-//        else
-//            return 0;
+        return rents[houseCount];
     }
 
-    public void buyHouse() {
-        if (this.isOwned() && this.houseCount <= 5) {
-            this.getOwner().getPlayerAcct().withdraw(this.housePrice);
-            this.houseCount++;
-        }
+    public int getHousePrice() {
+        return housePrice;
     }
 
-    public void sellHouse() {
-        if (this.isOwned() && this.houseCount > 0) {
-            this.getOwner().getPlayerAcct().deposit(this.housePrice / 2);
-            this.houseCount--;
-        }
+    public int getHouseCount() {
+        return houseCount;
+    }
+
+    public void setHouseCount(int houseCount) {
+        this.houseCount = houseCount;
     }
 
     public int getGroupID() {
         return groupID;
+    }
+
+    public static LandPlot[] getGroupedPlots (int groupID) {
+        List<LandPlot> groupedPlots = new ArrayList<>();
+
+        for (Ownable o: Ownable.getOwnedOwnables()) {
+            if (o instanceof LandPlot)
+                if (((LandPlot) o).getGroupID() == groupID)
+                    groupedPlots.add(((LandPlot) o));
+        }
+        return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
+
     }
 }
