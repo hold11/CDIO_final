@@ -10,6 +10,7 @@ package fields;/*
  */
 
 import models.Player;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Business extends Ownable
 {
@@ -25,9 +26,7 @@ public class Business extends Ownable
 
     @Override
     public int getRent() {
-        System.out.println("lol");
-        return 0;
-        //throw new NotImplementedException(); // Use getRent(Player) instead in this method.
+        throw new NotImplementedException(); // Use getRent(Player) instead in this method.
     }
 
     public int getRent(Player player) {
