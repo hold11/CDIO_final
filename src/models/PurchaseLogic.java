@@ -51,9 +51,9 @@ public class PurchaseLogic {
         int currentFieldID = ((LandPlot) Field.getFieldByID(player.getCurrentField())).getGroupID();
 
         if (LandPlot.hasAllPlotsInGroup(player, currentFieldID))
-            for (LandPlot l : LandPlot.getGroupedPlots(currentFieldID)) {
+            for (LandPlot l : LandPlot.getPlotGroup(currentFieldID)) {
                 if (l.getHouseCount() < 5) {                                                                                                    // Check if plot has max amount of houses
-                    for (LandPlot l2 : LandPlot.getGroupedPlots(currentFieldID)) {
+                    for (LandPlot l2 : LandPlot.getPlotGroup(currentFieldID)) {
                         if (l.getHouseCount() < 5 && l != l2)                                                                                      // skip if plots are the same and plot have max amount of houses
                             if (l.getHouseCount() == l2.getHouseCount() /*|| l.getHouseCount() == (l2.getHouseCount() - 1)*/ || l.getHouseCount() == (l2.getHouseCount() + 1))                      // Check if plot have the same amount of houses or exactly one more
                                 plotsWithHouses.add(l);
