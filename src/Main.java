@@ -15,6 +15,8 @@ import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
+import models.PurchaseLogic;
+import test_models.AutoDiceCup;
 
 public class Main {
 
