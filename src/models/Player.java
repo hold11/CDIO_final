@@ -21,7 +21,7 @@ public class Player {
     private DiceCup diceCup;
     private int currentField;
     private int previousField;
-    private boolean isInJail = false; // TODO: Could we have this in a List instead somewhere?
+    private int turnsInJail = 0;
     private static final int STARTING_BALANCE = 30000;
 
     private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
