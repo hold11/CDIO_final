@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cdio_final" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module CDIO_final -->
+  
+  <dirname property="module.cdio_final.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.cdio_final" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="cdio_final.output.dir" value="${module.cdio_final.basedir}/out/production/CDIO_final"/>
+  <property name="cdio_final.testoutput.dir" value="${module.cdio_final.basedir}/out/test/CDIO_final"/>
+  
+  <path id="cdio_final.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="cdio_final.module.production.classpath"/>
+  
+  <path id="cdio_final.runtime.production.module.classpath">
+    <pathelement location="${cdio_final.output.dir}"/>
+  </path>
+  
+  <path id="cdio_final.module.classpath">
+    <pathelement location="${cdio_final.output.dir}"/>
+    <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+  </path>
+  
+  <path id="cdio_final.runtime.module.classpath">
+    <pathelement location="${cdio_final.testoutput.dir}"/>
+    <pathelement location="${cdio_final.output.dir}"/>
+    <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.cdio_final">
+    <patternset refid="ignored.files"/>
+    <exclude name="GUI/tests/**"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.cdio_final">
+    <patternset refid="excluded.from.module.cdio_final"/>
+  </patternset>
+  
+  <path id="cdio_final.module.sourcepath">
+    <dirset dir="${module.cdio_final.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="cdio_final.module.test.sourcepath">
+    <dirset dir="${module.cdio_final.basedir}">
+      <include name="tests"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.cdio_final" depends="compile.module.cdio_final.production,compile.module.cdio_final.tests" description="Compile module CDIO_final"/>
+  
+  <target name="compile.module.cdio_final.production" description="Compile module CDIO_final; production classes">
+    <mkdir dir="${cdio_final.output.dir}"/>
+    <javac destdir="${cdio_final.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.cdio_final}"/>
+      <bootclasspath refid="cdio_final.module.bootclasspath"/>
+      <classpath refid="cdio_final.module.production.classpath"/>
+      <src refid="cdio_final.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cdio_final"/>
+    </javac>
+    
+    <copy todir="${cdio_final.output.dir}">
+      <fileset dir="${module.cdio_final.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.cdio_final.tests" depends="compile.module.cdio_final.production" description="compile module CDIO_final; test classes" unless="skip.tests">
+    <mkdir dir="${cdio_final.testoutput.dir}"/>
+    <javac destdir="${cdio_final.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.cdio_final}"/>
+      <bootclasspath refid="cdio_final.module.bootclasspath"/>
+      <classpath refid="cdio_final.module.classpath"/>
+      <src refid="cdio_final.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cdio_final"/>
+    </javac>
+    
+    <copy todir="${cdio_final.testoutput.dir}">
+      <fileset dir="${module.cdio_final.basedir}/tests">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.cdio_final" description="cleanup module">
+    <delete dir="${cdio_final.output.dir}"/>
+    <delete dir="${cdio_final.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.cdio_final" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.cdio_final" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
