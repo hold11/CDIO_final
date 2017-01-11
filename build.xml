@@ -42,6 +42,7 @@
         <formatter type="brief" usefile="false" />
         <batchtest>
             <fileset dir="${test.src.dir}" includes="**/*Test*.java" />
+            <fileset dir="${main.src.dir}" includes="**/lang*.properties" />
         </batchtest>
     </junit>
   </target>
