@@ -8,9 +8,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by s165228 on 10-01-2017.
- */
 public class BusinessTest {
     Player p1;
     Player p2;
@@ -23,8 +20,8 @@ public class BusinessTest {
         p2 = new Player();
         Lang.setLanguage(new String[] {"da", "DK"});
 
-        b1 = ((Business) Field.getFields()[12]);
-        b2 = ((Business) Field.getFields()[28]);
+        b1 = ((Business) Field.getFields()[28]);
+        b2 = ((Business) Field.getFields()[12]);
     }
 
     @After
