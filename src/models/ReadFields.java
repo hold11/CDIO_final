@@ -18,7 +18,9 @@ public class ReadFields {
         List<Field> fields = new ArrayList<>();
 
         try {
-            File fieldsXMLFile = new File("src/fields.xml");
+            String currentPath = System.getProperty("user.dir");
+//            File fieldsXMLFile = new File("src/fields.xml");
+            File fieldsXMLFile = new File(currentPath + "/fields.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fieldsXMLFile);

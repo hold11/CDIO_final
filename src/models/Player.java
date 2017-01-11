@@ -34,6 +34,9 @@ public class Player {
         this.playerID = nextPlayerId;
         nextPlayerId++;
 
+        this.currentField = 1;
+        this.previousField = 1;
+
         this.playerName = String.format("Player %s", this.playerID);
         this.diceCup = new DiceCup();
         this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
@@ -48,10 +51,12 @@ public class Player {
 
         this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
         nextPlayerId++;
+
+        this.currentField = 1;
+        this.previousField = 1;
+
         players.add(this);
 
-        currentField = 0;
-        previousField = 0;
     }
 
     //Reused from del3
@@ -63,6 +68,9 @@ public class Player {
         this.playerAcct = new BankAcct(STARTING_BALANCE);
 
         nextPlayerId++;
+
+        this.currentField = 1;
+        this.previousField = 1;
 
         players.add(this);
     }
@@ -76,6 +84,9 @@ public class Player {
         this.playerAcct = new BankAcct(STARTING_BALANCE);
 
         nextPlayerId++;
+
+        this.currentField = 1;
+        this.previousField = 1;
 
         players.add(this);
     }

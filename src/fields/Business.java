@@ -20,8 +20,12 @@ public class Business extends Ownable
 
     @Override
     public void landOnField(Player player) {
-        if (this.isOwned() && this.owner != player)
+        if (this.isOwned() && this.owner != player) {
+            System.out.println("   [Business LOF]");
+            System.out.print("      " + player + " pays ");
+            System.out.println(getRent(player) + " to " + this.owner + " in rent.");
             player.getPlayerAcct().transfer(this.getRent(player), this.owner);
+        }
     }
 
     @Override

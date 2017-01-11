@@ -38,15 +38,18 @@ public class LandPlot extends Ownable
     @Override
     public void landOnField(Player player) {
         // TODO: If pawning gets implemented, start by checking if field is pawned
-        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) {                     // if the plot is owned by another player and is owner NOT in jail
+        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) { // if the plot is owned by another player and owner is NOT in jail
+            System.out.println("   [LandPlot LOF]");
+            System.out.print("      " + player + " pays ");
+            System.out.println(getRent() + " to " + this.owner + " in rent.");
             player.getPlayerAcct().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
-        } else {
-            purchaseField(player);
         }
     }
 
     @Override
     public int getRent() {
+        if (hasAllPlotsInGroup(this.owner, this.groupID) && this.houseCount == 0)
+            return rents[houseCount] * 2;
         return rents[houseCount];
     }
 
@@ -66,15 +69,24 @@ public class LandPlot extends Ownable
         return groupID;
     }
 
-    public static LandPlot[] getGroupedPlots (int groupID) {
+    public static LandPlot[] getPlotGroup (int groupID) {
         List<LandPlot> groupedPlots = new ArrayList<>();
 
-        for (Ownable o: Ownable.getOwnedOwnables()) {
-            if (o instanceof LandPlot)
-                if (((LandPlot) o).getGroupID() == groupID)
-                    groupedPlots.add(((LandPlot) o));
+        for (Field f: Field.getFields()) {
+            if (f instanceof LandPlot)
+                if (((LandPlot) f).getGroupID() == groupID)
+                    groupedPlots.add(((LandPlot) f));
         }
         return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
+    }
 
+    public static boolean hasAllPlotsInGroup(Player player, int groupID) {
+        int groupPlotsCount = getPlotGroup(groupID).length;
+
+        for (LandPlot l : getPlotGroup(groupID)) {
+            if (l.getOwner() == player)
+                groupPlotsCount--;
+        }
+        return (groupPlotsCount == 0);
     }
 }
