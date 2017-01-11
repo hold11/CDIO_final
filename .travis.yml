@@ -1,3 +1,7 @@
+install: true
+
+script: ant build.xml
+
 language: java
 jdk:
 - oraclejdk8
