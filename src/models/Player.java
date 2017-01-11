@@ -21,7 +21,7 @@ public class Player {
     private DiceCup diceCup;
     private int currentField;
     private int previousField;
-    private boolean isInJail = false; // TODO: Could we have this in a List instead somewhere?
+    private int turnsInJail = 0; // TODO: Could we have this in a List instead somewhere?
     private static final int STARTING_BALANCE = 30000;
 
     private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
@@ -91,6 +91,8 @@ public class Player {
         players.add(this);
     }
 
+    public void setPlayerField(int fieldID) { this.currentField = fieldID; }
+
     // Reused from del3
     public BankAcct getPlayerAcct() {
         return playerAcct;
@@ -158,12 +160,15 @@ public class Player {
         return 0;
     }
 
-    public boolean isInJail() {
-        return isInJail;
+    public int getTurnsInJail() {
+        return this.turnsInJail;
     }
 
-    public void setInJail(boolean inJail) {
-        isInJail = inJail;
+    public void incrementTurnsInJail() {
+        this.turnsInJail += 1;
+    }
+    public void setTurnsInJail(int amount) {
+        this.turnsInJail = amount;
     }
 
     @Override
@@ -176,22 +181,10 @@ public class Player {
         if (playerID != player.playerID) return false;
         if (currentField != player.currentField) return false;
         if (previousField != player.previousField) return false;
-        if (isInJail != player.isInJail) return false;
+        if (turnsInJail != player.turnsInJail) return false;
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
         if (playerAcct != null ? !playerAcct.equals(player.playerAcct) : player.playerAcct != null) return false;
         return diceCup != null ? diceCup.equals(player.diceCup) : player.diceCup == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = playerID;
-        result = 31 * result + (playerName != null ? playerName.hashCode() : 0);
-        result = 31 * result + (playerAcct != null ? playerAcct.hashCode() : 0);
-        result = 31 * result + (diceCup != null ? diceCup.hashCode() : 0);
-        result = 31 * result + currentField;
-        result = 31 * result + previousField;
-        result = 31 * result + (isInJail ? 1 : 0);
-        return result;
     }
 
     public static void reset() {
