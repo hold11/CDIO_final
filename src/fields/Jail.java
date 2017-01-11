@@ -28,8 +28,8 @@ public class Jail extends Field
 
     @Override
     public void landOnField(Player player) {
-        player.setTurnsInJail();
-        // TODO: Move player to the jail parking area.
+        player.incrementTurnsInJail();
+        player.setPlayerField(11); // sets player on field 11 (the jail)
     }
 
     public static void putPlayerInJail(Player player) {
