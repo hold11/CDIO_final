@@ -1,10 +1,14 @@
-install: true
-
-script: ant build.xml
-
 language: java
 jdk:
 - oraclejdk8
+
+before_install:
+  - cd java
+
+script:
+  - ant compile.module.cdio_final.tests
+
+
 notifications:
   slack:
     secure: oNZxl5MfqvWMA1q6yAxg2srGergYx41FFfP2wDyWRYH9TeTil9h9Jbxk6Mz0kVqD1NhBhqKMngwasKlbpGFbKwfMc2ZzSzp1Ki7tPgYM0845KkMJgbUrhTHvJofSV2VWhkY3Pht4zbcWJRrDU1J9iQJcG2CGNJjObdWHJUXNPDBatj8+2oDrJkEXRHd4MU8zbf0KsqfA8B1y2SV8Yca7xFGXPbF9NGtos9u+l5CoxcipUrOF0e+9sd5MHw+IF+4OXOVRcG9ufisPab2tkYTvFBt4P+W6Asjio0HscNy+j8ccVK3PDjoCV734AMKH/fQX840K1eakA+42JMrEPSxbOF4EpmaRSRyMrfq+OUR4tFAK8kr1qwmZfb2kvsbFXtn/rF+EKQBrcDwrcf489tjVZ+XciaRKD88lEEA1CH+4WU1t67HOmIUMVZOZlQYMiHwQfZvrOywAsztMunDkCFDiAEkj3S2QylYVXzlHn7JTbnE2ejDvmlkXa5LKwDiK+T5Moz0b0sN4aSeBnatKHA30f4+CJWPAyvcuU3bUR6+towhXJamkTFhiF3UmF9F1yDrPLSASijh0r0Vy/B9KsdJeyPVhtjCLznqD9W8SoC2aHL2SUcx9QHtw0KhWVxicXpUFVEV1ImS2nleWir8SNdioy+YAYf3FbAsUMR/2QyQhB9w=
