@@ -19,7 +19,7 @@ public class Transportation extends Ownable
 
     @Override
     public void landOnField(Player player) {
-        if (this.isOwned() && this.owner != player) {
+        if (this.isOwned() && this.owner != player && this.owner.getTurnsInJail() == 0) {
             System.out.println("   [Transportation LOF]");
             System.out.print("      " + player + " pays ");
             System.out.println(getRent() + " to " + this.owner + " in rent.");
