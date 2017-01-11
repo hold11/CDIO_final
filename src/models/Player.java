@@ -176,7 +176,7 @@ public class Player {
         if (playerID != player.playerID) return false;
         if (currentField != player.currentField) return false;
         if (previousField != player.previousField) return false;
-        if (isInJail != player.isInJail) return false;
+        if (turnsInJail != player.turnsInJail) return false;
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
         if (playerAcct != null ? !playerAcct.equals(player.playerAcct) : player.playerAcct != null) return false;
         return diceCup != null ? diceCup.equals(player.diceCup) : player.diceCup == null;
