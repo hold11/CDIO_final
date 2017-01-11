@@ -25,7 +25,7 @@ public class GameController
     }
 
     public boolean playNormalTurn() {
-        return (!getCurrentPlayer().isInJail());
+        return (!getCurrentPlayer().getTurnsInJail());
     }
 
     public List<Jail.buttons>getJailButtons() {

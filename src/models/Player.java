@@ -158,12 +158,12 @@ public class Player {
         return 0;
     }
 
-    public int isInJail() {
-        return turnsInJail;
+    public int getTurnsInJail() {
+        return this.turnsInJail;
     }
 
-    public void setInJail() {
-        turnsInJail = 1;
+    public void setTurnsInJail() {
+        this.turnsInJail = 1;
     }
 
     @Override
