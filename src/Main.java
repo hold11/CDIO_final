@@ -103,8 +103,11 @@ public class Main {
     }
 
     private static void playJailTurn(GameController game) {
-        if (game.getCurrentPlayer().getTurnsInJail() < 3)
+        if (game.getCurrentPlayer().getTurnsInJail() != 3) {
             game.getCurrentPlayer().incrementTurnsInJail();
+            game.nextPlayer();
+            GUI.GUI.removeAllCars(game.getCurrentPlayer().toString());
+            GUI.GUI.setCar(11, game.getCurrentPlayer().toString());
 
             if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
                 // Show pay bail out button
@@ -112,9 +115,10 @@ public class Main {
             if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
                 // Show use free bail card button
             }
-            else {
+            playerRoll(game.getCurrentPlayer());
+        } else {
                 game.getCurrentPlayer().setTurnsInJail(0);
-            }
+        }
 
         // Show roll button
         // Show sell house button (if the player owns any houses that is)
