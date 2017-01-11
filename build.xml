@@ -2,7 +2,7 @@
 <project name="cdio_final" default="all">
   
   
-  <property file="cdio_final.properties"/>
+  <property file="build.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
   <!-- 
   <property name="skip.tests" value="true"/>
@@ -90,18 +90,6 @@
   
   
   <!-- Project Libraries -->
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
-  <path id="javac2.classpath">
-    <pathelement location="${javac2.home}/javac2.jar"/>
-    <pathelement location="${javac2.home}/jdom.jar"/>
-    <pathelement location="${javac2.home}/asm-all.jar"/>
-    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
-  </path>
-  <target name="register.custom.compilers">
-    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-  </target>
   
   <!-- Modules -->
   
@@ -171,15 +159,15 @@
   
   <target name="compile.module.cdio_final" depends="compile.module.cdio_final.production,compile.module.cdio_final.tests" description="Compile module CDIO_final"/>
   
-  <target name="compile.module.cdio_final.production" depends="register.custom.compilers" description="Compile module CDIO_final; production classes">
+  <target name="compile.module.cdio_final.production" description="Compile module CDIO_final; production classes">
     <mkdir dir="${cdio_final.output.dir}"/>
-    <javac2 destdir="${cdio_final.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cdio_final}/javac">
+    <javac destdir="${cdio_final.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cdio_final}/javac">
       <compilerarg line="${compiler.args.cdio_final}"/>
       <bootclasspath refid="cdio_final.module.bootclasspath"/>
       <classpath refid="cdio_final.module.production.classpath"/>
       <src refid="cdio_final.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.cdio_final"/>
-    </javac2>
+    </javac>
     
     <copy todir="${cdio_final.output.dir}">
       <fileset dir="${module.cdio_final.basedir}/src">
@@ -189,15 +177,15 @@
     </copy>
   </target>
   
-  <target name="compile.module.cdio_final.tests" depends="register.custom.compilers,compile.module.cdio_final.production" description="compile module CDIO_final; test classes" unless="skip.tests">
+  <target name="compile.module.cdio_final.tests" depends="compile.module.cdio_final.production" description="compile module CDIO_final; test classes" unless="skip.tests">
     <mkdir dir="${cdio_final.testoutput.dir}"/>
-    <javac2 destdir="${cdio_final.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cdio_final}/javac">
+    <javac destdir="${cdio_final.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cdio_final}/javac">
       <compilerarg line="${compiler.args.cdio_final}"/>
       <bootclasspath refid="cdio_final.module.bootclasspath"/>
       <classpath refid="cdio_final.module.classpath"/>
       <src refid="cdio_final.module.test.sourcepath"/>
       <patternset refid="excluded.from.compilation.cdio_final"/>
-    </javac2>
+    </javac>
     
     <copy todir="${cdio_final.testoutput.dir}">
       <fileset dir="${module.cdio_final.basedir}/tests">
