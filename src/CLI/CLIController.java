@@ -32,16 +32,16 @@ public class CLIController {
         System.out.println();
     }
 
-    public void displayHasAllPlotsInGroup(Player player, int groupId) {
-        System.out.println(player + " has all plots in group (" + groupId + "): " + LandPlot.hasAllPlotsInGroup(player, groupId));
+    public void displayHasAllPlotsInGroup(Player player, LandPlot landPlot) {
+        System.out.println(player + " has all plots in group (" + landPlot.getGroupID() + "): " + landPlot.playerHasAllPlotsInGroup());
         System.out.println();
     }
 
-    public void displayPlotsInGroup(int groupId) {
-        for (LandPlot l : LandPlot.getPlotGroup(groupId))
-            System.out.println(l + "(id:" + l.getFieldId() + ") is in group " + groupId);
-        System.out.println();
-    }
+//    public void displayPlotsInGroup(int groupId) {
+//        for (LandPlot l : LandPlot.getAllPlotsInGroup(groupId))
+//            System.out.println(l + "(id:" + l.getFieldId() + ") is in group " + groupId);
+//        System.out.println();
+//    }
 
     public void displayCanPurchaseHouse(LandPlot lplot) {
         if (PurchaseLogic.canPurchaseHouse(lplot))

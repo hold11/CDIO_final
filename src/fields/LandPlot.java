@@ -9,7 +9,6 @@ package fields;/*
     /`           ´\                                      |
  */
 
-import com.sun.org.apache.bcel.internal.generic.LAND;
 import models.Player;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class LandPlot extends Ownable
 
     @Override
     public int getRent() {
-        if (hasAllPlotsInGroup(this.owner, this.groupID) && this.houseCount == 0)
+        if (this.playerHasAllPlotsInGroup() && this.houseCount == 0)
             return rents[houseCount] * 2;
         return rents[houseCount];
     }
@@ -69,7 +68,7 @@ public class LandPlot extends Ownable
         return groupID;
     }
 
-    public static LandPlot[] getPlotGroup (int groupID) {
+    public LandPlot[] getAllPlotsInGroup(/*int groupID*/) {
         List<LandPlot> groupedPlots = new ArrayList<>();
 
         for (Field f: Field.getFields()) {
@@ -80,11 +79,11 @@ public class LandPlot extends Ownable
         return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
     }
 
-    public static boolean hasAllPlotsInGroup(Player player, int groupID) {
-        int groupPlotsCount = getPlotGroup(groupID).length;
+    public boolean playerHasAllPlotsInGroup() {
+        int groupPlotsCount = getAllPlotsInGroup().length;
 
-        for (LandPlot l : getPlotGroup(groupID)) {
-            if (l.getOwner() == player)
+        for (LandPlot l : getAllPlotsInGroup()) {
+            if (l.getOwner() == this.owner)
                 groupPlotsCount--;
         }
         return (groupPlotsCount == 0);
