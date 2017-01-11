@@ -21,7 +21,7 @@ public class Player {
     private DiceCup diceCup;
     private int currentField;
     private int previousField;
-    private int turnsInJail = 0;
+    private int turnsInJail = 0; // TODO: Could we have this in a List instead somewhere?
     private static final int STARTING_BALANCE = 30000;
 
     private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
@@ -158,12 +158,12 @@ public class Player {
         return 0;
     }
 
-    public boolean isInJail() {
-        return isInJail;
+    public int isInJail() {
+        return turnsInJail;
     }
 
-    public void setInJail(boolean inJail) {
-        isInJail = inJail;
+    public void setInJail() {
+        turnsInJail = 1;
     }
 
     @Override
@@ -180,18 +180,6 @@ public class Player {
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
         if (playerAcct != null ? !playerAcct.equals(player.playerAcct) : player.playerAcct != null) return false;
         return diceCup != null ? diceCup.equals(player.diceCup) : player.diceCup == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = playerID;
-        result = 31 * result + (playerName != null ? playerName.hashCode() : 0);
-        result = 31 * result + (playerAcct != null ? playerAcct.hashCode() : 0);
-        result = 31 * result + (diceCup != null ? diceCup.hashCode() : 0);
-        result = 31 * result + currentField;
-        result = 31 * result + previousField;
-        result = 31 * result + (isInJail ? 1 : 0);
-        return result;
     }
 
     public static void reset() {
