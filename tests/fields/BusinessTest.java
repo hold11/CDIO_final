@@ -20,8 +20,8 @@ public class BusinessTest {
         p2 = new Player();
         Lang.setLanguage(new String[] {"da", "DK"});
 
-        b1 = ((Business) Field.getFields()[28]);
-        b2 = ((Business) Field.getFields()[12]);
+        b1 = ((Business) Field.getFields()[12]);
+        b2 = ((Business) Field.getFields()[28]);
     }
 
     @After
@@ -88,6 +88,4 @@ public class BusinessTest {
         System.out.print(p1.getPlayerAcct().getBalance() + " ");
         assertNotEquals(startingBalance, p1.getPlayerAcct().getBalance() );
     }
-
-
 }
