@@ -9,15 +9,16 @@ import java.util.List;
 
 public class PurchaseLogic {
 
-    public void buyHouse(LandPlot landplot) {
-        if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)) {
-            landplot.getOwner().getPlayerAcct().withdraw(landplot.getHousePrice());
-            landplot.setHouseCount(landplot.getHouseCount() + 1);
-            System.out.println("[PurchaseLogic]: " + "player bought a house on " + landplot.toString());
-        }
+    public static void buyHouse(LandPlot landplot) {
+//        if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)) {
+//            landplot.getOwner().getPlayerAcct().withdraw(landplot.getHousePrice());
+//            landplot.setHouseCount(landplot.getHouseCount() + 1);
+//            System.out.println("[PurchaseLogic]: " + "player bought a house on " + landplot.toString());
+//        }
+        landplot.setHouseCount(landplot.getHouseCount() + 1);
     }
 
-    public void sellHouse(LandPlot landPlot) {
+    public static void sellHouse(LandPlot landPlot) {
         if (landPlot.isOwned() && landPlot.getHouseCount() > 0) {
             landPlot.getOwner().getPlayerAcct().deposit(landPlot.getHousePrice() / 2);
             landPlot.setHouseCount(landPlot.getHouseCount() - 1);
@@ -25,7 +26,7 @@ public class PurchaseLogic {
         }
     }
 
-    public int getTotalHouseCount() {
+    public static int getTotalHouseCount() {
         int totalHouseCount = 0;
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot)
@@ -35,7 +36,7 @@ public class PurchaseLogic {
         return totalHouseCount;
     }
 
-    public int getTotalHotelCount() {
+    public static int getTotalHotelCount() {
         int totalHotelCount = 0;
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot)
@@ -45,23 +46,38 @@ public class PurchaseLogic {
         return totalHotelCount;
     }
 
-    public List<LandPlot> getAvailablePlotsToBuildOn(Player player) {
-         List<LandPlot> plotsWithHouses = new ArrayList<>();
-        int currentFieldID = ((LandPlot) Field.getFieldByID(player.getCurrentField())).getGroupID();
-
-        if (LandPlot.hasAllPlotsInGroup(player, currentFieldID))
-            for (LandPlot l : LandPlot.getPlotGroup(currentFieldID)) {
-                if (l.getHouseCount() < 5) {                                                                                                    // Check if plot has max amount of houses
-                    for (LandPlot l2 : LandPlot.getPlotGroup(currentFieldID)) {
-                        if (l.getHouseCount() < 5 && l != l2)                                                                                      // skip if plots are the same and plot have max amount of houses
-                            if (l.getHouseCount() == l2.getHouseCount() /*|| l.getHouseCount() == (l2.getHouseCount() - 1)*/ || l.getHouseCount() == (l2.getHouseCount() + 1))                      // Check if plot have the same amount of houses or exactly one more
-                                plotsWithHouses.add(l);
-                }
-            }
+    public static boolean canPurchaseHouse(LandPlot lplot) {
+        // Loop through all plots in group
+        for (LandPlot l : LandPlot.getPlotGroup(lplot.getGroupID())) {
+            if (LandPlot.hasAllPlotsInGroup(lplot.getOwner(), lplot.getGroupID()))
+                if (lplot.getHouseCount() >= l.getHouseCount() && lplot.getHouseCount() < 5)
+                    return true;
         }
-        System.out.println("[PurchaseLogic]: " + "Plots available: ");
-        for (LandPlot p : plotsWithHouses)
-            System.out.println("   " + p);
-        return  plotsWithHouses;
+        return false;
     }
+
+    public static List<LandPlot> getAvailablePlotsForHouses(Player player) {
+
+        return null;
+    }
+
+//    public List<LandPlot> getAvailablePlotsToBuildOn(Player player) {
+//         List<LandPlot> plotsWithHouses = new ArrayList<>();
+//        int currentFieldID = ((LandPlot) Field.getFieldByID(player.getCurrentField())).getGroupID();
+//
+//        if (LandPlot.hasAllPlotsInGroup(player, currentFieldID))
+//            for (LandPlot l : LandPlot.getPlotGroup(currentFieldID)) {
+//                if (l.getHouseCount() < 5) {                                                                                                    // Check if plot has max amount of houses
+//                    for (LandPlot l2 : LandPlot.getPlotGroup(currentFieldID)) {
+//                        if (l.getHouseCount() < 5 && l != l2)                                                                                      // skip if plots are the same and plot have max amount of houses
+//                            if (l.getHouseCount() == l2.getHouseCount() /*|| l.getHouseCount() == (l2.getHouseCount() - 1)*/ || l.getHouseCount() == (l2.getHouseCount() + 1))                      // Check if plot have the same amount of houses or exactly one more
+//                                plotsWithHouses.add(l);
+//                }
+//            }
+//        }
+//        System.out.println("[PurchaseLogic]: " + "Plots available: ");
+//        for (LandPlot p : plotsWithHouses)
+//            System.out.println("   " + p);
+//        return  plotsWithHouses;
+//    }
 }
