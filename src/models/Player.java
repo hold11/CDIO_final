@@ -91,6 +91,8 @@ public class Player {
         players.add(this);
     }
 
+    public void setPlayerField(int fieldID) { this.currentField = fieldID; }
+
     // Reused from del3
     public BankAcct getPlayerAcct() {
         return playerAcct;
@@ -162,8 +164,11 @@ public class Player {
         return this.turnsInJail;
     }
 
-    public void setTurnsInJail() {
-        this.turnsInJail = 1;
+    public void incrementTurnsInJail() {
+        this.turnsInJail += 1;
+    }
+    public void setTurnsInJail(int amount) {
+        this.turnsInJail = amount;
     }
 
     @Override
