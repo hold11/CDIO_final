@@ -81,7 +81,10 @@ public class Main {
 
     private static void playNormalTurn(GameController game) {
         // Start by rolling the dice
+        int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
+
         playerRoll(game.getCurrentPlayer());
+
         Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
 
         // Move the player's car
@@ -102,16 +105,17 @@ public class Main {
         System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
 
-        // Check for double roll and give extra turn
-        if (game.getCurrentPlayer().getDiceCup().getDoublesRolled() > 0 && game.getCurrentPlayer().getDiceCup().getDoublesRolled() < 3)
-            game.playNormalTurn();
-        // if player gets 3 double rolls, throw player in jail
-        else if (game.getCurrentPlayer().getDiceCup().getDoublesRolled() == 3) {
-            game.throwInJail();
+        if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
+            // Check for double roll and give extra turn
+            if (doubleRollCount < 3)
+                playNormalTurn(game);
+                // if player gets 3 double rolls, throw player in jail
+            else if (doubleRollCount == 3)
+                game.throwInJail();
         }
-
-        // Next Player
-        game.nextPlayer();
+        else
+            // Next Player
+            game.nextPlayer();
     }
 
     private static void playJailTurn(GameController game) {

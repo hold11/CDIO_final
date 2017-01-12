@@ -92,8 +92,10 @@ public class DiceCup {
         for (Die die : dice)
             this.results.add(die.getRolledDieResult());
 
-        if (getResultArr()[0] == getResultArr()[1])
+        if (getResultArr()[0] == getResultArr()[1]) {
             this.doublesRolled =+ 1;
+            System.out.println("DOUBLEROLL");
+        }
     }
 
     public Collection<Integer> getResults() {
@@ -131,5 +133,9 @@ public class DiceCup {
 
     public void setDoublesRolled(int val) {
         this.doublesRolled = val;
+    }
+
+    public boolean wasRollDouble() {
+        return getResultArr()[0] == getResultArr()[1];
     }
 }
