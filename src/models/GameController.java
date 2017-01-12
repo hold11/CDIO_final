@@ -104,5 +104,10 @@ public class GameController
             return null;
     }
 
+    public void throwInJail() {
+        getCurrentPlayer().incrementTurnsInJail();
+        getCurrentPlayer().setCurrentField(11);
+    }
+
     public List<Player> getPlayers() { return Player.getPlayers(); }
 }

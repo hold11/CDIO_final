@@ -4,9 +4,6 @@ package test_models;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by awo on 10/01/17.
- */
 public class AutoDiceCup extends models.DiceCup {
     private List<Integer> rolls;
 

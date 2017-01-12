@@ -72,6 +72,9 @@ public class Main {
             playJailTurn(game);
         }
 
+        // set players double roll count back to 0
+        game.getCurrentPlayer().getDiceCup().setDoublesRolled(0);
+
         // Then restart the game loop (until a player has won the game)
         gameLoop(game);
     }
@@ -98,6 +101,15 @@ public class Main {
         gui.updateBalance(game.getPlayers());
         System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
+
+        // Check for double roll and give extra turn
+        if (game.getCurrentPlayer().getDiceCup().getDoublesRolled() > 0 && game.getCurrentPlayer().getDiceCup().getDoublesRolled() < 3)
+            game.playNormalTurn();
+        // if player gets 3 double rolls, throw player in jail
+        else if (game.getCurrentPlayer().getDiceCup().getDoublesRolled() == 3) {
+            game.throwInJail();
+        }
+
         // Next Player
         game.nextPlayer();
     }
@@ -105,9 +117,10 @@ public class Main {
     private static void playJailTurn(GameController game) {
         if (game.getCurrentPlayer().getTurnsInJail() != 3) {
             game.getCurrentPlayer().incrementTurnsInJail();
-            game.nextPlayer();
+
             GUI.GUI.removeAllCars(game.getCurrentPlayer().toString());
             GUI.GUI.setCar(11, game.getCurrentPlayer().toString());
+            game.nextPlayer();
 
             if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
                 // Show pay bail out button
