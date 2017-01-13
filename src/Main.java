@@ -127,12 +127,12 @@ public class Main {
             // TODO: Show sell house button (if the player owns any houses that is)
             String answer = gui.getJailButtons(game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT), game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
 
-            if (answer.equals("Pay bail out.")) {
+            if (answer.equals("Pay bail out. 1000,-")) {
                 game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
                 grantFreedom(game);
             }
 
-            if (answer.equals("Use Free Bail Card.")) {
+            if (answer.equals("Use Free Bail Card")) {
                 for (OwnableCard o : OwnableCard.getPlayersCards(game.getCurrentPlayer()))
                     if (o instanceof FreeBailCard) {
                         o.removeOwner();
@@ -141,7 +141,7 @@ public class Main {
                 grantFreedom(game);
             }
 
-            if (answer.equals("Roll")) {
+            if (answer.equals("Roll a double to get out")) {
                 game.getCurrentPlayer().getDiceCup().roll();
                 GUI.GUI.setDice(game.getCurrentPlayer().getDiceCup().getResultArr()[0], game.getCurrentPlayer().getDiceCup().getResultArr()[1]);
                 if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
