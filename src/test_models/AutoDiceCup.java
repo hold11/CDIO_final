@@ -34,5 +34,9 @@ public class AutoDiceCup extends models.DiceCup {
             System.out.println("[AutoDiceCup]: rolled " + rolls.get(0));
             this.rolls.remove(0);
         }
+
+        if (getResultArr()[0] == getResultArr()[1]) {
+            this.doublesRolled++;
+        }
     }
 }
