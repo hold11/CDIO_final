@@ -42,6 +42,13 @@ public abstract class Field
         return null;
     }
 
+    public static Field getFieldByName(String name) {
+        for (Field f: fields)
+            if (f.toString().equals(name))
+                return f;
+        return null;
+    }
+
     public static Field getNextFieldOfType(Player player, Class c) {
         for (int i = player.getCurrentField(); i < Field.getFields().length; i++) {
             if (Field.getFields()[i].getClass().equals(c)) {

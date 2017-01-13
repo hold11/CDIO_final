@@ -13,9 +13,13 @@ package GUI;
 
 
 import GUI.backend.Car;
+import fields.Field;
+import fields.LandPlot;
+import fields.Ownable;
 import models.Player;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class GUIController {
@@ -69,7 +73,7 @@ public class GUIController {
     }
 
     public int selectPlayerCount() {
-        return Integer.parseInt(GUI.getUserSelection("Select players",  "3", "4", "5", "6"));
+        return Integer.parseInt(GUI.getUserSelection("How many players?",  "3", "4", "5", "6"));
     }
 
     public void createPlayers(List<Player> players) {
@@ -144,14 +148,22 @@ public class GUIController {
             return GUI.getUserButtonPressed("", "Roll a double to get out");
     }
 
+    public String getLandPlotToBuildOn(LandPlot[] landPlots) {
+        String[] names = new String[landPlots.length];
+        for (int i = 0; i < landPlots.length; i++)
+            names[i] = landPlots[i].toString();
+
+        return GUI.getUserSelection("msg", names);
+    }
+
     // TODO: add actual options
-    public String getLandPlotBuildOptions(boolean canBuyHouse, boolean canBuyHotel, boolean hasHousesToSell) {
+    public String getLandPlotBuildOptions(boolean canBuyHouse , boolean canBuyHotel) {
         if (canBuyHotel && canBuyHouse)
-            return GUI.getUserButtonPressed("", "Buy House", "Buy Hotel", "Pay bail out. 1000,-");
+            return GUI.getUserButtonPressed("", "Roll", "Buy House", "Buy Hotel");
         else if (canBuyHouse)
-            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card");
+            return GUI.getUserButtonPressed("", "Roll", "Buy House");
         else if (canBuyHotel)
-            return GUI.getUserButtonPressed("", "Roll", "Pay bail out. 1000,-");
+            return GUI.getUserButtonPressed("", "Roll", "Buy Hotel");
         else
             return GUI.getUserButtonPressed("", "Roll");
     }

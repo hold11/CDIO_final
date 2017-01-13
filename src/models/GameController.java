@@ -140,5 +140,11 @@ public class GameController
         getCurrentPlayer().setCurrentField(11);
     }
 
-    public List<Player> getPlayers() { return Player.getPlayers(); }
+    public List<Player> getPlayers() {
+        return Player.getPlayers();
+    }
+
+    public LandPlot[] getAvailablePlotsToBuildOn() {
+        return PurchaseLogic.getAvailablePlotsToBuildOn(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
+    }
 }

@@ -23,7 +23,7 @@ public class Main {
     private static GUIController gui;
     private GameController game;
 
-    private Main (GameController game) {
+    private Main(GameController game) {
         this.game = game;
     }
 
@@ -123,8 +123,7 @@ public class Main {
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3) {
             playerRoll();
             playNormalTurn();
-        }
-        else
+        } else
             // Next Player
             game.nextPlayer();
     }
@@ -162,8 +161,7 @@ public class Main {
                 grantFreedom();
             else if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
                 grantFreedom();
-            }
-            else
+            } else
                 game.nextPlayer();
         }
     }
@@ -172,17 +170,17 @@ public class Main {
         gui = new GUIController();
 
         int players = gui.selectPlayerCount();
-            for (int i = 1; i <= players; i++)
-                getPlayerName();
+        for (int i = 1; i <= players; i++)
+            getPlayerName();
         gui.createPlayers(game.getPlayers());
     }
 
     private void setupAutoGame(/*GameController game*/) {
         gui = new GUIController();
 
-        int[] autoRolls1 = { 2, 2, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
-        int[] autoRolls2 = { 30, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
-        int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls1 = {2, 2, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3};
+        int[] autoRolls2 = {30, 5, 4, 11, 5, 3, 4, 5, 5, 5};
+        int[] autoRolls3 = {3, 6, 6, 6, 7, 7, 6, 2, 3};
 
         getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
         getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
@@ -216,48 +214,23 @@ public class Main {
         playNormalTurn();
     }
 
-    public void test(){
-        PurchaseLogic prl = new PurchaseLogic();
+    public void doRealEstateBusiness() {
+        boolean canHasHouse = false;
+        boolean canHasHotel = false;
 
-        Player p1 = new Player();
-        Player p2 = new Player();
+        if (PurchaseLogic.getTotalHouseCount() != PurchaseLogic.MAXHOUSECOUNT)
+            canHasHouse = true;
 
-        p1.setCurrentField(9);
+        if (PurchaseLogic.getTotalHotelCount() != PurchaseLogic.MAXHOTELCOUNT)
+            canHasHotel = true;
 
-//        for (LandPlot l : LandPlot.getPlotGroup(2))
-//            System.out.println(l.toString());
-//        GUI.GUIController.sleep(200);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-        ((LandPlot) Field.getFields()[6]).purchaseField(p1);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-        ((LandPlot) Field.getFields()[8]).purchaseField(p1);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-//
-        ((LandPlot) Field.getFields()[9]).purchaseField(p1);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+        String answer = gui.getLandPlotBuildOptions(canHasHouse, canHasHotel);
 
-        for (int i = 0 ; i < 3 ; i++) {
-            prl.buyHouse(((LandPlot) Field.getFields()[6]));
-            System.out.println((Field.getFields()[6]).toString() + " contains " + ((LandPlot) Field.getFields()[6]).getHouseCount() + " Houses");
-            for(int j = 0 ; j < 3 ; j++) {
-                prl.buyHouse(((LandPlot) Field.getFields()[8]));
-                System.out.println((Field.getFields()[8]).toString() + " contains " + ((LandPlot) Field.getFields()[8]).getHouseCount() + " Houses");
-            }
-//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
-//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
-        }
+        if (answer.equals("Buy House"))
+            PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn()))));
+        if (answer.equals("Roll"))
+            playerRoll();
+
 
     }
 }
