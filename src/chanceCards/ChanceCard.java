@@ -10,6 +10,7 @@ package chanceCards;/*
  */
 
 import fields.Field;
+import fields.Jail;
 import models.Player;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public abstract class ChanceCard
         cCards.add(new BalanceCard(15, false, -200));
         cCards.add(new BalanceCard(16, false, -200));
         // card 17 er et næste transportkort
-        // card 18 get jailed
+        cCards.add(new MoveCard(18, Field.getNextFieldOfType(0, Jail.class)));
         cCards.add(new BalanceCard(19, 500, 2000));
         cCards.add(new BalanceCard(20, false, 1000));
         // card 21 næste transport + betal dobbelt leje

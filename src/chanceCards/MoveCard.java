@@ -10,6 +10,7 @@ package chanceCards;/*
  */
 
 import fields.Field;
+import fields.Jail;
 import models.Player;
 
 public class MoveCard extends ChanceCard
@@ -30,8 +31,14 @@ public class MoveCard extends ChanceCard
     public void receiveCard(Player player) {
         if (destination == null) {
             player.moveCurrentField(this.moveCount);
+            Field.getFieldByID(player.getCurrentField()).landOnField(player);
         } else if (destination != null) {
+            if (destination instanceof Jail){
+                player.setCurrentField(destination.getFieldId());
+                Field.getFieldByID(player.getCurrentField()).landOnField(player);
+            }
             player.setCurrentField(destination.getFieldId());
+            Field.getFieldByID(player.getCurrentField()).landOnField(player);
         }
     }
 }
