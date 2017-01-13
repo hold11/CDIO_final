@@ -7,13 +7,24 @@ package CLI;
 import models.*;
 import fields.*;
 
+import java.util.ArrayList;
+
 /**
  * This class is for testing purposes only.
  * It is created to simplify some functions when displaying data.
  */
 public class CLIController {
-    public void displayBalance(Player player) {
-        System.out.println(player + "'s balance is " + player.getPlayerAccount().getBalance());
+    public void displayStartBalance(Player player) {
+        System.out.println("Starting balance: " + player.getPlayerAccount().getBalance() + ".");
+        if (player.getTurnsInJail() == 0)
+            System.out.println("Player in jail: false.");
+        else
+            System.out.println("Player in jail: true.");
+        System.out.println();
+    }
+
+    public void displayEndBalance(Player player) {
+        System.out.println("End balance: " + player.getPlayerAccount().getBalance());
         System.out.println();
     }
 
@@ -49,5 +60,48 @@ public class CLIController {
         else
             System.out.println("It is not possible to purchase a house on " + lplot);
         System.out.println();
+    }
+
+    public void displayRolled(Player player) {
+        System.out.println("Player rolled [" + player.getDiceCup().getResultArr()[0] +
+        "] and [" + player.getDiceCup().getResultArr()[1] + "].");
+    }
+
+    public void displayLandedOn(Player player) {
+        Field landedOn = Field.getFieldByID(player.getCurrentField());
+        System.out.println("Player landed on \"" + landedOn + "\".");
+        if (landedOn instanceof Ownable) {
+            System.out.print("   Field Type: Ownable : ");
+            if (landedOn instanceof Business)
+                System.out.println("Business.");
+            else if (landedOn instanceof LandPlot)
+                System.out.println("LandPlot.");
+            else if (landedOn instanceof Transportation)
+                System.out.println("Transportation.");
+            System.out.println("   Rent: " + ((Ownable) landedOn).getRent());
+        } else if (landedOn instanceof ChanceField)
+                System.out.println("   Field Type: ChanceField.");
+        else if (landedOn instanceof Jail)
+            System.out.println("   Field Type: Jail.");
+        else if (landedOn instanceof Rest)
+            System.out.println("   Field Type: Rest");
+        else if (landedOn instanceof Tax)
+            System.out.println("   Field Type: Tax");
+    }
+
+    public void displayThreeDoubleRoll() {
+        System.out.println("Player rolled doubled 3 times in a row");
+    }
+
+    public void displayEndTurn() {
+        System.out.println("\n3 double rolls in a row. Going to jail.\n");
+    }
+
+    public void displayCanPurchaseField() {
+        System.out.println("Current field is for sale.");
+    }
+
+    public void displayPlayerBoughtField(Ownable ownable) {
+        System.out.println("   Player chose to buy the field for " + ownable.getPrice() + ".");
     }
 }
