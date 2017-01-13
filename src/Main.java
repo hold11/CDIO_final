@@ -15,8 +15,6 @@ import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
-import models.PurchaseLogic;
-import test_models.AutoDiceCup;
 
 public class Main {
 
@@ -94,7 +92,7 @@ public class Main {
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
-            if (gui.getPlayerPurchaseChoice(game.getCurrentPlayer()))
+            if (gui.getPurchaseChoice(game.getCurrentPlayer()))
                 game.purchaseCurrentField();
 
         // Player landed on a field
@@ -124,20 +122,29 @@ public class Main {
 
             GUI.GUI.removeAllCars(game.getCurrentPlayer().toString());
             GUI.GUI.setCar(11, game.getCurrentPlayer().toString());
-            game.nextPlayer();
 
             if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
                 // Show pay bail out button
+                if (gui.getPayBailOut()) {
+                    game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
+                    grantFreedom(game);
+                }
             }
             if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
                 // Show use free bail card button
+                if (gui.getFreeBailCard()) {
+                    // TODO: Remove Free Bail Card from player
+                    grantFreedom(game);
+                }
             }
+            // Show roll button
             playerRoll(game.getCurrentPlayer());
-        } else {
-                game.getCurrentPlayer().setTurnsInJail(0);
-        }
-
-        // Show roll button
+                if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
+                    grantFreedom(game);
+                } else
+                    game.nextPlayer();
+        } else
+            game.getCurrentPlayer().setTurnsInJail(0);
         // Show sell house button (if the player owns any houses that is)
     }
 
@@ -181,5 +188,10 @@ public class Main {
         GUI.GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
         player.getDiceCup().roll();
         GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
+    }
+
+    private static void grantFreedom(GameController game) {
+        game.getCurrentPlayer().setTurnsInJail(0);
+        playNormalTurn(game);
     }
 }
