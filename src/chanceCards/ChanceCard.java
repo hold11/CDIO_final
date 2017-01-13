@@ -44,7 +44,7 @@ public abstract class ChanceCard
         cCards.add(new BalanceCard(6, false, 1000));
         cCards.add(new BalanceCard(7, false, -300));
         cCards.add(new BalanceCard(8, false, 1000));
-        // card 9 matadorlegatet
+        cCards.add(new GrantCard(9, 40000, 15000 ));
         cCards.add(new MoveCard(10, Field.getFieldByID(1)));
         cCards.add(new BalanceCard(11, true, 500));
         cCards.add(new MoveCard(12, Field.getFieldByID(40)));

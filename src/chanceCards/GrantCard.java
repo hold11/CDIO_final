@@ -14,16 +14,20 @@ import models.Player;
 public class GrantCard extends ChanceCard
 {
     private int changeBalance;
+    private int allowedAmount;
 
-    public GrantCard(int chanceCardID,  int changeBalance) {
+    public GrantCard(int chanceCardID,  int changeBalance, int allowedAmount) {
         super(chanceCardID);
+        this.changeBalance = changeBalance;
+        this.allowedAmount = allowedAmount;
     }
+
 
 
     @Override
     public void receiveCard(Player player) {
-        player.
-
-
+        if (player.getPlayerAccount().getGrossWorth(player) < allowedAmount) {
+            player.getPlayerAccount().deposit(changeBalance);
+        }
     }
 }
