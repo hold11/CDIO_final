@@ -76,7 +76,7 @@ public class GUIController {
         initMovers();
 
         for (int i = 0; i < players.size(); i++)
-            GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAcct().getBalance(), cars[i]);
+            GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAccount().getBalance(), cars[i]);
     }
 
     public void moveCars(Player player) {
@@ -122,7 +122,7 @@ public class GUIController {
 
     public void updateBalance(List<Player> players) {
         for (Player player : players)
-            GUI.setBalance(player.getPlayerName(), player.getPlayerAcct().getBalance());
+            GUI.setBalance(player.getPlayerName(), player.getPlayerAccount().getBalance());
     }
 
     public boolean getPurchaseChoice(Player player) {
@@ -135,10 +135,22 @@ public class GUIController {
 
     public String getJailButtons(boolean freeBail, boolean payBailOut) {
         if (freeBail && payBailOut)
-            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card.", "Pay bail out. 1000,-");
+            return GUI.getUserButtonPressed("", "Roll a double to get out", "Use Free Bail Card", "Pay bail out. 1000,-");
         else if (freeBail)
-            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card.");
+            return GUI.getUserButtonPressed("", "Roll a double to get out", "Use Free Bail Card");
         else if (payBailOut)
+            return GUI.getUserButtonPressed("", "Roll a double to get out", "Pay bail out. 1000,-");
+        else
+            return GUI.getUserButtonPressed("", "Roll a double to get out");
+    }
+
+    // TODO: add actual options
+    public String getLandPlotBuildOptions(boolean canBuyHouse, boolean canBuyHotel, boolean hasHousesToSell) {
+        if (canBuyHotel && canBuyHouse)
+            return GUI.getUserButtonPressed("", "Buy House", "Buy Hotel", "Pay bail out. 1000,-");
+        else if (canBuyHouse)
+            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card");
+        else if (canBuyHotel)
             return GUI.getUserButtonPressed("", "Roll", "Pay bail out. 1000,-");
         else
             return GUI.getUserButtonPressed("", "Roll");

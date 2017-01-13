@@ -41,7 +41,7 @@ public class LandPlot extends Ownable
             System.out.println("   [LandPlot LOF]");
             System.out.print("      " + player + " pays ");
             System.out.println(getRent() + " to " + this.owner + " in rent.");
-            player.getPlayerAcct().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
+            player.getPlayerAccount().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
         }
     }
 

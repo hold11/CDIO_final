@@ -24,7 +24,7 @@ public class Business extends Ownable
             System.out.println("   [Business LOF]");
             System.out.print("      " + player + " pays ");
             System.out.println(getRent(player) + " to " + this.owner + " in rent.");
-            player.getPlayerAcct().transfer(this.getRent(player), this.owner);
+            player.getPlayerAccount().transfer(this.getRent(player), this.owner);
         }
     }
 
