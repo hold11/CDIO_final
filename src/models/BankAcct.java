@@ -9,6 +9,12 @@ package models;/*
     /`           ´\                                      |
  */
 
+import fields.LandPlot;
+import fields.Ownable;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class BankAcct
 {
     private int balance;
@@ -40,11 +46,32 @@ public class BankAcct
 
     public int getBalance() { return this.balance; }
 
-    public int getGrossWorth() {
-        return 0;
+    public int getGrossWorth(Player player) {
+        Ownable[] properties = Ownable.getOwnedOwnables();
+        grossWorth = player.getPlayerAcct().getBalance();
+        for (Ownable o : properties) {
+            if (o.getOwner() == player) {
+                grossWorth += o.getPrice();
+                if (o instanceof LandPlot) {
+                    grossWorth += ((LandPlot) o).getHouseCount() * ((LandPlot) o).getHousePrice();
+                }
+            }
+        }
+        return grossWorth;
     }
 
-    public int getNetWorth() {
-        return 0;
+    public int getNetWorth(Player player) {
+        Ownable[] properties = Ownable.getOwnedOwnables();
+        netWorth = player.getPlayerAcct().getBalance();
+        for (Ownable o : properties) {
+            if (o.getOwner() == player) {
+                netWorth += o.getPrice()/2;
+                if (o instanceof LandPlot) {
+                    netWorth += (((LandPlot) o).getHouseCount() * ((LandPlot) o).getHousePrice())/2;
+                }
+            }
+        }
+        return netWorth;
+
     }
 }
