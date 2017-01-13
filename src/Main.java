@@ -10,6 +10,9 @@
  */
 
 import CLI.CLIController;
+import chanceCards.ChanceCard;
+import chanceCards.FreeBailCard;
+import chanceCards.OwnableCard;
 import fields.*;
 import lang.Lang;
 import models.GameController;
@@ -133,7 +136,11 @@ public class Main {
             }
 
             if (answer.equals("Use Free Bail Card.")) {
-                // TODO: Remove Free Bail Card from player
+                for (OwnableCard o : OwnableCard.getPlayersCards(game.getCurrentPlayer()))
+                    if (o instanceof FreeBailCard) {
+                        o.removeOwner();
+                        break;
+                    }
                 grantFreedom(game);
             }
 
