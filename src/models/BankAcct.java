@@ -12,14 +12,11 @@ package models;/*
 import fields.LandPlot;
 import fields.Ownable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BankAcct
 {
     private int balance;
-    private int grossWorth;
-    private int netWorth;
+//    private int grossWorth;
+//    private int netWorth;
 
     public BankAcct() {
         this.balance = 0;
@@ -31,12 +28,10 @@ public class BankAcct
 
     public void deposit(int balance) {
         this.balance += Math.abs(balance);
-        // Recalculate gross worth and net worth
     }
 
     public void withdraw(int balance) {
         this.balance -= Math.abs(balance);
-        // Recalculate gross worth and net worth
     }
 
     public void transfer(int amount,Player transferToPlayer) {
@@ -48,7 +43,7 @@ public class BankAcct
 
     public int getGrossWorth(Player player) {
         Ownable[] properties = Ownable.getOwnedOwnables();
-        grossWorth = player.getPlayerAcct().getBalance();
+        int grossWorth = player.getPlayerAcct().getBalance();
         for (Ownable o : properties) {
             if (o.getOwner() == player) {
                 grossWorth += o.getPrice();
@@ -62,7 +57,7 @@ public class BankAcct
 
     public int getNetWorth(Player player) {
         Ownable[] properties = Ownable.getOwnedOwnables();
-        netWorth = player.getPlayerAcct().getBalance();
+        int netWorth = player.getPlayerAcct().getBalance();
         for (Ownable o : properties) {
             if (o.getOwner() == player) {
                 netWorth += o.getPrice()/2;

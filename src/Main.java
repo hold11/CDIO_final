@@ -10,7 +10,6 @@
  */
 
 import CLI.CLIController;
-import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
 import fields.*;
@@ -82,9 +81,9 @@ public class Main {
 
     private static void playNormalTurn(GameController game) {
         // Start by rolling the dice
-        int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
-
         playerRoll(game.getCurrentPlayer());
+
+        int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
 
         // if player gets 3 double rolls, throw player in jail
         if (doubleRollCount == 3)
@@ -109,12 +108,9 @@ public class Main {
         gui.updateBalance(game.getPlayers());
         System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
-
-        if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
-            // Check for double roll and give extra turn
-            if (doubleRollCount < 3)
-                playNormalTurn(game);
-        }
+        // Give extra turn if player rolled a double
+        if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3)
+            playNormalTurn(game);
         else
             // Next Player
             game.nextPlayer();
@@ -127,7 +123,8 @@ public class Main {
             GUI.GUI.removeAllCars(game.getCurrentPlayer().toString());
             GUI.GUI.setCar(11, game.getCurrentPlayer().toString());
 
-            // Show the options for getting out of jail. Return is a String.
+            // Show the options for getting out of jail
+            // TODO: Show sell house button (if the player owns any houses that is)
             String answer = gui.getJailButtons(game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT), game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
 
             if (answer.equals("Pay bail out.")) {
@@ -152,24 +149,8 @@ public class Main {
                 } else
                     game.nextPlayer();
             }
-
-//            if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
-//                // Show pay bail out button
-//                if (gui.getPayBailOut()) {
-//                    game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
-//                    grantFreedom(game);
-//                }
-//            }
-//            if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
-//                // Show use free bail card button
-//                if (gui.getFreeBailCard()) {
-//                    // TODO: Remove Free Bail Card from player
-//                    grantFreedom(game);
-//                }
-//            }
         } else
             game.getCurrentPlayer().setTurnsInJail(0);
-        // Show sell house button (if the player owns any houses that is)
     }
 
     private static void setup(GameController game) {
@@ -201,7 +182,7 @@ public class Main {
     }
 
     private static void getPlayerName() {
-        Player p = new Player(GUI.GUI.getUserString(" please type your name"));
+        new Player(GUI.GUI.getUserString("Please type your name."));
     }
 
     private static void getAutomatedPlayerName(String name, test_models.AutoDiceCup diceCup) {
@@ -209,7 +190,7 @@ public class Main {
     }
 
     private static void playerRoll(Player player) {
-        GUI.GUI.getUserButtonPressed(player.getPlayerName() + "", "Roll!");
+        GUI.GUI.getUserButtonPressed(player.getPlayerName(), "Roll");
         player.getDiceCup().roll();
         GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
     }

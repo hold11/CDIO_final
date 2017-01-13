@@ -13,7 +13,6 @@ package GUI;
 
 
 import GUI.backend.Car;
-import models.GameController;
 import models.Player;
 
 import java.awt.*;
@@ -24,7 +23,7 @@ public class GUIController {
 
     public GUIController() { }
 
-    public void initMovers() {
+    private void initMovers() {
 
         cars[0] = new Car.Builder()
                 .typeCar()
@@ -134,16 +133,6 @@ public class GUIController {
         } else return false;
     }
 
-//    public boolean getPayBailOut() {
-//        String answer = GUI.getUserButtonPressed("", "Pay bail out.");
-//        return answer.equals("Pay bail out.");
-//    }
-//
-//    public boolean getFreeBailCard() {
-//        String answer = GUI.getUserButtonPressed("", "Use Free Bail Card.");
-//        return answer.equals("Use Free Bail Card.");
-//    }
-
     public String getJailButtons(boolean freeBail, boolean payBailOut) {
         if (freeBail && payBailOut)
             return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card.", "Pay bail out. 1000,-");
@@ -155,7 +144,7 @@ public class GUIController {
             return GUI.getUserButtonPressed("", "Roll");
     }
 
-    public static void sleep(int n) {
+    private static void sleep(int n) {
         long t0, t1;
         t0 = System.currentTimeMillis();
         do{

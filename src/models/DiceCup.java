@@ -12,7 +12,6 @@ package models;/*
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.*;
 import java.lang.*;
 
 /**
@@ -94,7 +93,6 @@ public class DiceCup {
 
         if (getResultArr()[0] == getResultArr()[1]) {
             this.doublesRolled =+ 1;
-            System.out.println("DOUBLEROLL");
         }
     }
 

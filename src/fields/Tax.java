@@ -36,7 +36,7 @@ public class Tax extends Field
             if (player.getPlayerAcct().getBalance() < player.getPlayerAcct().getGrossWorth(player) * percentage){
                 player.getPlayerAcct().withdraw(amount);
             } else {
-                player.getPlayerAcct().withdraw((int)(player.getPlayerAcct().getGrossWorth(player)* percentage));
+                player.getPlayerAcct().withdraw((int)(player.getPlayerAcct().getGrossWorth(player) * percentage));
             }
         }
     }
