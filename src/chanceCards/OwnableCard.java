@@ -47,10 +47,23 @@ public abstract class OwnableCard extends ChanceCard {
         return ownedCards.toArray(new OwnableCard[ownedCards.size()]);
     }
 
-    public static boolean playerHasCard(Player player, Class C) {
+    private static OwnableCard[] findCardsOfType(Player player, Class c) {
+        List<OwnableCard> cards = new ArrayList<>();
+        for (OwnableCard oc : getPlayersCards(player))
+            if (oc.getClass() == c)
+                cards.add(oc);
+        return cards.stream().toArray(OwnableCard[]::new);
+    }
+
+    public static boolean playerHasCard(Player player, Class c) {
         for (OwnableCard o : getPlayersCards(player))
-            if (o.getClass() == C)
+            if (o.getClass() == c)
                 return true;
         return false;
+    }
+
+    public static void useChanceCard(Player player, Class c) {
+        if (playerHasCard(player, c))
+            findCardsOfType(player, c)[0].removeOwner();
     }
 }

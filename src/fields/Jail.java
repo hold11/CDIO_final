@@ -28,6 +28,20 @@ public class Jail extends Field
     @Override
     public void landOnField(Player player) {
         player.incrementTurnsInJail();
-        player.setPlayerField(11); // sets player on field 11 (the jail)
+        player.setPlayerField(findRestJail().getFieldId()); // sets player on field 11 (the jail)
+    }
+
+    // This finds the Rest field where the player is jailed.
+    private Rest findRestJail() {
+        boolean isJail = false;
+        Field f = null;
+        int index = 0;
+        while (!isJail) {
+            f = Field.getNextFieldOfType(index, Rest.class);
+            if (((Rest) f).isJail())
+                isJail = true;
+            index = f.getFieldId();
+        }
+        return ((Rest) f);
     }
 }
