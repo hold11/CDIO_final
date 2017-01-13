@@ -30,7 +30,7 @@ public class Tax extends Field
 
     @Override
     public void landOnField(Player player) {
-        // TODO: amount or percentage?
+        player.getPlayerAcct().withdraw(amount); // temporary solution so we actually have functional tax field
     }
 
     public double getPercentageInPercent() {
