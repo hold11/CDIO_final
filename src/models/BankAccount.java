@@ -15,8 +15,6 @@ import fields.Ownable;
 public class BankAccount
 {
     private int balance;
-//    private int grossWorth;
-//    private int netWorth;
 
     public BankAccount() {
         this.balance = 0;
@@ -42,9 +40,8 @@ public class BankAccount
     public int getBalance() { return this.balance; }
 
     public int getGrossWorth(Player player) {
-        Ownable[] properties = Ownable.getOwnedOwnables();
         int grossWorth = player.getPlayerAccount().getBalance();
-        for (Ownable o : properties) {
+        for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o.getOwner() == player) {
                 grossWorth += o.getPrice();
                 if (o instanceof LandPlot) {
@@ -56,9 +53,8 @@ public class BankAccount
     }
 
     public int getNetWorth(Player player) {
-        Ownable[] properties = Ownable.getOwnedOwnables();
         int netWorth = player.getPlayerAccount().getBalance();
-        for (Ownable o : properties) {
+        for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o.getOwner() == player) {
                 netWorth += o.getPrice()/2;
                 if (o instanceof LandPlot) {
