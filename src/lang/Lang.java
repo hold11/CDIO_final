@@ -3,9 +3,6 @@ package lang;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * Created by AndersWOlsen on 06-01-2017.
- */
 public class Lang {
     private static String lang;
     private static String country;

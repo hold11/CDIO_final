@@ -57,4 +57,12 @@ public abstract class Ownable extends Field
     public int getPrice() {
         return price;
     }
+
+    public static void reset() {
+        for (Field f : Field.getFields()) {
+            if (f instanceof Ownable) {
+                ((Ownable) f).owner = null;
+            }
+        }
+    }
 }

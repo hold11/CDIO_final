@@ -34,10 +34,7 @@ public class Business extends Ownable
     }
 
     public int getRent(Player player) {
-        if (this.isOwned() && this.owner != player)
-            return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
-        else
-            return 0;
+        return player.getDiceCup().getTotalEyes() * 100 * getTotalBusinessCount(this.owner);
     }
 
     /**
@@ -45,7 +42,7 @@ public class Business extends Ownable
      * @param player
      * @return
      */
-    private static int getTotalBusinessCount(Player player) {
+    public static int getTotalBusinessCount(Player player) {
         int totalCount = 0;
 
         for (Ownable o : getOwnedOwnables()) {
