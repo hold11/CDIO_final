@@ -94,7 +94,7 @@ public class Main {
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
 
-//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
@@ -106,7 +106,7 @@ public class Main {
         // Player passed a field
         game.playerPassedField();
         gui.updateBalance(game.getPlayers());
-        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
 
         // Give extra turn if player rolled a double
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3)
@@ -128,7 +128,7 @@ public class Main {
             String answer = gui.getJailButtons(game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT), game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
 
             if (answer.equals("Pay bail out.")) {
-                game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
+                game.getCurrentPlayer().getPlayerAccount().withdraw(1000);
                 grantFreedom(game);
             }
 

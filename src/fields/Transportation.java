@@ -23,7 +23,7 @@ public class Transportation extends Ownable
             System.out.println("   [Transportation LOF]");
             System.out.print("      " + player + " pays ");
             System.out.println(getRent() + " to " + this.owner + " in rent.");
-            player.getPlayerAcct().transfer(getRent(), this.owner);
+            player.getPlayerAccount().transfer(getRent(), this.owner);
         }
     }
 
