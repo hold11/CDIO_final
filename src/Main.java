@@ -99,6 +99,8 @@ public class Main {
         }
 
         Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
+        // Player landed on a field
+        game.playerLandsOnField();
 
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
@@ -110,8 +112,10 @@ public class Main {
             if (gui.getPurchaseChoice(game.getCurrentPlayer()))
                 game.purchaseCurrentField();
 
-        // Player landed on a field
-        game.playerLandsOnField();
+
+        if (playerLandedOn.getFieldId() != game.getCurrentPlayer().getCurrentField())
+            gui.moveCars(game.getCurrentPlayer());
+
         if (playerLandedOn instanceof Rest)
             if (((Rest) playerLandedOn).isJail())
                 gui.moveCars(game.getCurrentPlayer());
@@ -182,8 +186,8 @@ public class Main {
     private void setupAutoGame(/*GameController game*/) {
         gui = new GUIController();
 
-        int[] autoRolls1 = { 2, 2, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
-        int[] autoRolls2 = { 1, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls1 = { 2, 5, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls2 = { 2, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
         int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
         getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));

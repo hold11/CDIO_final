@@ -23,6 +23,7 @@ public abstract class ChanceCard
     protected String chanceText;
     protected int count = 1;
     private static ChanceCard[] chanceCards;
+    private static int drawCardsCount = 0;
 
     public ChanceCard(int chanceCardID) {
         this.chanceCardID = chanceCardID;
@@ -85,5 +86,19 @@ public abstract class ChanceCard
 
     public static ChanceCard[] getChanceCards() {
         return chanceCards;
+    }
+
+    @Override
+    public String toString() {
+        return this.chanceText;
+    }
+
+    public static ChanceCard drawChanceCard() {
+        ChanceCard c = getChanceCards()[drawCardsCount];
+        if (drawCardsCount < chanceCards.length)
+            drawCardsCount++;
+        else
+            drawCardsCount = 0;
+        return c;
     }
 }
