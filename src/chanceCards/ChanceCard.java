@@ -57,9 +57,22 @@ public abstract class ChanceCard
         cCards.add(new BalanceCard(19, 500, 2000));
         cCards.add(new BalanceCard(20, false, 1000));
         // card 21 næste transport + betal dobbelt leje
-        
-
-
+        cCards.add(new MoveCard(22, Field.getFieldByID(20)));
+        cCards.add(new BalanceCard(23, false, -1000));
+        cCards.add(new BalanceCard(24, false, 1000));
+        cCards.add(new BalanceCard(25, false, 500));
+        cCards.add(new MoveCard(26, Field.getFieldByID(33)));
+        cCards.add(new MoveCard(27, -3));
+        // card 28 free bail card
+        cCards.add(new BalanceCard(29, false, -3000));
+        cCards.add(new BalanceCard(30, false, 1000));
+        cCards.add(new BalanceCard(31, false, -200));
+        cCards.add(new MoveCard(32, Field.getFieldByID(25)));
+        cCards.add(new BalanceCard(33, false, 3000));
+        cCards.add(new BalanceCard(34, true, 500));
+        cCards.add(new BalanceCard(35, false, -1000));
+        cCards.add(new BalanceCard(36, false, -2000));
+        cCards.add(new BalanceCard(37, false, 200));
 
 
         chanceCards = cCards.stream().toArray(ChanceCard[]::new); // TODO: ensure you understand what the heck this is :D
