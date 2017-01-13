@@ -9,6 +9,7 @@ package fields;/*
     /`           ´\                                      |
  */
 
+import chanceCards.ChanceCard;
 import models.Player;
 
 public class ChanceField extends Field
@@ -19,6 +20,9 @@ public class ChanceField extends Field
 
     @Override
     public void landOnField(Player player) {
-
+        System.out.println("twast er tard");
+        ChanceCard c = ChanceCard.drawChanceCard();
+        System.out.println(c.toString());
+        c.receiveCard(player);
     }
 }
