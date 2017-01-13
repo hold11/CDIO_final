@@ -59,7 +59,7 @@ public class GameController
         Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
         if (currentPlayerField instanceof Ownable)
             if (!((Ownable) currentPlayerField).isOwned())
-                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current players buys the current field
+                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current player buys the current field
     }
 
     public void playerLandsOnField() {

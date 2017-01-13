@@ -185,7 +185,7 @@ public class Main {
     }
 
     private static void playerRoll(Player player) {
-        GUI.GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
+        GUI.GUI.getUserButtonPressed(player.getPlayerName() + "", "Roll!");
         player.getDiceCup().roll();
         GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
     }
