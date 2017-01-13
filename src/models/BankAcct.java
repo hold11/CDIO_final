@@ -72,6 +72,5 @@ public class BankAcct
             }
         }
         return netWorth;
-
     }
 }
