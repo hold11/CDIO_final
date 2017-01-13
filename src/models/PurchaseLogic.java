@@ -8,6 +8,9 @@ import java.util.List;
 
 public class PurchaseLogic {
 
+    public static final int MAXHOUSECOUNT = 32;
+    public static final int MAXHOTELCOUNT = 12;
+
     public static void buyHouse(LandPlot landplot) {
         if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)) {
             landplot.getOwner().getPlayerAccount().withdraw(landplot.getHousePrice());

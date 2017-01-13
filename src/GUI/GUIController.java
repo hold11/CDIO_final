@@ -135,10 +135,22 @@ public class GUIController {
 
     public String getJailButtons(boolean freeBail, boolean payBailOut) {
         if (freeBail && payBailOut)
-            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card", "Pay bail out. 1000,-");
+            return GUI.getUserButtonPressed("", "Roll a double to get out", "Use Free Bail Card", "Pay bail out. 1000,-");
         else if (freeBail)
-            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card");
+            return GUI.getUserButtonPressed("", "Roll a double to get out", "Use Free Bail Card");
         else if (payBailOut)
+            return GUI.getUserButtonPressed("", "Roll a double to get out", "Pay bail out. 1000,-");
+        else
+            return GUI.getUserButtonPressed("", "Roll a double to get out");
+    }
+
+    // TODO: add actual options
+    public String getLandPlotBuildOptions(boolean canBuyHouse, boolean canBuyHotel, boolean hasHousesToSell) {
+        if (canBuyHotel && canBuyHouse)
+            return GUI.getUserButtonPressed("", "Buy House", "Buy Hotel", "Pay bail out. 1000,-");
+        else if (canBuyHouse)
+            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card");
+        else if (canBuyHotel)
             return GUI.getUserButtonPressed("", "Roll", "Pay bail out. 1000,-");
         else
             return GUI.getUserButtonPressed("", "Roll");

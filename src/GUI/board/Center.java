@@ -26,7 +26,7 @@ public final class Center{
 
 	private Center(){
 		centerPanel = new JPanel();
-		this.factory.setSize(centerPanel, 3*Field.FIELDWIDTH, 3*Field.FIELDHEIGHT);
+		this.factory.setSize(centerPanel, 3*Field.FIELDWIDTH, 4*Field.FIELDHEIGHT);
 		centerPanel.addMouseListener(new CenterMouseListener(this));
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 		 
