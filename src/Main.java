@@ -148,9 +148,11 @@ public class Main {
             playerRoll();
             playNormalTurn();
         }
-        else
+        else {
             // Next Player
+            cli.displayEndBalance(game.getCurrentPlayer());
             game.nextPlayer();
+        }
     }
 
     private void playJailTurn() {
@@ -188,8 +190,10 @@ public class Main {
             else if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
                 grantFreedom();
             }
-            else
+            else {
+                cli.displayEndBalance(game.getCurrentPlayer());
                 game.nextPlayer();
+            }
         }
     }
 
