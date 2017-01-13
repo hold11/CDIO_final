@@ -18,13 +18,17 @@ import models.GameController;
 import models.Player;
 import GUI.GUIController;
 
+import java.util.*;
+
 public class Main {
 
     private static GUIController gui;
     private GameController game;
+    private CLIController cli;
 
-    private Main (GameController game) {
+    private Main (GameController game, CLIController cli) {
         this.game = game;
+        this.cli = cli;
     }
 
     public static void main(String[] args) {
@@ -52,22 +56,27 @@ public class Main {
         Lang.setLanguage(locale);
         CLIController cli = new CLIController(); // For testing purposes
 //        GameController game = new GameController();
-        Main main = new Main(new GameController());
+        Main main = new Main(new GameController(), new CLIController());
 
         if (autoGame)
             main.setupAutoGame();
         else
             main.setup();
-        // TODO: commented out for testing purposes
 
+        System.out.println("========================================");
         main.gameLoop();
     }
 
-    private void gameLoop(/*GameController game*/) {
-
+    private void gameLoop() {
+        System.out.println();
+        System.out.println("----------------------------------------");
+        System.out.println("-- Current Player: " + game.getCurrentPlayer() + " --");
+        System.out.println("----------------------------------------");
+        cli.displayStartBalance(game.getCurrentPlayer());
 
         // Call aPlayerhasWon() and stop the main method if a player has won the game.
         if (game.getWinner() != null) {
+            System.out.println(game.getWinner() + " has won the game.");
             aPlayerHasWon();
             return;
         }
@@ -75,6 +84,7 @@ public class Main {
         // If a player hasn't won the game
         if (game.playNormalTurn()) {
             playerRoll();
+
             playNormalTurn();
         } else {
             playJailTurn();
@@ -84,7 +94,7 @@ public class Main {
         gameLoop();
     }
 
-    private void playNormalTurn(/*GameController game*/) {
+    private void playNormalTurn() {
         int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
 
         // if player gets 3 double rolls, throw player in jail
@@ -92,11 +102,15 @@ public class Main {
         if (doubleRollCount == 3) {
             game.throwInJail();
             gui.moveCars(game.getCurrentPlayer());
+            cli.displayThreeDoubleRoll();
+            cli.displayEndTurn();
+            cli.displayEndBalance(game.getCurrentPlayer());
             game.nextPlayer();
             return;
         }
 
         Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
+        cli.displayLandedOn(game.getCurrentPlayer());
 
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
@@ -104,9 +118,13 @@ public class Main {
 //        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
 
         // Purchase field if the player can and want to
-        if (game.canPurchaseField())
-            if (gui.getPurchaseChoice(game.getCurrentPlayer()))
+        if (game.canPurchaseField()) {
+            cli.displayCanPurchaseField();
+            if (gui.getPurchaseChoice(game.getCurrentPlayer())) {
                 game.purchaseCurrentField();
+                cli.displayPlayerBoughtField(((Ownable) Field.getFieldByID(game.getCurrentPlayer().getCurrentField())));
+            }
+        }
 
         // Player landed on a field
         game.playerLandsOnField();
@@ -117,7 +135,7 @@ public class Main {
         // Player passed a field
         game.playerPassedField();
         gui.updateBalance(game.getPlayers());
-        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
+//        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
 
         // Give extra turn if player rolled a double
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3) {
@@ -129,7 +147,7 @@ public class Main {
             game.nextPlayer();
     }
 
-    private void playJailTurn(/*GameController game*/) {
+    private void playJailTurn() {
         game.getCurrentPlayer().incrementTurnsInJail();
 
         GUI.GUI.removeAllCars(game.getCurrentPlayer().getPlayerName());
@@ -144,6 +162,7 @@ public class Main {
         if (answer.equals("Pay bail out. 1000,-")) {
             game.payBailOut();
             playerRoll();
+            cli.displayRolled(game.getCurrentPlayer());
             grantFreedom();
         }
 
@@ -168,7 +187,7 @@ public class Main {
         }
     }
 
-    private void setup(/*GameController game*/) {
+    private void setup() {
         gui = new GUIController();
 
         int players = gui.selectPlayerCount();
@@ -177,7 +196,7 @@ public class Main {
         gui.createPlayers(game.getPlayers());
     }
 
-    private void setupAutoGame(/*GameController game*/) {
+    private void setupAutoGame() {
         gui = new GUIController();
 
         int[] autoRolls1 = { 2, 2, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
@@ -191,7 +210,7 @@ public class Main {
 
     }
 
-    private void aPlayerHasWon(/*GameController game*/) {
+    private void aPlayerHasWon() {
         if (game.getWinner() != null)
             System.out.println(game.getWinner() + " has won the game!");
     }
@@ -204,60 +223,18 @@ public class Main {
         Player p = new Player(name, diceCup);
     }
 
-    private void playerRoll(/*GameController game*/) {
+    private void playerRoll() {
         Player currentPlayer = game.getCurrentPlayer();
         GUI.GUI.getUserButtonPressed(currentPlayer.getPlayerName(), "Roll");
         game.rollDice();
+
+        cli.displayRolled(game.getCurrentPlayer());
+
         GUI.GUI.setDice(currentPlayer.getDiceCup().getResultArr()[0], currentPlayer.getDiceCup().getResultArr()[1]);
     }
 
-    private void grantFreedom(/*GameController game*/) {
+    private void grantFreedom() {
         game.grantFreedom();
         playNormalTurn();
-    }
-
-    public void test(){
-        PurchaseLogic prl = new PurchaseLogic();
-
-        Player p1 = new Player();
-        Player p2 = new Player();
-
-        p1.setCurrentField(9);
-
-//        for (LandPlot l : LandPlot.getPlotGroup(2))
-//            System.out.println(l.toString());
-//        GUI.GUIController.sleep(200);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-        ((LandPlot) Field.getFields()[6]).purchaseField(p1);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-        ((LandPlot) Field.getFields()[8]).purchaseField(p1);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-//
-        ((LandPlot) Field.getFields()[9]).purchaseField(p1);
-//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
-//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
-//        else
-//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
-
-        for (int i = 0 ; i < 3 ; i++) {
-            prl.buyHouse(((LandPlot) Field.getFields()[6]));
-            System.out.println((Field.getFields()[6]).toString() + " contains " + ((LandPlot) Field.getFields()[6]).getHouseCount() + " Houses");
-            for(int j = 0 ; j < 3 ; j++) {
-                prl.buyHouse(((LandPlot) Field.getFields()[8]));
-                System.out.println((Field.getFields()[8]).toString() + " contains " + ((LandPlot) Field.getFields()[8]).getHouseCount() + " Houses");
-            }
-//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
-//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
-        }
-
     }
 }
