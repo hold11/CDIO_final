@@ -223,4 +223,49 @@ public class Main {
         game.grantFreedom();
         playNormalTurn();
     }
+
+    public static void test(){
+        PurchaseLogic prl = new PurchaseLogic();
+
+        Player p1 = new Player();
+        Player p2 = new Player();
+
+        p1.setCurrentField(9);
+
+//        for (LandPlot l : LandPlot.getPlotGroup(2))
+//            System.out.println(l.toString());
+//        GUI.GUIController.sleep(200);
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+        ((LandPlot) Field.getFields()[6]).purchaseField(p1);
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+        ((LandPlot) Field.getFields()[8]).purchaseField(p1);
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+//
+        ((LandPlot) Field.getFields()[9]).purchaseField(p1);
+//        if(LandPlot.hasAllPlotsInGroup(p1, 2))
+//            System.out.println(p1.getPlayerName() + " has all the plots in the group!");
+//        else
+//            System.out.println(p1.getPlayerName() + " doesn't have all the plots in the group!");
+
+        for (int i = 0 ; i < 3 ; i++) {
+            prl.buyHouse(((LandPlot) Field.getFields()[6]));
+            System.out.println((Field.getFields()[6]).toString() + " contains " + ((LandPlot) Field.getFields()[6]).getHouseCount() + " Houses");
+            for(int j = 0 ; j < 3 ; j++) {
+                prl.buyHouse(((LandPlot) Field.getFields()[8]));
+                System.out.println((Field.getFields()[8]).toString() + " contains " + ((LandPlot) Field.getFields()[8]).getHouseCount() + " Houses");
+            }
+//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHotelCount() + " Hotels");
+//            System.out.println(p1.getPlayerName() + " has "+ prl.getTotalHouseCount() + " Houses");
+        }
+
+    }
 }
