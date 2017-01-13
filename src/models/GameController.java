@@ -64,7 +64,7 @@ public class GameController
 
     public void payBailOut() {
         if (playerIsInJail())
-            getCurrentPlayer().getPlayerAcct().withdraw(this.BAIL_OUT_PRICE);
+            getCurrentPlayer().getPlayerAccount().withdraw(this.BAIL_OUT_PRICE);
     }
 
     public void grantFreedom() {
