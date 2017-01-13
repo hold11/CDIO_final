@@ -11,7 +11,7 @@
 
 import CLI.CLIController;
 import chanceCards.FreeBailCard;
-import chanceCards.OwnableCard;
+import models.PurchaseLogic;
 import fields.*;
 import lang.Lang;
 import models.GameController;
@@ -224,7 +224,7 @@ public class Main {
         playNormalTurn();
     }
 
-    public static void test(){
+    public void test(){
         PurchaseLogic prl = new PurchaseLogic();
 
         Player p1 = new Player();
