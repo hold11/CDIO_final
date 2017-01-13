@@ -41,7 +41,7 @@ public class GameController
     public List<Jail.buttons>getJailButtons() {
         List<Jail.buttons> jailButtons = new ArrayList<>();
 
-        if (getCurrentPlayer().getPlayerAcct().getBalance() >= 1000) {
+        if (getCurrentPlayer().getPlayerAccount().getBalance() >= 1000) {
             jailButtons.add(Jail.buttons.PAY_BAIL_OUT);
         }
         if (OwnableCard.playerHasCard(getCurrentPlayer(), FreeBailCard.class)) {
@@ -64,7 +64,7 @@ public class GameController
 
     public void payBailOut() {
         if (playerIsInJail())
-            getCurrentPlayer().getPlayerAcct().withdraw(this.BAIL_OUT_PRICE);
+            getCurrentPlayer().getPlayerAccount().withdraw(this.BAIL_OUT_PRICE);
     }
 
     public void grantFreedom() {
@@ -72,7 +72,7 @@ public class GameController
     }
 
     public boolean canPurchaseField() {
-        int playerBalance = getCurrentPlayer().getPlayerAcct().getBalance();
+        int playerBalance = getCurrentPlayer().getPlayerAccount().getBalance();
         int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
         Field currentPlayerField = Field.getFieldByID(currentPlayerFieldId);
 

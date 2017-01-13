@@ -43,12 +43,12 @@ public class BalanceCard extends ChanceCard
     public void receiveCard(Player player)
     {
         if (this.changeBalance < 0 && this.type == 0)                 // Pay money to the bank
-            player.getPlayerAcct().withdraw(this.changeBalance);
+            player.getPlayerAccount().withdraw(this.changeBalance);
         else if (this.changeBalance > 0 && this.type == 0)            // Receive money from the bank
-            player.getPlayerAcct().deposit(this.changeBalance);
+            player.getPlayerAccount().deposit(this.changeBalance);
         else if (this.type == 1)                                      // Receive money from all players except you
             for (Player p : Player.getPlayers())
                 if (p != player)                                      // If the player in the list is not the current player, transfer the money (really not necesary to check this)
-                    p.getPlayerAcct().transfer(this.changeBalance, p);
+                    p.getPlayerAccount().transfer(this.changeBalance, p);
     }
 }

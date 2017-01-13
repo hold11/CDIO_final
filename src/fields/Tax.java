@@ -31,16 +31,17 @@ public class Tax extends Field
     @Override
     public void landOnField(Player player) {
         if (percentage == 0) {
-            player.getPlayerAcct().withdraw(amount);
+            player.getPlayerAccount().withdraw(amount);
         } else {
-            if (player.getPlayerAcct().getBalance() < player.getPlayerAcct().getGrossWorth(player) * percentage){
-                player.getPlayerAcct().withdraw(amount);
+            if (player.getPlayerAccount().getBalance() < player.getPlayerAccount().getGrossWorth(player) * percentage){
+                player.getPlayerAccount().withdraw(amount);
             } else {
-                player.getPlayerAcct().withdraw((int)(player.getPlayerAcct().getGrossWorth(player) * percentage));
+                player.getPlayerAccount().withdraw((int)(player.getPlayerAccount().getGrossWorth(player) * percentage));
             }
         }
     }
 
+    // Converts decimal to percentage
     public double getPercentageInPercent() {
         double percentagalizer = this.percentage * 100;
         return (int) percentagalizer;

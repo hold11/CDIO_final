@@ -14,21 +14,21 @@ import java.util.ArrayList;
 
 public class Bank
 {
-    private static List<BankAcct> bankAccts = new ArrayList<>();
+    private static List<BankAccount> bankAccounts = new ArrayList<>();
 
-    public static BankAcct createBankAcct() {
-        BankAcct bankAcct = new BankAcct();
-        bankAccts.add(bankAcct);
-        return bankAcct;
+    public static BankAccount createBankAcct() {
+        BankAccount bankAccount = new BankAccount();
+        bankAccounts.add(bankAccount);
+        return bankAccount;
     }
 
-    public static BankAcct createBankAcct(int startingBalance) {
-        BankAcct bankAcct = new BankAcct(startingBalance);
-        bankAccts.add(bankAcct);
-        return bankAcct;
+    public static BankAccount createBankAcct(int startingBalance) {
+        BankAccount bankAccount = new BankAccount(startingBalance);
+        bankAccounts.add(bankAccount);
+        return bankAccount;
     }
 
-    public static List<BankAcct> getBankAccts() {
-        return bankAccts;
+    public static List<BankAccount> getBankAccounts() {
+        return bankAccounts;
     }
 }

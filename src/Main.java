@@ -104,7 +104,7 @@ public class Main {
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
 
-//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
@@ -120,7 +120,7 @@ public class Main {
         // Player passed a field
         game.playerPassedField();
         gui.updateBalance(game.getPlayers());
-        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
+        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
 
         // Give extra turn if player rolled a double
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3)

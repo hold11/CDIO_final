@@ -13,7 +13,7 @@ import fields.*;
  */
 public class CLIController {
     public void displayBalance(Player player) {
-        System.out.println(player + "'s balance is " + player.getPlayerAcct().getBalance());
+        System.out.println(player + "'s balance is " + player.getPlayerAccount().getBalance());
         System.out.println();
     }
 
