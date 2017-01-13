@@ -150,7 +150,7 @@ public class Main {
         }
         else {
             // Next Player
-            cli.displayEndTurn();
+            cli.displayEndBalance(game.getCurrentPlayer());
             game.nextPlayer();
         }
     }
@@ -190,8 +190,10 @@ public class Main {
             else if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
                 grantFreedom();
             }
-            else
+            else {
+                cli.displayEndBalance(game.getCurrentPlayer());
                 game.nextPlayer();
+            }
         }
     }
 
