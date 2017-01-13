@@ -148,9 +148,11 @@ public class Main {
             playerRoll();
             playNormalTurn();
         }
-        else
+        else {
             // Next Player
+            cli.displayEndTurn();
             game.nextPlayer();
+        }
     }
 
     private void playJailTurn() {
