@@ -57,7 +57,6 @@ public class Main {
         Lang.setLanguage(locale);
         CLIController cli = new CLIController(); // For testing purposes
 //        GameController game = new GameController();
-        ChanceCard.initChanceCards();
         Main main = new Main(new GameController(), new CLIController());
 
         if (autoGame)
@@ -111,7 +110,7 @@ public class Main {
             return;
         }
 
-        Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
+        Field playerLandedOn = game.playerLandedOn();
         // Player landed on a field
         game.playerLandsOnField();
         cli.displayLandedOn(game.getCurrentPlayer());

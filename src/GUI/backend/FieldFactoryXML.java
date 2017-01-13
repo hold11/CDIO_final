@@ -39,7 +39,7 @@ public class FieldFactoryXML {
                 createBrewery(((Business) field));
             else if (field instanceof fields.ChanceField)
                 createChance();
-            else if (field instanceof fields.Jail) // TODO: check if a rest field is the visit jail field
+            else if (field instanceof fields.Jail)
                 createJail(((fields.Jail) field));
             else if (field instanceof fields.Rest) {
                 if (((Rest) field).isJail())
