@@ -34,8 +34,8 @@ public class Tax extends Field
             player.getPlayerAcct().withdraw(amount);
         } else {
             if (player.getPlayerAcct().getBalance() < player.getPlayerAcct().getGrossWorth(player) * percentage){
-                player.getPlayerAcct().withdraw(amount);
-            } else {
+                player.getPlayerAcct().withdraw(amount);    ////If players balance is < players gross worth: withdraw tax amount (4000).
+            } else {    //Withdraw 10% of players gross worth.
                 player.getPlayerAcct().withdraw((int)(player.getPlayerAcct().getGrossWorth(player) * percentage));
             }
         }
