@@ -185,7 +185,7 @@ public final class Board extends javax.swing.JFrame {
 	private void makeCenter() {
 		this.base.setLayer(Center.getInstance().getCenterPanel(), 1);
 		this.base.add(Center.getInstance().getCenterPanel(),
-			this.factory.createGridBagConstraints(4, 4, 3, 3));
+			this.factory.createGridBagConstraints(4, 4, 3, 4));
 	}
 	/**
 	 * Makes the base

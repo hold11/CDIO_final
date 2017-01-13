@@ -363,7 +363,7 @@ public final class BoardController {
 		List<Point> dicePlaces = new ArrayList<Point>();
 		for(int x = 1; x < 10; x++) {
 			for(int y = 1; y < 10; y++) {
-				if(x >= 4 && x <= 6 && y >= 4 && y <= 6) {
+				if(x >= 4 && x <= 6 && y >= 4 && y <= 7) {
 					continue;
 				} // Do not add the points in the center.
 				if(x > 6 && y > (9 - this.board.getPlayerCount())) {
