@@ -11,14 +11,23 @@ package chanceCards;/*
 
 import models.Player;
 
-public class FreeBailCard extends OwnableCard
+public class GrantCard extends ChanceCard
 {
-    public FreeBailCard(int chanceCardID) {
+    private int changeBalance;
+    private int allowedAmount;
+
+    public GrantCard(int chanceCardID,  int changeBalance, int allowedAmount) {
         super(chanceCardID);
+        this.changeBalance = changeBalance;
+        this.allowedAmount = allowedAmount;
     }
+
+
 
     @Override
     public void receiveCard(Player player) {
-        this.setOwner(player);
+        if (player.getPlayerAccount().getGrossWorth(player) < allowedAmount) {
+            player.getPlayerAccount().deposit(changeBalance);
+        }
     }
 }
