@@ -9,17 +9,29 @@ package chanceCards;/*
     /`           ´\                                      |
  */
 
+import fields.Field;
 import models.Player;
 
 public class MoveCard extends ChanceCard
 {
-    public MoveCard(int chanceCardID) {
+    Field destination;
+    int moveCount;
+
+    public MoveCard(int chanceCardID, Field field) {
         super(chanceCardID);
-        // More here
+        this.destination = field;
+    }
+    public MoveCard(int chanceCardID, int moveCount) {
+        super(chanceCardID);
+        this.moveCount = moveCount;
     }
 
     @Override
     public void receiveCard(Player player) {
-
+        if (destination == null) {
+            player.moveCurrentField(this.moveCount);
+        } else if (destination != null) {
+            player.setCurrentField(destination.getFieldId());
+        }
     }
 }
