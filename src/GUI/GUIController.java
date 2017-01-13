@@ -12,249 +12,72 @@ package GUI;
  */
 
 
-import GUI.GUI;
 import GUI.backend.Car;
-import GUI.fields.*;
-import lang.Lang;
+import models.GameController;
 import models.Player;
 
+import java.awt.*;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class GUIController {
     private Car[] cars = new Car[6];
 
-    public GUIController() {
-    }
+    public GUIController() { }
 
-    //TODO: Figure out if this is still needed
-//    public void initMovers() {
-//
-//        movers[0] = new Car.Builder()
-//                .troldeTanja()
-//                .primaryColor(new Color(22, 154,255))
-//                .secondaryColor(new Color(255, 21, 208))
-//                .overlayDualColor()
-//                .build();
-//
-//        movers[1] = new Car.Builder()
-//                .troldeTanja()
-//                .primaryColor(Color.GREEN)
-//                .secondaryColor(Color.WHITE)
-//                .overlayDualColor()
-//                .build();
-//
-//        movers[2] = new Car.Builder()
-//                .troldeTanja()
-//                .primaryColor(Color.WHITE)
-//                .secondaryColor(Color.RED)
-//                .overlayDualColor()
-//                .build();
-//
-//        movers[3] = new Car.Builder()
-//                .troldeTanja()
-//                .primaryColor(Color.YELLOW)
-//                .secondaryColor(Color.GREEN)
-//                .overlayDualColor()
-//                .build();
-//
-//        movers[4] = new Car.Builder()
-//                .troldeTanja()
-//                .primaryColor(Color.BLUE)
-//                .secondaryColor(Color.ORANGE)
-//                .overlayDualColor()
-//                .build();
-//
-//        movers[5] = new Car.Builder()
-//                .troldeTanja()
-//                .primaryColor(Color.WHITE)
-//                .secondaryColor(new Color(22, 154,255))
-//                .overlayDualColor()
-//                .build();
-//    }
+    public void initMovers() {
+
+        cars[0] = new Car.Builder()
+                .typeCar()
+                .primaryColor(new Color(22, 154,255))
+                .secondaryColor(new Color(255, 21, 208))
+                .patternZebra()
+                .build();
+
+        cars[1] = new Car.Builder()
+                .typeCar()
+                .primaryColor(Color.GREEN)
+                .secondaryColor(Color.WHITE)
+                .patternZebra()
+                .build();
+
+        cars[2] = new Car.Builder()
+                .typeCar()
+                .primaryColor(Color.WHITE)
+                .secondaryColor(Color.RED)
+                .patternZebra()
+                .build();
+
+        cars[3] = new Car.Builder()
+                .typeCar()
+                .primaryColor(Color.YELLOW)
+                .secondaryColor(Color.GREEN)
+                .patternZebra()
+                .build();
+
+        cars[4] = new Car.Builder()
+                .typeCar()
+                .primaryColor(Color.BLUE)
+                .secondaryColor(Color.ORANGE)
+                .patternZebra()
+                .build();
+
+        cars[5] = new Car.Builder()
+                .typeCar()
+                .primaryColor(Color.WHITE)
+                .secondaryColor(new Color(22, 154,255))
+                .patternZebra()
+                .build();
+    }
 
     public int selectPlayerCount() {
         return Integer.parseInt(GUI.getUserSelection("Select players",  "3", "4", "5", "6"));
     }
 
-    //TODO: Figure out if this is needed at all
-//    public void createBoardWithFields() {
-//        ArrayList<Field> list = new ArrayList<>();
-//
-//        //Field #1
-//        list.add(new Territory.Builder()
-//                .setTitle("Tribe Encampment")
-//                .setPicture("src/GUI/art/fields/territories/tribalEncampment.png")
-//                .setRent("100")
-//                .setPrice("1000")
-//                .build());
-//
-//        //Field #2
-//        list.add(new Territory.Builder()
-//                .setTitle("Crater")
-//                .setPicture("src/GUI/art/fields/territories/crater.png")
-//                .setRent("300")
-//                .setPrice("1500")
-//                .build());
-//
-//        //Field #3
-//        list.add(new Territory.Builder()
-//                .setTitle("Mountain")
-//                .setPicture("src/GUI/art/fields/territories/mountain.png")
-//                .setRent("500")
-//                .setPrice("2000")
-//                .build());
-//
-//        //Field #4
-//        list.add(new Territory.Builder()
-//                .setTitle("Cold Desert")
-//                .setPicture("src/GUI/art/fields/territories/coldDesert.png")
-//                .setRent("700")
-//                .setPrice("3000")
-//                .build());
-//
-//        //Field #5
-//        list.add(new Territory.Builder()
-//                .setTitle("Black Cave")
-//                .setPicture("src/GUI/art/fields/territories/blackCave.png")
-//                .setRent("1000")
-//                .setPrice("4000")
-//                .build());
-//
-//        //Field #6
-//        list.add(new Territory.Builder()
-//                .setTitle("The Werewall")
-//                .setPicture("src/GUI/art/fields/territories/werewall.png")
-//                .setRent("1300")
-//                .setPrice("4300")
-//                .build());
-//
-//        //Field #7
-//        list.add(new Territory.Builder()
-//                .setTitle("Mountain Village")
-//                .setPicture("src/GUI/art/fields/territories/mountainVillage.png")
-//                .setRent("1600")
-//                .setPrice("4750")
-//                .build());
-//
-//        //Field #8
-//        list.add(new Territory.Builder()
-//                .setTitle("South Citadel")
-//                .setPicture("src/GUI/art/fields/territories/southCitadel.png")
-//                .setRent("2000")
-//                .setPrice("5000")
-//                .build());
-//
-//        //Field #9
-//        list.add(new Territory.Builder()
-//                .setTitle("Palace Gates")
-//                .setPicture("src/GUI/art/fields/territories/palaceGates.png")
-//                .setRent("2600")
-//                .setPrice("5500")
-//                .build());
-//
-//        //Field #10
-//        list.add(new Territory.Builder()
-//                .setTitle("Tower")
-//                .setPicture("src/GUI/art/fields/territories/tower.png")
-//                .setRent("3200")
-//                .setPrice("6000")
-//                .build());
-//
-//        //Field #11
-//        list.add(new Territory.Builder()
-//                .setTitle("Castle")
-//                .setPicture("src/GUI/art/fields/territories/castle.png")
-//                .setRent("4000")
-//                .setPrice("8000")
-//                .build());
-//
-//        //Field #12
-//        list.add(new Refuge.Builder()
-//                .setTitle("Walled City")
-//                .setPicture("src/GUI/art/Fields/refuge/walledCity.png")
-//                .setBonus("5000")
-//                .build());
-//
-//        //Field #13
-//        list.add(new Refuge.Builder()
-//                .setTitle("Monastery")
-//                .setPicture("src/GUI/art/Fields/refuge/monastery.png")
-//                .setBonus("500")
-//                .build());
-//
-//        //Field #14
-//        list.add(new LaborCamp.Builder()
-//                .setTitle("Huts in the Mountain")
-//                .setPicture("src/GUI/art/Fields/laborCamp/hutsInTheMountain.png")
-//                .setRent("dice x100")
-//                .setPrice("2500")
-//                .build());
-//
-//        //Field #15
-//        list.add(new LaborCamp.Builder()
-//                .setTitle("The Pit")
-//                .setPicture("src/GUI/art/Fields/laborCamp/thePit.png")
-//                .setRent("dice x100")
-//                .setPrice("2500")
-//                .build());
-//
-//        //Field #16
-//        list.add(new Tax.Builder()
-//                .setTitle("Goldmine")
-//                .setPicture("src/GUI/art/Fields/tax/goldmine.png")
-//                .setTax("2000")
-//                .build());
-//
-//        //Field #17
-//        list.add(new Tax.Builder()
-//                .setTitle("Caravan")
-//                .setPicture("src/GUI/art/Fields/tax/caravan.png")
-//                .setTax("10% or 4000")
-//                .build());
-//
-//        //Field #18
-//        list.add(new Fleet.Builder()
-//                .setTitle("Second Sail")
-//                .setPicture("src/GUI/art/Fields/fleet/secondSail.png")
-//                .setRent("1000")
-//                .setPrice("4000")
-//                .build());
-//
-//        //Field #19
-//        list.add(new Fleet.Builder()
-//                .setTitle("Sea Grover")
-//                .setPicture("src/GUI/art/Fields/fleet/seaGrover.png")
-//                .setRent("2000")
-//                .setPrice("4000")
-//                .build());
-//
-//        //Field #20
-//        list.add(new Fleet.Builder()
-//                .setTitle("The Buccaneers")
-//                .setPicture("src/GUI/art/Fields/fleet/theBuccaneers.png")
-//                .setRent("3000")
-//                .setPrice("4000")
-//                .build());
-//
-//        //Field #21
-//        list.add(new Fleet.Builder()
-//                .setTitle("Privateer Armada")
-//                .setPicture("src/GUI/art/Fields/fleet/privateerArmada.png")
-//                .setRent("4000")
-//                .setPrice("4000")
-//                .build());
-//
-//        GUI.create(list);
-//    }
-
     public void createPlayers(List<Player> players) {
-        //initMovers();
+        initMovers();
 
         for (int i = 0; i < players.size(); i++)
-            GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAcct().getBalance());
-//            GUI.addPlayer(Player.getPlayers().get(i).getPlayerName(), Player.getPlayers().get(i).getPlayerAcct().getBalance());
+            GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAcct().getBalance(), cars[i]);
     }
 
     public void moveCars(Player player) {
@@ -303,8 +126,7 @@ public class GUIController {
             GUI.setBalance(player.getPlayerName(), player.getPlayerAcct().getBalance());
     }
 
-    public boolean getPlayerPurchaseChoice(Player player) {
-//        showDescriptionCardBuy(player);
+    public boolean getPurchaseChoice(Player player) {
         String answer = GUI.getUserButtonPressed("Want to purchase this field?", "Yes!", "No!");
         if (answer.equals("Yes!")) {
             GUI.setOwner(player.getCurrentField(), player.getPlayerName());
@@ -312,92 +134,26 @@ public class GUIController {
         } else return false;
     }
 
-//   public void showDescriptionCardBuy(Player player) {
-//
-//        switch(player.getCurrentField()) {
-//
-//            case 1: GUI.displayChanceCard(Lang.msg("desc_buy_TribeEncampment"));
-//                    break;
-//            case 2: GUI.displayChanceCard(Lang.msg("desc_buy_Crater"));
-//                    break;
-//            case 3: GUI.displayChanceCard(Lang.msg("desc_buy_Mountain"));
-//                    break;
-//            case 4: GUI.displayChanceCard(Lang.msg("desc_buy_ColdDesert"));
-//                    break;
-//            case 5: GUI.displayChanceCard(Lang.msg("desc_buy_BlackCave"));
-//                    break;
-//            case 6: GUI.displayChanceCard(Lang.msg("desc_buy_TheWerewall"));
-//                    break;
-//            case 7: GUI.displayChanceCard(Lang.msg("desc_buy_MountainVillage"));
-//                    break;
-//            case 8: GUI.displayChanceCard(Lang.msg("desc_buy_SouthCitadel"));
-//                    break;
-//            case 9: GUI.displayChanceCard(Lang.msg("desc_buy_PalaceGates"));
-//                    break;
-//            case 10: GUI.displayChanceCard(Lang.msg("desc_buy_Tower"));
-//                    break;
-//            case 11: GUI.displayChanceCard(Lang.msg("desc_buy_Castle"));
-//                    break;
-//            case 14: GUI.displayChanceCard(Lang.msg("desc_buy_HutsInTheMountains"));
-//                    break;
-//            case 15: GUI.displayChanceCard(Lang.msg("desc_buy_ThePit1") + " 100 " + Lang.msg("desc_buy_ThePit2"));
-//                    break;
-//            case 18: GUI.displayChanceCard(Lang.msg("desc_buy_SecondSail"));
-//                    break;
-//            case 19: GUI.displayChanceCard(Lang.msg("desc_buy_SeaGrover"));
-//                    break;
-//            case 20: GUI.displayChanceCard(Lang.msg("desc_buy_TheBuccaneers"));
-//                    break;
-//            case 21: GUI.displayChanceCard(Lang.msg("desc_buy_PrivateArmada"));
-//                break;
-//            default:
-//                break;
-//        }
-//   }
-
-//   public void showDescriptionCardRent(Player player) {
-//
-//        switch(player.getCurrentField()) {
-//
-//            case 1: GUI.displayChanceCard(Lang.msg("desc_rent_TribeEncampment"));
-//                break;
-//            case 2: GUI.displayChanceCard(Lang.msg("desc_rent_Crater"));
-//                break;
-//            case 3: GUI.displayChanceCard(Lang.msg("desc_rent_Mountain"));
-//                break;
-//            case 4: GUI.displayChanceCard(Lang.msg("desc_rent_ColdDesert"));
-//                break;
-//            case 5: GUI.displayChanceCard(Lang.msg("desc_rent_BlackCave"));
-//                break;
-//            case 6: GUI.displayChanceCard(Lang.msg("desc_rent_TheWerewall"));
-//                break;
-//            case 7: GUI.displayChanceCard(Lang.msg("desc_rent_MountainVillage"));
-//                break;
-//            case 8: GUI.displayChanceCard(Lang.msg("desc_rent_SouthCitadel"));
-//                break;
-//            case 9: GUI.displayChanceCard(Lang.msg("desc_rent_PalaceGates"));
-//                break;
-//            case 10: GUI.displayChanceCard(Lang.msg("desc_rent_Tower"));
-//                break;
-//            case 11: GUI.displayChanceCard(Lang.msg("desc_rent_Castle"));
-//                break;
-//            case 14: GUI.displayChanceCard(Lang.msg("desc_rent_HutsInTheMountains"));
-//                break;
-//            case 15: GUI.displayChanceCard(Lang.msg("desc_rent_ThePit1" + " 100 " + "desc_rent_ThePit2"));
-//                break;
-//            case 18: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-//                break;
-//            case 19: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-//                break;
-//            case 20: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-//                break;
-//            case 21: GUI.displayChanceCard(Lang.msg("desc_rent_fleet1" + " 100 " + "desc_rent_fleet2"));
-//                break;
-//            default:
-//                break;
-//
-//        }
+//    public boolean getPayBailOut() {
+//        String answer = GUI.getUserButtonPressed("", "Pay bail out.");
+//        return answer.equals("Pay bail out.");
 //    }
+//
+//    public boolean getFreeBailCard() {
+//        String answer = GUI.getUserButtonPressed("", "Use Free Bail Card.");
+//        return answer.equals("Use Free Bail Card.");
+//    }
+
+    public String getJailButtons(boolean freeBail, boolean payBailOut) {
+        if (freeBail && payBailOut)
+            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card.", "Pay bail out. 1000,-");
+        else if (freeBail)
+            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card.");
+        else if (payBailOut)
+            return GUI.getUserButtonPressed("", "Roll", "Pay bail out. 1000,-");
+        else
+            return GUI.getUserButtonPressed("", "Roll");
+    }
 
     public static void sleep(int n) {
         long t0, t1;

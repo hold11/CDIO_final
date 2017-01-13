@@ -152,13 +152,13 @@ public class Player {
         this.currentField = fieldID;
     }
 
-    public int getOwnedHouseCount() {
-        return 0;
-    }
-
-    public int getOwnedHotelCount() {
-        return 0;
-    }
+//    public int getOwnedHouseCount() {
+//        return 0;
+//    }
+//
+//    public int getOwnedHotelCount() {
+//        return 0;
+//    }
 
     public int getTurnsInJail() {
         return this.turnsInJail;
@@ -167,6 +167,7 @@ public class Player {
     public void incrementTurnsInJail() {
         this.turnsInJail += 1;
     }
+
     public void setTurnsInJail(int amount) {
         this.turnsInJail = amount;
     }

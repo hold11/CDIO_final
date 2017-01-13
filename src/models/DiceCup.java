@@ -27,6 +27,8 @@ public class DiceCup {
     private static int diceCount;
     private static int faceCount;
 
+    private int doublesRolled;
+
     public DiceCup() {
         this.diceCount = 2;
         this.faceCount = 6;
@@ -89,6 +91,11 @@ public class DiceCup {
 
         for (Die die : dice)
             this.results.add(die.getRolledDieResult());
+
+        if (getResultArr()[0] == getResultArr()[1]) {
+            this.doublesRolled =+ 1;
+            System.out.println("DOUBLEROLL");
+        }
     }
 
     public Collection<Integer> getResults() {
@@ -118,5 +125,17 @@ public class DiceCup {
         for (Iterator<Integer> iter = this.getResults().iterator(); iter.hasNext(); i++)
             results[i] = iter.next();
         return results;
+    }
+
+    public int getDoublesRolled() {
+        return doublesRolled;
+    }
+
+    public void setDoublesRolled(int val) {
+        this.doublesRolled = val;
+    }
+
+    public boolean wasRollDouble() {
+        return getResultArr()[0] == getResultArr()[1];
     }
 }

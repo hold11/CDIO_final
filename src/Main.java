@@ -10,13 +10,14 @@
  */
 
 import CLI.CLIController;
+import chanceCards.ChanceCard;
+import chanceCards.FreeBailCard;
+import chanceCards.OwnableCard;
 import fields.*;
 import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
-import models.PurchaseLogic;
-import test_models.AutoDiceCup;
 
 public class Main {
 
@@ -72,13 +73,23 @@ public class Main {
             playJailTurn(game);
         }
 
+        // set players double roll count back to 0
+        game.getCurrentPlayer().getDiceCup().setDoublesRolled(0);
+
         // Then restart the game loop (until a player has won the game)
         gameLoop(game);
     }
 
     private static void playNormalTurn(GameController game) {
         // Start by rolling the dice
+        int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
+
         playerRoll(game.getCurrentPlayer());
+
+        // if player gets 3 double rolls, throw player in jail
+        if (doubleRollCount == 3)
+            game.throwInJail();
+
         Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
 
         // Move the player's car
@@ -88,7 +99,7 @@ public class Main {
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField())
-            if (gui.getPlayerPurchaseChoice(game.getCurrentPlayer()))
+            if (gui.getPurchaseChoice(game.getCurrentPlayer()))
                 game.purchaseCurrentField();
 
         // Player landed on a field
@@ -98,25 +109,66 @@ public class Main {
         gui.updateBalance(game.getPlayers());
         System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAcct().getBalance());
 
-        // Next Player
-        game.nextPlayer();
+
+        if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
+            // Check for double roll and give extra turn
+            if (doubleRollCount < 3)
+                playNormalTurn(game);
+        }
+        else
+            // Next Player
+            game.nextPlayer();
     }
 
     private static void playJailTurn(GameController game) {
-        if (game.getCurrentPlayer().getTurnsInJail() < 3)
+        if (game.getCurrentPlayer().getTurnsInJail() != 3) {
             game.getCurrentPlayer().incrementTurnsInJail();
 
-            if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
-                // Show pay bail out button
-            }
-            if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
-                // Show use free bail card button
-            }
-            else {
-                game.getCurrentPlayer().setTurnsInJail(0);
+            GUI.GUI.removeAllCars(game.getCurrentPlayer().toString());
+            GUI.GUI.setCar(11, game.getCurrentPlayer().toString());
+
+            // Show the options for getting out of jail. Return is a String.
+            String answer = gui.getJailButtons(game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT), game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
+
+            if (answer.equals("Pay bail out.")) {
+                game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
+                grantFreedom(game);
             }
 
-        // Show roll button
+            if (answer.equals("Use Free Bail Card.")) {
+                for (OwnableCard o : OwnableCard.getPlayersCards(game.getCurrentPlayer()))
+                    if (o instanceof FreeBailCard) {
+                        o.removeOwner();
+                        break;
+                    }
+                grantFreedom(game);
+            }
+
+            if (answer.equals("Roll")) {
+                game.getCurrentPlayer().getDiceCup().roll();
+                GUI.GUI.setDice(game.getCurrentPlayer().getDiceCup().getResultArr()[0], game.getCurrentPlayer().getDiceCup().getResultArr()[1]);
+                if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
+                    grantFreedom(game);
+                } else
+                    game.nextPlayer();
+            }
+
+//            if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
+//                // Show pay bail out button
+//                if (gui.getPayBailOut()) {
+//                    game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
+//                    grantFreedom(game);
+//                }
+//            }
+//            if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
+//                // Show use free bail card button
+//                if (gui.getFreeBailCard()) {
+//                    // TODO: Remove Free Bail Card from player
+//                    grantFreedom(game);
+//                }
+//            }
+        } else
+            game.getCurrentPlayer().setTurnsInJail(0);
         // Show sell house button (if the player owns any houses that is)
     }
 
@@ -157,8 +209,13 @@ public class Main {
     }
 
     private static void playerRoll(Player player) {
-        GUI.GUI.getUserButtonPressed(player.getPlayerName() + "! Roll for adventure and glory!", "Roll!");
+        GUI.GUI.getUserButtonPressed(player.getPlayerName() + "", "Roll!");
         player.getDiceCup().roll();
         GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
+    }
+
+    private static void grantFreedom(GameController game) {
+        game.getCurrentPlayer().setTurnsInJail(0);
+        playNormalTurn(game);
     }
 }

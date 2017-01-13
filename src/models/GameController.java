@@ -59,7 +59,7 @@ public class GameController
         Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
         if (currentPlayerField instanceof Ownable)
             if (!((Ownable) currentPlayerField).isOwned())
-                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current players buys the current field
+                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current player buys the current field
     }
 
     public void playerLandsOnField() {
@@ -102,6 +102,11 @@ public class GameController
             return Player.getPlayers().get(0);
         else
             return null;
+    }
+
+    public void throwInJail() {
+        getCurrentPlayer().incrementTurnsInJail();
+        getCurrentPlayer().setCurrentField(11);
     }
 
     public List<Player> getPlayers() { return Player.getPlayers(); }
