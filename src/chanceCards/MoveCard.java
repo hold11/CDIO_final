@@ -11,6 +11,7 @@ package chanceCards;/*
 
 import fields.Field;
 import fields.Jail;
+import fields.Transportation;
 import models.Player;
 
 public class MoveCard extends ChanceCard
@@ -36,9 +37,13 @@ public class MoveCard extends ChanceCard
             if (destination instanceof Jail){
                 player.setCurrentField(destination.getFieldId());
                 Field.getFieldByID(player.getCurrentField()).landOnField(player);
-            }
+            } else if (destination instanceof Transportation) {
+                player.setCurrentField(Field.getNextFieldOfType(player, Transportation.class).getFieldId());
+                Field.getFieldByID(player.getCurrentField()).landOnField(player);
+            } else {
             player.setCurrentField(destination.getFieldId());
             Field.getFieldByID(player.getCurrentField()).landOnField(player);
         }
     }
+}
 }

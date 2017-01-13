@@ -11,6 +11,7 @@ package chanceCards;/*
 
 import fields.Field;
 import fields.Jail;
+import fields.Transportation;
 import models.Player;
 
 import java.util.ArrayList;
@@ -49,15 +50,15 @@ public abstract class ChanceCard
         cCards.add(new MoveCard(10, Field.getFieldByID(1)));
         cCards.add(new BalanceCard(11, true, 500));
         cCards.add(new MoveCard(12, Field.getFieldByID(40)));
-        // card 13 er et næste transportkort
+        cCards.add(new MoveCard(13, Field.getFieldByID(16)));
         cCards.add(new BalanceCard(14, false, -1000));
         cCards.add(new BalanceCard(15, false, -200));
         cCards.add(new BalanceCard(16, false, -200));
-        // card 17 er et næste transportkort
+        cCards.add(new MoveCard(17, Field.getFieldByID(16)));
         cCards.add(new MoveCard(18, Field.getNextFieldOfType(0, Jail.class)));
         cCards.add(new BalanceCard(19, 500, 2000));
         cCards.add(new BalanceCard(20, false, 1000));
-        // card 21 næste transport + betal dobbelt leje
+        cCards.add(new MoveCard(21, Field.getFieldByID(16)));
         cCards.add(new MoveCard(22, Field.getFieldByID(20)));
         cCards.add(new BalanceCard(23, false, -1000));
         cCards.add(new BalanceCard(24, false, 1000));
