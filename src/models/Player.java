@@ -21,7 +21,7 @@ public class Player {
     private DiceCup diceCup;
     private int currentField;
     private int previousField;
-    private int turnsInJail = 0; // TODO: Could we have this in a List instead somewhere?
+    private int turnsInJail = 0;
     private static final int STARTING_BALANCE = 30000;
 
     private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
@@ -136,7 +136,6 @@ public class Player {
 
     // Reused from del3
     public void moveCurrentField(int diceCount) {
-//        models.GameBoard board = new models.GameBoard();
         if (this.currentField + diceCount > Field.getFields().length)
             this.setCurrentField(diceCount - Field.getFields().length + this.currentField);
         else
@@ -151,14 +150,6 @@ public class Player {
             this.previousField = this.currentField;
         this.currentField = fieldID;
     }
-
-//    public int getOwnedHouseCount() {
-//        return 0;
-//    }
-//
-//    public int getOwnedHotelCount() {
-//        return 0;
-//    }
 
     public int getTurnsInJail() {
         return this.turnsInJail;
