@@ -13,6 +13,7 @@ package GUI;
 
 
 import GUI.backend.Car;
+import models.GameController;
 import models.Player;
 
 import java.awt.*;
@@ -21,10 +22,8 @@ import java.util.List;
 public class GUIController {
     private Car[] cars = new Car[6];
 
-    public GUIController() {
-    }
+    public GUIController() { }
 
-    //TODO: Figure out if this is still needed
     public void initMovers() {
 
         cars[0] = new Car.Builder()
@@ -135,14 +134,25 @@ public class GUIController {
         } else return false;
     }
 
-    public boolean getPayBailOut() {
-        String answer = GUI.getUserButtonPressed("", "Pay bail out.");
-        return answer.equals("Pay bail out.");
-    }
+//    public boolean getPayBailOut() {
+//        String answer = GUI.getUserButtonPressed("", "Pay bail out.");
+//        return answer.equals("Pay bail out.");
+//    }
+//
+//    public boolean getFreeBailCard() {
+//        String answer = GUI.getUserButtonPressed("", "Use Free Bail Card.");
+//        return answer.equals("Use Free Bail Card.");
+//    }
 
-    public boolean getFreeBailCard() {
-        String answer = GUI.getUserButtonPressed("", "Use Free Bail Card.");
-        return answer.equals("Use Free Bail Card.");
+    public String getJailButtons(boolean freeBail, boolean payBailOut) {
+        if (freeBail && payBailOut)
+            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card.", "Pay bail out.");
+        else if (freeBail)
+            return GUI.getUserButtonPressed("", "Roll", "Use Free Bail Card.");
+        else if (payBailOut)
+            return GUI.getUserButtonPressed("", "Roll", "Pay bail out.");
+        else
+            return GUI.getUserButtonPressed("", "Roll");
     }
 
     public static void sleep(int n) {

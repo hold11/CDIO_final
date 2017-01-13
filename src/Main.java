@@ -83,6 +83,10 @@ public class Main {
 
         playerRoll(game.getCurrentPlayer());
 
+        // if player gets 3 double rolls, throw player in jail
+        if (doubleRollCount == 3)
+            game.throwInJail();
+
         Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
 
         // Move the player's car
@@ -107,9 +111,6 @@ public class Main {
             // Check for double roll and give extra turn
             if (doubleRollCount < 3)
                 playNormalTurn(game);
-                // if player gets 3 double rolls, throw player in jail
-            else if (doubleRollCount == 3)
-                game.throwInJail();
         }
         else
             // Next Player
@@ -123,26 +124,42 @@ public class Main {
             GUI.GUI.removeAllCars(game.getCurrentPlayer().toString());
             GUI.GUI.setCar(11, game.getCurrentPlayer().toString());
 
-            if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
-                // Show pay bail out button
-                if (gui.getPayBailOut()) {
-                    game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
-                    grantFreedom(game);
-                }
+            // Show the options for getting out of jail. Return is a String.
+            String answer = gui.getJailButtons(game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT), game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
+
+            if (answer.equals("Pay bail out.")) {
+                game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
+                grantFreedom(game);
             }
-            if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
-                // Show use free bail card button
-                if (gui.getFreeBailCard()) {
-                    // TODO: Remove Free Bail Card from player
-                    grantFreedom(game);
-                }
+
+            if (answer.equals("Use Free Bail Card.")) {
+                // TODO: Remove Free Bail Card from player
+                grantFreedom(game);
             }
-            // Show roll button
-            playerRoll(game.getCurrentPlayer());
+
+            if (answer.equals("Roll")) {
+                game.getCurrentPlayer().getDiceCup().roll();
+                GUI.GUI.setDice(game.getCurrentPlayer().getDiceCup().getResultArr()[0], game.getCurrentPlayer().getDiceCup().getResultArr()[1]);
                 if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
                     grantFreedom(game);
                 } else
                     game.nextPlayer();
+            }
+
+//            if (game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT)) {
+//                // Show pay bail out button
+//                if (gui.getPayBailOut()) {
+//                    game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
+//                    grantFreedom(game);
+//                }
+//            }
+//            if (game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD)) {
+//                // Show use free bail card button
+//                if (gui.getFreeBailCard()) {
+//                    // TODO: Remove Free Bail Card from player
+//                    grantFreedom(game);
+//                }
+//            }
         } else
             game.getCurrentPlayer().setTurnsInJail(0);
         // Show sell house button (if the player owns any houses that is)
