@@ -43,7 +43,7 @@ public class MoveCard extends ChanceCard
             } else {
             player.setCurrentField(destination.getFieldId());
             Field.getFieldByID(player.getCurrentField()).landOnField(player);
+            }
         }
     }
-}
 }

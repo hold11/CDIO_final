@@ -9,6 +9,7 @@ package models;/*
     /`           ´\                                      |
  */
 
+import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
 import fields.*;
@@ -22,7 +23,7 @@ public class GameController
     private final int BAIL_OUT_PRICE = 1000;
 
     public GameController() {
-
+        ChanceCard.initChanceCards();
     }
 
     public boolean playNormalTurn() {
@@ -30,11 +31,6 @@ public class GameController
     }
 
     public void rollDice() {
-//        if (getCurrentPlayer().getDiceCup().getDoublesRolled() == 3) {
-//            throwInJail();
-//            nextPlayer();
-//        }
-
         getCurrentPlayer().getDiceCup().roll();
     }
 
@@ -108,7 +104,7 @@ public class GameController
     public Field playerLandedOn() {
         int totalRolled = getCurrentPlayer().getDiceCup().getTotalEyes();
         getCurrentPlayer().moveCurrentField(totalRolled);
-        return Field.getFieldByID(getCurrentPlayer().getCurrentField()); // TODO: Wait for Field.getFieldById(int);
+        return Field.getFieldByID(getCurrentPlayer().getCurrentField());
     }
 
     public void nextPlayer() {
