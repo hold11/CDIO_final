@@ -11,10 +11,10 @@ package chanceCards;/*
 
 import fields.Field;
 import fields.Jail;
-import fields.Transportation;
 import models.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ChanceCard
@@ -76,6 +76,7 @@ public abstract class ChanceCard
         cCards.add(new BalanceCard(36, false, -2000));
         cCards.add(new BalanceCard(37, false, 200));
 
+        Collections.shuffle(cCards);
 
         chanceCards = cCards.stream().toArray(ChanceCard[]::new); // TODO: ensure you understand what the heck this is :D
     }
