@@ -11,7 +11,7 @@ package models;/*
 
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
-import fields.Jail;
+import fields.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class GameController
     }
 
     public boolean playNormalTurn() {
-        return (!getCurrentPlayer().isInJail());
+        return (getCurrentPlayer().getTurnsInJail() == 0);
     }
 
     public List<Jail.buttons>getJailButtons() {
@@ -39,6 +39,46 @@ public class GameController
         }
 
         return jailButtons;
+    }
+
+    public boolean canPurchaseField() {
+        int playerBalance = getCurrentPlayer().getPlayerAcct().getBalance();
+        int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
+        Field currentPlayerField = Field.getFieldByID(currentPlayerFieldId);
+
+        if (currentPlayerField instanceof Ownable) {
+            boolean canAffordField = playerBalance >= ((Ownable) currentPlayerField).getPrice();
+            boolean fieldIsOwned = ((Ownable) currentPlayerField).isOwned();
+            return (canAffordField && !fieldIsOwned);
+        }
+
+        return false;
+    }
+
+    public void purchaseCurrentField() {
+        Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
+        if (currentPlayerField instanceof Ownable)
+            if (!((Ownable) currentPlayerField).isOwned())
+                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current player buys the current field
+    }
+
+    public void playerLandsOnField() {
+        Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
+        currentPlayerField.landOnField(getCurrentPlayer());
+    }
+
+    public void playerPassedField() {
+        int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
+        int previousPlayerFieldId = getCurrentPlayer().getPreviousField();
+
+        if (previousPlayerFieldId > currentPlayerFieldId)
+            ((Rest) Field.getFields()[0]).passedField(getCurrentPlayer());
+    }
+
+    public Field playerLandedOn() {
+        int totalRolled = getCurrentPlayer().getDiceCup().getTotalEyes();
+        getCurrentPlayer().moveCurrentField(totalRolled);
+        return null; // TODO: Wait for Field.getFieldById(int);
     }
 
     public void nextPlayer() {
@@ -63,4 +103,11 @@ public class GameController
         else
             return null;
     }
+
+    public void throwInJail() {
+        getCurrentPlayer().incrementTurnsInJail();
+        getCurrentPlayer().setCurrentField(11);
+    }
+
+    public List<Player> getPlayers() { return Player.getPlayers(); }
 }

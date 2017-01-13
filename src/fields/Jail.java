@@ -16,7 +16,6 @@ import java.util.List;
 
 public class Jail extends Field
 {
-    private static List<Player> playersInJail = new ArrayList<>();
     public Jail(int fieldID) {
         super(fieldID);
     }
@@ -28,19 +27,7 @@ public class Jail extends Field
 
     @Override
     public void landOnField(Player player) {
-        player.setInJail(true);
-        // TODO: Move player to the jail parking area.
-    }
-
-    public static void putPlayerInJail(Player player) {
-        playersInJail.add(player);
-    }
-
-    public static void removePlayerFromJail(Player player) {
-        playersInJail.remove(player);
-    }
-
-    public static List<Player> getPlayersInJail() {
-        return playersInJail;
+        player.incrementTurnsInJail();
+        player.setPlayerField(11); // sets player on field 11 (the jail)
     }
 }

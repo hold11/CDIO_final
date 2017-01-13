@@ -34,4 +34,20 @@ public abstract class Field
     public static Field[] getFields() {
         return fields;
     }
+
+    public static Field getFieldByID(int ID) {
+        for (Field f: fields)
+            if (f.getFieldId() == ID)
+                return f;
+        return null;
+    }
+
+    public static Field getNextFieldOfType(Player player, Class c) {
+        for (int i = player.getCurrentField(); i < Field.getFields().length; i++) {
+            if (Field.getFields()[i].getClass().equals(c)) {
+                return Field.getFields()[i];
+            }
+        }
+        return null;
+    }
 }

@@ -108,7 +108,7 @@
         <rent>[300, 1400, 4000, 11000, 15000, 19000]</rent>
     </field>
 
-    <!-- 20 : Stranvejen -->
+    <!-- 20 : Strandvejen -->
     <field groupId="4" type="landplot">
         <price>4000</price>
         <housePrice>2000</housePrice>

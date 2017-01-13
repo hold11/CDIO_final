@@ -64,13 +64,13 @@ public class FieldFactoryXML {
         String title = field.toString();
         String subText = Lang.msg("price") + ": " + Lang.msg("currency") + " " + field.getPrice();
         String description = Lang.msg("Field" + field.getFieldId() + "_desc");
-        String leje = Lang.msg("currency") + " " + field.getRent();
+//        String leje = Lang.msg("currency") + " " + field.getRent();
         Field f = new Brewery.Builder()
                 .setPicture(picture)
                 .setTitle(title)
                 .setSubText(subText)
                 .setDescription(description)
-                .setRent(leje)
+//                .setRent(leje)
                 .build();
         fields.add(f);
     }

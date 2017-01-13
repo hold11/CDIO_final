@@ -9,11 +9,14 @@ package models;/*
     /`           ´\                                      |
  */
 
+import fields.LandPlot;
+import fields.Ownable;
+
 public class BankAcct
 {
     private int balance;
-    private int grossWorth;
-    private int netWorth;
+//    private int grossWorth;
+//    private int netWorth;
 
     public BankAcct() {
         this.balance = 0;
@@ -25,12 +28,10 @@ public class BankAcct
 
     public void deposit(int balance) {
         this.balance += Math.abs(balance);
-        // Recalculate gross worth and net worth
     }
 
     public void withdraw(int balance) {
         this.balance -= Math.abs(balance);
-        // Recalculate gross worth and net worth
     }
 
     public void transfer(int amount,Player transferToPlayer) {
@@ -40,11 +41,31 @@ public class BankAcct
 
     public int getBalance() { return this.balance; }
 
-    public int getGrossWorth() {
-        return 0;
+    public int getGrossWorth(Player player) {
+        Ownable[] properties = Ownable.getOwnedOwnables();
+        int grossWorth = player.getPlayerAcct().getBalance();
+        for (Ownable o : properties) {
+            if (o.getOwner() == player) {
+                grossWorth += o.getPrice();
+                if (o instanceof LandPlot) {
+                    grossWorth += ((LandPlot) o).getHouseCount() * ((LandPlot) o).getHousePrice();
+                }
+            }
+        }
+        return grossWorth;
     }
 
-    public int getNetWorth() {
-        return 0;
+    public int getNetWorth(Player player) {
+        Ownable[] properties = Ownable.getOwnedOwnables();
+        int netWorth = player.getPlayerAcct().getBalance();
+        for (Ownable o : properties) {
+            if (o.getOwner() == player) {
+                netWorth += o.getPrice()/2;
+                if (o instanceof LandPlot) {
+                    netWorth += (((LandPlot) o).getHouseCount() * ((LandPlot) o).getHousePrice())/2;
+                }
+            }
+        }
+        return netWorth;
     }
 }

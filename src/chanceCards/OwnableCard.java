@@ -1,9 +1,7 @@
 package chanceCards;
 
-import fields.Ownable;
 import models.Player;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
