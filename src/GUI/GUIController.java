@@ -76,7 +76,7 @@ public class GUIController {
         initMovers();
 
         for (int i = 0; i < players.size(); i++)
-            GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAcct().getBalance(), cars[i]);
+            GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAccount().getBalance(), cars[i]);
     }
 
     public void moveCars(Player player) {
@@ -122,7 +122,7 @@ public class GUIController {
 
     public void updateBalance(List<Player> players) {
         for (Player player : players)
-            GUI.setBalance(player.getPlayerName(), player.getPlayerAcct().getBalance());
+            GUI.setBalance(player.getPlayerName(), player.getPlayerAccount().getBalance());
     }
 
     public boolean getPurchaseChoice(Player player) {

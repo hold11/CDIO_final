@@ -44,10 +44,10 @@ public abstract class Ownable extends Field
     }
 
     public void purchaseField(Player player) {
-        if (!isOwned() && player.getPlayerAcct().getBalance() >= this.price) {
+        if (!isOwned() && player.getPlayerAccount().getBalance() >= this.price) {
             this.owner = player;
 //            getOwnedOwnables.add(this);
-            player.getPlayerAcct().withdraw(this.price);
+            player.getPlayerAccount().withdraw(this.price);
             System.out.println(this.owner + " just bought " + this.toString());
         }
     }

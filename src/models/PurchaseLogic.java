@@ -13,7 +13,7 @@ public class PurchaseLogic {
 
     public static void buyHouse(LandPlot landplot) {
         if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)) {
-            landplot.getOwner().getPlayerAcct().withdraw(landplot.getHousePrice());
+            landplot.getOwner().getPlayerAccount().withdraw(landplot.getHousePrice());
             landplot.setHouseCount(landplot.getHouseCount() + 1);
             System.out.println("[PurchaseLogic]: " + "player bought a house on " + landplot.toString());
         }
@@ -21,7 +21,7 @@ public class PurchaseLogic {
 
     public static void sellHouse(LandPlot landPlot) {
         if (landPlot.isOwned() && landPlot.getHouseCount() > 0) {
-            landPlot.getOwner().getPlayerAcct().deposit(landPlot.getHousePrice() / 2);
+            landPlot.getOwner().getPlayerAccount().deposit(landPlot.getHousePrice() / 2);
             landPlot.setHouseCount(landPlot.getHouseCount() - 1);
             System.out.println("[PurchaseLogic]: " + "player bought a house");
         }

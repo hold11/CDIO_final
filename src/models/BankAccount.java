@@ -12,15 +12,15 @@ package models;/*
 import fields.LandPlot;
 import fields.Ownable;
 
-public class BankAcct
+public class BankAccount
 {
     private int balance;
 
-    public BankAcct() {
+    public BankAccount() {
         this.balance = 0;
     }
 
-    public BankAcct(int balance) {
+    public BankAccount(int balance) {
         this.balance = balance;
     }
 
@@ -34,13 +34,13 @@ public class BankAcct
 
     public void transfer(int amount,Player transferToPlayer) {
         this.withdraw(amount);
-        transferToPlayer.getPlayerAcct().deposit(amount);
+        transferToPlayer.getPlayerAccount().deposit(amount);
     }
 
     public int getBalance() { return this.balance; }
 
     public int getGrossWorth(Player player) {
-        int grossWorth = player.getPlayerAcct().getBalance();
+        int grossWorth = player.getPlayerAccount().getBalance();
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o.getOwner() == player) {
                 grossWorth += o.getPrice();
@@ -53,7 +53,7 @@ public class BankAcct
     }
 
     public int getNetWorth(Player player) {
-        int netWorth = player.getPlayerAcct().getBalance();
+        int netWorth = player.getPlayerAccount().getBalance();
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o.getOwner() == player) {
                 netWorth += o.getPrice()/2;

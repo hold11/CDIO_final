@@ -9,8 +9,8 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by tjc on 9/1/17.
  */
-public class BankAcctTest {
-    private BankAcct playerAcct;
+public class BankAccountTest {
+    private BankAccount playerAcct;
     private Player p1, p2;
 
     /**
@@ -39,11 +39,11 @@ public class BankAcctTest {
 //     */
 //    @Test
 //    public void setBalance() throws Exception {
-//        p1.getPlayerAcct().setBalance(100);
-//        p2.getPlayerAcct().setBalance(250);
+//        p1.getPlayerAccount().setBalance(100);
+//        p2.getPlayerAccount().setBalance(250);
 //
-//        assertEquals(100, p1.getPlayerAcct().getBalance());
-//        assertEquals(250, p2.getPlayerAcct().getBalance());
+//        assertEquals(100, p1.getPlayerAccount().getBalance());
+//        assertEquals(250, p2.getPlayerAccount().getBalance());
 //
 //    }
 
@@ -53,8 +53,8 @@ public class BankAcctTest {
      */
     @Test
     public void getBalance() throws Exception {
-        assertEquals(30000, p1.getPlayerAcct().getBalance());
-        assertEquals(30000, p2.getPlayerAcct().getBalance());
+        assertEquals(30000, p1.getPlayerAccount().getBalance());
+        assertEquals(30000, p2.getPlayerAccount().getBalance());
 
     }
 
@@ -64,11 +64,11 @@ public class BankAcctTest {
      */
     @Test
     public void deposit() throws Exception {
-        p1.getPlayerAcct().deposit(200);
-        p2.getPlayerAcct().deposit(300);
+        p1.getPlayerAccount().deposit(200);
+        p2.getPlayerAccount().deposit(300);
 
-        assertEquals(30200, p1.getPlayerAcct().getBalance());
-        assertEquals(30300, p2.getPlayerAcct().getBalance());
+        assertEquals(30200, p1.getPlayerAccount().getBalance());
+        assertEquals(30300, p2.getPlayerAccount().getBalance());
 
     }
 
@@ -78,11 +78,11 @@ public class BankAcctTest {
      */
     @Test
     public void withdraw() throws Exception {
-        p1.getPlayerAcct().withdraw(1000);
-        p2.getPlayerAcct().withdraw(2000);
+        p1.getPlayerAccount().withdraw(1000);
+        p2.getPlayerAccount().withdraw(2000);
 
-        assertEquals(29000, p1.getPlayerAcct().getBalance());
-        assertEquals(28000, p2.getPlayerAcct().getBalance());
+        assertEquals(29000, p1.getPlayerAccount().getBalance());
+        assertEquals(28000, p2.getPlayerAccount().getBalance());
 
     }
 
@@ -92,11 +92,11 @@ public class BankAcctTest {
 //     */
 //    @Test
 //    public void withdrawNegative() throws Exception {
-//        p1.getPlayerAcct().withdraw(32000);
-//        p2.getPlayerAcct().withdraw(35000);
+//        p1.getPlayerAccount().withdraw(32000);
+//        p2.getPlayerAccount().withdraw(35000);
 //
-//        assertEquals(0, p1.getPlayerAcct().getBalance());
-//        assertEquals(0, p2.getPlayerAcct().getBalance());
+//        assertEquals(0, p1.getPlayerAccount().getBalance());
+//        assertEquals(0, p2.getPlayerAccount().getBalance());
 //
 //    }
 }
