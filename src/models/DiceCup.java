@@ -20,17 +20,18 @@ import java.lang.*;
  * imported from CDIO_del3 develop branch on 2017-01-06.
  */
 public class DiceCup {
-    private Collection<Die> dice = new ArrayList<Die>();
+    protected Collection<Die> dice = new ArrayList<Die>();
     protected Collection<Integer> results = new ArrayList<Integer>();
 
-    private static int diceCount;
-    private static int faceCount;
+    protected static int diceCount;
+    protected static int faceCount;
 
-    private int doublesRolled;
+    protected int doublesRolled;
 
     public DiceCup() {
         this.diceCount = 2;
         this.faceCount = 6;
+        this.doublesRolled = 0;
         initDice();
     }
 
@@ -39,6 +40,7 @@ public class DiceCup {
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = diceCount;
         this.faceCount = 6;
+        this.doublesRolled = 0;
         initDice();
     }
 
@@ -47,6 +49,7 @@ public class DiceCup {
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = diceCount;
         this.faceCount = faceCount;
+        this.doublesRolled = 0;
         initDice();
     }
 
@@ -54,6 +57,7 @@ public class DiceCup {
         if (diceCount < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = diceCount;
+        this.doublesRolled = 0;
 
         initDice(die);
     }
@@ -92,7 +96,7 @@ public class DiceCup {
             this.results.add(die.getRolledDieResult());
 
         if (getResultArr()[0] == getResultArr()[1]) {
-            this.doublesRolled =+ 1;
+            this.doublesRolled++;
         }
     }
 

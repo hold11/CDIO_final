@@ -19,6 +19,7 @@ import java.util.List;
 public class GameController
 {
     private int playerTurn = 0;
+    private final int BAIL_OUT_PRICE = 1000;
 
     public GameController() {
 
@@ -26,6 +27,15 @@ public class GameController
 
     public boolean playNormalTurn() {
         return (getCurrentPlayer().getTurnsInJail() == 0);
+    }
+
+    public void rollDice() {
+//        if (getCurrentPlayer().getDiceCup().getDoublesRolled() == 3) {
+//            throwInJail();
+//            nextPlayer();
+//        }
+
+        getCurrentPlayer().getDiceCup().roll();
     }
 
     public List<Jail.buttons>getJailButtons() {
@@ -39,6 +49,26 @@ public class GameController
         }
 
         return jailButtons;
+    }
+
+    public boolean playerHasOwnableCard(Class c) {
+        return (OwnableCard.playerHasCard(getCurrentPlayer(), c));
+    }
+
+    public boolean playerIsInJail() { return (getCurrentPlayer().getTurnsInJail() != 0); }
+
+    public void useOwnableCard(Class c) {
+        if (playerIsInJail())
+            OwnableCard.useChanceCard(getCurrentPlayer(), c);
+    }
+
+    public void payBailOut() {
+        if (playerIsInJail())
+            getCurrentPlayer().getPlayerAcct().withdraw(this.BAIL_OUT_PRICE);
+    }
+
+    public void grantFreedom() {
+        getCurrentPlayer().setTurnsInJail(0);
     }
 
     public boolean canPurchaseField() {
@@ -78,10 +108,11 @@ public class GameController
     public Field playerLandedOn() {
         int totalRolled = getCurrentPlayer().getDiceCup().getTotalEyes();
         getCurrentPlayer().moveCurrentField(totalRolled);
-        return null; // TODO: Wait for Field.getFieldById(int);
+        return Field.getFieldByID(getCurrentPlayer().getCurrentField()); // TODO: Wait for Field.getFieldById(int);
     }
 
     public void nextPlayer() {
+        getCurrentPlayer().getDiceCup().setDoublesRolled(0);
         if (playerTurn + 1 < Player.getPlayers().size()) {
             playerTurn++;
         } else {

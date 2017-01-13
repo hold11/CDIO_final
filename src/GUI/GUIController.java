@@ -156,6 +156,10 @@ public class GUIController {
             return GUI.getUserButtonPressed("", "Roll");
     }
 
+    public boolean getPayBailOut() {
+        return GUI.getUserButtonPressed("", "Pay bail out. 1000,-").equals("Pay bail out. 1000,-");
+    }
+
     private static void sleep(int n) {
         long t0, t1;
         t0 = System.currentTimeMillis();

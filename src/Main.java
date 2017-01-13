@@ -21,6 +21,11 @@ import GUI.GUIController;
 public class Main {
 
     private static GUIController gui;
+    private GameController game;
+
+    private Main (GameController game) {
+        this.game = game;
+    }
 
     public static void main(String[] args) {
         // TODO: Put the following in a separate method:
@@ -46,48 +51,53 @@ public class Main {
 
         Lang.setLanguage(locale);
         CLIController cli = new CLIController(); // For testing purposes
-        GameController game = new GameController();
+//        GameController game = new GameController();
+        Main main = new Main(new GameController());
+
         if (autoGame)
-            setupAutoGame(game);
+            main.setupAutoGame();
         else
-            setup(game);
+            main.setup();
         // TODO: commented out for testing purposes
 
-        gameLoop(game);
+        main.gameLoop();
     }
 
-    private static void gameLoop(GameController game) {
+    private void gameLoop(/*GameController game*/) {
 
 
         // Call aPlayerhasWon() and stop the main method if a player has won the game.
         if (game.getWinner() != null) {
-            aPlayerHasWon(game);
+            aPlayerHasWon();
             return;
         }
 
         // If a player hasn't won the game
         if (game.playNormalTurn()) {
-            playNormalTurn(game);
+            playNormalTurn();
         } else {
-            playJailTurn(game);
+            playJailTurn();
         }
 
-        // set players double roll count back to 0
-        game.getCurrentPlayer().getDiceCup().setDoublesRolled(0);
-
         // Then restart the game loop (until a player has won the game)
-        gameLoop(game);
+        gameLoop();
     }
 
-    private static void playNormalTurn(GameController game) {
+    private void playNormalTurn(/*GameController game*/) {
         // Start by rolling the dice
-        playerRoll(game.getCurrentPlayer());
+        playerRoll();
 
         int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
 
         // if player gets 3 double rolls, throw player in jail
-        if (doubleRollCount == 3)
+        System.out.println("[playNormalTurn]: Double roll = " + game.getCurrentPlayer().getDiceCup().getDoublesRolled());
+        if (doubleRollCount == 3) {
             game.throwInJail();
+            gui.moveCars(game.getCurrentPlayer());
+            game.nextPlayer();
+            return;
+        }
+
 
         Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
 
@@ -103,6 +113,10 @@ public class Main {
 
         // Player landed on a field
         game.playerLandsOnField();
+        if (playerLandedOn instanceof Rest)
+            if (((Rest) playerLandedOn).isJail())
+                gui.moveCars(game.getCurrentPlayer());
+
         // Player passed a field
         game.playerPassedField();
         gui.updateBalance(game.getPlayers());
@@ -110,14 +124,14 @@ public class Main {
 
         // Give extra turn if player rolled a double
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3)
-            playNormalTurn(game);
+            playNormalTurn();
         else
             // Next Player
             game.nextPlayer();
     }
 
-    private static void playJailTurn(GameController game) {
-        if (game.getCurrentPlayer().getTurnsInJail() != 3) {
+    private void playJailTurn(/*GameController game*/) {
+        if (/*game.getCurrentPlayer().getTurnsInJail() != 3*/true) { // TODO: Temporary solution
             game.getCurrentPlayer().incrementTurnsInJail();
 
             GUI.GUI.removeAllCars(game.getCurrentPlayer().toString());
@@ -125,35 +139,44 @@ public class Main {
 
             // Show the options for getting out of jail
             // TODO: Show sell house button (if the player owns any houses that is)
-            String answer = gui.getJailButtons(game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT), game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
+            String answer = gui.getJailButtons(
+                    game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT),
+                    game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
 
             if (answer.equals("Pay bail out. 1000,-")) {
-                game.getCurrentPlayer().getPlayerAcct().withdraw(1000);
-                grantFreedom(game);
+                game.payBailOut();
+                grantFreedom(); // TODO: Get the turn right away???
             }
 
             if (answer.equals("Use Free Bail Card")) {
-                for (OwnableCard o : OwnableCard.getPlayersCards(game.getCurrentPlayer()))
-                    if (o instanceof FreeBailCard) {
-                        o.removeOwner();
-                        break;
-                    }
-                grantFreedom(game);
+                if (game.playerHasOwnableCard(FreeBailCard.class))
+                    game.useOwnableCard(FreeBailCard.class);
+
+                grantFreedom();
             }
 
             if (answer.equals("Roll a double to get out")) {
-                game.getCurrentPlayer().getDiceCup().roll();
-                GUI.GUI.setDice(game.getCurrentPlayer().getDiceCup().getResultArr()[0], game.getCurrentPlayer().getDiceCup().getResultArr()[1]);
-                if (game.getCurrentPlayer().getDiceCup().wasRollDouble()) {
-                    grantFreedom(game);
-                } else
+                game.rollDice();
+                GUI.GUI.setDice(
+                        game.getCurrentPlayer().getDiceCup().getResultArr()[0],
+                        game.getCurrentPlayer().getDiceCup().getResultArr()[1]);
+                if (game.getCurrentPlayer().getDiceCup().wasRollDouble())
+                    grantFreedom();
+                else if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
+                    grantFreedom();
+                }
+                else
                     game.nextPlayer();
             }
-        } else
-            game.getCurrentPlayer().setTurnsInJail(0);
+        } else {
+            game.payBailOut();
+            grantFreedom();
+            // TODO: Make normal turn
+        }
+
     }
 
-    private static void setup(GameController game) {
+    private void setup(/*GameController game*/) {
         gui = new GUIController();
 
         int players = gui.selectPlayerCount();
@@ -162,11 +185,11 @@ public class Main {
         gui.createPlayers(game.getPlayers());
     }
 
-    private static void setupAutoGame(GameController game) {
+    private void setupAutoGame(/*GameController game*/) {
         gui = new GUIController();
 
-        int[] autoRolls1 = { 3, 7, 5, 6, 7, 7, 6, 2, 3 };
-        int[] autoRolls2 = { 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls1 = { 2, 2, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls2 = { 30, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
         int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
         getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
@@ -176,27 +199,28 @@ public class Main {
 
     }
 
-    private static void aPlayerHasWon(GameController game) {
+    private void aPlayerHasWon(/*GameController game*/) {
         if (game.getWinner() != null)
             System.out.println(game.getWinner() + " has won the game!");
     }
 
-    private static void getPlayerName() {
+    private void getPlayerName() {
         new Player(GUI.GUI.getUserString("Please type your name."));
     }
 
-    private static void getAutomatedPlayerName(String name, test_models.AutoDiceCup diceCup) {
+    private void getAutomatedPlayerName(String name, test_models.AutoDiceCup diceCup) {
         Player p = new Player(name, diceCup);
     }
 
-    private static void playerRoll(Player player) {
-        GUI.GUI.getUserButtonPressed(player.getPlayerName(), "Roll");
-        player.getDiceCup().roll();
-        GUI.GUI.setDice(player.getDiceCup().getResultArr()[0], player.getDiceCup().getResultArr()[1]);
+    private void playerRoll(/*GameController game*/) {
+        Player currentPlayer = game.getCurrentPlayer();
+        GUI.GUI.getUserButtonPressed(currentPlayer.getPlayerName(), "Roll");
+        game.rollDice();
+        GUI.GUI.setDice(currentPlayer.getDiceCup().getResultArr()[0], currentPlayer.getDiceCup().getResultArr()[1]);
     }
 
-    private static void grantFreedom(GameController game) {
-        game.getCurrentPlayer().setTurnsInJail(0);
-        playNormalTurn(game);
+    private void grantFreedom(/*GameController game*/) {
+        game.grantFreedom();
+        playNormalTurn();
     }
 }

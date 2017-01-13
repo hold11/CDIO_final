@@ -50,4 +50,13 @@ public abstract class Field
         }
         return null;
     }
+
+    public static Field getNextFieldOfType(int index, Class c) {
+        for (int i = index; i < Field.getFields().length; i++) {
+            if (Field.getFields()[i].getClass().equals(c)) {
+                return Field.getFields()[i];
+            }
+        }
+        return null;
+    }
 }
