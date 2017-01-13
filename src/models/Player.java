@@ -17,7 +17,7 @@ import java.util.List;
 public class Player {
     private int playerID;
     private String playerName;
-    private BankAcct playerAcct;
+    private BankAccount playerAccount;
     private DiceCup diceCup;
     private int currentField;
     private int previousField;
@@ -39,7 +39,7 @@ public class Player {
 
         this.playerName = String.format("Player %s", this.playerID);
         this.diceCup = new DiceCup();
-        this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
+        this.playerAccount = Bank.createBankAcct(STARTING_BALANCE);
         players.add(this);
     }
 
@@ -49,7 +49,7 @@ public class Player {
         this.playerID = nextPlayerId;
         this.diceCup = diceCup;
 
-        this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
+        this.playerAccount = Bank.createBankAcct(STARTING_BALANCE);
         nextPlayerId++;
 
         this.currentField = 1;
@@ -65,7 +65,7 @@ public class Player {
         this.playerID = nextPlayerId;
         this.diceCup = new DiceCup();
 
-        this.playerAcct = new BankAcct(STARTING_BALANCE);
+        this.playerAccount = new BankAccount(STARTING_BALANCE);
 
         nextPlayerId++;
 
@@ -81,7 +81,7 @@ public class Player {
         this.playerID = nextPlayerId;
         this.diceCup = diceCup;
 
-        this.playerAcct = new BankAcct(STARTING_BALANCE);
+        this.playerAccount = new BankAccount(STARTING_BALANCE);
 
         nextPlayerId++;
 
@@ -94,8 +94,8 @@ public class Player {
     public void setPlayerField(int fieldID) { this.currentField = fieldID; }
 
     // Reused from del3
-    public BankAcct getPlayerAcct() {
-        return playerAcct;
+    public BankAccount getPlayerAccount() {
+        return playerAccount;
     }
 
     // Reused from del3
@@ -175,7 +175,7 @@ public class Player {
         if (previousField != player.previousField) return false;
         if (turnsInJail != player.turnsInJail) return false;
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
-        if (playerAcct != null ? !playerAcct.equals(player.playerAcct) : player.playerAcct != null) return false;
+        if (playerAccount != null ? !playerAccount.equals(player.playerAccount) : player.playerAccount != null) return false;
         return diceCup != null ? diceCup.equals(player.diceCup) : player.diceCup == null;
     }
 
