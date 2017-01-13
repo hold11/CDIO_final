@@ -63,7 +63,7 @@ public abstract class ChanceCard
         cCards.add(new BalanceCard(25, false, 500));
         cCards.add(new MoveCard(26, Field.getFieldByID(33)));
         cCards.add(new MoveCard(27, -3));
-        // card 28 free bail card
+        cCards.add(new FreeBailCard(28));
         cCards.add(new BalanceCard(29, false, -3000));
         cCards.add(new BalanceCard(30, false, 1000));
         cCards.add(new BalanceCard(31, false, -200));

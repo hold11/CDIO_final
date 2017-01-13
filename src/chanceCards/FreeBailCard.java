@@ -15,11 +15,10 @@ public class FreeBailCard extends OwnableCard
 {
     public FreeBailCard(int chanceCardID) {
         super(chanceCardID);
-        // More here
     }
 
     @Override
     public void receiveCard(Player player) {
-
+        this.setOwner(player);
     }
 }
