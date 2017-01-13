@@ -27,16 +27,16 @@ public abstract class ChanceCard
     public ChanceCard(int chanceCardID) {
         this.chanceCardID = chanceCardID;
         this.chanceText = lang.Lang.msg("Card" + this.chanceCardID);
-        initChanceCards();
+//        initChanceCards();
     }
 
     public ChanceCard(String chanceText, int count) {
         this.chanceText = chanceText;
         this.count = count;
-        initChanceCards();
+//        initChanceCards();
     }
 
-    private void initChanceCards() {
+    public static void initChanceCards() {
         List<ChanceCard> cCards = new ArrayList<>();
         cCards.add(new BalanceCard(1, 800, 2300));
         cCards.add(new MoveCard(2, Field.getFieldByID(12)));

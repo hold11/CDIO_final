@@ -10,6 +10,7 @@
  */
 
 import CLI.CLIController;
+import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import models.PurchaseLogic;
 import fields.*;
@@ -53,6 +54,7 @@ public class Main {
         CLIController cli = new CLIController(); // For testing purposes
 //        GameController game = new GameController();
         Main main = new Main(new GameController());
+        ChanceCard.initChanceCards();
 
         if (autoGame)
             main.setupAutoGame();
@@ -137,10 +139,10 @@ public class Main {
 
         // Show the options for getting out of jail
         // TODO: Show sell house button (if the player owns any houses that is)
+
         String answer = gui.getJailButtons(
                 game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT),
                 game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
-
         if (answer.equals("Pay bail out. 1000,-")) {
             game.payBailOut();
             playerRoll();
@@ -181,12 +183,12 @@ public class Main {
         gui = new GUIController();
 
         int[] autoRolls1 = { 2, 2, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
-        int[] autoRolls2 = { 30, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls2 = { 1, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
         int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
         getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
         getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
-        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
+//        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
         gui.createPlayers(game.getPlayers());
 
     }
