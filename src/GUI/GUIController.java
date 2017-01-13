@@ -79,7 +79,6 @@ public class GUIController {
 
         for (int i = 0; i < players.size(); i++)
             GUI.addPlayer(players.get(i).getPlayerName(), players.get(i).getPlayerAcct().getBalance(), cars[i]);
-//            GUI.addPlayer(Player.getPlayers().get(i).getPlayerName(), Player.getPlayers().get(i).getPlayerAcct().getBalance());
     }
 
     public void moveCars(Player player) {
@@ -129,7 +128,6 @@ public class GUIController {
     }
 
     public boolean getPurchaseChoice(Player player) {
-//        showDescriptionCardBuy(player);
         String answer = GUI.getUserButtonPressed("Want to purchase this field?", "Yes!", "No!");
         if (answer.equals("Yes!")) {
             GUI.setOwner(player.getCurrentField(), player.getPlayerName());
