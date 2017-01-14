@@ -86,7 +86,6 @@ public class Main {
         // If a player hasn't won the game
         if (game.playNormalTurn()) {
             showButtOptions();
-
             playNormalTurn();
         } else {
             playJailTurn();
@@ -130,8 +129,8 @@ public class Main {
             }
         }
 
-        if (playerLandedOn.getFieldId() != game.getCurrentPlayer().getCurrentField())
-            gui.moveCars(game.getCurrentPlayer());
+//        if (playerLandedOn.getFieldId() != game.getCurrentPlayer().getCurrentField())
+//            gui.moveCars(game.getCurrentPlayer());
 
         if (playerLandedOn instanceof Rest)
             if (((Rest) playerLandedOn).isJail())

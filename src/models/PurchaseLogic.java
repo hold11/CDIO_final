@@ -17,9 +17,6 @@ import java.util.List;
 
 public class PurchaseLogic {
 
-    public static final int MAXHOUSECOUNT = 32;
-    public static final int MAXHOTELCOUNT = 12;
-
     public static void buyHouse(LandPlot landplot) {
         if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)) {
             landplot.getOwner().getPlayerAccount().withdraw(landplot.getHousePrice());
@@ -46,16 +43,6 @@ public class PurchaseLogic {
         return totalHouseCount;
     }
 
-    public static int getTotalHotelCount() {
-        int totalHotelCount = 0;
-        for (Ownable o : Ownable.getOwnedOwnables()) {
-            if (o instanceof LandPlot)
-                if (((LandPlot) o).getHouseCount() == 5)    // Casting ownable o to LandPlot, because getHouseCount method is there.
-                    totalHotelCount++;
-        }
-        return totalHotelCount;
-    }
-
     public static int getPlayerBuildingCount(Player player) {
         int playerHouseCount = 0;
         for (Ownable o : Ownable.getOwnedOwnables()) {
@@ -66,10 +53,11 @@ public class PurchaseLogic {
         }
         return playerHouseCount;
     }
-    public static boolean canPurchaseHouse(LandPlot landPlot) {
+
+    public static boolean canPurchaseHouse(LandPlot landPlot, Player player) {
         // Loop through all plots in group
         for (LandPlot l : landPlot.getAllPlotsInGroup()) {
-            if (landPlot.playerHasAllPlotsInGroup())
+            if (landPlot.playerHasAllPlotsInGroup(player))
                 if (landPlot.getHouseCount() <= l.getHouseCount() && landPlot.getHouseCount() < 5 && landPlot != l)
                     return true;
         }
@@ -80,7 +68,7 @@ public class PurchaseLogic {
         List<LandPlot> result = new ArrayList<>();
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot) {
-                if (((LandPlot) o).playerHasAllPlotsInGroup() && ((LandPlot) o).getHouseCount() < 5)
+                if (((LandPlot) o).playerHasAllPlotsInGroup(player) && ((LandPlot) o).getHouseCount() < 5)
                     result.add(((LandPlot) o));
             }
         }
@@ -101,15 +89,14 @@ public class PurchaseLogic {
     public static List<LandPlot> getAvailablePlotsToBuildOn(Player player) {
         List<LandPlot> result = new ArrayList<>();
         for (LandPlot l : getAllFullyGroupedPlots(player)) {
-            if (canPurchaseHouse(l))
+            if (canPurchaseHouse(l, player))
                 result.add(l);
         }
         return result;
     }
 
     public static boolean playerCanDevelopPlots(Player player) {
-        return (getAllFullyGroupedPlots(player).length != 0);
-
+        return (getAvailablePlotsToBuildOn(player).size() != 0);
     }
 
     public static List<LandPlot> getPlayersDevelopedPlots(Player player) {

@@ -139,17 +139,6 @@ public class GUIController {
         } else return false;
     }
 
-//    public String getJailButtons(boolean payBailOut, boolean freeBail) {
-//        if (freeBail && payBailOut)
-//            return GUI.getUserButtonPressed("", "Roll a double to get out", "Use Free Bail Card", "Pay bail out. 1000,-");
-//        else if (freeBail)
-//            return GUI.getUserButtonPressed("", "Roll a double to get out", "Use Free Bail Card");
-//        else if (payBailOut)
-//            return GUI.getUserButtonPressed("", "Roll a double to get out", "Pay bail out. 1000,-");
-//        else
-//            return GUI.getUserButtonPressed("", "Roll a double to get out");
-//    }
-
     public String getLandPlotToBuildOn(LandPlot[] landPlots) {
         String[] options = new String[(landPlots.length + 1)];
         options[0] = "Back"; // add option for going back to previous menu

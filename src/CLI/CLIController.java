@@ -47,7 +47,7 @@ public class CLIController {
     }
 
     public void displayHasAllPlotsInGroup(Player player, LandPlot landPlot) {
-        System.out.println(player + " has all plots in group (" + landPlot.getGroupID() + "): " + landPlot.playerHasAllPlotsInGroup());
+        System.out.println(player + " has all plots in group (" + landPlot.getGroupID() + "): " + landPlot.playerHasAllPlotsInGroup(player));
         System.out.println();
     }
 
@@ -57,13 +57,13 @@ public class CLIController {
 //        System.out.println();
 //    }
 
-    public void displayCanPurchaseHouse(LandPlot lplot) {
-        if (PurchaseLogic.canPurchaseHouse(lplot))
-            System.out.println("It is possible to purchase a house on " + lplot);
-        else
-            System.out.println("It is not possible to purchase a house on " + lplot);
-        System.out.println();
-    }
+//    public void displayCanPurchaseHouse(LandPlot lplot) {
+//        if (PurchaseLogic.canPurchaseHouse(lplot))
+//            System.out.println("It is possible to purchase a house on " + lplot);
+//        else
+//            System.out.println("It is not possible to purchase a house on " + lplot);
+//        System.out.println();
+//    }
 
     public void displayRolled(Player player) {
         System.out.println("Player rolled [" + player.getDiceCup().getResultArr()[0] +
