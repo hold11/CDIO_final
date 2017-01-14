@@ -10,6 +10,7 @@
 */
 
 import CLI.CLIController;
+import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import models.PurchaseLogic;
 import fields.*;
@@ -77,6 +78,11 @@ public class Main {
             aPlayerHasWon();
             return;
         }
+
+        // TODO: Remove below
+//        for (ChanceCard c : ChanceCard.getChanceCards())
+//            if (c instanceof FreeBailCard && game.getCurrentPlayer().getPlayerID() == 1)
+//                ((FreeBailCard) c).setOwner(game.getCurrentPlayer());
 
         // If a player hasn't won the game
         if (game.playNormalTurn()) {
@@ -162,6 +168,7 @@ public class Main {
                 game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
         if (answer.equals("Pay bail out. 1000,-")) {
             game.payBailOut();
+            gui.updateBalance(game.getPlayers());
             playerRoll();
             cli.displayRolled(game.getCurrentPlayer());
             grantFreedom();
@@ -227,7 +234,7 @@ public class Main {
     private void setupAutoGame() {
         gui = new GUIController();
 
-        int[] autoRolls1 = { 2, 5, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls1 = { 2, 2, 2, 3, 2, 7, 5, 6, 7, 7, 6, 2, 3 };
         int[] autoRolls2 = { 2, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
         int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
