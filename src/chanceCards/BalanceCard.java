@@ -59,9 +59,10 @@ public class BalanceCard extends ChanceCard
             for (Player p : Player.getPlayers())
                 if (p != player)                                      // If the player in the list is not the current player, transfer the money (really not necesary to check this)
                     p.getPlayerAccount().transfer(this.changeBalance, p);
-        else if (this.houseTax != 0 && this.hotelTax != 0) {
-
-                }
+        else if (this.houseTax != 0 && this.hotelTax != 0)
+            for (Player pl : Player.getPlayers())
+                if (pl != player)
+                    p.getPlayerAccount().transfer(changeBalance, player);
 
     }
 }
