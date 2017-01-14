@@ -225,6 +225,7 @@ public class Main {
         switch (answer) {
             case "Roll":
                 playerRoll();
+                showButtOptions();
                 break;
             case "Pay bail out. 1000,-":
                 payBail();
@@ -237,9 +238,11 @@ public class Main {
                 break;
             case "Buy house/hotel":
                 buyBuilding();
+                showButtOptions();
                 break;
             case "Sell house/hotel":
                 sellBuilding();
+                showButtOptions();
                 break;
             default:
                 System.out.println("YOU BROKE IT! WHAT A GOOF!");
@@ -287,10 +290,8 @@ public class Main {
     private void buyBuilding() {
         String answer1 = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
 
-        if (answer1.equals("Back")) {
-            showButtOptions();
+        if (answer1.equals("Back"))
             return;
-        }
 
         PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(answer1)));
 
@@ -303,10 +304,8 @@ public class Main {
     private void sellBuilding() {
         String answer2 = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
 
-        if (answer2.equals("Back")) {
-            showButtOptions();
+        if (answer2.equals("Back"))
             return;
-        }
 
         PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer2)));
 
