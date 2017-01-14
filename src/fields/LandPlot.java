@@ -7,7 +7,7 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
 
@@ -36,7 +36,6 @@ public class LandPlot extends Ownable
 
     @Override
     public void landOnField(Player player) {
-        // TODO: If pawning gets implemented, start by checking if field is pawned
         if (this.isOwned() && this.owner != player && this.owner.getTurnsInJail() == 0) { // if the plot is owned by another player and owner is NOT in jail
             System.out.println("   [LandPlot LOF]");
             System.out.print("      " + player + " pays ");
@@ -68,7 +67,7 @@ public class LandPlot extends Ownable
         return groupID;
     }
 
-    public LandPlot[] getAllPlotsInGroup(/*int groupID*/) {
+    public LandPlot[] getAllPlotsInGroup() {
         List<LandPlot> groupedPlots = new ArrayList<>();
 
         for (Field f: Field.getFields()) {

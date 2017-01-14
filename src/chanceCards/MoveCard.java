@@ -7,7 +7,7 @@ package chanceCards;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import fields.Field;
 import fields.Jail;
@@ -16,8 +16,8 @@ import models.Player;
 
 public class MoveCard extends ChanceCard
 {
-    Field destination;
-    int moveCount;
+    private Field destination;
+    private int moveCount;
 
     public MoveCard(int chanceCardID, Field field) {
         super(chanceCardID);
@@ -33,7 +33,7 @@ public class MoveCard extends ChanceCard
         if (destination == null) {
             player.moveCurrentField(this.moveCount);
             Field.getFieldByID(player.getCurrentField()).landOnField(player);
-        } else if (destination != null) {
+        } else {
             if (destination instanceof Jail){
                 player.setCurrentField(destination.getFieldId());
                 Field.getFieldByID(player.getCurrentField()).landOnField(player);

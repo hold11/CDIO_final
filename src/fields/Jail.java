@@ -7,12 +7,9 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Jail extends Field
 {
@@ -28,7 +25,7 @@ public class Jail extends Field
     @Override
     public void landOnField(Player player) {
         player.incrementTurnsInJail();
-        player.setPlayerField(findRestJail().getFieldId()); // sets player on field 11 (the jail)
+        player.setPlayerField(findRestJail().getFieldId()); // sets player on the "in jail" Field
     }
 
     // This finds the Rest field where the player is jailed.

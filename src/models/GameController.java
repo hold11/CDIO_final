@@ -7,7 +7,7 @@ package models;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
@@ -136,5 +136,11 @@ public class GameController
         getCurrentPlayer().setCurrentField(11);
     }
 
-    public List<Player> getPlayers() { return Player.getPlayers(); }
+    public List<Player> getPlayers() {
+        return Player.getPlayers();
+    }
+
+    public LandPlot[] getAvailablePlotsToBuildOn() {
+        return PurchaseLogic.getAvailablePlotsToBuildOn(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
+    }
 }

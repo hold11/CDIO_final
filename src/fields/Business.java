@@ -7,7 +7,7 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -40,11 +40,6 @@ public class Business extends Ownable
             return 0;
     }
 
-    /**
-     * This method calculates how many businesses is owned by a specific player
-     * @param player
-     * @return
-     */
     private static int getTotalBusinessCount(Player player) {
         int totalCount = 0;
 
@@ -52,7 +47,6 @@ public class Business extends Ownable
             if (o instanceof Business && o.getOwner() == player)
                 totalCount++;
         }
-
         return totalCount;
     }
 }
