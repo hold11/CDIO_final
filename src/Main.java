@@ -10,7 +10,6 @@
 */
 
 import CLI.CLIController;
-import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import models.PurchaseLogic;
 import fields.*;
@@ -53,8 +52,7 @@ public class Main {
         }
 
         Lang.setLanguage(locale);
-        CLIController cli = new CLIController(); // For testing purposes
-//        GameController game = new GameController();
+
         Main main = new Main(new GameController(), new CLIController());
 
         if (autoGame)
@@ -127,7 +125,6 @@ public class Main {
             }
         }
 
-
         if (playerLandedOn.getFieldId() != game.getCurrentPlayer().getCurrentField())
             gui.moveCars(game.getCurrentPlayer());
 
@@ -196,23 +193,11 @@ public class Main {
         gui = new GUIController();
 
         int players = gui.selectPlayerCount();
+
         for (int i = 1; i <= players; i++)
             getPlayerName();
+
         gui.createPlayers(game.getPlayers());
-    }
-
-    private void setupAutoGame() {
-        gui = new GUIController();
-
-        int[] autoRolls1 = { 2, 5, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
-        int[] autoRolls2 = { 2, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
-        int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
-
-        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
-        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
-//        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
-        gui.createPlayers(game.getPlayers());
-
     }
 
     private void aPlayerHasWon() {
@@ -222,10 +207,6 @@ public class Main {
 
     private void getPlayerName() {
         new Player(GUI.GUI.getUserString("Please type your name."));
-    }
-
-    private void getAutomatedPlayerName(String name, test_models.AutoDiceCup diceCup) {
-        Player p = new Player(name, diceCup);
     }
 
     private void playerRoll() {
@@ -259,7 +240,24 @@ public class Main {
             PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn()))));
         if (answer.equals("Roll"))
             playerRoll();
-
-
     }
+
+    private void setupAutoGame() {
+        gui = new GUIController();
+
+        int[] autoRolls1 = { 2, 5, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls2 = { 2, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
+
+        getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
+        getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
+//        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
+
+        gui.createPlayers(game.getPlayers());
+    }
+
+    private void getAutomatedPlayerName(String name, test_models.AutoDiceCup diceCup) {
+        new Player(name, diceCup);
+    }
+
 }
