@@ -224,24 +224,6 @@ public class Main {
         playNormalTurn();
     }
 
-    public void doRealEstateBusiness() {
-        boolean canHasHouse = false;
-        boolean canHasHotel = false;
-
-        if (PurchaseLogic.getTotalHouseCount() != PurchaseLogic.MAXHOUSECOUNT)
-            canHasHouse = true;
-
-        if (PurchaseLogic.getTotalHotelCount() != PurchaseLogic.MAXHOTELCOUNT)
-            canHasHotel = true;
-
-        String answer = gui.getLandPlotBuildOptions(canHasHouse, canHasHotel);
-
-        if (answer.equals("Buy House"))
-            PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn()))));
-        if (answer.equals("Roll"))
-            playerRoll();
-    }
-
     private void setupAutoGame() {
         gui = new GUIController();
 
