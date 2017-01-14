@@ -139,7 +139,7 @@ public class GUIController {
         } else return false;
     }
 
-    public String getJailButtons(boolean freeBail, boolean payBailOut) {
+    public String getJailButtons(boolean payBailOut, boolean freeBail) {
         if (freeBail && payBailOut)
             return GUI.getUserButtonPressed("", "Roll a double to get out", "Use Free Bail Card", "Pay bail out. 1000,-");
         else if (freeBail)
