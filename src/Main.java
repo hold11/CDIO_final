@@ -233,7 +233,7 @@ public class Main {
 
         if (game.getCurrentPlayer().getTurnsInJail() > 0)
             buttOpts.add("Roll a double to get out");
-        else //if (game.getCurrentPlayer().getDiceCup().getTotalEyes() == 0)
+        else //if (game.getCurrentPlayer().getDiceCup().getTotalEyes() == 0) TODO: Make sure the DiceCup gets reset or somehow has a tag that says it's already been rolled this turn!
             buttOpts.add("Roll");
 
         if (PurchaseLogic.playerCanDevelopPlots(game.getCurrentPlayer()) && PurchaseLogic.getTotalHouseCount() != PurchaseLogic.MAXHOUSECOUNT)
