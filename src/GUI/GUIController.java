@@ -156,7 +156,7 @@ public class GUIController {
         for (int i = 0; i < landPlots.length; i++)
             options[(i+1)] = landPlots[i].toString();
 
-        return GUI.getUserSelection("msg", options);
+        return GUI.getUserSelection("", options);
     }
 
     public String getButtOption(String playerName, List<String> buttOptions) {

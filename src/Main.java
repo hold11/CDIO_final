@@ -159,9 +159,7 @@ public class Main {
         GUI.GUI.removeAllCars(game.getCurrentPlayer().getPlayerName());
         GUI.GUI.setCar(game.getCurrentPlayer().getCurrentField(), game.getCurrentPlayer().getPlayerName());
 
-
         showButtOptions();
-
 //        Show the options for getting out of jail
 //        String answer = gui.getJailButtons(
 //                game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT),
@@ -194,7 +192,6 @@ public class Main {
 //                game.nextPlayer();
 //            }
 //        }
-
         if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
             grantFreedom();
         } else {
@@ -225,83 +222,30 @@ public class Main {
 
     private void showButtOptions() {
         String answer = gui.getButtOption(game.getCurrentPlayer().getPlayerName(), game.getButtOptions());
-            switch (answer) {
-                case "Roll":
-                    playerRoll();
-                    break;
-                case "Pay bail out. 1000,-":
-                    payBail();
-                    break;
-                case "Use Free Bail Card":
-                    freeBail();
-                    break;
-                case "Roll a double to get out":
-                    checkJailDoubleRoll();
-                    break;
-                case "Buy house/hotel":
-                    String answer1 = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
 
-                    if (answer1.equals("Back")) {
-                        showButtOptions();
-                        return;
-                    }
-
-                    PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(answer1)));
-
-                    if (((LandPlot) Field.getFieldByName(answer1)).getHouseCount() < 5)
-                        GUI.GUI.setHouses((LandPlot.getFieldByName(answer1)).getFieldId(), ((LandPlot) Field.getFieldByName(answer1)).getHouseCount());
-                    else
-                        GUI.GUI.setHotel((LandPlot.getFieldByName(answer1)).getFieldId(), true);
-                    break;
-                case "Sell house/hotel":
-                    String answer2 = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
-
-                    if (answer2.equals("Back")) {
-                    showButtOptions();
-                    return;
-                }
-
-                    PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer2)));
-
-                    if (((LandPlot) Field.getFieldByName(answer2)).getHouseCount() < 5)
-                        GUI.GUI.setHouses((LandPlot.getFieldByName(answer2)).getFieldId(), ((LandPlot) Field.getFieldByName(answer2)).getHouseCount());
-                    else
-                        GUI.GUI.setHotel((LandPlot.getFieldByName(answer2)).getFieldId(), false);
-                    break;
+        switch (answer) {
+            case "Roll":
+                playerRoll();
+                break;
+            case "Pay bail out. 1000,-":
+                payBail();
+                break;
+            case "Use Free Bail Card":
+                freeBail();
+                break;
+            case "Roll a double to get out":
+                checkJailDoubleRoll();
+                break;
+            case "Buy house/hotel":
+                buyBuilding();
+                break;
+            case "Sell house/hotel":
+                sellBuilding();
+                break;
+            default:
+                System.out.println("YOU BROKE IT! WHAT A GOOF!");
+                break;
             }
-//        if (answer.equals("Roll"))
-//            playerRoll();
-//
-//        if (answer.equals("Pay bail out. 1000,-"))
-//            //pay bail out
-//
-//        if (answer.equals("Use Free Bail Card"))
-//            //use free bail card
-//
-//        if (answer.equals("Roll a double to get out"))
-//            // check all the double roll logic
-//
-//        if (answer.equals("Buy house/hotel")) {
-//            String landPlot = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
-//
-//            PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(landPlot)));
-//
-//            if (((LandPlot) Field.getFieldByName(landPlot)).getHouseCount() < 5)
-//                GUI.GUI.setHouses((LandPlot.getFieldByName(landPlot)).getFieldId(), ((LandPlot) Field.getFieldByName(landPlot)).getHouseCount());
-//            else
-//                GUI.GUI.setHotel((LandPlot.getFieldByName(landPlot)).getFieldId(), true);
-//        }
-//
-//        if (answer.equals("Sell house/hotel")) {
-//            String landPlot = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
-//
-//            PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(landPlot)));
-//
-//            if (((LandPlot) Field.getFieldByName(landPlot)).getHouseCount() < 5)
-//                GUI.GUI.setHouses((LandPlot.getFieldByName(landPlot)).getFieldId(), ((LandPlot) Field.getFieldByName(landPlot)).getHouseCount());
-//            else
-//                GUI.GUI.setHotel((LandPlot.getFieldByName(landPlot)).getFieldId(), false);
-//        }
     }
 
     private void playerRoll() {
@@ -339,6 +283,38 @@ public class Main {
     private void grantFreedom() {
         game.grantFreedom();
         playNormalTurn();
+    }
+
+    private void buyBuilding() {
+        String answer1 = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
+
+        if (answer1.equals("Back")) {
+            showButtOptions();
+            return;
+        }
+
+        PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(answer1)));
+
+        if (((LandPlot) Field.getFieldByName(answer1)).getHouseCount() < 5)
+            GUI.GUI.setHouses((LandPlot.getFieldByName(answer1)).getFieldId(), ((LandPlot) Field.getFieldByName(answer1)).getHouseCount());
+        else
+            GUI.GUI.setHotel((LandPlot.getFieldByName(answer1)).getFieldId(), true);
+    }
+
+    private void sellBuilding() {
+        String answer2 = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
+
+        if (answer2.equals("Back")) {
+            showButtOptions();
+            return;
+        }
+
+        PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer2)));
+
+        if (((LandPlot) Field.getFieldByName(answer2)).getHouseCount() < 5)
+            GUI.GUI.setHouses((LandPlot.getFieldByName(answer2)).getFieldId(), ((LandPlot) Field.getFieldByName(answer2)).getHouseCount());
+        else
+            GUI.GUI.setHotel((LandPlot.getFieldByName(answer2)).getFieldId(), false);
     }
 
     private void setupAutoGame() {
