@@ -1,6 +1,4 @@
-package GUI;
-
-/*
+package GUI;/*
            ,                                             |
           /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
          /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
@@ -9,67 +7,71 @@ package GUI;
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 
 import GUI.backend.Car;
-import fields.Field;
 import fields.LandPlot;
-import fields.Ownable;
 import models.Player;
 
-import java.awt.*;
-import java.util.Arrays;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GUIController {
-    private Car[] cars = new Car[6];
+    private static Car[] cars;
 
     public GUIController() { }
 
     private void initMovers() {
+        List<Car> car = new ArrayList<>();
 
-        cars[0] = new Car.Builder()
+        car.add(new Car.Builder()
                 .typeCar()
                 .primaryColor(new Color(22, 154,255))
                 .secondaryColor(new Color(255, 21, 208))
                 .patternZebra()
-                .build();
+                .build());
 
-        cars[1] = new Car.Builder()
+        car.add(new Car.Builder()
                 .typeCar()
                 .primaryColor(Color.GREEN)
                 .secondaryColor(Color.WHITE)
                 .patternZebra()
-                .build();
+                .build());
 
-        cars[2] = new Car.Builder()
+        car.add(new Car.Builder()
                 .typeCar()
                 .primaryColor(Color.WHITE)
                 .secondaryColor(Color.RED)
                 .patternZebra()
-                .build();
+                .build());
 
-        cars[3] = new Car.Builder()
+        car.add(new Car.Builder()
                 .typeCar()
                 .primaryColor(Color.YELLOW)
                 .secondaryColor(Color.GREEN)
                 .patternZebra()
-                .build();
+                .build());
 
-        cars[4] = new Car.Builder()
+        car.add(new Car.Builder()
                 .typeCar()
                 .primaryColor(Color.BLUE)
                 .secondaryColor(Color.ORANGE)
                 .patternZebra()
-                .build();
+                .build());
 
-        cars[5] = new Car.Builder()
+        car.add(new Car.Builder()
                 .typeCar()
                 .primaryColor(Color.WHITE)
                 .secondaryColor(new Color(22, 154,255))
                 .patternZebra()
-                .build();
+                .build());
+
+        Collections.shuffle(car);
+
+        cars = car.toArray(new Car[car.size()]);
     }
 
     public int selectPlayerCount() {

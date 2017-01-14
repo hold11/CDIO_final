@@ -1,13 +1,16 @@
-package CLI;
-
-/**
- * Created by AndersWOlsen on 07-01-2017.
- */
+package CLI;/*
+           ,                                             |
+          /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
+         /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
+        /#####\      | '_ \ / \| |/ _  |    | |   | |    |
+       /##,-,##\     | | | | O | | ( | |   _| |_ _| |_   | Anders Wiberg Olsen (s165241), Valentin Leon Christensen (s152735),
+      /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
+     /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
+    /`           ´\                                      |
+*/
 
 import models.*;
 import fields.*;
-
-import java.util.ArrayList;
 
 /**
  * This class is for testing purposes only.
@@ -70,14 +73,14 @@ public class CLIController {
     public void displayLandedOn(Player player) {
         Field landedOn = Field.getFieldByID(player.getCurrentField());
         System.out.println("Player landed on \"" + landedOn + "\".");
-        if (landedOn instanceof Ownable) {
-            System.out.print("   Field Type: Ownable : ");
-            if (landedOn instanceof Business)
-                System.out.println("Business.");
-            else if (landedOn instanceof LandPlot)
-                System.out.println("LandPlot.");
-            else if (landedOn instanceof Transportation)
-                System.out.println("Transportation.");
+        if (landedOn instanceof Business) {
+            System.out.println("Business.");
+            System.out.println("   Rent: " + ((Business) landedOn).getRent(player));
+        } else if (landedOn instanceof LandPlot) {
+            System.out.println("LandPlot.");
+            System.out.println("   Rent: " + ((Ownable) landedOn).getRent());
+        } else if (landedOn instanceof Transportation) {
+            System.out.println("Transportation.");
             System.out.println("   Rent: " + ((Ownable) landedOn).getRent());
         } else if (landedOn instanceof ChanceField)
                 System.out.println("   Field Type: ChanceField.");

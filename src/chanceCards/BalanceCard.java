@@ -7,19 +7,9 @@ package chanceCards;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
-
-/**
- * There are multiple types of balance cards. I have implemented:
- *    Receive money from the bank
- *    Pay money to the bank
- *    Receive from all players
- *
- * Missing:
- *    Change balance by assets
- */
 
 public class BalanceCard extends ChanceCard
 {
@@ -28,16 +18,9 @@ public class BalanceCard extends ChanceCard
     private int houseTax;
     private int hotelTax;
 
-    /**
-     * Type = 0: Pay/receive money to/from the bank.
-     * Type = 1: Receive from all players
-     * @param chanceCardID
-     * @param changeBalance
-     * @param receiveFromPlayers
-     */
     public BalanceCard(int chanceCardID, boolean receiveFromPlayers, int changeBalance) {
         super(chanceCardID);
-        this.receiveFromPlayers = receiveFromPlayers;                       // TODO: Can we do this in a prettier way?
+        this.receiveFromPlayers = receiveFromPlayers;
         this.changeBalance = changeBalance;
     }
 
@@ -48,9 +31,7 @@ public class BalanceCard extends ChanceCard
     }
 
     @Override
-    public void receiveCard(Player player)
-    {
-
+    public void receiveCard(Player player) {
         if (this.changeBalance < 0 && !this.receiveFromPlayers)                 // Pay money to the bank
             player.getPlayerAccount().withdraw(this.changeBalance);
         else if (this.changeBalance > 0 && !this.receiveFromPlayers)            // Receive money from the bank
@@ -63,6 +44,5 @@ public class BalanceCard extends ChanceCard
             for (Player pl : Player.getPlayers())
                 if (pl != player)
                     p.getPlayerAccount().transfer(changeBalance, player);
-
     }
 }

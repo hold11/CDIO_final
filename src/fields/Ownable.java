@@ -7,7 +7,7 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
 
@@ -18,7 +18,6 @@ public abstract class Ownable extends Field
 {
     protected int price;
     protected Player owner;
-//    protected static List<Ownable> getOwnedOwnables = new ArrayList<>();
     public abstract int getRent();
 
     public Ownable(int fieldID, int price) {
@@ -37,18 +36,14 @@ public abstract class Ownable extends Field
     }
 
     public boolean isOwned() {
-        if (this.owner == null)
-            return false;
-        else
-            return true;
+        return (this.owner != null);
     }
 
     public void purchaseField(Player player) {
         if (!isOwned() && player.getPlayerAccount().getBalance() >= this.price) {
             this.owner = player;
-//            getOwnedOwnables.add(this);
             player.getPlayerAccount().withdraw(this.price);
-            System.out.println(this.owner + " just bought " + this.toString());
+            System.out.println("[Ownable]: " + this.owner + " just bought " + this.toString());
         }
     }
 

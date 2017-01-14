@@ -7,7 +7,7 @@ package chanceCards;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import fields.Field;
 import fields.Jail;
@@ -28,13 +28,11 @@ public abstract class ChanceCard
     public ChanceCard(int chanceCardID) {
         this.chanceCardID = chanceCardID;
         this.chanceText = lang.Lang.msg("Card" + this.chanceCardID);
-//        initChanceCards();
     }
 
     public ChanceCard(String chanceText, int count) {
         this.chanceText = chanceText;
         this.count = count;
-//        initChanceCards();
     }
 
     public static void initChanceCards() {

@@ -7,7 +7,7 @@ package models;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
@@ -108,7 +108,7 @@ public class GameController
     public Field playerLandedOn() {
         int totalRolled = getCurrentPlayer().getDiceCup().getTotalEyes();
         getCurrentPlayer().moveCurrentField(totalRolled);
-        return Field.getFieldByID(getCurrentPlayer().getCurrentField()); // TODO: Wait for Field.getFieldById(int);
+        return Field.getFieldByID(getCurrentPlayer().getCurrentField());
     }
 
     public void nextPlayer() {

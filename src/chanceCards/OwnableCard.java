@@ -1,13 +1,19 @@
-package chanceCards;
+package chanceCards;/*
+           ,                                             |
+          /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
+         /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
+        /#####\      | '_ \ / \| |/ _  |    | |   | |    |
+       /##,-,##\     | | | | O | | ( | |   _| |_ _| |_   | Anders Wiberg Olsen (s165241), Valentin Leon Christensen (s152735),
+      /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
+     /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
+    /`           ´\                                      |
+*/
 
 import models.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by awo on 09/01/17.
- */
 public abstract class OwnableCard extends ChanceCard {
     private Player owner;
 

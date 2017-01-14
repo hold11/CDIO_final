@@ -1,11 +1,17 @@
-package lang;
+package lang;/*
+           ,                                             |
+          /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
+         /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
+        /#####\      | '_ \ / \| |/ _  |    | |   | |    |
+       /##,-,##\     | | | | O | | ( | |   _| |_ _| |_   | Anders Wiberg Olsen (s165241), Valentin Leon Christensen (s152735),
+      /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
+     /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
+    /`           ´\                                      |
+*/
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * Created by AndersWOlsen on 06-01-2017.
- */
 public class Lang {
     private static String lang;
     private static String country;

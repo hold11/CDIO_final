@@ -7,7 +7,7 @@
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import CLI.CLIController;
 import chanceCards.ChanceCard;
@@ -18,8 +18,6 @@ import lang.Lang;
 import models.GameController;
 import models.Player;
 import GUI.GUIController;
-
-import java.util.*;
 
 public class Main {
 

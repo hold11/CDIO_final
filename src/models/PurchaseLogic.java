@@ -1,4 +1,13 @@
-package models;
+package models;/*
+           ,                                             |
+          /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
+         /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
+        /#####\      | '_ \ / \| |/ _  |    | |   | |    |
+       /##,-,##\     | | | | O | | ( | |   _| |_ _| |_   | Anders Wiberg Olsen (s165241), Valentin Leon Christensen (s152735),
+      /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
+     /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
+    /`           ´\                                      |
+*/
 
 import fields.LandPlot;
 import fields.Ownable;
@@ -65,6 +74,7 @@ public class PurchaseLogic {
                     result.add(((LandPlot) o));
             }
         }
+        // TODO: Finish sentence below...
         // return result.toArray(new LandPlot[result.size()]); was the
         return result.stream().toArray(LandPlot[]::new);
     }

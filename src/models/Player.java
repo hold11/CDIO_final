@@ -7,7 +7,7 @@ package models;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import fields.Field;
 
@@ -27,9 +27,6 @@ public class Player {
     private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
     private static List<Player> players = new ArrayList<>();
 
-    /*
-    Anders made this. Not reused from del3.
-     */
     public Player() {
         this.playerID = nextPlayerId;
         nextPlayerId++;
@@ -75,7 +72,6 @@ public class Player {
         players.add(this);
     }
 
-    // Reused from del3
     public Player(String playerName, DiceCup diceCup) {
         this.playerName = playerName;
         this.playerID = nextPlayerId;
@@ -93,48 +89,39 @@ public class Player {
 
     public void setPlayerField(int fieldID) { this.currentField = fieldID; }
 
-    // Reused from del3
     public BankAccount getPlayerAccount() {
         return playerAccount;
     }
 
-    // Reused from del3
     public int getPlayerID() {
         return playerID;
     }
 
-    // Reused from del3
     public String getPlayerName() {
         return playerName;
     }
 
-    // Reused from del3
     public static List<Player> getPlayers()
     {
         return players;
     }
 
-    // Reused from del3
     public String toString() {
         return this.playerName;
     }
 
-    // Reused from del3
     public DiceCup getDiceCup() {
         return this.diceCup;
     }
 
-    // Reused from del3
     public int getPreviousField() {
         return this.previousField;
     }
 
-    // Reused from del3
     public int getCurrentField() {
         return this.currentField;
     }
 
-    // Reused from del3
     public void moveCurrentField(int diceCount) {
         if (this.currentField + diceCount > Field.getFields().length)
             this.setCurrentField(diceCount - Field.getFields().length + this.currentField);
@@ -142,7 +129,6 @@ public class Player {
             this.setCurrentField(this.currentField + diceCount);
     }
 
-    // Reused from del3
     public void setCurrentField(int fieldID) {
         if (this.currentField == 0)
             this.previousField = this.currentField + 1;
