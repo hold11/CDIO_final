@@ -140,6 +140,30 @@ public class GameController
         return Player.getPlayers();
     }
 
+    public List<String> getButtOptions() {
+
+        List<String> buttOpts = new ArrayList<>();
+
+        if (getCurrentPlayer().getTurnsInJail() > 0) {
+            buttOpts.add("Roll a double to get out");
+
+            if (getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT))
+                buttOpts.add("Pay bail out. 1000,-");
+
+            if (getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD))
+                buttOpts.add("Use Free Bail Card");
+        }
+        else //if (game.getCurrentPlayer().getDiceCup().getTotalEyes() == 0) TODO: Make sure the DiceCup gets reset or somehow has a tag that says it's already been rolled this turn!
+            buttOpts.add("Roll");
+
+        if (PurchaseLogic.playerCanDevelopPlots(getCurrentPlayer()) && PurchaseLogic.getTotalHouseCount() != PurchaseLogic.MAXHOUSECOUNT)
+            buttOpts.add("Buy house/hotel");
+
+        if (PurchaseLogic.getPlayerBuildingCount(getCurrentPlayer()) != 0)
+            buttOpts.add("Sell house/hotel");
+        return buttOpts;
+    }
+
     public LandPlot[] getAvailablePlotsToBuildOn() {
         return PurchaseLogic.getAvailablePlotsToBuildOn(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
     }
