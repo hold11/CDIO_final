@@ -143,4 +143,12 @@ public class GameController
     public LandPlot[] getAvailablePlotsToBuildOn() {
         return PurchaseLogic.getAvailablePlotsToBuildOn(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
     }
+
+    public void checkBankruptcy() {
+        if (getCurrentPlayer().getPlayerAccount().getBalance() < 0) {
+            Ownable.resetPlayersPlots(getCurrentPlayer());
+            OwnableCard.resetOwnableCards(getCurrentPlayer());
+            getCurrentPlayer().removePlayer();
+        }
+    }
 }

@@ -12,6 +12,7 @@ package chanceCards;/*
 import models.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class OwnableCard extends ChanceCard {
@@ -71,5 +72,12 @@ public abstract class OwnableCard extends ChanceCard {
     public static void useChanceCard(Player player, Class c) {
         if (playerHasCard(player, c))
             findCardsOfType(player, c)[0].removeOwner();
+    }
+
+    public static void resetOwnableCards(Player player) {
+        Arrays.stream(ChanceCard.getChanceCards())
+                .filter(chanceCard -> chanceCard instanceof OwnableCard)
+                .filter(ownableCard -> ((OwnableCard) ownableCard).getOwner().equals(player))
+                .forEach(ownableCard -> ((OwnableCard) ownableCard).setOwner(null));
     }
 }

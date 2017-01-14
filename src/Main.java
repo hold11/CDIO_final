@@ -150,7 +150,15 @@ public class Main {
         } else {
             // Next Player
             cli.displayEndBalance(game.getCurrentPlayer());
+            checkBankruptcy();
             game.nextPlayer();
+        }
+    }
+
+    private void checkBankruptcy() {
+        if (game.getCurrentPlayer().getPlayerAccount().getBalance() < 0) {
+            game.checkBankruptcy();
+
         }
     }
 
