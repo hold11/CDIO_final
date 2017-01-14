@@ -55,7 +55,6 @@ public class Main {
         Lang.setLanguage(locale);
         CLIController cli = new CLIController(); // For testing purposes
 //        GameController game = new GameController();
-        ChanceCard.initChanceCards();
         Main main = new Main(new GameController(), new CLIController());
 
         if (autoGame)
@@ -109,7 +108,7 @@ public class Main {
             return;
         }
 
-        Field playerLandedOn = game.playerLandedOn(); //TODO: Do we need this?
+        Field playerLandedOn = game.playerLandedOn();
         // Player landed on a field
         game.playerLandsOnField();
         cli.displayLandedOn(game.getCurrentPlayer());
@@ -145,9 +144,11 @@ public class Main {
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3) {
             playerRoll();
             playNormalTurn();
-        } else
+        } else {
             // Next Player
+            cli.displayEndBalance(game.getCurrentPlayer());
             game.nextPlayer();
+        }
     }
 
     private void playJailTurn() {
@@ -184,8 +185,10 @@ public class Main {
                 grantFreedom();
             else if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
                 grantFreedom();
-            } else
+            } else {
+                cli.displayEndBalance(game.getCurrentPlayer());
                 game.nextPlayer();
+            }
         }
     }
 

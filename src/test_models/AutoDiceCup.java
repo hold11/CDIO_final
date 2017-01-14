@@ -24,7 +24,6 @@ public class AutoDiceCup extends models.DiceCup {
         this.rolls = new ArrayList<>();
 
         for (int i : rolls) {
-            // TODO: Implement double rolls
             this.rolls.add(i);
         }
     }

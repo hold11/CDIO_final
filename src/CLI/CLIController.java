@@ -27,7 +27,7 @@ public class CLIController {
     }
 
     public void displayEndBalance(Player player) {
-        System.out.println("End balance: " + player.getPlayerAccount().getBalance());
+        System.out.println("\nEnd balance: " + player.getPlayerAccount().getBalance());
         System.out.println();
     }
 
@@ -97,7 +97,7 @@ public class CLIController {
     }
 
     public void displayEndTurn() {
-        System.out.println("\n3 double rolls in a row. Going to jail.\n");
+        System.out.println("\n3 double rolls in a row. Going to jail.");
     }
 
     public void displayCanPurchaseField() {

@@ -73,7 +73,6 @@ public abstract class Field {
         }
     }
     
-	//TODO add number to parameters - just for display
     protected Field(Color bgColor, Color fgColor, String title, String subText, String description) {
         this(bgColor, fgColor, title, subText, description, BorderFactory.createLineBorder(Color.BLACK));
     }
