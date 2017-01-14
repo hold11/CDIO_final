@@ -159,15 +159,22 @@ public class GUIController {
     }
 
     // TODO: add actual options
-    public String getLandPlotBuildOptions(boolean canBuyHouse , boolean canBuyHotel) {
-        if (canBuyHotel && canBuyHouse)
-            return GUI.getUserButtonPressed("", "Roll", "Buy House", "Buy Hotel");
-        else if (canBuyHouse)
-            return GUI.getUserButtonPressed("", "Roll", "Buy House");
-        else if (canBuyHotel)
-            return GUI.getUserButtonPressed("", "Roll", "Buy Hotel");
-        else
-            return GUI.getUserButtonPressed("", "Roll");
+    public String getLandPlotBuildOptions(List<String> buttOpts) {
+
+        String[] optionsForButts = new String[buttOpts.size()];
+        for (int i = 0; i < buttOpts.size(); i++)
+            optionsForButts[i] = buttOpts.get(i);
+
+        return GUI.getUserButtonPressed("", optionsForButts);
+
+//        if (canRoll && canBuyHouse && canBuyHotel)
+//            return GUI.getUserButtonPressed("", "Roll", "Buy House", "Buy Hotel");
+//        else if (canRoll && canBuyHouse)
+//            return GUI.getUserButtonPressed("", "Roll", "Buy House");
+//        else if (canRoll && canBuyHotel)
+//            return GUI.getUserButtonPressed("", "Roll", "Buy Hotel");
+//        else if ()
+//            return GUI.getUserButtonPressed("", "Roll");
     }
 
     public boolean getPayBailOut() {

@@ -18,6 +18,9 @@ import models.GameController;
 import models.Player;
 import GUI.GUIController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     private static GUIController gui;
@@ -80,7 +83,7 @@ public class Main {
 
         // If a player hasn't won the game
         if (game.playNormalTurn()) {
-            playerRoll();
+            showButtOpts();
 
             playNormalTurn();
         } else {
@@ -139,7 +142,7 @@ public class Main {
 
         // Give extra turn if player rolled a double
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3) {
-            playerRoll();
+            showButtOpts();
             playNormalTurn();
         } else {
             // Next Player
@@ -154,22 +157,21 @@ public class Main {
         GUI.GUI.removeAllCars(game.getCurrentPlayer().getPlayerName());
         GUI.GUI.setCar(game.getCurrentPlayer().getCurrentField(), game.getCurrentPlayer().getPlayerName());
 
-        // Show the options for getting out of jail
         // TODO: Show sell house button (if the player owns any houses that is)
-
+        // Show the options for getting out of jail
         String answer = gui.getJailButtons(
                 game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT),
                 game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
         if (answer.equals("Pay bail out. 1000,-")) {
             game.payBailOut();
-            playerRoll();
+            showButtOpts();
             cli.displayRolled(game.getCurrentPlayer());
             grantFreedom();
         }
 
         if (answer.equals("Use Free Bail Card")) {
             game.useOwnableCard(FreeBailCard.class);
-            playerRoll();
+            showButtOpts();
             grantFreedom();
         }
 
@@ -224,22 +226,43 @@ public class Main {
         playNormalTurn();
     }
 
-    public void doRealEstateBusiness() {
-        boolean canHasHouse = false;
-        boolean canHasHotel = false;
+    //TODO: Maybe move to gameController and instead add method here passing the list to GUI
+    private void showButtOpts() {
+//        boolean canHasHouse = false;
+//        boolean canHasHotel = false;
+//        boolean canHasRoll  = false;
 
-        if (PurchaseLogic.getTotalHouseCount() != PurchaseLogic.MAXHOUSECOUNT)
-            canHasHouse = true;
+        List<String> buttOpts = new ArrayList<>();
 
-        if (PurchaseLogic.getTotalHotelCount() != PurchaseLogic.MAXHOTELCOUNT)
-            canHasHotel = true;
+        if (game.getCurrentPlayer().getTurnsInJail() > 0)
+            buttOpts.add("Roll a double to get out");
+        else if (game.getCurrentPlayer().getDiceCup().getTotalEyes() == 0)
+            buttOpts.add("Roll");
 
-        String answer = gui.getLandPlotBuildOptions(canHasHouse, canHasHotel);
+        if (PurchaseLogic.playerCanDevelopPlots(game.getCurrentPlayer()) && PurchaseLogic.getTotalHouseCount() != PurchaseLogic.MAXHOUSECOUNT)
+            buttOpts.add("Buy house/hotel");
 
-        if (answer.equals("Buy House"))
-            PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn()))));
+//        if (PurchaseLogic.getTotalHotelCount() != PurchaseLogic.MAXHOTELCOUNT)
+//            buttOpts.add("Buy hotel");
+
+        if (PurchaseLogic.getPlayerHouseCount(game.getCurrentPlayer()) != 0)
+            buttOpts.add("Sell house/hotel");
+
+//        if (PurchaseLogic.getPlayerHotelCount(game.getCurrentPlayer()) != 0)
+//            buttOpts.add("Sell hotel");
+
+        String answer = gui.getLandPlotBuildOptions(buttOpts);
+
         if (answer.equals("Roll"))
             playerRoll();
+
+        if (answer.equals("Buy house/hotel")) {
+            String landPlot = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
+            PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(landPlot)));
+        }
+
+//        if (answer.equals("Buy hotel"))
+//            PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn()))));
     }
 
     private void setupAutoGame() {
