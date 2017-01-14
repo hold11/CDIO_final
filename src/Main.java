@@ -213,7 +213,7 @@ public class Main {
 
     private void playerRoll() {
         Player currentPlayer = game.getCurrentPlayer();
-        GUI.GUI.getUserButtonPressed(currentPlayer.getPlayerName(), "Roll");
+//        GUI.GUI.getUserButtonPressed(currentPlayer.getPlayerName(), "Roll");
         game.rollDice();
 
         cli.displayRolled(game.getCurrentPlayer());
@@ -228,47 +228,52 @@ public class Main {
 
     //TODO: Maybe move to gameController and instead add method here passing the list to GUI
     private void showButtOpts() {
-//        boolean canHasHouse = false;
-//        boolean canHasHotel = false;
-//        boolean canHasRoll  = false;
 
         List<String> buttOpts = new ArrayList<>();
 
         if (game.getCurrentPlayer().getTurnsInJail() > 0)
             buttOpts.add("Roll a double to get out");
-        else if (game.getCurrentPlayer().getDiceCup().getTotalEyes() == 0)
+        else //if (game.getCurrentPlayer().getDiceCup().getTotalEyes() == 0)
             buttOpts.add("Roll");
 
         if (PurchaseLogic.playerCanDevelopPlots(game.getCurrentPlayer()) && PurchaseLogic.getTotalHouseCount() != PurchaseLogic.MAXHOUSECOUNT)
             buttOpts.add("Buy house/hotel");
 
-//        if (PurchaseLogic.getTotalHotelCount() != PurchaseLogic.MAXHOTELCOUNT)
-//            buttOpts.add("Buy hotel");
-
-        if (PurchaseLogic.getPlayerHouseCount(game.getCurrentPlayer()) != 0)
+        if (PurchaseLogic.getPlayerBuildingCount(game.getCurrentPlayer()) != 0)
             buttOpts.add("Sell house/hotel");
 
-//        if (PurchaseLogic.getPlayerHotelCount(game.getCurrentPlayer()) != 0)
-//            buttOpts.add("Sell hotel");
+        String answer = gui.getBuySellOption(game.getCurrentPlayer().getPlayerName(), buttOpts);
 
-        String answer = gui.getLandPlotBuildOptions(buttOpts);
-
-        if (answer.equals("Roll"))
+        if (answer.equals("Roll") || answer.equals("Roll a double to get out"))
             playerRoll();
 
         if (answer.equals("Buy house/hotel")) {
             String landPlot = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
+
             PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(landPlot)));
+
+            if (((LandPlot) Field.getFieldByName(landPlot)).getHouseCount() < 5)
+                GUI.GUI.setHouses((LandPlot.getFieldByName(landPlot)).getFieldId(), ((LandPlot) Field.getFieldByName(landPlot)).getHouseCount());
+            else
+                GUI.GUI.setHotel((LandPlot.getFieldByName(landPlot)).getFieldId(), true);
         }
 
-//        if (answer.equals("Buy hotel"))
-//            PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn()))));
+        if (answer.equals("Sell house/hotel")) {
+            String landPlot = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
+
+            PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(landPlot)));
+
+            if (((LandPlot) Field.getFieldByName(landPlot)).getHouseCount() < 5)
+                GUI.GUI.setHouses((LandPlot.getFieldByName(landPlot)).getFieldId(), ((LandPlot) Field.getFieldByName(landPlot)).getHouseCount());
+            else
+                GUI.GUI.setHotel((LandPlot.getFieldByName(landPlot)).getFieldId(), false);
+        }
     }
 
     private void setupAutoGame() {
         gui = new GUIController();
 
-        int[] autoRolls1 = { 2, 5, 2, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
+        int[] autoRolls1 = { 6, 2, 1, 3, 7, 5, 6, 7, 7, 6, 2, 3 };
         int[] autoRolls2 = { 2, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
         int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 

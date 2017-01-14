@@ -117,6 +117,10 @@ public class DiceCup {
         return total;
     }
 
+    public void resetDicecup() {
+        this.results.clear();
+    }
+
     public int[] getResultArr() {
         int[] results = new int[2];
         int i = 0;

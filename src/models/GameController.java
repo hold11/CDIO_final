@@ -143,4 +143,8 @@ public class GameController
     public LandPlot[] getAvailablePlotsToBuildOn() {
         return PurchaseLogic.getAvailablePlotsToBuildOn(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
     }
+
+    public LandPlot[] getPlayersDevelopedPlots() {
+        return PurchaseLogic.getPlayersDevelopedPlots(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
+    }
 }

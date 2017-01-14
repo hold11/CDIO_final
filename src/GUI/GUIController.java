@@ -158,23 +158,13 @@ public class GUIController {
         return GUI.getUserSelection("msg", names);
     }
 
-    // TODO: add actual options
-    public String getLandPlotBuildOptions(List<String> buttOpts) {
+    public String getBuySellOption(String playerName, List<String> buttOpts) {
 
         String[] optionsForButts = new String[buttOpts.size()];
         for (int i = 0; i < buttOpts.size(); i++)
             optionsForButts[i] = buttOpts.get(i);
 
-        return GUI.getUserButtonPressed("", optionsForButts);
-
-//        if (canRoll && canBuyHouse && canBuyHotel)
-//            return GUI.getUserButtonPressed("", "Roll", "Buy House", "Buy Hotel");
-//        else if (canRoll && canBuyHouse)
-//            return GUI.getUserButtonPressed("", "Roll", "Buy House");
-//        else if (canRoll && canBuyHotel)
-//            return GUI.getUserButtonPressed("", "Roll", "Buy Hotel");
-//        else if ()
-//            return GUI.getUserButtonPressed("", "Roll");
+        return GUI.getUserButtonPressed(playerName, optionsForButts);
     }
 
     public boolean getPayBailOut() {

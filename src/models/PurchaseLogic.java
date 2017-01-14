@@ -56,28 +56,16 @@ public class PurchaseLogic {
         return totalHotelCount;
     }
 
-    public static int getPlayerHouseCount(Player player) {
+    public static int getPlayerBuildingCount(Player player) {
         int playerHouseCount = 0;
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot)
                 if (o.getOwner().equals(player))
-                    if (((LandPlot) o).getHouseCount() < 5)     // Casting ownable o to LandPlot, because getHouseCount method is there.
+                    if (((LandPlot) o).getHouseCount() != 0)     // Casting ownable o to LandPlot, because getHouseCount method is there.
                         playerHouseCount += ((LandPlot) o).getHouseCount();
         }
         return playerHouseCount;
     }
-
-    public static int getPlayerHotelCount(Player player) {
-        int playerHotelCount = 0;
-        for (Ownable o : Ownable.getOwnedOwnables()) {
-            if (o instanceof LandPlot)
-                if (o.getOwner().equals(player))
-                    if (((LandPlot) o).getHouseCount() == 5)     // Casting ownable o to LandPlot, because getHouseCount method is there.
-                        playerHotelCount += ((LandPlot) o).getHouseCount();
-        }
-        return playerHotelCount;
-    }
-
     public static boolean canPurchaseHouse(LandPlot landPlot) {
         // Loop through all plots in group
         for (LandPlot l : landPlot.getAllPlotsInGroup()) {
@@ -122,5 +110,14 @@ public class PurchaseLogic {
     public static boolean playerCanDevelopPlots(Player player) {
         return (getAllFullyGroupedPlots(player).length != 0);
 
+    }
+
+    public static List<LandPlot> getPlayersDevelopedPlots(Player player) {
+        List<LandPlot> result = new ArrayList<>();
+        for (LandPlot l : getAllFullyGroupedPlots(player)) {
+            if (l.getHouseCount() != 0)
+                result.add(l);
+        }
+        return result;
     }
 }
