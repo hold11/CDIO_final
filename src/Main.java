@@ -86,12 +86,10 @@ public class Main {
 //                ((FreeBailCard) c).setOwner(game.getCurrentPlayer());
 
         // If a player hasn't won the game
-        if (game.playNormalTurn()) {
-            showButtOptions();
+        if (game.isNormalTurn())
             playNormalTurn();
-        } else {
+        else
             playJailTurn();
-        }
 
         // Then restart the game loop (until a player has won the game)
         gameLoop();
@@ -118,6 +116,8 @@ public class Main {
     }
 
     private void playNormalTurn() {
+        showButtOptions();
+
         int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
 
         // if player gets 3 double rolls, throw player in jail
@@ -158,12 +158,11 @@ public class Main {
 
         // Give extra turn if player rolled a double
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3) {
-            showButtOptions();
             playNormalTurn();
         } else {
             // Last chance to do business then next player
-            cli.displayEndBalance(game.getCurrentPlayer());
             showButtOptions();
+            cli.displayEndBalance(game.getCurrentPlayer());
             checkBankruptcy();
             game.getCurrentPlayer().getDiceCup().resetHasRolled();
             game.nextPlayer();
@@ -177,38 +176,7 @@ public class Main {
         GUI.GUI.setCar(game.getCurrentPlayer().getCurrentField(), game.getCurrentPlayer().getPlayerName());
 
         showButtOptions();
-//        Show the options for getting out of jail
-//        String answer = gui.getJailButtons(
-//                game.getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT),
-//                game.getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD));
-//        if (answer.equals("Roll")answer.equals("Pay bail out. 1000,-")) {
-//            game.payBailOut();
-//            gui.updateBalance(game.getPlayers());
-//            showButtOptions();
-//            cli.displayRolled(game.getCurrentPlayer());
-//            grantFreedom();
-//        }
-//
-//        if (answer.equals("Use Free Bail Card")) {
-//            game.useOwnableCard(FreeBailCard.class);
-//            showButtOptions();
-//            grantFreedom();
-//        }
-//
-//        if (answer.equals("Roll a double to get out")) {
-//            game.rollDice();
-//            GUI.GUI.setDice(
-//                    game.getCurrentPlayer().getDiceCup().getResultArr()[0],
-//                    game.getCurrentPlayer().getDiceCup().getResultArr()[1]);
-//            if (game.getCurrentPlayer().getDiceCup().wasRollDouble())
-//                grantFreedom();
-//            else if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
-//                grantFreedom();
-//            } else {
-//                cli.displayEndBalance(game.getCurrentPlayer());
-//                game.nextPlayer();
-//            }
-//        }
+
         if (game.playerTurnsInJail() == 3 && gui.getPayBailOut()) {
             grantFreedom();
         } else {
@@ -274,7 +242,6 @@ public class Main {
 
     private void playerRoll() {
         Player currentPlayer = game.getCurrentPlayer();
-//        GUI.GUI.getUserButtonPressed(currentPlayer.getPlayerName(), "Roll");
         game.rollDice();
 
         cli.displayRolled(game.getCurrentPlayer());
@@ -293,14 +260,11 @@ public class Main {
     private void payBail() {
         game.payBailOut();
         gui.updateBalance(game.getPlayers());
-        showButtOptions();
-        cli.displayRolled(game.getCurrentPlayer());
         grantFreedom();
     }
 
     private void freeBail() {
         game.useOwnableCard(FreeBailCard.class);
-        showButtOptions();
         grantFreedom();
     }
 
@@ -310,31 +274,31 @@ public class Main {
     }
 
     private void buyBuilding() {
-        String answer1 = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
+        String answer = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
 
-        if (answer1.equals("Back"))
+        if (answer.equals("Back"))
             return;
 
-        PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(answer1)));
+        PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(answer)));
 
-        if (((LandPlot) Field.getFieldByName(answer1)).getHouseCount() < 5)
-            GUI.GUI.setHouses((LandPlot.getFieldByName(answer1)).getFieldId(), ((LandPlot) Field.getFieldByName(answer1)).getHouseCount());
+        if (((LandPlot) Field.getFieldByName(answer)).getHouseCount() < 5)
+            GUI.GUI.setHouses((LandPlot.getFieldByName(answer)).getFieldId(), ((LandPlot) Field.getFieldByName(answer)).getHouseCount());
         else
-            GUI.GUI.setHotel((LandPlot.getFieldByName(answer1)).getFieldId(), true);
+            GUI.GUI.setHotel((LandPlot.getFieldByName(answer)).getFieldId(), true);
     }
 
     private void sellBuilding() {
-        String answer2 = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
+        String answer = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
 
-        if (answer2.equals("Back"))
+        if (answer.equals("Back"))
             return;
 
-        PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer2)));
+        PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer)));
 
-        if (((LandPlot) Field.getFieldByName(answer2)).getHouseCount() < 5)
-            GUI.GUI.setHouses((LandPlot.getFieldByName(answer2)).getFieldId(), ((LandPlot) Field.getFieldByName(answer2)).getHouseCount());
+        if (((LandPlot) Field.getFieldByName(answer)).getHouseCount() < 5)
+            GUI.GUI.setHouses((LandPlot.getFieldByName(answer)).getFieldId(), ((LandPlot) Field.getFieldByName(answer)).getHouseCount());
         else
-            GUI.GUI.setHotel((LandPlot.getFieldByName(answer2)).getFieldId(), false);
+            GUI.GUI.setHotel((LandPlot.getFieldByName(answer)).getFieldId(), false);
     }
 
     private void setupAutoGame() {

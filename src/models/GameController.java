@@ -26,7 +26,7 @@ public class GameController
         ChanceCard.initChanceCards();
     }
 
-    public boolean playNormalTurn() {
+    public boolean isNormalTurn() {
         return (getCurrentPlayer().getTurnsInJail() == 0);
     }
 
