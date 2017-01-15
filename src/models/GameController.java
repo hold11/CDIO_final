@@ -134,25 +134,25 @@ public class GameController
         List<String> buttOpts = new ArrayList<>();
 
         if (getCurrentPlayer().getTurnsInJail() > 0) {
-            buttOpts.add("Roll a double to get out");
+            buttOpts.add("Kast og få to ens");
 
             if (getCurrentPlayer().getPlayerAccount().getBalance() >= 1000)
-            buttOpts.add("Pay bail out. 1000,-");
+            buttOpts.add("Betal din bøde på 1000 kr.");
 
             if (OwnableCard.playerHasCard(getCurrentPlayer(), FreeBailCard.class))
-                buttOpts.add("Use Free Bail Card");
+                buttOpts.add("Brug Kom-Ud-Af-Fængsel-kort©");
         }
         else if (!getCurrentPlayer().getDiceCup().getHasRolled() || getCurrentPlayer().getDiceCup().wasRollDouble())
-            buttOpts.add("Roll");
+            buttOpts.add("Kast terninger");
 
         else
-            buttOpts.add("End turn");
+            buttOpts.add("Afslut tur");
 
         if (PurchaseLogic.playerCanDevelopPlots(getCurrentPlayer()))
-            buttOpts.add("Buy house/hotel");
+            buttOpts.add("Køb hus/hotel");
 
         if (PurchaseLogic.getPlayerBuildingCount(getCurrentPlayer()) != 0)
-            buttOpts.add("Sell house/hotel");
+            buttOpts.add("Sælg hus/hotel");
         return buttOpts;
     }
 
