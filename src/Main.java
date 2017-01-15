@@ -131,12 +131,13 @@ public class Main {
             return;
         }
 
-        // Move the player's car
-        gui.moveCars(game.getCurrentPlayer());
-
         // Player landed on a field
+        game.playerLandedOn();
         game.playerLandsOnField();
         cli.displayLandedOn(game.getCurrentPlayer());
+
+        // Move the player's car
+        gui.moveCars(game.getCurrentPlayer());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField()) {
