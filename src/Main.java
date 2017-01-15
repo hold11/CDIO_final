@@ -10,6 +10,7 @@
 */
 
 import CLI.CLIController;
+import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import models.PurchaseLogic;
 import fields.*;
@@ -98,17 +99,18 @@ public class Main {
     private void checkBankruptcy() {
         if (game.getCurrentPlayer().getPlayerAccount().getBalance() < 0) {
             GUI.GUI.removeAllCars(game.getCurrentPlayer().getPlayerName());
-            for (Ownable o : game.getOwnedOwnables()) {
-                if (o instanceof LandPlot) {
-                    LandPlot l = ((LandPlot) o);
-                    GUI.GUI.setHouses(o.getFieldId(), 0);
-                    GUI.GUI.setHotel(o.getFieldId(), false);
-                }
-            }
 
             Arrays.stream(game.getOwnedOwnables())
-                    .filter(ownable -> ownable.getOwner().equals(game.getCurrentPlayer()))
-                    .forEach(ownable -> GUI.GUI.removeOwner(ownable.getFieldId()));
+                    .filter(o -> o instanceof LandPlot)
+                    .filter(o -> o.getOwner().equals(game.getCurrentPlayer()))
+                    .forEach(o -> {
+                        GUI.GUI.setHouses(o.getFieldId(), 0);
+                        GUI.GUI.setHotel(o.getFieldId(), false);
+                    });
+
+            Arrays.stream(game.getOwnedOwnables())
+                    .filter(o -> o.getOwner().equals(game.getCurrentPlayer()))
+                    .forEach(o -> GUI.GUI.removeOwner(o.getFieldId()));
 
             game.checkBankruptcy();
             gui.createPlayers(game.getPlayers());
@@ -132,12 +134,18 @@ public class Main {
         }
 
         // Player landed on a field
-        game.playerLandedOn();
-        game.playerLandsOnField();
-        cli.displayLandedOn(game.getCurrentPlayer());
-
-        // Move the player's car
+        Field landedOn = game.playerLandedOn();
         gui.moveCars(game.getCurrentPlayer());
+        cli.displayLandedOn(game.getCurrentPlayer());
+        if (landedOn instanceof ChanceField) {
+            gui.showChanceCard(ChanceCard.getCurrentChanceCard().toString());
+            game.playerLandsOnField();
+            gui.moveCars(game.getCurrentPlayer());
+        } else
+            game.playerLandsOnField();
+
+
+
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField()) {

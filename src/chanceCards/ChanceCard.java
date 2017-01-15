@@ -9,6 +9,7 @@ package chanceCards;/*
     /`           ´\                                      |
 */
 
+import GUI.fields.Chance;
 import fields.Field;
 import fields.Jail;
 import models.Player;
@@ -23,6 +24,7 @@ public abstract class ChanceCard
     protected String chanceText;
     protected int count = 1;
     private static ChanceCard[] chanceCards;
+    private static List<ChanceCard> deck;
     private static int drawCardsCount = 0;
 
     public ChanceCard(int chanceCardID) {
@@ -35,8 +37,11 @@ public abstract class ChanceCard
         this.count = count;
     }
 
+    public abstract void receiveCard(Player player);
+
     public static void initChanceCards() {
         List<ChanceCard> cCards = new ArrayList<>();
+
         cCards.add(new BalanceCard(1, 800, 2300));
         cCards.add(new MoveCard(2, Field.getFieldByID(12)));
         cCards.add(new BalanceCard(3, true, 200));
@@ -75,15 +80,20 @@ public abstract class ChanceCard
         cCards.add(new BalanceCard(36, false, -2000));
         cCards.add(new BalanceCard(37, false, 200));
 
-        Collections.shuffle(cCards);
-
-        chanceCards = cCards.stream().toArray(ChanceCard[]::new); // TODO: ensure you understand what the heck this is :D
+        deck = cCards;
     }
-
-    public abstract void receiveCard(Player player);
 
     public static ChanceCard[] getChanceCards() {
         return chanceCards;
+    }
+
+    public static ChanceCard getCurrentChanceCard() {
+        return getChanceCards()[drawCardsCount];
+    }
+
+    public static void shuffleCards() {
+        Collections.shuffle(deck);
+        chanceCards = deck.stream().toArray(ChanceCard[]::new); // TODO: ensure you understand what the heck this is :D
     }
 
     @Override
@@ -95,8 +105,10 @@ public abstract class ChanceCard
         ChanceCard c = getChanceCards()[drawCardsCount];
         if (drawCardsCount < chanceCards.length)
             drawCardsCount++;
-        else
+        else {
             drawCardsCount = 0;
+            shuffleCards();
+        }
         return c;
     }
 }

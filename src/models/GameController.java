@@ -9,6 +9,7 @@ package models;/*
     /`           ´\                                      |
 */
 
+import GUI.fields.Chance;
 import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
@@ -24,6 +25,7 @@ public class GameController
 
     public GameController() {
         ChanceCard.initChanceCards();
+        ChanceCard.shuffleCards();
     }
 
     public boolean isNormalTurn() {
@@ -166,7 +168,9 @@ public class GameController
         }
     }
 
-    public Ownable[] getOwnedOwnables() { return Ownable.getOwnedOwnables(); }
+    public Ownable[] getOwnedOwnables() {
+        return Ownable.getOwnedOwnables();
+    }
 
     public LandPlot[] getPlayersDevelopedPlots() {
         return PurchaseLogic.getPlayersDevelopedPlots(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
