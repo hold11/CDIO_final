@@ -42,7 +42,8 @@
         <formatter type="brief" usefile="false" />
         <batchtest>
             <fileset dir="${test.src.dir}"/>
-            <exclude name="fields/BusinessTest.java"/>
+                <include name="**/*Test*.java"/>
+                <exclude name="**/BusinessTest.java"/>
         </batchtest>
     </junit>
   </target>
