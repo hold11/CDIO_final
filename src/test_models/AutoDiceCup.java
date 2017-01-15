@@ -11,6 +11,7 @@ package test_models;/*
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AutoDiceCup extends models.DiceCup {
@@ -20,11 +21,12 @@ public class AutoDiceCup extends models.DiceCup {
         this.rolls = new ArrayList<>();
     }
 
-    public AutoDiceCup(int[] rolls) {
+    public AutoDiceCup(int[] rolls1, int[] rolls2) {
         this.rolls = new ArrayList<>();
 
-        for (int i : rolls) {
-            this.rolls.add(i);
+        for (int i = 0; i < rolls1.length; i++) {
+            this.rolls.add(rolls1[i]);
+            this.rolls.add(rolls2[i]);
         }
     }
 
@@ -38,8 +40,9 @@ public class AutoDiceCup extends models.DiceCup {
         this.hasRolled = true;
 
         if (this.rolls.size() > 0) {
-            this.results.add(rolls.get(0) - 1);
-            this.results.add(1);
+            this.results.add(rolls.get(0));
+            this.results.add(rolls.get(1));
+            this.rolls.remove(0);
             this.rolls.remove(0);
         }
 
