@@ -11,35 +11,41 @@ package test_models;/*
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AutoDiceCup extends models.DiceCup {
-    private List<Integer> rolls;
+    private List<Integer> rolls1;
+    private List<Integer> rolls2;
 
     public AutoDiceCup() {
-        this.rolls = new ArrayList<>();
+        this.rolls1 = new ArrayList<>();
+        this.rolls2 = new ArrayList<>();
     }
 
-    public AutoDiceCup(int[] rolls) {
-        this.rolls = new ArrayList<>();
-
-        for (int i : rolls) {
-            this.rolls.add(i);
-        }
+    public AutoDiceCup(int[] rolls1, int[] rolls2) {
+        for (int i : rolls1)
+            this.rolls1.add(i);
+        for (int i : rolls2)
+            this.rolls2.add(i);
+//        Arrays.stream(rolls1).forEach(roll -> this.rolls1.add(roll));
+//        Arrays.stream(rolls2).forEach(roll -> this.rolls2.add(roll));
     }
 
-    public void addRoll(int roll) {
-        this.rolls.add(roll);
+    public void addRoll(int roll1, int roll2) {
+        this.rolls1.add(roll1);
+        this.rolls2.add(roll2);
     }
 
     @Override
     public void roll() {
         this.results.clear();
 
-        if (this.rolls.size() > 0) {
-            this.results.add(rolls.get(0) - 1);
-            this.results.add(1);
-            this.rolls.remove(0);
+        if (this.rolls1.size() > 0) {
+            this.results.add(rolls1.get(0));
+            this.results.add(rolls2.get(0));
+            this.rolls1.remove(0);
+            this.rolls2.remove(0);
         }
 
         if (getResultArr()[0] == getResultArr()[1]) {
