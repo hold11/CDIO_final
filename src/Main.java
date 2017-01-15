@@ -326,10 +326,6 @@ public class Main {
         getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(d1p2, d2p2));
         getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(d1p3, d2p3));
 
-        ((Ownable) Field.getFields()[6]).purchaseField(Player.getPlayers().get(0));
-        ((Ownable) Field.getFields()[8]).purchaseField(Player.getPlayers().get(0));
-        ((Ownable) Field.getFields()[9]).purchaseField(Player.getPlayers().get(0));
-
         gui.createPlayers(game.getPlayers());
     }
 
