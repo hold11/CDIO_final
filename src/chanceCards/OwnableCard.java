@@ -76,15 +76,9 @@ public abstract class OwnableCard extends ChanceCard {
 
     public static void resetOwnableCards(Player player) {
         Arrays.stream(ChanceCard.getChanceCards())
-                .filter(chanceCard -> chanceCard instanceof OwnableCard)
-                .filter(ownableCard -> ((OwnableCard) ownableCard).getOwner() != null)
-                .filter(ownableCard -> ((OwnableCard) ownableCard).getOwner().equals(player))
+                .filter(chanceCard   -> chanceCard instanceof OwnableCard)
+                .filter(ownableCard  -> ((OwnableCard) ownableCard).getOwner() != null)
+                .filter(ownableCard  -> ((OwnableCard) ownableCard).getOwner().equals(player))
                 .forEach(ownableCard -> ((OwnableCard) ownableCard).setOwner(null));
-        // Fuck yea.... Lambdas FTW!!! Fuck you indentations!
-//        for (ChanceCard c : ChanceCard.getChanceCards())
-//            if (c instanceof OwnableCard)
-//                if (((OwnableCard) c).getOwner() != null)
-//                    if (((OwnableCard) c).getOwner().equals(player))
-//                        ((OwnableCard) c).setOwner(null);
     }
 }
