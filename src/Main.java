@@ -211,7 +211,7 @@ public class Main {
     }
 
     private void getPlayerName() {
-        new Player(GUI.GUI.getUserString("Please type your name."));
+        new Player(GUI.GUI.getUserString(Lang.msg("getName")));
     }
 
     private void showButtOptions() {
@@ -221,25 +221,25 @@ public class Main {
         String answer = gui.getButtOption(game.getCurrentPlayer().getPlayerName(), game.getButtOptions());
 
         switch (answer) {
-            case "Roll":
+            case "Kast terninger":
                 playerRoll();
                 break;
-            case "End turn":
+            case "Afslut tur":
                 break;
-            case "Pay bail out. 1000,-":
+            case "Betal din bøde på 1000 kr.":
                 payBail();
                 break;
-            case "Use Free Bail Card":
+            case "Brug Kom-Ud-Af-Fængsel-kort©":
                 freeBail();
                 break;
-            case "Roll a double to get out":
+            case "Kast og få to ens":
                 checkJailDoubleRoll();
                 break;
-            case "Buy house/hotel":
+            case "Køb hus/hotel":
                 buyBuilding();
                 showButtOptions();
                 break;
-            case "Sell house/hotel":
+            case "Sælg hus/hotel":
                 sellBuilding();
                 showButtOptions();
                 break;
@@ -285,7 +285,7 @@ public class Main {
     private void buyBuilding() {
         String answer = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
 
-        if (answer.equals("Back"))
+        if (answer.equals(Lang.msg("back")))
             return;
 
         PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(answer)));
@@ -299,7 +299,7 @@ public class Main {
     private void sellBuilding() {
         String answer = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
 
-        if (answer.equals("Back"))
+        if (answer.equals(Lang.msg("back")))
             return;
 
         PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer)));

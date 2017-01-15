@@ -14,6 +14,7 @@ import GUI.backend.Car;
 import chanceCards.ChanceCard;
 import fields.ChanceField;
 import fields.LandPlot;
+import lang.Lang;
 import models.Player;
 
 import java.awt.Color;
@@ -77,7 +78,7 @@ public class GUIController {
     }
 
     public int selectPlayerCount() {
-        return Integer.parseInt(GUI.getUserSelection("How many players?",  "3", "4", "5", "6"));
+        return Integer.parseInt(GUI.getUserSelection(Lang.msg("getPlayerCount"),  "3", "4", "5", "6"));
     }
 
     public void createPlayers(List<Player> players) {
@@ -108,26 +109,6 @@ public class GUIController {
         }
     }
 
-    //TODO: Get this thing working
-//    public void removeBankruptPlayer(Player player) {
-//        if (player.getPlayerAccount().getBalance() == 0) {
-//            GUI.removeAllMovers(player);
-//
-//            List<Integer> ownablesInt = new ArrayList<>();
-//            List<fields.Ownable> tmp = fields.Ownable.getPlayersOwnedFields(player);
-//            models.GameBoard board = new models.GameBoard();
-//
-//            for (int i = 0; i > board.getFields().length; i++) {
-//                for (int i2 = 0; i > tmp.size(); i2++) {
-//                    if (board.getFields()[i].toString() == tmp.get(i2).toString())
-//                        ownablesInt.add(i);
-//                }
-//            }
-//            for (int i : ownablesInt)
-//                GUI.removeOwner(i);
-//        }
-//    }
-
     public void showChanceCard(String cardText) {
         GUI.displayChanceCard(cardText);
         GUI.getUserButtonPressed("", "OK");
@@ -139,8 +120,8 @@ public class GUIController {
     }
 
     public boolean getPurchaseChoice(Player player) {
-        String answer = GUI.getUserButtonPressed("Want to purchase this field?", "Yes!", "No!");
-        if (answer.equals("Yes!")) {
+        String answer = GUI.getUserButtonPressed(Lang.msg("purchaseFieldQ"), Lang.msg("yes"), Lang.msg("no"));
+        if (answer.equals(Lang.msg("yes"))) {
             GUI.setOwner(player.getCurrentField(), player.getPlayerName());
             return true;
         } else return false;
@@ -148,7 +129,7 @@ public class GUIController {
 
     public String getLandPlotToBuildOn(LandPlot[] landPlots) {
         String[] options = new String[(landPlots.length + 1)];
-        options[0] = "Back"; // add option for going back to previous menu
+        options[0] = Lang.msg("back"); // add option for going back to previous menu
         for (int i = 0; i < landPlots.length; i++)
             options[(i+1)] = landPlots[i].toString();
 
@@ -165,7 +146,7 @@ public class GUIController {
     }
 
     public boolean getPayBailOut() {
-        return GUI.getUserButtonPressed("", "Pay bail out. 1000,-").equals("Pay bail out. 1000,-");
+        return GUI.getUserButtonPressed("", Lang.msg("payBail")).equals(Lang.msg("payBail"));
     }
 
     private static void sleep(int n) {
