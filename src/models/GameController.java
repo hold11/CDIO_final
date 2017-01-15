@@ -108,7 +108,11 @@ public class GameController
     }
 
     public void nextPlayer() {
-        getCurrentPlayer().getDiceCup().setDoublesRolled(0);
+        try {
+            getCurrentPlayer().getDiceCup().setDoublesRolled(0);
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("Player has gone bankrupt.");
+        }
         if (playerTurn + 1 < Player.getPlayers().size()) {
             playerTurn++;
         } else {
@@ -151,4 +155,6 @@ public class GameController
             getCurrentPlayer().removePlayer();
         }
     }
+
+    public Ownable[] getOwnedOwnables() { return Ownable.getOwnedOwnables(); }
 }
