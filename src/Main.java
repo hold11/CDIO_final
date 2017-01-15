@@ -304,7 +304,7 @@ public class Main {
 
         PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer)));
 
-        if (((LandPlot) Field.getFieldByName(answer)).getHouseCount() < 5)
+        if (((LandPlot) Field.getFieldByName(answer)).getHouseCount() < 4)
             GUI.GUI.setHouses((LandPlot.getFieldByName(answer)).getFieldId(), ((LandPlot) Field.getFieldByName(answer)).getHouseCount());
         else
             GUI.GUI.setHotel((LandPlot.getFieldByName(answer)).getFieldId(), false);
