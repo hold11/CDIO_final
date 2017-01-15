@@ -1,15 +1,20 @@
-package chanceCards;
+package chanceCards;/*
+           ,                                             |
+          /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
+         /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
+        /#####\      | '_ \ / \| |/ _  |    | |   | |    |
+       /##,-,##\     | | | | O | | ( | |   _| |_ _| |_   | Anders Wiberg Olsen (s165241), Valentin Leon Christensen (s152735),
+      /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
+     /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
+    /`           ´\                                      |
+*/
 
-import fields.Ownable;
 import models.Player;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by awo on 09/01/17.
- */
 public abstract class OwnableCard extends ChanceCard {
     private Player owner;
 
@@ -49,10 +54,31 @@ public abstract class OwnableCard extends ChanceCard {
         return ownedCards.toArray(new OwnableCard[ownedCards.size()]);
     }
 
-    public static boolean playerHasCard(Player player, Class C) {
+    private static OwnableCard[] findCardsOfType(Player player, Class c) {
+        List<OwnableCard> cards = new ArrayList<>();
+        for (OwnableCard oc : getPlayersCards(player))
+            if (oc.getClass() == c)
+                cards.add(oc);
+        return cards.stream().toArray(OwnableCard[]::new);
+    }
+
+    public static boolean playerHasCard(Player player, Class c) {
         for (OwnableCard o : getPlayersCards(player))
-            if (o.getClass() == C)
+            if (o.getClass() == c)
                 return true;
         return false;
+    }
+
+    public static void useChanceCard(Player player, Class c) {
+        if (playerHasCard(player, c))
+            findCardsOfType(player, c)[0].removeOwner();
+    }
+
+    public static void resetOwnableCards(Player player) {
+        Arrays.stream(ChanceCard.getChanceCards())
+                .filter(chanceCard   -> chanceCard instanceof OwnableCard)
+                .filter(ownableCard  -> ((OwnableCard) ownableCard).getOwner() != null)
+                .filter(ownableCard  -> ((OwnableCard) ownableCard).getOwner().equals(player))
+                .forEach(ownableCard -> ((OwnableCard) ownableCard).setOwner(null));
     }
 }

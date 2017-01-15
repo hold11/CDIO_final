@@ -7,9 +7,8 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
-import com.sun.org.apache.bcel.internal.generic.LAND;
 import models.Player;
 
 import java.util.ArrayList;
@@ -37,18 +36,17 @@ public class LandPlot extends Ownable
 
     @Override
     public void landOnField(Player player) {
-        // TODO: If pawning gets implemented, start by checking if field is pawned
-        if (this.isOwned() && this.owner != player && !this.owner.isInJail()) { // if the plot is owned by another player and owner is NOT in jail
+        if (this.isOwned() && this.owner != player && this.owner.getTurnsInJail() == 0) { // if the plot is owned by another player and owner is NOT in jail
             System.out.println("   [LandPlot LOF]");
             System.out.print("      " + player + " pays ");
             System.out.println(getRent() + " to " + this.owner + " in rent.");
-            player.getPlayerAcct().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
+            player.getPlayerAccount().transfer(this.getRent(), this.owner);                            // transfer rent to the rightful owner
         }
     }
 
     @Override
     public int getRent() {
-        if (hasAllPlotsInGroup(this.owner, this.groupID) && this.houseCount == 0)
+        if (this.playerHasAllPlotsInGroup(this.owner) && this.houseCount == 0)
             return rents[houseCount] * 2;
         return rents[houseCount];
     }
@@ -69,7 +67,7 @@ public class LandPlot extends Ownable
         return groupID;
     }
 
-    public static LandPlot[] getPlotGroup (int groupID) {
+    public LandPlot[] getAllPlotsInGroup() {
         List<LandPlot> groupedPlots = new ArrayList<>();
 
         for (Field f: Field.getFields()) {
@@ -80,10 +78,10 @@ public class LandPlot extends Ownable
         return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
     }
 
-    public static boolean hasAllPlotsInGroup(Player player, int groupID) {
-        int groupPlotsCount = getPlotGroup(groupID).length;
+    public boolean playerHasAllPlotsInGroup(Player player) {
+        int groupPlotsCount = getAllPlotsInGroup().length;
 
-        for (LandPlot l : getPlotGroup(groupID)) {
+        for (LandPlot l : getAllPlotsInGroup()) {
             if (l.getOwner() == player)
                 groupPlotsCount--;
         }

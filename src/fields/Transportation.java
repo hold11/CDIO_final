@@ -7,7 +7,7 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
 
@@ -19,11 +19,11 @@ public class Transportation extends Ownable
 
     @Override
     public void landOnField(Player player) {
-        if (this.isOwned() && this.owner != player) {
+        if (this.isOwned() && this.owner != player && this.owner.getTurnsInJail() == 0) {
             System.out.println("   [Transportation LOF]");
             System.out.print("      " + player + " pays ");
             System.out.println(getRent() + " to " + this.owner + " in rent.");
-            player.getPlayerAcct().transfer(getRent(), this.owner);
+            player.getPlayerAccount().transfer(getRent(), this.owner);
         }
     }
 
@@ -32,11 +32,6 @@ public class Transportation extends Ownable
         return 250 * ((int) Math.pow(2, getTotalTransportationCount(this.owner)));
     }
 
-    /**
-     * This method calculates how many transportation services is owned by a specific player
-     * @param player
-     * @return
-     */
     private static int getTotalTransportationCount(Player player) {
         int totalCount = 0;
 
@@ -44,7 +39,6 @@ public class Transportation extends Ownable
             if (o instanceof Transportation && o.getOwner() == player)
                 totalCount++;
         }
-
         return totalCount;
     }
 }

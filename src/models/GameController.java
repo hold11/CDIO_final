@@ -7,8 +7,10 @@ package models;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
+import GUI.fields.Chance;
+import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
 import fields.*;
@@ -19,30 +21,43 @@ import java.util.List;
 public class GameController
 {
     private int playerTurn = 0;
+    private final int BAIL_OUT_PRICE = 1000;
 
     public GameController() {
-
+        ChanceCard.initChanceCards();
+        ChanceCard.shuffleCards();
     }
 
-    public boolean playNormalTurn() {
-        return (!getCurrentPlayer().isInJail());
+    public boolean isNormalTurn() {
+        return (getCurrentPlayer().getTurnsInJail() == 0);
     }
 
-    public List<Jail.buttons>getJailButtons() {
-        List<Jail.buttons> jailButtons = new ArrayList<>();
+    public void rollDice() {
+        getCurrentPlayer().getDiceCup().roll();
+    }
 
-        if (getCurrentPlayer().getPlayerAcct().getBalance() >= 1000) {
-            jailButtons.add(Jail.buttons.PAY_BAIL_OUT);
-        }
-        if (OwnableCard.playerHasCard(getCurrentPlayer(), FreeBailCard.class)) {
-            jailButtons.add(Jail.buttons.FREE_BAIL_CARD);
-        }
+    public boolean playerHasOwnableCard(Class c) {
+        return (OwnableCard.playerHasCard(getCurrentPlayer(), c));
+    }
 
-        return jailButtons;
+    public int playerTurnsInJail() { return getCurrentPlayer().getTurnsInJail(); }
+
+    public void useOwnableCard(Class c) {
+        if (playerTurnsInJail() != 0)
+            OwnableCard.useChanceCard(getCurrentPlayer(), c);
+    }
+
+    public void payBailOut() {
+        if (playerTurnsInJail() != 0)
+            getCurrentPlayer().getPlayerAccount().withdraw(this.BAIL_OUT_PRICE);
+    }
+
+    public void grantFreedom() {
+        getCurrentPlayer().setTurnsInJail(0);
     }
 
     public boolean canPurchaseField() {
-        int playerBalance = getCurrentPlayer().getPlayerAcct().getBalance();
+        int playerBalance = getCurrentPlayer().getPlayerAccount().getBalance();
         int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
         Field currentPlayerField = Field.getFieldByID(currentPlayerFieldId);
 
@@ -59,7 +74,7 @@ public class GameController
         Field currentPlayerField = Field.getFieldByID(getCurrentPlayer().getCurrentField());
         if (currentPlayerField instanceof Ownable)
             if (!((Ownable) currentPlayerField).isOwned())
-                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current players buys the current field
+                ((Ownable) currentPlayerField).purchaseField(getCurrentPlayer()); // Current player buys the current field
     }
 
     public void playerLandsOnField() {
@@ -67,7 +82,7 @@ public class GameController
         currentPlayerField.landOnField(getCurrentPlayer());
     }
 
-    public void playerPassedField() {
+    public void playerPassedStart() {
         int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
         int previousPlayerFieldId = getCurrentPlayer().getPreviousField();
 
@@ -78,10 +93,15 @@ public class GameController
     public Field playerLandedOn() {
         int totalRolled = getCurrentPlayer().getDiceCup().getTotalEyes();
         getCurrentPlayer().moveCurrentField(totalRolled);
-        return null; // TODO: Wait for Field.getFieldById(int);
+        return Field.getFieldByID(getCurrentPlayer().getCurrentField());
     }
 
     public void nextPlayer() {
+        try {
+            getCurrentPlayer().getDiceCup().setDoublesRolled(0);
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("Player has gone bankrupt.");
+        }
         if (playerTurn + 1 < Player.getPlayers().size()) {
             playerTurn++;
         } else {
@@ -89,12 +109,8 @@ public class GameController
         }
     }
 
-    public int getPlayerTurn() {
-        return playerTurn;
-    }
-
     public Player getCurrentPlayer() {
-        return Player.getPlayers().get(getPlayerTurn());
+        return Player.getPlayers().get(playerTurn);
     }
 
     public Player getWinner() {
@@ -104,5 +120,59 @@ public class GameController
             return null;
     }
 
-    public List<Player> getPlayers() { return Player.getPlayers(); }
+    public void throwInJail() {
+        getCurrentPlayer().incrementTurnsInJail();
+        getCurrentPlayer().setCurrentField(11);
+    }
+
+    public List<Player> getPlayers() {
+        return Player.getPlayers();
+    }
+
+    public List<String> getButtOptions() {
+
+        List<String> buttOpts = new ArrayList<>();
+
+        if (getCurrentPlayer().getTurnsInJail() > 0) {
+            buttOpts.add("Kast og få to ens");
+
+            if (getCurrentPlayer().getPlayerAccount().getBalance() >= 1000)
+            buttOpts.add("Betal din bøde på 1000 kr.");
+
+            if (OwnableCard.playerHasCard(getCurrentPlayer(), FreeBailCard.class))
+                buttOpts.add("Brug Kom-Ud-Af-Fængsel-kort©");
+        }
+        else if (!getCurrentPlayer().getDiceCup().getHasRolled() || getCurrentPlayer().getDiceCup().wasRollDouble())
+            buttOpts.add("Kast terninger");
+
+        else
+            buttOpts.add("Afslut tur");
+
+        if (PurchaseLogic.playerCanDevelopPlots(getCurrentPlayer()))
+            buttOpts.add("Køb hus/hotel");
+
+        if (PurchaseLogic.getPlayerBuildingCount(getCurrentPlayer()) != 0)
+            buttOpts.add("Sælg hus/hotel");
+        return buttOpts;
+    }
+
+    public LandPlot[] getAvailablePlotsToBuildOn() {
+        return PurchaseLogic.getAvailablePlotsToBuildOn(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
+    }
+
+    public void checkBankruptcy() {
+        if (getCurrentPlayer().getPlayerAccount().getBalance() < 0) {
+            Ownable.resetPlayersPlots(getCurrentPlayer());
+            OwnableCard.resetOwnableCards(getCurrentPlayer());
+            getCurrentPlayer().removePlayer();
+        }
+    }
+
+    public Ownable[] getOwnedOwnables() {
+        return Ownable.getOwnedOwnables();
+    }
+
+    public LandPlot[] getPlayersDevelopedPlots() {
+        return PurchaseLogic.getPlayersDevelopedPlots(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
+    }
 }

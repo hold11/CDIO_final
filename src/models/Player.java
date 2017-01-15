@@ -7,7 +7,7 @@ package models;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import fields.Field;
 
@@ -17,19 +17,16 @@ import java.util.List;
 public class Player {
     private int playerID;
     private String playerName;
-    private BankAcct playerAcct;
+    private BankAccount playerAccount;
     private DiceCup diceCup;
     private int currentField;
     private int previousField;
-    private boolean isInJail = false; // TODO: Could we have this in a List instead somewhere?
+    private int turnsInJail = 0;
     private static final int STARTING_BALANCE = 30000;
 
     private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
     private static List<Player> players = new ArrayList<>();
 
-    /*
-    Anders made this. Not reused from del3.
-     */
     public Player() {
         this.playerID = nextPlayerId;
         nextPlayerId++;
@@ -39,17 +36,16 @@ public class Player {
 
         this.playerName = String.format("Player %s", this.playerID);
         this.diceCup = new DiceCup();
-        this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
+        this.playerAccount = Bank.createBankAcct(STARTING_BALANCE);
         players.add(this);
     }
 
-    //Reused from del3
     public Player(DiceCup diceCup) {
         this.playerName = String.format("Player %s", nextPlayerId);
         this.playerID = nextPlayerId;
         this.diceCup = diceCup;
 
-        this.playerAcct = Bank.createBankAcct(STARTING_BALANCE);
+        this.playerAccount = Bank.createBankAcct(STARTING_BALANCE);
         nextPlayerId++;
 
         this.currentField = 1;
@@ -59,13 +55,12 @@ public class Player {
 
     }
 
-    //Reused from del3
     public Player(String playerName) {
         this.playerName = playerName;
         this.playerID = nextPlayerId;
         this.diceCup = new DiceCup();
 
-        this.playerAcct = new BankAcct(STARTING_BALANCE);
+        this.playerAccount = new BankAccount(STARTING_BALANCE);
 
         nextPlayerId++;
 
@@ -75,13 +70,12 @@ public class Player {
         players.add(this);
     }
 
-    // Reused from del3
     public Player(String playerName, DiceCup diceCup) {
         this.playerName = playerName;
         this.playerID = nextPlayerId;
         this.diceCup = diceCup;
 
-        this.playerAcct = new BankAcct(STARTING_BALANCE);
+        this.playerAccount = new BankAccount(STARTING_BALANCE);
 
         nextPlayerId++;
 
@@ -91,57 +85,48 @@ public class Player {
         players.add(this);
     }
 
-    // Reused from del3
-    public BankAcct getPlayerAcct() {
-        return playerAcct;
+    public void setPlayerField(int fieldID) { this.currentField = fieldID; }
+
+    public BankAccount getPlayerAccount() {
+        return playerAccount;
     }
 
-    // Reused from del3
     public int getPlayerID() {
         return playerID;
     }
 
-    // Reused from del3
     public String getPlayerName() {
         return playerName;
     }
 
-    // Reused from del3
     public static List<Player> getPlayers()
     {
         return players;
     }
 
-    // Reused from del3
     public String toString() {
         return this.playerName;
     }
 
-    // Reused from del3
     public DiceCup getDiceCup() {
         return this.diceCup;
     }
 
-    // Reused from del3
     public int getPreviousField() {
         return this.previousField;
     }
 
-    // Reused from del3
     public int getCurrentField() {
         return this.currentField;
     }
 
-    // Reused from del3
     public void moveCurrentField(int diceCount) {
-//        models.GameBoard board = new models.GameBoard();
         if (this.currentField + diceCount > Field.getFields().length)
             this.setCurrentField(diceCount - Field.getFields().length + this.currentField);
         else
             this.setCurrentField(this.currentField + diceCount);
     }
 
-    // Reused from del3
     public void setCurrentField(int fieldID) {
         if (this.currentField == 0)
             this.previousField = this.currentField + 1;
@@ -150,20 +135,20 @@ public class Player {
         this.currentField = fieldID;
     }
 
-    public int getOwnedHouseCount() {
-        return 0;
+    public int getTurnsInJail() {
+        return this.turnsInJail;
     }
 
-    public int getOwnedHotelCount() {
-        return 0;
+    public void incrementTurnsInJail() {
+        this.turnsInJail += 1;
     }
 
-    public boolean isInJail() {
-        return isInJail;
+    public void setTurnsInJail(int amount) {
+        this.turnsInJail = amount;
     }
 
-    public void setInJail(boolean inJail) {
-        isInJail = inJail;
+    public void removePlayer() {
+        this.players.remove(this);
     }
 
     @Override
@@ -176,22 +161,10 @@ public class Player {
         if (playerID != player.playerID) return false;
         if (currentField != player.currentField) return false;
         if (previousField != player.previousField) return false;
-        if (isInJail != player.isInJail) return false;
+        if (turnsInJail != player.turnsInJail) return false;
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
-        if (playerAcct != null ? !playerAcct.equals(player.playerAcct) : player.playerAcct != null) return false;
+        if (playerAccount != null ? !playerAccount.equals(player.playerAccount) : player.playerAccount != null) return false;
         return diceCup != null ? diceCup.equals(player.diceCup) : player.diceCup == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = playerID;
-        result = 31 * result + (playerName != null ? playerName.hashCode() : 0);
-        result = 31 * result + (playerAcct != null ? playerAcct.hashCode() : 0);
-        result = 31 * result + (diceCup != null ? diceCup.hashCode() : 0);
-        result = 31 * result + currentField;
-        result = 31 * result + previousField;
-        result = 31 * result + (isInJail ? 1 : 0);
-        return result;
     }
 
     public static void reset() {

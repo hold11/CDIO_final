@@ -7,12 +7,11 @@ package models;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.*;
 import java.lang.*;
 
 /**
@@ -21,15 +20,20 @@ import java.lang.*;
  * imported from CDIO_del3 develop branch on 2017-01-06.
  */
 public class DiceCup {
-    private Collection<Die> dice = new ArrayList<Die>();
+    protected Collection<Die> dice = new ArrayList<Die>();
     protected Collection<Integer> results = new ArrayList<Integer>();
 
-    private static int diceCount;
-    private static int faceCount;
+    protected static int diceCount;
+    protected static int faceCount;
+
+    protected int doublesRolled;
+    protected boolean hasRolled;
 
     public DiceCup() {
         this.diceCount = 2;
         this.faceCount = 6;
+        this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice();
     }
 
@@ -38,6 +42,8 @@ public class DiceCup {
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = diceCount;
         this.faceCount = 6;
+        this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice();
     }
 
@@ -46,6 +52,8 @@ public class DiceCup {
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = diceCount;
         this.faceCount = faceCount;
+        this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice();
     }
 
@@ -53,6 +61,8 @@ public class DiceCup {
         if (diceCount < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = diceCount;
+        this.doublesRolled = 0;
+        this.hasRolled = false;
 
         initDice(die);
     }
@@ -61,6 +71,8 @@ public class DiceCup {
         if (dice.size() < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = dice.size();
+        this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice(dice);
     }
 
@@ -86,9 +98,14 @@ public class DiceCup {
 
     public void roll() {
         this.results.clear();
+        this.hasRolled = true;
 
         for (Die die : dice)
             this.results.add(die.getRolledDieResult());
+
+        if (getResultArr()[0] == getResultArr()[1]) {
+            this.doublesRolled++;
+        }
     }
 
     public Collection<Integer> getResults() {
@@ -100,10 +117,6 @@ public class DiceCup {
         return results;
     }
 
-    /**
-     * getTotalEyes returns the total number of eyes of the rolled dice.
-     * @return
-     */
     public int getTotalEyes() {
         int total = 0;
 
@@ -112,11 +125,35 @@ public class DiceCup {
         return total;
     }
 
+    public void resetDicecup() {
+        this.results.clear();
+    }
+
     public int[] getResultArr() {
         int[] results = new int[2];
         int i = 0;
         for (Iterator<Integer> iter = this.getResults().iterator(); iter.hasNext(); i++)
             results[i] = iter.next();
         return results;
+    }
+
+    public int getDoublesRolled() {
+        return doublesRolled;
+    }
+
+    public void setDoublesRolled(int val) {
+        this.doublesRolled = val;
+    }
+
+    public boolean wasRollDouble() {
+        return getResultArr()[0] == getResultArr()[1];
+    }
+
+    public boolean getHasRolled() {
+        return this.hasRolled;
+    }
+
+    public void resetHasRolled() {
+        this.hasRolled = false;
     }
 }

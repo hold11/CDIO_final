@@ -7,7 +7,7 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
 
@@ -30,9 +30,18 @@ public class Tax extends Field
 
     @Override
     public void landOnField(Player player) {
-        // TODO: amount or percentage?
+        if (percentage == 0) {
+            player.getPlayerAccount().withdraw(amount);
+        } else {
+            if (player.getPlayerAccount().getBalance() < player.getPlayerAccount().getGrossWorth(player) * percentage){
+                player.getPlayerAccount().withdraw(amount);
+            } else {
+                player.getPlayerAccount().withdraw((int)(player.getPlayerAccount().getGrossWorth(player) * percentage));
+            }
+        }
     }
 
+    // Converts decimal to percentage
     public double getPercentageInPercent() {
         double percentagalizer = this.percentage * 100;
         return (int) percentagalizer;

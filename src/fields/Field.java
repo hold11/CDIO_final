@@ -7,7 +7,7 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import lang.Lang;
 import models.Player;
@@ -39,6 +39,31 @@ public abstract class Field
         for (Field f: fields)
             if (f.getFieldId() == ID)
                 return f;
+        return null;
+    }
+
+    public static Field getFieldByName(String name) {
+        for (Field f: fields)
+            if (f.toString().equals(name))
+                return f;
+        return null;
+    }
+
+    public static Field getNextFieldOfType(Player player, Class c) {
+        for (int i = player.getCurrentField(); i < Field.getFields().length; i++) {
+            if (Field.getFields()[i].getClass().equals(c)) {
+                return Field.getFields()[i];
+            }
+        }
+        return null;
+    }
+
+    public static Field getNextFieldOfType(int index, Class c) {
+        for (int i = index; i < Field.getFields().length; i++) {
+            if (Field.getFields()[i].getClass().equals(c)) {
+                return Field.getFields()[i];
+            }
+        }
         return null;
     }
 }

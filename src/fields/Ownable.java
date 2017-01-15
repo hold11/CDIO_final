@@ -7,18 +7,18 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Ownable extends Field
 {
     protected int price;
     protected Player owner;
-//    protected static List<Ownable> getOwnedOwnables = new ArrayList<>();
     public abstract int getRent();
 
     public Ownable(int fieldID, int price) {
@@ -33,22 +33,18 @@ public abstract class Ownable extends Field
                 if (((Ownable) field).getOwner() != null)
                     ownedOwnables.add(((Ownable) field));
         }
-        return ownedOwnables.toArray(new Ownable[ownedOwnables.size()]);
+        return ownedOwnables.stream().toArray(Ownable[]::new);
     }
 
     public boolean isOwned() {
-        if (this.owner == null)
-            return false;
-        else
-            return true;
+        return (this.owner != null);
     }
 
     public void purchaseField(Player player) {
-        if (!isOwned() && player.getPlayerAcct().getBalance() >= this.price) {
+        if (!isOwned() && player.getPlayerAccount().getBalance() >= this.price) {
             this.owner = player;
-//            getOwnedOwnables.add(this);
-            player.getPlayerAcct().withdraw(this.price);
-            System.out.println(this.owner + " just bought " + this.toString());
+            player.getPlayerAccount().withdraw(this.price);
+            System.out.println("[Ownable]: " + this.owner + " just bought " + this.toString());
         }
     }
 
@@ -57,4 +53,20 @@ public abstract class Ownable extends Field
     public int getPrice() {
         return price;
     }
+
+    public static void resetPlayersPlots(Player player) {
+        // Reset the ownership
+        Arrays.stream(getOwnedOwnables())
+                .filter(ownable -> ownable.getOwner().equals(player))
+                .forEach(Ownable::resetOwnership);
+
+        // Reset House Count
+        Arrays.stream(getOwnedOwnables())
+                .filter(ownable -> ownable instanceof LandPlot)
+                .forEach(landPlot -> ((LandPlot) landPlot).setHouseCount(0));
+
+        // TODO: Add methods for removing gui plots, houses and hotels
+    }
+
+    public void resetOwnership() { this.owner = null; }
 }

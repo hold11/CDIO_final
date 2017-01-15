@@ -7,8 +7,9 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
+import chanceCards.ChanceCard;
 import models.Player;
 
 public class ChanceField extends Field
@@ -19,6 +20,8 @@ public class ChanceField extends Field
 
     @Override
     public void landOnField(Player player) {
-
+        ChanceCard c = ChanceCard.drawChanceCard();
+        System.out.println(c.toString());
+        c.receiveCard(player);
     }
 }

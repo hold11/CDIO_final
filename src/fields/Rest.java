@@ -7,14 +7,14 @@ package fields;/*
       /##(   )##\    |_| |_|\_/|_|\__,_|  |_____|_____|  | Iman Chelhi (s165228), Troels Just Christoffersen (s120052),
      /#.--   --.#\                                       | Sebastian Tibor Bakonyvári (s145918)
     /`           ´\                                      |
- */
+*/
 
 import models.Player;
 
 public class Rest extends Field
 {
     private int reward;
-    private boolean isJail; // This is so that the GUI are able to differentiate between the jail and visit jail (our backend differs from the GUI backend)
+    private boolean isJail; // This is so that the GUI is able to differentiate between the jail and visit jail (our backend differs from the GUI backend)
 
     public Rest(int fieldID) {
         super(fieldID);
@@ -35,7 +35,7 @@ public class Rest extends Field
     public void passedField(Player player) {
         System.out.println("   [Rest Passed]: ");
         System.out.println("      " + player + " has received " + this.reward + " for passing START.");
-        player.getPlayerAcct().deposit(this.reward);
+        player.getPlayerAccount().deposit(this.reward);
     }
 
     public boolean isJail() {

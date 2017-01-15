@@ -1,4 +1,4 @@
-package models;/*
+package chanceCards;/*
            ,                                             |
           /#\         _         _     _    ___   ___     | Project: Matador - CDIO_final
          /###\       | |__   _ | | __| |  /_  | /_  |    | Version: v0.1.0
@@ -9,26 +9,25 @@ package models;/*
     /`           ´\                                      |
 */
 
-import java.util.List;
-import java.util.ArrayList;
+import models.Player;
 
-public class Bank
+public class GrantCard extends ChanceCard
 {
-    private static List<BankAccount> bankAccounts = new ArrayList<>();
+    private int changeBalance;
+    private int allowedAmount;
 
-    public static BankAccount createBankAcct() {
-        BankAccount bankAccount = new BankAccount();
-        bankAccounts.add(bankAccount);
-        return bankAccount;
+    public GrantCard(int chanceCardID,  int changeBalance, int allowedAmount) {
+        super(chanceCardID);
+        this.changeBalance = changeBalance;
+        this.allowedAmount = allowedAmount;
     }
 
-    public static BankAccount createBankAcct(int startingBalance) {
-        BankAccount bankAccount = new BankAccount(startingBalance);
-        bankAccounts.add(bankAccount);
-        return bankAccount;
-    }
 
-    public static List<BankAccount> getBankAccounts() {
-        return bankAccounts;
+
+    @Override
+    public void receiveCard(Player player) {
+        if (player.getPlayerAccount().getGrossWorth(player) < allowedAmount) {
+            player.getPlayerAccount().deposit(changeBalance);
+        }
     }
 }
