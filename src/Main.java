@@ -199,7 +199,7 @@ public class Main {
 
     private void aPlayerHasWon() {
         if (game.getWinner() != null)
-            System.out.println(game.getWinner() + " has won the game!");
+            System.out.println(game.getWinner() + " h as won the game!");
     }
 
     private void getPlayerName() {
@@ -305,8 +305,10 @@ public class Main {
     private void setupAutoGame() {
         gui = new GUIController();
 
-        int[] d1p1 = { 1, 6, 5, 6, 5, 4, 5, 5, 1, 6 };
-        int[] d2p1 = { 6, 1, 3, 2, 5, 3, 3, 4, 6, 5 };
+        int[] d1p1 = { 1, 6, 5, 6, 5, 2, 5, 5, 1, 6 };
+        int[] d2p1 = { 2, 1, 3, 2, 6, 2, 3, 4, 6, 5 };
+
+
 
         int[] d1p2 = { 1, 6, 5, 4, 4, 4, 4, 3, 4, 5 };
         int[] d2p2 = { 5, 4, 1, 3, 3, 3, 3, 2, 6, 3 };
@@ -317,6 +319,10 @@ public class Main {
         getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(d1p1, d2p1));
         getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(d1p2, d2p2));
         getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(d1p3, d2p3));
+
+        ((Ownable) Field.getFields()[6]).purchaseField(Player.getPlayers().get(0));
+        ((Ownable) Field.getFields()[8]).purchaseField(Player.getPlayers().get(0));
+        ((Ownable) Field.getFields()[9]).purchaseField(Player.getPlayers().get(0));
 
         gui.createPlayers(game.getPlayers());
     }
