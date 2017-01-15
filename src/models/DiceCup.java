@@ -27,11 +27,13 @@ public class DiceCup {
     protected static int faceCount;
 
     protected int doublesRolled;
+    protected boolean hasRolled;
 
     public DiceCup() {
         this.diceCount = 2;
         this.faceCount = 6;
         this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice();
     }
 
@@ -41,6 +43,7 @@ public class DiceCup {
         this.diceCount = diceCount;
         this.faceCount = 6;
         this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice();
     }
 
@@ -50,6 +53,7 @@ public class DiceCup {
         this.diceCount = diceCount;
         this.faceCount = faceCount;
         this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice();
     }
 
@@ -58,6 +62,7 @@ public class DiceCup {
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = diceCount;
         this.doublesRolled = 0;
+        this.hasRolled = false;
 
         initDice(die);
     }
@@ -66,6 +71,8 @@ public class DiceCup {
         if (dice.size() < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
         this.diceCount = dice.size();
+        this.doublesRolled = 0;
+        this.hasRolled = false;
         initDice(dice);
     }
 
@@ -91,6 +98,7 @@ public class DiceCup {
 
     public void roll() {
         this.results.clear();
+        this.hasRolled = true;
 
         for (Die die : dice)
             this.results.add(die.getRolledDieResult());
@@ -139,5 +147,13 @@ public class DiceCup {
 
     public boolean wasRollDouble() {
         return getResultArr()[0] == getResultArr()[1];
+    }
+
+    public boolean getHasRolled() {
+        return this.hasRolled;
+    }
+
+    public void setHasRolled() {
+        this.hasRolled = false;
     }
 }

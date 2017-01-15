@@ -153,10 +153,11 @@ public class GameController
             if (getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD))
                 buttOpts.add("Use Free Bail Card");
         }
-        else { //if (game.getCurrentPlayer().getDiceCup().getTotalEyes() == 0) TODO: Make sure the DiceCup gets reset or somehow has a tag that says it's already been rolled this turn!
+        else if (!getCurrentPlayer().getDiceCup().getHasRolled() || getCurrentPlayer().getDiceCup().wasRollDouble())
             buttOpts.add("Roll");
-        }
 
+        else
+            buttOpts.add("End turn");
 
         if (PurchaseLogic.playerCanDevelopPlots(getCurrentPlayer()))
             buttOpts.add("Buy house/hotel");

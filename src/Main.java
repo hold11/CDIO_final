@@ -148,6 +148,8 @@ public class Main {
         } else {
             // Next Player
             cli.displayEndBalance(game.getCurrentPlayer());
+            showButtOptions();
+            game.getCurrentPlayer().getDiceCup().setHasRolled();
             game.nextPlayer();
         }
     }
@@ -220,12 +222,15 @@ public class Main {
     }
 
     private void showButtOptions() {
+        if (game.getButtOptions().size() == 0)
+            return;
         String answer = gui.getButtOption(game.getCurrentPlayer().getPlayerName(), game.getButtOptions());
 
         switch (answer) {
             case "Roll":
                 playerRoll();
-                showButtOptions();
+                break;
+            case "End turn":
                 break;
             case "Pay bail out. 1000,-":
                 payBail();
