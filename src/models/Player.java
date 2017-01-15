@@ -22,7 +22,7 @@ public class Player {
     private int currentField;
     private int previousField;
     private int turnsInJail = 0;
-    private static final int STARTING_BALANCE = 4000;
+    private static final int STARTING_BALANCE = 30000;
 
     private static int nextPlayerId = 1; // This variable is for defining the player ID for the next player that gets constructed.
     private static List<Player> players = new ArrayList<>();
