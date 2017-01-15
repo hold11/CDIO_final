@@ -153,7 +153,7 @@ public class DiceCup {
         return this.hasRolled;
     }
 
-    public void setHasRolled() {
+    public void resetHasRolled() {
         this.hasRolled = false;
     }
 }

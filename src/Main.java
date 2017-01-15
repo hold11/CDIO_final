@@ -99,10 +99,9 @@ public class Main {
         int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
 
         // if player gets 3 double rolls, throw player in jail
-//        System.out.println("[playNormalTurn]: Double roll = " + game.getCurrentPlayer().getDiceCup().getDoublesRolled());
         if (doubleRollCount == 3) {
             game.throwInJail();
-            gui.moveCars(game.getCurrentPlayer());
+            GUI.GUI.setCar(game.getCurrentPlayer().getCurrentField(), game.getCurrentPlayer().getPlayerName());
             cli.displayThreeDoubleRoll();
             cli.displayEndTurn();
             cli.displayEndBalance(game.getCurrentPlayer());
@@ -110,15 +109,12 @@ public class Main {
             return;
         }
 
-        Field playerLandedOn = game.playerLandedOn();
-        // Player landed on a field
-        game.playerLandsOnField();
-        cli.displayLandedOn(game.getCurrentPlayer());
-
         // Move the player's car
         gui.moveCars(game.getCurrentPlayer());
 
-//        System.out.println("   [Main 1]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
+        // Player landed on a field
+        game.playerLandsOnField();
+        cli.displayLandedOn(game.getCurrentPlayer());
 
         // Purchase field if the player can and want to
         if (game.canPurchaseField()) {
@@ -132,24 +128,21 @@ public class Main {
 //        if (playerLandedOn.getFieldId() != game.getCurrentPlayer().getCurrentField())
 //            gui.moveCars(game.getCurrentPlayer());
 
-        if (playerLandedOn instanceof Rest)
-            if (((Rest) playerLandedOn).isJail())
-                gui.moveCars(game.getCurrentPlayer());
+        // Player passed start?
+        game.playerPassedStart();
 
-        // Player passed a field
-        game.playerPassedField();
+        // Update balance of all players
         gui.updateBalance(game.getPlayers());
-//        System.out.println("         [Main Balance]: " + game.getCurrentPlayer() + " has kr. " + game.getCurrentPlayer().getPlayerAccount().getBalance());
 
         // Give extra turn if player rolled a double
         if (game.getCurrentPlayer().getDiceCup().wasRollDouble() && doubleRollCount < 3) {
             showButtOptions();
             playNormalTurn();
         } else {
-            // Next Player
+            // Last chance to do business then next player
             cli.displayEndBalance(game.getCurrentPlayer());
             showButtOptions();
-            game.getCurrentPlayer().getDiceCup().setHasRolled();
+            game.getCurrentPlayer().getDiceCup().resetHasRolled();
             game.nextPlayer();
         }
     }
@@ -193,7 +186,7 @@ public class Main {
 //                game.nextPlayer();
 //            }
 //        }
-        if (game.getCurrentPlayer().getTurnsInJail() == 3 && gui.getPayBailOut()) {
+        if (game.playerTurnsInJail() == 3 && gui.getPayBailOut()) {
             grantFreedom();
         } else {
             cli.displayEndBalance(game.getCurrentPlayer());
@@ -224,6 +217,7 @@ public class Main {
     private void showButtOptions() {
         if (game.getButtOptions().size() == 0)
             return;
+
         String answer = gui.getButtOption(game.getCurrentPlayer().getPlayerName(), game.getButtOptions());
 
         switch (answer) {

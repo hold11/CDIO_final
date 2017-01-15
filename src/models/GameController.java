@@ -34,32 +34,19 @@ public class GameController
         getCurrentPlayer().getDiceCup().roll();
     }
 
-    public List<Jail.buttons>getJailButtons() {
-        List<Jail.buttons> jailButtons = new ArrayList<>();
-
-        if (getCurrentPlayer().getPlayerAccount().getBalance() >= 1000) {
-            jailButtons.add(Jail.buttons.PAY_BAIL_OUT);
-        }
-        if (OwnableCard.playerHasCard(getCurrentPlayer(), FreeBailCard.class)) {
-            jailButtons.add(Jail.buttons.FREE_BAIL_CARD);
-        }
-
-        return jailButtons;
-    }
-
     public boolean playerHasOwnableCard(Class c) {
         return (OwnableCard.playerHasCard(getCurrentPlayer(), c));
     }
 
-    public boolean playerIsInJail() { return (getCurrentPlayer().getTurnsInJail() != 0); }
+    public int playerTurnsInJail() { return getCurrentPlayer().getTurnsInJail(); }
 
     public void useOwnableCard(Class c) {
-        if (playerIsInJail())
+        if (playerTurnsInJail() != 0)
             OwnableCard.useChanceCard(getCurrentPlayer(), c);
     }
 
     public void payBailOut() {
-        if (playerIsInJail())
+        if (playerTurnsInJail() != 0)
             getCurrentPlayer().getPlayerAccount().withdraw(this.BAIL_OUT_PRICE);
     }
 
@@ -93,7 +80,7 @@ public class GameController
         currentPlayerField.landOnField(getCurrentPlayer());
     }
 
-    public void playerPassedField() {
+    public void playerPassedStart() {
         int currentPlayerFieldId = getCurrentPlayer().getCurrentField();
         int previousPlayerFieldId = getCurrentPlayer().getPreviousField();
 
@@ -116,12 +103,8 @@ public class GameController
         }
     }
 
-    public int getPlayerTurn() {
-        return playerTurn;
-    }
-
     public Player getCurrentPlayer() {
-        return Player.getPlayers().get(getPlayerTurn());
+        return Player.getPlayers().get(playerTurn);
     }
 
     public Player getWinner() {
@@ -147,10 +130,10 @@ public class GameController
         if (getCurrentPlayer().getTurnsInJail() > 0) {
             buttOpts.add("Roll a double to get out");
 
-            if (getJailButtons().contains(Jail.buttons.PAY_BAIL_OUT))
-                buttOpts.add("Pay bail out. 1000,-");
+            if (getCurrentPlayer().getPlayerAccount().getBalance() >= 1000)
+            buttOpts.add("Pay bail out. 1000,-");
 
-            if (getJailButtons().contains(Jail.buttons.FREE_BAIL_CARD))
+            if (OwnableCard.playerHasCard(getCurrentPlayer(), FreeBailCard.class))
                 buttOpts.add("Use Free Bail Card");
         }
         else if (!getCurrentPlayer().getDiceCup().getHasRolled() || getCurrentPlayer().getDiceCup().wasRollDouble())
