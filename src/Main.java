@@ -19,6 +19,8 @@ import models.GameController;
 import models.Player;
 import GUI.GUIController;
 
+import java.util.Arrays;
+
 public class Main {
 
     private static GUIController gui;
@@ -97,6 +99,26 @@ public class Main {
         gameLoop();
     }
 
+    private void checkBankruptcy() {
+        if (game.getCurrentPlayer().getPlayerAccount().getBalance() < 0) {
+            GUI.GUI.removeAllCars(game.getCurrentPlayer().getPlayerName());
+            for (Ownable o : game.getOwnedOwnables()) {
+                if (o instanceof LandPlot) {
+                    LandPlot l = ((LandPlot) o);
+                    GUI.GUI.setHouses(o.getFieldId(), 0);
+                    GUI.GUI.setHotel(o.getFieldId(), false);
+                }
+            }
+
+            Arrays.stream(game.getOwnedOwnables())
+                    .filter(ownable -> ownable.getOwner().equals(game.getCurrentPlayer()))
+                    .forEach(ownable -> GUI.GUI.removeOwner(ownable.getFieldId()));
+
+            game.checkBankruptcy();
+            gui.createPlayers(game.getPlayers());
+        }
+    }
+
     private void playNormalTurn() {
         int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
 
@@ -150,6 +172,7 @@ public class Main {
         } else {
             // Next Player
             cli.displayEndBalance(game.getCurrentPlayer());
+            checkBankruptcy();
             game.nextPlayer();
         }
     }
@@ -235,12 +258,12 @@ public class Main {
         gui = new GUIController();
 
         int[] autoRolls1 = { 2, 2, 2, 3, 2, 7, 5, 6, 7, 7, 6, 2, 3 };
-        int[] autoRolls2 = { 2, 5, 4, 11, 5, 3, 4, 5, 5, 5 };
+        int[] autoRolls2 = { 35, 3, 2, 4, 11, 5, 3, 4, 5, 5, 5 };
         int[] autoRolls3 = { 3, 6, 6, 6, 7, 7, 6, 2, 3 };
 
         getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(autoRolls1));
         getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(autoRolls2));
-//        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
+        getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(autoRolls3));
 
         gui.createPlayers(game.getPlayers());
     }

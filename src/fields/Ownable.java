@@ -12,6 +12,7 @@ package fields;/*
 import models.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Ownable extends Field
@@ -32,7 +33,7 @@ public abstract class Ownable extends Field
                 if (((Ownable) field).getOwner() != null)
                     ownedOwnables.add(((Ownable) field));
         }
-        return ownedOwnables.toArray(new Ownable[ownedOwnables.size()]);
+        return ownedOwnables.stream().toArray(Ownable[]::new);
     }
 
     public boolean isOwned() {
@@ -52,4 +53,20 @@ public abstract class Ownable extends Field
     public int getPrice() {
         return price;
     }
+
+    public static void resetPlayersPlots(Player player) {
+        // Reset the ownership
+        Arrays.stream(getOwnedOwnables())
+                .filter(ownable -> ownable.getOwner().equals(player))
+                .forEach(Ownable::resetOwnership);
+
+        // Reset House Count
+        Arrays.stream(getOwnedOwnables())
+                .filter(ownable -> ownable instanceof LandPlot)
+                .forEach(landPlot -> ((LandPlot) landPlot).setHouseCount(0));
+
+        // TODO: Add methods for removing gui plots, houses and hotels
+    }
+
+    public void resetOwnership() { this.owner = null; }
 }
