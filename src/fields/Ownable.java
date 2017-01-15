@@ -69,4 +69,12 @@ public abstract class Ownable extends Field
     }
 
     public void resetOwnership() { this.owner = null; }
+
+    public static void resetAllFields() {
+        for (Field f : Field.getFields()) {
+            if (f instanceof Ownable) {
+                ((Ownable) f).owner = null;
+            }
+        }
+    }
 }
