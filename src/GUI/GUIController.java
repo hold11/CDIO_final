@@ -11,6 +11,8 @@ package GUI;/*
 
 
 import GUI.backend.Car;
+import chanceCards.ChanceCard;
+import fields.ChanceField;
 import fields.LandPlot;
 import models.Player;
 
@@ -125,6 +127,11 @@ public class GUIController {
 //                GUI.removeOwner(i);
 //        }
 //    }
+
+    public void showChanceCard(String cardText) {
+        GUI.displayChanceCard(cardText);
+        GUI.getUserButtonPressed("", "OK");
+    }
 
     public void updateBalance(List<Player> players) {
         for (Player player : players)
