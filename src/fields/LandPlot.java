@@ -46,7 +46,7 @@ public class LandPlot extends Ownable
 
     @Override
     public int getRent() {
-        if (this.playerHasAllPlotsInGroup() && this.houseCount == 0)
+        if (this.playerHasAllPlotsInGroup(this.owner) && this.houseCount == 0)
             return rents[houseCount] * 2;
         return rents[houseCount];
     }
@@ -78,11 +78,11 @@ public class LandPlot extends Ownable
         return groupedPlots.toArray(new LandPlot[groupedPlots.size()]);
     }
 
-    public boolean playerHasAllPlotsInGroup() {
+    public boolean playerHasAllPlotsInGroup(Player player) {
         int groupPlotsCount = getAllPlotsInGroup().length;
 
         for (LandPlot l : getAllPlotsInGroup()) {
-            if (l.getOwner() == this.owner)
+            if (l.getOwner() == player)
                 groupPlotsCount--;
         }
         return (groupPlotsCount == 0);

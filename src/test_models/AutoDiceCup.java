@@ -40,6 +40,7 @@ public class AutoDiceCup extends models.DiceCup {
     @Override
     public void roll() {
         this.results.clear();
+        this.hasRolled = true;
 
         if (this.rolls1.size() > 0) {
             this.results.add(rolls1.get(0));

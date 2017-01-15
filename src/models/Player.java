@@ -40,7 +40,6 @@ public class Player {
         players.add(this);
     }
 
-    //Reused from del3
     public Player(DiceCup diceCup) {
         this.playerName = String.format("Player %s", nextPlayerId);
         this.playerID = nextPlayerId;
@@ -56,7 +55,6 @@ public class Player {
 
     }
 
-    //Reused from del3
     public Player(String playerName) {
         this.playerName = playerName;
         this.playerID = nextPlayerId;
