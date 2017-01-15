@@ -95,7 +95,11 @@ public class GameController
     }
 
     public void nextPlayer() {
-        getCurrentPlayer().getDiceCup().setDoublesRolled(0);
+        try {
+            getCurrentPlayer().getDiceCup().setDoublesRolled(0);
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("Player has gone bankrupt.");
+        }
         if (playerTurn + 1 < Player.getPlayers().size()) {
             playerTurn++;
         } else {
@@ -153,6 +157,16 @@ public class GameController
     public LandPlot[] getAvailablePlotsToBuildOn() {
         return PurchaseLogic.getAvailablePlotsToBuildOn(getCurrentPlayer()).stream().toArray(LandPlot[]::new);
     }
+
+    public void checkBankruptcy() {
+        if (getCurrentPlayer().getPlayerAccount().getBalance() < 0) {
+            Ownable.resetPlayersPlots(getCurrentPlayer());
+            OwnableCard.resetOwnableCards(getCurrentPlayer());
+            getCurrentPlayer().removePlayer();
+        }
+    }
+
+    public Ownable[] getOwnedOwnables() { return Ownable.getOwnedOwnables(); }
 
     public LandPlot[] getPlayersDevelopedPlots() {
         return PurchaseLogic.getPlayersDevelopedPlots(getCurrentPlayer()).stream().toArray(LandPlot[]::new);

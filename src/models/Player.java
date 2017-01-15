@@ -147,6 +147,10 @@ public class Player {
         this.turnsInJail = amount;
     }
 
+    public void removePlayer() {
+        this.players.remove(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
