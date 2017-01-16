@@ -102,7 +102,7 @@ public abstract class ChanceCard
 
     public static void shuffleCards() {
         Collections.shuffle(deck);
-        chanceCards = deck.stream().toArray(ChanceCard[]::new); // TODO: ensure you understand what the heck this is :D
+        chanceCards = deck.stream().toArray(ChanceCard[]::new);
     }
 
     @Override
