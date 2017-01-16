@@ -216,6 +216,7 @@ public class Main {
                 break;
             case "Betal din bøde på 1000 kr.":
                 payBail();
+                gui.updateBalance(game.getPlayers());
                 break;
             case "Brug Kom-Ud-Af-Fængsel-kort©":
                 freeBail();
@@ -226,10 +227,12 @@ public class Main {
             case "Køb hus/hotel":
                 buyBuilding();
                 showButtonOptions();
+                gui.updateBalance(game.getPlayers());
                 break;
             case "Sælg hus/hotel":
                 sellBuilding();
                 showButtonOptions();
+                gui.updateBalance(game.getPlayers());
                 break;
             default:
                 System.out.println("YOU BROKE IT! WHAT A GOOF!");
