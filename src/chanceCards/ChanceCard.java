@@ -56,7 +56,6 @@ public abstract class ChanceCard
         cCards.add(new MoveCard(10, Field.getFieldByID(1)));
         cCards.add(new BalanceCard(11, true, 500));
         cCards.add(new MoveCard(12, Field.getFieldByID(40)));
-        cCards.add(new MoveCard(13, Field.getFieldByID(16)));
         cCards.add(new BalanceCard(14, false, -1000));
         cCards.add(new BalanceCard(15, false, -200));
         cCards.add(new BalanceCard(16, false, -200));
