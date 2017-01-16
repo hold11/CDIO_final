@@ -18,7 +18,8 @@ import java.util.List;
 public class PurchaseLogic {
 
     public static void buyHouse(LandPlot landplot) {
-        if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)) {
+        if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)
+                && landplot.getOwner().getPlayerAccount().getBalance() >= landplot.getHousePrice()) {
             landplot.getOwner().getPlayerAccount().withdraw(landplot.getHousePrice());
             landplot.setHouseCount(landplot.getHouseCount() + 1);
             System.out.println("[PurchaseLogic]: " + "player bought a house on " + landplot.toString());

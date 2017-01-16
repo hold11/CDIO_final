@@ -81,7 +81,6 @@ public class ReadFields {
 
     private static LandPlot createLandPlot(Element element, int index) {
         // Fetch all the data for the field:
-//        int fieldId = getTagValue(element, "id");
         int fieldId = index;
         int groupId = getAttrValueInt(element, "groupId");
         int price = getTagValue(element, "price");
