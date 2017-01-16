@@ -73,8 +73,6 @@ public class PurchaseLogic {
                     result.add(((LandPlot) o));
             }
         }
-        // TODO: Finish sentence below...
-        // return result.toArray(new LandPlot[result.size()]); was the
         return result.stream().toArray(LandPlot[]::new);
     }
 

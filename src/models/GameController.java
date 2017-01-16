@@ -9,7 +9,6 @@ package models;/*
     /`           ´\                                      |
 */
 
-import GUI.fields.Chance;
 import chanceCards.ChanceCard;
 import chanceCards.FreeBailCard;
 import chanceCards.OwnableCard;
