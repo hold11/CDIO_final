@@ -175,6 +175,7 @@ public class Main {
         showButtonOptions();
 
         if (game.playerTurnsInJail() == 3 && gui.getPayBailOut()) {
+            gui.updateBalance(game.getPlayers());
             grantFreedom();
         } else {
             cli.displayEndBalance(game.getCurrentPlayer());
@@ -216,7 +217,6 @@ public class Main {
                 break;
             case "Betal din bøde på 1000 kr.":
                 payBail();
-                gui.updateBalance(game.getPlayers());
                 break;
             case "Brug Kom-Ud-Af-Fængsel-kort©":
                 freeBail();
@@ -227,12 +227,10 @@ public class Main {
             case "Køb hus/hotel":
                 buyBuilding();
                 showButtonOptions();
-                gui.updateBalance(game.getPlayers());
                 break;
             case "Sælg hus/hotel":
                 sellBuilding();
                 showButtonOptions();
-                gui.updateBalance(game.getPlayers());
                 break;
             default:
                 System.out.println("YOU BROKE IT! WHAT A GOOF!");
@@ -289,6 +287,7 @@ public class Main {
         else
             if (fieldAns.getOwner().getPlayerAccount().getBalance() >= fieldAns.getHousePrice())
                 GUI.GUI.setHotel(fieldAns.getFieldId(), true);
+        gui.updateBalance(game.getPlayers());
     }
 
     private void sellBuilding() {
@@ -304,6 +303,7 @@ public class Main {
             GUI.GUI.setHouses(fieldAns.getFieldId(), fieldAns.getHouseCount());
         else
             GUI.GUI.setHotel(fieldAns.getFieldId(), false);
+        gui.updateBalance(game.getPlayers());
     }
 
     private void setupAutoGame() {

@@ -69,7 +69,7 @@ public class PurchaseLogic {
         List<LandPlot> result = new ArrayList<>();
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot) {
-                if (((LandPlot) o).playerHasAllPlotsInGroup(player) && ((LandPlot) o).getHouseCount() < 5)
+                if (((LandPlot) o).playerHasAllPlotsInGroup(player))
                     result.add(((LandPlot) o));
             }
         }
