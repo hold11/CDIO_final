@@ -273,7 +273,6 @@ public class Main {
         playNormalTurn();
     }
 
-    @SuppressWarnings("fieldAns.getHouseCount() will never generate a NullPointerException.")
     private void buyBuilding() {
         String answer = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
         LandPlot fieldAns = ((LandPlot) Field.getFieldByName(answer));
@@ -293,7 +292,6 @@ public class Main {
         gui.updateBalance(game.getPlayers());
     }
 
-    @SuppressWarnings("fieldAns.getHouseCount() will never generate a NullPointerException.")
     private void sellBuilding() {
         String answer = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
         LandPlot fieldAns = ((LandPlot) Field.getFieldByName(answer));
