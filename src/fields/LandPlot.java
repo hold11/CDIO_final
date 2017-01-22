@@ -17,7 +17,7 @@ import java.util.List;
 public class LandPlot extends Ownable
 {
     // [0] : 0 houses, [1] : 1 house,  [2] : 2 houses
-    // [3] : 3 houses, [4] : 4 houses, [5] : 1 hotel
+    // [3] : 3 houses, [4] : 4 houses, [5] : 1 hotel test
     private int rents[] = new int[6];
     private int housePrice;
     private int houseCount;
