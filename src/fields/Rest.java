@@ -13,7 +13,7 @@ import models.Player;
 
 public class Rest extends Field
 {
-    private int reward;
+    private final int reward;
     private boolean isJail; // This is so that the GUI is able to differentiate between the jail and visit jail (our backend differs from the GUI backend)
 
     public Rest(int fieldID) {

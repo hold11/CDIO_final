@@ -13,16 +13,14 @@ import models.Player;
 
 public class GrantCard extends ChanceCard
 {
-    private int changeBalance;
-    private int allowedAmount;
+    private final int changeBalance;
+    private final int allowedAmount;
 
     public GrantCard(int chanceCardID,  int changeBalance, int allowedAmount) {
         super(chanceCardID);
         this.changeBalance = changeBalance;
         this.allowedAmount = allowedAmount;
     }
-
-
 
     @Override
     public void receiveCard(Player player) {

@@ -11,11 +11,10 @@ package test_models;/*
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AutoDiceCup extends models.DiceCup {
-    private List<Integer> rolls;
+    private final List<Integer> rolls;
 
     public AutoDiceCup() {
         this.rolls = new ArrayList<>();

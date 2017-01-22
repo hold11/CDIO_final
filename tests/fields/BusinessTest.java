@@ -9,10 +9,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class BusinessTest {
-    Player p1;
-    Player p2;
-    Business b1;
-    Business b2;
+    private Player p1;
+    private Player p2;
+    private Business b1;
+    private Business b2;
 
     @Before
     public void setUp() throws Exception {

@@ -13,8 +13,8 @@ import models.Player;
 
 public class Tax extends Field
 {
-    private double percentage;
-    private int amount;
+    private final double percentage;
+    private final int amount;
 
     public Tax(int fieldID, int amount) {
         super(fieldID);

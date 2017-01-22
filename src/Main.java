@@ -22,10 +22,9 @@ import GUI.GUIController;
 import java.util.Arrays;
 
 public class Main {
-
-    private static GUIController gui;
-    private GameController game;
-    private CLIController cli;
+    private GUIController gui;
+    private final GameController game;
+    private final CLIController cli;
 
     private Main (GameController game, CLIController cli) {
         this.game = game;
@@ -35,7 +34,7 @@ public class Main {
     public static void main(String[] args) {
         String[] locale = new String[2];
         boolean autoGame = false;
-        if (args.length == 1 || args.length == 3) {
+        if (args.length >= 1 || args.length <= 3) {
             if (args[0].equals("auto")) {
                 autoGame = true;
                 System.out.println("[Autogame enabled]");
@@ -44,6 +43,9 @@ public class Main {
             if (args.length == 3) {
                 locale[0] = args[1];
                 locale[1] = args[2];
+            } else if (args.length == 2) {
+                locale[0] = args[0];
+                locale[1] = args[1];
             } else {
                 locale[0] = "da";
                 locale[1] = "DK";

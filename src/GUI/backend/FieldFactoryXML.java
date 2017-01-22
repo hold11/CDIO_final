@@ -12,7 +12,7 @@ import lang.*;
 
 public class FieldFactoryXML {
     public static ArrayList<Field> fields = null;
-    private static fields.Field[] xmlFields = models.ReadFields.readFields();
+    private static final fields.Field[] xmlFields = models.ReadFields.readFields();
 
     private FieldFactoryXML() {
 
@@ -32,7 +32,7 @@ public class FieldFactoryXML {
     private boolean parse() {
 
         // 75% > 40 so increase in capacity is required
-        fields = new ArrayList<Field>(54);
+        fields = new ArrayList<>(54);
 
         for (fields.Field field : xmlFields) {
             if (field instanceof fields.Business)

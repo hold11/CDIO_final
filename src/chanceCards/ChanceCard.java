@@ -9,7 +9,6 @@ package chanceCards;/*
     /`           ´\                                      |
 */
 
-import GUI.fields.Chance;
 import fields.Field;
 import fields.Jail;
 import models.Player;
@@ -21,13 +20,13 @@ import java.util.List;
 public abstract class ChanceCard
 {
     private int chanceCardID;
-    protected String chanceText;
-    protected int count = 1;
+    private final String chanceText;
+    private int count = 1;
     private static ChanceCard[] chanceCards;
     private static List<ChanceCard> deck;
     private static int drawCardsCount = 0;
 
-    public ChanceCard(int chanceCardID) {
+    protected ChanceCard(int chanceCardID) {
         this.chanceCardID = chanceCardID;
         this.chanceText = lang.Lang.msg("Card" + this.chanceCardID);
     }
@@ -91,22 +90,9 @@ public abstract class ChanceCard
         deck = cCards;
     }
 
-    public static ChanceCard[] getChanceCards() {
-        return chanceCards;
-    }
-
-    public static ChanceCard getCurrentChanceCard() {
-        return getChanceCards()[drawCardsCount];
-    }
-
     public static void shuffleCards() {
         Collections.shuffle(deck);
         chanceCards = deck.stream().toArray(ChanceCard[]::new);
-    }
-
-    @Override
-    public String toString() {
-        return this.chanceText;
     }
 
     public static ChanceCard drawChanceCard() {
@@ -118,5 +104,22 @@ public abstract class ChanceCard
             shuffleCards();
         }
         return c;
+    }
+
+    public static ChanceCard[] getChanceCards() {
+        return chanceCards;
+    }
+
+    public static ChanceCard getCurrentChanceCard() {
+        return getChanceCards()[drawCardsCount];
+    }
+
+    public int getChanceCardID() {
+        return chanceCardID;
+    }
+
+    @Override
+    public String toString() {
+        return this.chanceText;
     }
 }
