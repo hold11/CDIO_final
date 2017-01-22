@@ -26,8 +26,7 @@ public class Main {
     private GameController game;
     private CLIController cli;
 
-    private Main (GUIController gui, GameController game, CLIController cli) {
-        this.gui = gui;
+    private Main (GameController game, CLIController cli) {
         this.game = game;
         this.cli = cli;
     }
@@ -58,7 +57,7 @@ public class Main {
 
         Lang.setLanguage(locale);
 
-        Main main = new Main(new GUIController(), new GameController(), new CLIController());
+        Main main = new Main(new GameController(), new CLIController());
 
         if (autoGame)
             main.setupAutoGame();
