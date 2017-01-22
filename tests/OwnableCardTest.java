@@ -1,18 +1,15 @@
-import fields.Ownable;
 import lang.Lang;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import chanceCards.*;
 import models.*;
 
 /**
  * Created by AndersWOlsen on 07-01-2017.
  */
 public class OwnableCardTest {
-    Player p1, p2;
+    private Player p1, p2;
 
     @Before
     public void setUp() throws Exception {
@@ -26,6 +23,7 @@ public class OwnableCardTest {
         Player.reset();
     }
 
+    // TODO: Make this test work again.
     @Test
     public void playerHasCard() throws Exception {
         // Create a new FreeBailCard (OwnableCard)

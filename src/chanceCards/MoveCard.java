@@ -30,7 +30,7 @@ public class MoveCard extends ChanceCard
 
     @Override
     public void receiveCard(Player player) {
-        if (destination == null) {
+        if (destination == null) { // TODO: LandOnField on a null field? Fix this
             player.moveCurrentField(this.moveCount);
             Field.getFieldByID(player.getCurrentField()).landOnField(player);
         } else {

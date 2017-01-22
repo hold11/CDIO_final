@@ -23,8 +23,8 @@ import java.util.Arrays;
 
 public class Main {
     private GUIController gui;
-    private GameController game;
-    private CLIController cli;
+    private final GameController game;
+    private final CLIController cli;
 
     private Main (GameController game, CLIController cli) {
         this.game = game;

@@ -17,11 +17,11 @@ import java.util.List;
 
 public abstract class Ownable extends Field
 {
-    protected int price;
+    private final int price;
     protected Player owner;
     public abstract int getRent();
 
-    public Ownable(int fieldID, int price) {
+    protected Ownable(int fieldID, int price) {
         super(fieldID);
         this.price = price;
     }
@@ -68,7 +68,7 @@ public abstract class Ownable extends Field
         // TODO: Add methods for removing gui plots, houses and hotels
     }
 
-    public void resetOwnership() { this.owner = null; }
+    private void resetOwnership() { this.owner = null; }
 
     public static void resetAllFields() {
         for (Field f : Field.getFields()) {

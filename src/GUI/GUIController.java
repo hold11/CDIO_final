@@ -11,8 +11,6 @@ package GUI;/*
 
 
 import GUI.backend.Car;
-import chanceCards.ChanceCard;
-import fields.ChanceField;
 import fields.LandPlot;
 import lang.Lang;
 import models.Player;
