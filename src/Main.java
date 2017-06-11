@@ -22,10 +22,9 @@ import GUI.GUIController;
 import java.util.Arrays;
 
 public class Main {
-
-    private static GUIController gui;
-    private GameController game;
-    private CLIController cli;
+    private GUIController gui;
+    private final GameController game;
+    private final CLIController cli;
 
     private Main (GameController game, CLIController cli) {
         this.game = game;
@@ -33,10 +32,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // TODO: Put the following in a separate method:
         String[] locale = new String[2];
         boolean autoGame = false;
-        if (args.length == 1 || args.length == 3) {
+        if (args.length >= 1 || args.length <= 3) {
             if (args[0].equals("auto")) {
                 autoGame = true;
                 System.out.println("[Autogame enabled]");
@@ -45,6 +43,9 @@ public class Main {
             if (args.length == 3) {
                 locale[0] = args[1];
                 locale[1] = args[2];
+            } else if (args.length == 2) {
+                locale[0] = args[0];
+                locale[1] = args[1];
             } else {
                 locale[0] = "da";
                 locale[1] = "DK";
@@ -81,11 +82,6 @@ public class Main {
             return;
         }
 
-        // TODO: Remove below
-//        for (ChanceCard c : ChanceCard.getChanceCards())
-//            if (c instanceof FreeBailCard && game.getCurrentPlayer().getPlayerID() == 1)
-//                ((FreeBailCard) c).setOwner(game.getCurrentPlayer());
-
         // If a player hasn't won the game
         if (game.isNormalTurn())
             playNormalTurn();
@@ -118,7 +114,7 @@ public class Main {
     }
 
     private void playNormalTurn() {
-        showButtOptions();
+        showButtonOptions();
 
         int doubleRollCount = game.getCurrentPlayer().getDiceCup().getDoublesRolled();
 
@@ -144,9 +140,6 @@ public class Main {
         } else
             game.playerLandsOnField();
 
-
-
-
         // Purchase field if the player can and want to
         if (game.canPurchaseField()) {
             cli.displayCanPurchaseField();
@@ -155,9 +148,6 @@ public class Main {
                 cli.displayPlayerBoughtField(((Ownable) Field.getFieldByID(game.getCurrentPlayer().getCurrentField())));
             }
         }
-
-//        if (playerLandedOn.getFieldId() != game.getCurrentPlayer().getCurrentField())
-//            gui.moveCars(game.getCurrentPlayer());
 
         // Player passed start?
         game.playerPassedStart();
@@ -170,7 +160,7 @@ public class Main {
             playNormalTurn();
         } else {
             // Last chance to do business then next player
-            showButtOptions();
+            showButtonOptions();
             cli.displayEndBalance(game.getCurrentPlayer());
             checkBankruptcy();
             game.getCurrentPlayer().getDiceCup().resetHasRolled();
@@ -184,9 +174,10 @@ public class Main {
         GUI.GUI.removeAllCars(game.getCurrentPlayer().getPlayerName());
         GUI.GUI.setCar(game.getCurrentPlayer().getCurrentField(), game.getCurrentPlayer().getPlayerName());
 
-        showButtOptions();
+        showButtonOptions();
 
         if (game.playerTurnsInJail() == 3 && gui.getPayBailOut()) {
+            gui.updateBalance(game.getPlayers());
             grantFreedom();
         } else {
             cli.displayEndBalance(game.getCurrentPlayer());
@@ -207,14 +198,14 @@ public class Main {
 
     private void aPlayerHasWon() {
         if (game.getWinner() != null)
-            System.out.println(game.getWinner() + " h as won the game!");
+            System.out.println(game.getWinner() + " has won the game!");
     }
 
     private void getPlayerName() {
         new Player(GUI.GUI.getUserString(Lang.msg("getName")));
     }
 
-    private void showButtOptions() {
+    private void showButtonOptions() {
         if (game.getButtOptions().size() == 0)
             return;
 
@@ -237,11 +228,11 @@ public class Main {
                 break;
             case "Køb hus/hotel":
                 buyBuilding();
-                showButtOptions();
+                showButtonOptions();
                 break;
             case "Sælg hus/hotel":
                 sellBuilding();
-                showButtOptions();
+                showButtonOptions();
                 break;
             default:
                 System.out.println("YOU BROKE IT! WHAT A GOOF!");
@@ -284,30 +275,37 @@ public class Main {
 
     private void buyBuilding() {
         String answer = gui.getLandPlotToBuildOn(game.getAvailablePlotsToBuildOn());
+        LandPlot fieldAns = ((LandPlot) Field.getFieldByName(answer));
 
         if (answer.equals(Lang.msg("back")))
             return;
 
-        PurchaseLogic.buyHouse(((LandPlot) Field.getFieldByName(answer)));
+        PurchaseLogic.buyHouse(fieldAns);
 
-        if (((LandPlot) Field.getFieldByName(answer)).getHouseCount() < 5)
-            GUI.GUI.setHouses((LandPlot.getFieldByName(answer)).getFieldId(), ((LandPlot) Field.getFieldByName(answer)).getHouseCount());
+        if (fieldAns.getHouseCount() < 5
+                && fieldAns.getOwner().getPlayerAccount().getBalance()
+                >= fieldAns.getHousePrice())
+            GUI.GUI.setHouses(fieldAns.getFieldId(), fieldAns.getHouseCount());
         else
-            GUI.GUI.setHotel((LandPlot.getFieldByName(answer)).getFieldId(), true);
+            if (fieldAns.getOwner().getPlayerAccount().getBalance() >= fieldAns.getHousePrice())
+                GUI.GUI.setHotel(fieldAns.getFieldId(), true);
+        gui.updateBalance(game.getPlayers());
     }
 
     private void sellBuilding() {
         String answer = gui.getLandPlotToBuildOn(game.getPlayersDevelopedPlots());
+        LandPlot fieldAns = ((LandPlot) Field.getFieldByName(answer));
 
         if (answer.equals(Lang.msg("back")))
             return;
 
-        PurchaseLogic.sellHouse(((LandPlot) Field.getFieldByName(answer)));
+        PurchaseLogic.sellHouse(fieldAns);
 
-        if (((LandPlot) Field.getFieldByName(answer)).getHouseCount() < 4)
-            GUI.GUI.setHouses((LandPlot.getFieldByName(answer)).getFieldId(), ((LandPlot) Field.getFieldByName(answer)).getHouseCount());
+        if (fieldAns.getHouseCount() < 4)
+            GUI.GUI.setHouses(fieldAns.getFieldId(), fieldAns.getHouseCount());
         else
-            GUI.GUI.setHotel((LandPlot.getFieldByName(answer)).getFieldId(), false);
+            GUI.GUI.setHotel(fieldAns.getFieldId(), false);
+        gui.updateBalance(game.getPlayers());
     }
 
     private void setupAutoGame() {
@@ -325,10 +323,6 @@ public class Main {
         getAutomatedPlayerName("Dirch", new test_models.AutoDiceCup(d1p1, d2p1));
         getAutomatedPlayerName("Inger", new test_models.AutoDiceCup(d1p2, d2p2));
         getAutomatedPlayerName("Ove", new test_models.AutoDiceCup(d1p3, d2p3));
-
-        ((Ownable) Field.getFields()[6]).purchaseField(Player.getPlayers().get(0));
-        ((Ownable) Field.getFields()[8]).purchaseField(Player.getPlayers().get(0));
-        ((Ownable) Field.getFields()[9]).purchaseField(Player.getPlayers().get(0));
 
         gui.createPlayers(game.getPlayers());
     }

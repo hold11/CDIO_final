@@ -81,8 +81,6 @@ public class ReadFields {
 
     private static LandPlot createLandPlot(Element element, int index) {
         // Fetch all the data for the field:
-//        int fieldId = getTagValue(element, "id");
-        int fieldId = index;
         int groupId = getAttrValueInt(element, "groupId");
         int price = getTagValue(element, "price");
         int housePrice = getTagValue(element, "housePrice");
@@ -104,31 +102,27 @@ public class ReadFields {
             rents[i] = Integer.parseInt(rentStrs[i]);
 
         // Return a LandPlot based on the given data:
-        return  new LandPlot(fieldId, groupId, price, housePrice, rents);
+        return new LandPlot(index, groupId, price, housePrice, rents);
     }
 
     private static Business createBusiness(Element element, int index) {
 //        int fieldId = getTagValue(element, "id");
-        int fieldId = index;
         int price = getTagValue(element, "price");
-        return new Business(fieldId, price);
+        return new Business(index, price);
     }
 
     private static ChanceField createChanceField(Element element, int index) {
 //        int fieldId = getTagValue(element, "id");
-        int fieldId = index;
-        return new ChanceField(fieldId);
+        return new ChanceField(index);
     }
 
     private static Jail createJail(Element element, int index) {
 //        int fieldId = getTagValue(element, "id");
-        int fieldId = index;
-        return new Jail(fieldId);
+        return new Jail(index);
     }
 
     private static Rest createRest(Element element, int index) {
 //        int fieldId = getTagValue(element, "id");
-        int fieldId = index;
         int passingReward = 0;
         boolean isJail = false;
 
@@ -140,12 +134,11 @@ public class ReadFields {
             isJail = Boolean.parseBoolean(element.getElementsByTagName("jail").item(0).getTextContent());
         } catch (Exception e) { /* Is not the visit jail field. */ }
 
-        return new Rest(fieldId, passingReward, isJail);
+        return new Rest(index, passingReward, isJail);
     }
 
     private static Tax createTax(Element element, int index) {
 //        int fieldId = getTagValue(element, "fieldId");
-        int fieldId = index;
         int amount = getTagValue(element, "amount");
         double percentage = 0;
 
@@ -153,14 +146,13 @@ public class ReadFields {
             percentage = Double.parseDouble(element.getElementsByTagName("percentage").item(0).getTextContent());
         } catch (Exception e) { /* Percentage doesn't exist on this field */ }
 
-        return new Tax(fieldId, percentage, amount);
+        return new Tax(index, percentage, amount);
     }
 
     private static Transportation createTransportation(Element element, int index) {
 //        int fieldId = getTagValue(element, "id");
-        int fieldId = index;
         int price = getTagValue(element, "price");
-        return new Transportation(fieldId, price);
+        return new Transportation(index, price);
     }
 
     private static int getTagValue(Element element, String tagName) {

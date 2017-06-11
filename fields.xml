@@ -13,7 +13,7 @@
     </field>
 
     <!-- 3 : Chance Field -->
-    <field type="chancefield"></field>
+    <field type="chancefield" />
 
     <!-- 4 : Hvidovrevej -->
     <field groupId="1" type="landplot">
@@ -41,7 +41,7 @@
     </field>
 
     <!-- 8 : Chance Field -->
-    <field type="chancefield"></field>
+    <field type="chancefield" />
 
     <!-- 9 : Valby Langgade -->
     <field groupId="2" type="landplot">
@@ -99,7 +99,7 @@
     </field>
 
     <!-- 18 : Chance Field -->
-    <field type="chancefield"></field>
+    <field type="chancefield" />
 
     <!-- 19 : Hellerupvej -->
     <field groupId="4" type="landplot">
@@ -116,7 +116,7 @@
     </field>
 
     <!-- 21 : Parkering -->
-    <field type="rest"></field>
+    <field type="rest" />
 
     <!-- 22 : Trianglen -->
     <field groupId="5" type="landplot">
@@ -126,7 +126,7 @@
     </field>
 
     <!-- 23 : Chance Field -->
-    <field type="chancefield"></field>
+    <field type="chancefield" />
 
     <!-- 24 : Osterbrogade -->
     <field groupId="5" type="landplot">
@@ -174,7 +174,7 @@
     </field>
 
     <!-- 31 : Jail -->
-    <field type="jail"></field>
+    <field type="jail" />
 
     <!-- 32 : Amagertorv -->
     <field groupId="7" type="landplot">
@@ -191,7 +191,7 @@
     </field>
 
     <!-- 34 : Chance Field -->
-    <field type="chancefield"></field>
+    <field type="chancefield" />
 
     <!-- 35 : Nygade -->
     <field groupId="7" type="landplot">
@@ -206,7 +206,7 @@
     </field>
 
     <!-- 37 : Chance Field -->
-    <field type="chancefield"></field>
+    <field type="chancefield" />
 
     <!-- 38 : Frederiksberggade -->
     <field groupId="8" type="landplot">

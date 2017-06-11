@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Bank
 {
-    private static List<BankAccount> bankAccounts = new ArrayList<>();
+    private static final List<BankAccount> bankAccounts = new ArrayList<>();
 
     public static BankAccount createBankAcct() {
         BankAccount bankAccount = new BankAccount();

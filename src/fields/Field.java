@@ -14,12 +14,12 @@ import models.Player;
 
 public abstract class Field
 {
-    private String fieldName;
-    private int fieldId;
+    private final String fieldName;
+    private final int fieldId;
     private static final Field[] fields = models.ReadFields.readFields();
     public abstract void landOnField(Player player);
 
-    public Field(int fieldID) {
+    protected Field(int fieldID) {
         this.fieldId = fieldID;
         this.fieldName = Lang.msg("Field" + this.fieldId);
     }

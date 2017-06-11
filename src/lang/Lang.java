@@ -15,9 +15,10 @@ import java.util.ResourceBundle;
 public class Lang {
     private static String lang;
     private static String country;
+    @SuppressWarnings("FieldCanBeLocal")
     private static Locale locale;
 
-    public static ResourceBundle resourceBundle;
+    private static ResourceBundle resourceBundle;
 
     public static String msg(String message) { return resourceBundle.getString(message); }
 

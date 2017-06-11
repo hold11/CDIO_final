@@ -20,8 +20,8 @@ import java.lang.*;
  * imported from CDIO_del3 develop branch on 2017-01-06.
  */
 public class DiceCup {
-    protected Collection<Die> dice = new ArrayList<Die>();
-    protected Collection<Integer> results = new ArrayList<Integer>();
+    protected final Collection<Die> dice = new ArrayList<>();
+    protected final Collection<Integer> results = new ArrayList<>();
 
     protected static int diceCount;
     protected static int faceCount;
@@ -30,8 +30,8 @@ public class DiceCup {
     protected boolean hasRolled;
 
     public DiceCup() {
-        this.diceCount = 2;
-        this.faceCount = 6;
+        diceCount = 2;
+        faceCount = 6;
         this.doublesRolled = 0;
         this.hasRolled = false;
         initDice();
@@ -40,8 +40,8 @@ public class DiceCup {
     public DiceCup(int diceCount) {
         if (diceCount < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
-        this.diceCount = diceCount;
-        this.faceCount = 6;
+        DiceCup.diceCount = diceCount;
+        faceCount = 6;
         this.doublesRolled = 0;
         this.hasRolled = false;
         initDice();
@@ -50,8 +50,8 @@ public class DiceCup {
     public DiceCup(int diceCount, int faceCount) {
         if (diceCount < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
-        this.diceCount = diceCount;
-        this.faceCount = faceCount;
+        DiceCup.diceCount = diceCount;
+        DiceCup.faceCount = faceCount;
         this.doublesRolled = 0;
         this.hasRolled = false;
         initDice();
@@ -60,7 +60,7 @@ public class DiceCup {
     public DiceCup(int diceCount, Die die) {
         if (diceCount < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
-        this.diceCount = diceCount;
+        DiceCup.diceCount = diceCount;
         this.doublesRolled = 0;
         this.hasRolled = false;
 
@@ -70,7 +70,7 @@ public class DiceCup {
     public DiceCup(Collection<Die> dice) {
         if (dice.size() < 2)
             throw new IndexOutOfBoundsException("There should be at least 2 dice.");
-        this.diceCount = dice.size();
+        diceCount = dice.size();
         this.doublesRolled = 0;
         this.hasRolled = false;
         initDice(dice);

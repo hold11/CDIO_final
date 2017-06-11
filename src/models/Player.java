@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private int playerID;
-    private String playerName;
-    private BankAccount playerAccount;
-    private DiceCup diceCup;
+    private final int playerID;
+    private final String playerName;
+    private final BankAccount playerAccount;
+    private final DiceCup diceCup;
     private int currentField;
     private int previousField;
     private int turnsInJail = 0;
@@ -148,7 +148,7 @@ public class Player {
     }
 
     public void removePlayer() {
-        this.players.remove(this);
+        players.remove(this);
     }
 
     @Override

@@ -18,7 +18,8 @@ import java.util.List;
 public class PurchaseLogic {
 
     public static void buyHouse(LandPlot landplot) {
-        if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)) {
+        if (landplot.isOwned() && getAvailablePlotsToBuildOn(landplot.getOwner()).contains(landplot)
+                && landplot.getOwner().getPlayerAccount().getBalance() >= landplot.getHousePrice()) {
             landplot.getOwner().getPlayerAccount().withdraw(landplot.getHousePrice());
             landplot.setHouseCount(landplot.getHouseCount() + 1);
             System.out.println("[PurchaseLogic]: " + "player bought a house on " + landplot.toString());
@@ -68,12 +69,10 @@ public class PurchaseLogic {
         List<LandPlot> result = new ArrayList<>();
         for (Ownable o : Ownable.getOwnedOwnables()) {
             if (o instanceof LandPlot) {
-                if (((LandPlot) o).playerHasAllPlotsInGroup(player) && ((LandPlot) o).getHouseCount() < 5)
+                if (((LandPlot) o).playerHasAllPlotsInGroup(player))
                     result.add(((LandPlot) o));
             }
         }
-        // TODO: Finish sentence below...
-        // return result.toArray(new LandPlot[result.size()]); was the
         return result.stream().toArray(LandPlot[]::new);
     }
 
